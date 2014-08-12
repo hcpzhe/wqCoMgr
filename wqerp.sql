@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50524
 File Encoding         : 65001
 
-Date: 2014-08-09 17:49:01
+Date: 2014-08-12 18:06:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -325,11 +325,12 @@ DROP TABLE IF EXISTS `erp_depart`;
 CREATE TABLE `erp_depart` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `parent_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '所属部门ID',
+  `class` tinyint(1) NOT NULL DEFAULT '0' COMMENT '部门类型 1-销售 2-客服 3-产品客服 4-技术部',
   `name` varchar(32) NOT NULL COMMENT '部门名称',
   `sort` tinyint(4) DEFAULT '100' COMMENT '排序',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '-1:删除 0:禁用 1:正常',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='部门';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='部门; 通过class来区别不同类型的部门, 不同类型的部门, 管理的数据表不同';
 
 -- ----------------------------
 -- Records of erp_depart
@@ -348,7 +349,7 @@ CREATE TABLE `erp_develop_order` (
   `check` tinyint(1) NOT NULL DEFAULT '0' COMMENT '-1:拒绝 0:待审 >1:通过',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '-1:删除 0:禁用 1:正常',
   PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单 开发池';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='开发-订单池; 由技术部来管理 , 分配制作人员';
 
 -- ----------------------------
 -- Records of erp_develop_order
@@ -435,14 +436,14 @@ CREATE TABLE `erp_order` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL COMMENT '签单员工ID',
   `cust_id` int(10) unsigned NOT NULL COMMENT '所属客户ID',
-  `prod_id` int(10) unsigned NOT NULL COMMENT '所属产品ID',
+  `prod_id` int(10) unsigned NOT NULL COMMENT '所属产品ID 0:增值服务',
   `total_fees` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '订单总金额',
   `remark` text COMMENT '备注',
   `expired_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '到期时间',
   `check` tinyint(1) NOT NULL DEFAULT '0' COMMENT '-1:拒绝 0:待审 >1:通过',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '-1:删除 0:禁用 1:正常',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单表; 财务审核后, 由签单人员和签单部门来 决定 此订单分配至 哪个订单户池';
 
 -- ----------------------------
 -- Records of erp_order
@@ -544,7 +545,7 @@ CREATE TABLE `erp_seo_order` (
   `check` tinyint(1) NOT NULL DEFAULT '0' COMMENT '-1:拒绝 0:待审 >1:通过',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '-1:删除 0:禁用 1:正常',
   PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单 优化池';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='优化-订单池;  由产品客服部来管理 , 分配制作人员';
 
 -- ----------------------------
 -- Records of erp_seo_order
@@ -608,8 +609,8 @@ CREATE TABLE `erp_user_cust_prod` (
   `user_id` int(10) unsigned NOT NULL,
   `cust_id` int(10) unsigned NOT NULL,
   `prod_id` int(10) unsigned NOT NULL COMMENT '0:所有产品的权限',
-  PRIMARY KEY (`user_id`,`cust_id`,`prod_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='员工-客户-产品 权限表; 用户销售,客服 拜访';
+  `expired_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '权限过期时间 0:永不过期'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='员工-客户-产品 权限表; 用于销售,客服 拜访';
 
 -- ----------------------------
 -- Records of erp_user_cust_prod
@@ -630,57 +631,6 @@ CREATE TABLE `erp_user_depart_mgr` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `erp_valadd_order`
--- ----------------------------
-DROP TABLE IF EXISTS `erp_valadd_order`;
-CREATE TABLE `erp_valadd_order` (
-  `order_id` int(10) unsigned NOT NULL COMMENT '订单ID',
-  `remark` text COMMENT '制作要求',
-  `start_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '开始时间',
-  `end_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '结束时间',
-  `finish_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '完成时间',
-  `check` tinyint(1) NOT NULL DEFAULT '0' COMMENT '-1:拒绝 0:待审 >1:通过',
-  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '-1:删除 0:禁用 1:正常',
-  PRIMARY KEY (`order_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单 增值服务池';
-
--- ----------------------------
--- Records of erp_valadd_order
--- ----------------------------
-
--- ----------------------------
--- Table structure for `erp_valadd_order_comment`
--- ----------------------------
-DROP TABLE IF EXISTS `erp_valadd_order_comment`;
-CREATE TABLE `erp_valadd_order_comment` (
-  `order_id` int(10) unsigned NOT NULL,
-  `user_id` int(10) unsigned NOT NULL,
-  `post_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '提交时间',
-  `content` text COMMENT '内容'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='增值服务-订单沟通记录表';
-
--- ----------------------------
--- Records of erp_valadd_order_comment
--- ----------------------------
-
--- ----------------------------
--- Table structure for `erp_valadd_user`
--- ----------------------------
-DROP TABLE IF EXISTS `erp_valadd_user`;
-CREATE TABLE `erp_valadd_user` (
-  `order_id` int(10) unsigned NOT NULL COMMENT '订单ID',
-  `user_id` int(10) unsigned NOT NULL COMMENT '员工ID',
-  `money` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '获得的总业绩',
-  `finish_rate` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '完成率',
-  `update_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '完成率更新时间',
-  PRIMARY KEY (`order_id`,`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='增值服务制作 人员表';
-
--- ----------------------------
--- Records of erp_valadd_user
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `erp_visit_prod`
 -- ----------------------------
 DROP TABLE IF EXISTS `erp_visit_prod`;
@@ -694,3 +644,12 @@ CREATE TABLE `erp_visit_prod` (
 -- ----------------------------
 -- Records of erp_visit_prod
 -- ----------------------------
+
+-- ----------------------------
+-- Event structure for `test`
+-- ----------------------------
+DROP EVENT IF EXISTS `test`;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` EVENT `test` ON SCHEDULE EVERY 1 DAY STARTS '2014-08-12 00:00:01' ON COMPLETION PRESERVE DISABLE DO INSERT INTO `erp_user_cust_prod` VALUES (1,2,3,4)
+;;
+DELIMITER ;
