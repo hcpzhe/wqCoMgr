@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50524
 File Encoding         : 65001
 
-Date: 2014-08-12 18:06:49
+Date: 2014-08-14 18:33:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -414,7 +414,7 @@ DROP TABLE IF EXISTS `erp_domain_renewal`;
 CREATE TABLE `erp_domain_renewal` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `domain_id` int(10) unsigned NOT NULL COMMENT '所属域名ID',
-  `money` decimal(10,0) NOT NULL DEFAULT '0' COMMENT '续费金额',
+  `money` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '续费金额',
   `org_expired_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '原过期时间',
   `new_expired_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '新过期时间',
   `pay_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '付款时间',
@@ -436,7 +436,7 @@ CREATE TABLE `erp_order` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL COMMENT '签单员工ID',
   `cust_id` int(10) unsigned NOT NULL COMMENT '所属客户ID',
-  `prod_id` int(10) unsigned NOT NULL COMMENT '所属产品ID 0:增值服务',
+  `prod_id` int(10) unsigned NOT NULL COMMENT '所属产品ID',
   `total_fees` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '订单总金额',
   `remark` text COMMENT '备注',
   `expired_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '到期时间',
@@ -447,6 +447,23 @@ CREATE TABLE `erp_order` (
 
 -- ----------------------------
 -- Records of erp_order
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `erp_order_depart`
+-- ----------------------------
+DROP TABLE IF EXISTS `erp_order_depart`;
+CREATE TABLE `erp_order_depart` (
+  `order_id` int(10) unsigned NOT NULL,
+  `depart_id` int(10) unsigned NOT NULL,
+  `last_depart_id` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '上一个经手的部门',
+  `is_use` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否应用中 0否 1是; 每个order只能有一条记录为1',
+  `create_time` varchar(32) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`order_id`,`depart_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='订单-部门 关系表; 记录订单现在处于哪个部门的工作流程中';
+
+-- ----------------------------
+-- Records of erp_order_depart
 -- ----------------------------
 
 -- ----------------------------
@@ -470,7 +487,7 @@ DROP TABLE IF EXISTS `erp_order_pay`;
 CREATE TABLE `erp_order_pay` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `order_id` int(10) unsigned NOT NULL COMMENT '所属订单ID',
-  `money` decimal(10,0) NOT NULL DEFAULT '0' COMMENT '付款金额',
+  `money` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '付款金额',
   `class` enum('2','1') NOT NULL DEFAULT '1' COMMENT '1-预付款; 2-余款',
   `check` tinyint(1) NOT NULL DEFAULT '0' COMMENT '-1:拒绝 0:待审 >1:通过',
   `pay_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '付款时间',
@@ -490,7 +507,7 @@ DROP TABLE IF EXISTS `erp_order_renewal`;
 CREATE TABLE `erp_order_renewal` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `order_id` int(10) unsigned NOT NULL COMMENT '所属订单ID',
-  `money` decimal(10,0) NOT NULL DEFAULT '0' COMMENT '续费金额',
+  `money` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '续费金额',
   `org_expired_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '原过期时间',
   `new_expired_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '新过期时间',
   `pay_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '付款时间',
@@ -602,6 +619,31 @@ CREATE TABLE `erp_user` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for `erp_user_cust_apply`
+-- ----------------------------
+DROP TABLE IF EXISTS `erp_user_cust_apply`;
+CREATE TABLE `erp_user_cust_apply` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL COMMENT '申请人ID',
+  `cust_id` int(10) unsigned NOT NULL COMMENT '客户ID',
+  `class` enum('delay','new') DEFAULT 'new' COMMENT 'new-新申请 delay-延期',
+  `apply_days` tinyint(4) NOT NULL COMMENT '申请天数',
+  `agree_days` tinyint(4) NOT NULL DEFAULT '0' COMMENT '批准天数',
+  `org_expired_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '原过期时间 0:永久',
+  `new_expired_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '新过期时间 0:永久',
+  `apply_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '申请的时间',
+  `check_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '审核的时间',
+  `check_user` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '审核人ID',
+  `check` tinyint(1) NOT NULL DEFAULT '0' COMMENT '-1:拒绝 0:待审 >1:通过',
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '-1:删除 0:禁用 1:正常',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='员工-客户 权限申请记录';
+
+-- ----------------------------
+-- Records of erp_user_cust_apply
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `erp_user_cust_prod`
 -- ----------------------------
 DROP TABLE IF EXISTS `erp_user_cust_prod`;
@@ -609,7 +651,8 @@ CREATE TABLE `erp_user_cust_prod` (
   `user_id` int(10) unsigned NOT NULL,
   `cust_id` int(10) unsigned NOT NULL,
   `prod_id` int(10) unsigned NOT NULL COMMENT '0:所有产品的权限',
-  `expired_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '权限过期时间 0:永不过期'
+  `expired_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '权限过期时间 0:永不过期',
+  PRIMARY KEY (`user_id`,`cust_id`,`prod_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='员工-客户-产品 权限表; 用于销售,客服 拜访';
 
 -- ----------------------------
@@ -628,6 +671,61 @@ CREATE TABLE `erp_user_depart_mgr` (
 
 -- ----------------------------
 -- Records of erp_user_depart_mgr
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `erp_valadd_comment`
+-- ----------------------------
+DROP TABLE IF EXISTS `erp_valadd_comment`;
+CREATE TABLE `erp_valadd_comment` (
+  `valadd_id` int(10) unsigned NOT NULL COMMENT '所属增值服务ID',
+  `user_id` int(10) unsigned NOT NULL COMMENT '评论用户ID',
+  `post_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '提交时间',
+  `content` text COMMENT '内容'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='增值服务-沟通记录表';
+
+-- ----------------------------
+-- Records of erp_valadd_comment
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `erp_valadd_order`
+-- ----------------------------
+DROP TABLE IF EXISTS `erp_valadd_order`;
+CREATE TABLE `erp_valadd_order` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '增值服务主键ID',
+  `user_id` int(10) unsigned NOT NULL COMMENT '销售人员ID',
+  `cust_id` int(10) unsigned NOT NULL COMMENT '所属客户ID',
+  `fees` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '费用',
+  `remark` text COMMENT '制作要求',
+  `start_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '开始时间',
+  `end_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '结束时间',
+  `finish_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '完成时间',
+  `is_paid` tinyint(1) NOT NULL DEFAULT '0' COMMENT '0:未付款  1:已付款',
+  `check` tinyint(1) NOT NULL DEFAULT '0' COMMENT '-1:拒绝 0:待审 >1:通过',
+  `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '-1:删除 0:禁用 1:正常',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='客户 增值服务池';
+
+-- ----------------------------
+-- Records of erp_valadd_order
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `erp_valadd_user`
+-- ----------------------------
+DROP TABLE IF EXISTS `erp_valadd_user`;
+CREATE TABLE `erp_valadd_user` (
+  `valadd_id` int(10) unsigned NOT NULL COMMENT '增值服务ID',
+  `user_id` int(10) unsigned NOT NULL COMMENT '员工ID',
+  `money` decimal(10,2) NOT NULL DEFAULT '0.00' COMMENT '获得的总业绩',
+  `finish_rate` tinyint(3) unsigned NOT NULL DEFAULT '0' COMMENT '完成率',
+  `update_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '完成率更新时间',
+  PRIMARY KEY (`valadd_id`,`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='增值服务制作 人员表';
+
+-- ----------------------------
+-- Records of erp_valadd_user
 -- ----------------------------
 
 -- ----------------------------
