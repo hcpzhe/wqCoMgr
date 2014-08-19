@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50524
 File Encoding         : 65001
 
-Date: 2014-08-18 18:28:43
+Date: 2014-08-19 18:11:49
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -323,7 +323,6 @@ INSERT INTO `erp_config` VALUES ('12', 'DOCUMENT_DISPLAY', '3', '文档可见性
 INSERT INTO `erp_config` VALUES ('13', 'COLOR_STYLE', '4', '后台色系', '1', 'default_color:默认\r\nblue_color:紫罗兰', '后台颜色风格', '1379122533', '1379235904', '1', 'default_color', '10');
 INSERT INTO `erp_config` VALUES ('20', 'CONFIG_GROUP_LIST', '3', '配置分组', '4', '', '配置分组', '1379228036', '1384418383', '1', '1:基本\r\n2:内容\r\n3:用户\r\n4:系统', '4');
 INSERT INTO `erp_config` VALUES ('21', 'HOOKS_TYPE', '3', '钩子的类型', '4', '', '类型 1-用于扩展显示内容，2-用于扩展业务处理', '1379313397', '1379313407', '1', '1:视图\r\n2:控制器', '6');
-INSERT INTO `erp_config` VALUES ('22', 'AUTH_CONFIG', '3', 'Auth配置', '4', '', '自定义Auth.class.php类配置', '1379409310', '1379409564', '1', 'AUTH_ON:1\r\nAUTH_TYPE:2', '8');
 INSERT INTO `erp_config` VALUES ('23', 'OPEN_DRAFTBOX', '4', '是否开启草稿功能', '2', '0:关闭草稿功能\r\n1:开启草稿功能\r\n', '新增文章时的草稿功能配置', '1379484332', '1379484591', '1', '1', '1');
 INSERT INTO `erp_config` VALUES ('24', 'DRAFT_AOTOSAVE_INTERVAL', '0', '自动保存草稿时间', '2', '', '自动保存草稿的时间间隔，单位：秒', '1379484574', '1386143323', '1', '60', '2');
 INSERT INTO `erp_config` VALUES ('25', 'LIST_ROWS', '0', '后台每页记录数', '2', '', '后台数据每页显示记录数', '1379503896', '1380427745', '1', '15', '10');
@@ -664,6 +663,11 @@ CREATE TABLE `erp_user` (
   `password` char(32) NOT NULL,
   `depart_id` int(10) unsigned NOT NULL COMMENT '所属部门ID',
   `realname` varchar(32) NOT NULL COMMENT '真实姓名',
+  `sex` enum('0','1') NOT NULL DEFAULT '1' COMMENT '1男 0女',
+  `birthday` varchar(32) DEFAULT '0' COMMENT '生日',
+  `login_times` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登录次数',
+  `last_login_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '上次登录时间',
+  `last_login_ip` varchar(32) NOT NULL DEFAULT '0' COMMENT '上次登录IP',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '-1:删除 0:禁用 1:正常',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='员工表';
