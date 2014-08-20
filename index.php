@@ -10,7 +10,7 @@ define('APP_DEBUG',True);
 // 定义应用目录
 define('APP_PATH','./Application/');
 
-define('ADDON_PATH','./Addons/');
+//define('ADDON_PATH','./Addons/');
 
 define ( 'RUNTIME_PATH', './Runtime/' );
 

@@ -5,15 +5,25 @@ use Think\Model;
 class UserModel extends Model {
 	
 	/**
-	 * 登录指定用户
-	 * @param  integer $uid 用户ID
+	 * 登录用户
+	 * @param  array $map 用户查询条件 account & password
 	 * @return boolean      ture-登录成功，false-登录失败
 	 */
-	public function login($uid){
-		/* 检测是否在当前应用注册 */
-		$user = $this->field(true)->find($uid);
+	public function login($map) {
+		if (empty($map)) {
+			$this->error = '登录条件异常！';
+			return false;
+		}
+		$password = $map['password'];
+		unset($map['password']);
+		
+		$user = $this->where($map)->find();
 		if(!$user || 1 != $user['status']) {
-			$this->error = '用户不存在或已被禁用！'; //应用级别禁用
+			$this->error = '用户不存在或已被禁用！';
+			return false;
+		}
+		if($user['password'] != pwd_hash($password)) {
+			$this->error = '密码错误！';
 			return false;
 		}
 		
@@ -42,18 +52,19 @@ class UserModel extends Model {
 	private function autoLogin($user){
 		/* 更新登录信息 */
 		$data = array(
-				'id'             => $user['uid'],
-				'login'           => array('exp', '`login`+1'),
+				'uid'             => $user['id'],
+				'login_times'           => array('exp', '`login_times`+1'),
 				'last_login_time' => NOW_TIME,
-				'last_login_ip'   => get_client_ip(1),
+				'last_login_ip'   => get_client_ip(1)
 		);
 		$this->save($data);
 	
 		/* 记录登录SESSION和COOKIES */
 		$auth = array(
-				'uid'             => $user['uid'],
-				'username'        => $user['nickname'],
+				'uid'             => $user['id'],
+				'realname'        => $user['realname'],
 				'last_login_time' => $user['last_login_time'],
+				'last_login_ip'   => $user['last_login_ip']
 		);
 	
 		session('user_auth', $auth);

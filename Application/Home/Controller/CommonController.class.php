@@ -2,102 +2,71 @@
 namespace Home\Controller;
 use Think\Controller;
 use Home\Model\ConfigModel;
+use Home\Model\UserModel;
+use Think\Verify;
 
-//免登录控制器
+/**
+ * 免登录控制器
+ * @author RockSnap <hdszhe@hotmail.com>
+ */
 class CommonController extends Controller {
 	
-	protected $_cfgs = NULL;
-	
 	protected function _initialize() {
-    	$config =   S('DB_CONFIG_DATA');
-    	if(!$config) {
-    		$model = new ConfigModel();
-    		$config = $model->lists();
-    		S('DB_CONFIG_DATA',$config);
-    	}
-    	C($config); //TODO 添加配置
+    	$model = new ConfigModel();
+    	$model->loadConfig();
 	}
 	
 	public function _empty() {
 		$this->redirect('Index/index');
 	}
 	
-	public function login() {
-		$this->display();
+	/**
+	 * 登录页面 , 登录提交接口
+	 * @param string $account 帐号
+	 * @param string $password 密码
+	 * @param string $verify 验证码
+	 */
+	public function login($account = null, $password = null, $verify = null) {
+        if(IS_POST){
+        	//登录提交
+			if(empty($account)) {
+				$this->error('帐号错误！');
+			}elseif (empty($password)) {
+				$this->error('密码必须！');
+			}
+			
+			/* 检测验证码  */
+			$verify = new Verify();
+			if (!$verify->check($code, 1)) {//验证码编号为1
+				$this->error('验证码输入错误！');
+			}
+			
+            //验证用户
+			$map = array();
+			$map['account']	= $account;
+			$map["status"]	= 1; //-1:删除 0:禁用 1:正常
+			$map['password'] = $password;
+            $User = new UserModel();
+            if (!$User->login($map)) {
+            	$this->error($User->getError()); //登录验证失败
+            }
+            $this->success('登录成功', U('Index/index') );
+        } else {
+        	//登录页面
+            if(is_login()){
+                $this->redirect('Index/index');
+            }else{
+                $this->display();
+            }
+        }
 	}
 	
-	/**
-	 * 登录提交验证
-	 */
-	function checkLogin() {
-		if(empty($_POST['account'])) {
-			$this->error('帐号错误！');
-		}elseif (empty($_POST['password'])){
-			$this->error('密码必须！');
-		}
-		elseif (empty($_POST['verify'])){
-			$this->error('验证码必须！');
-		}
-		
-		/* 检测验证码 TODO: */
-		$verify = new \Think\Verify();
-		if (!$verify->check($code, 1)) {
-			$this->error('验证码输入错误！');
-		}
-		
-		//生成认证条件
-		$map			= array();
-		$map['account']	= $_POST['account'];
-		$map["status"]	= array('gt',0);
-		if(session('verify') != md5($_POST['verify'])) {
-			$this->error('验证码错误！');
-		}
-		import ( 'ORG.Util.RBAC' );
-		$authInfo = RBAC::authenticate($map);
-		//使用用户名、密码和状态的方式进行认证
-		if(false === $authInfo) {
-			$this->error('帐号不存！');
-		}elseif ($authInfo['status'] == '2'){
-			$this->error('帐号已禁用！');
-		}elseif ($authInfo['status'] < 0){
-			$this->error('帐号已被删除！');
-		}else {
-			if($authInfo['password'] != pwdHash($_POST['password'])) {
-				$this->error('密码错误！');
-			}
-			$_SESSION[C('USER_AUTH_KEY')]	=	$authInfo['id'];
-			$_SESSION['email']	=	$authInfo['email'];
-			$_SESSION['nickname']		=	$authInfo['nickname'];
-			$_SESSION['lastLoginTime']		=	$authInfo['last_login_time'];
-			$_SESSION['login_count']	=	$authInfo['login_count'];
-			
-			//超级管理员
-			if(in_array($authInfo['account'], C('ADMIN_AUTHS'))) {
-				$_SESSION[C('ADMIN_AUTH_KEY')]		=	true;
-			}
-			
-			//保存登录信息
-			$User	=	M('User');
-			$ip		=	get_client_ip();
-			$time	=	time();
-			$data = array();
-			$data['id']	=	$authInfo['id'];
-			$data['last_login_time']	=	$time;
-			$data['login_count']	=	array('exp','login_count+1');
-			$data['last_login_ip']	=	$ip;
-			$User->save($data);
-
-			// 缓存访问权限
-			RBAC::saveAccessList();
-			$this->success('登录成功！', U('Index/index'));
-		}
-	}
 	/**
 	 * 注销接口
 	 */
 	function logout() {
-        if(is_login()){
-            D('Member')->logout();
+        if(is_login()) {
+            D('User')->logout();
             session('[destroy]');
             $this->success('退出成功！', U('login'));
         } else {
@@ -109,8 +78,8 @@ class CommonController extends Controller {
 	 * 验证码接口
 	 */
     public function verify() {
-        $verify = new \Think\Verify();
-        $verify->entry(1);
+		$verify = new Verify();
+        $verify->entry(1);//验证码编号为1
     }
 	
 	

@@ -21,7 +21,7 @@ class ConfigModel extends Model {
     );
 	
     /**
-     * 载入缓存
+     * 载入数据库中的配置
      * @return NULL
      */
     public function loadConfig() {
@@ -31,7 +31,6 @@ class ConfigModel extends Model {
     		S('DB_CONFIG_DATA',$config);
     	}
     	C($config); //添加配置
-    	
     	return null;
     }
     

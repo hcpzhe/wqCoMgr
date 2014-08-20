@@ -1,6 +1,6 @@
 <?php
 return array(
-	'AUTOLOAD_NAMESPACE' => array('Addons' => ADDON_PATH), //扩展模块列表
+// 	'AUTOLOAD_NAMESPACE' => array('Addons' => ADDON_PATH), //扩展模块列表
 	'DEFAULT_TIMEZONE'			=>	'PRC', //时区
 	'URL_PATHINFO_DEPR'			=>	'-', //参数之间的分割符号  默认是'/'
 	'URL_CASE_INSENSITIVE' => true, //默认false 表示URL区分大小写 true则表示不区分大小写
