@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>欢迎页</title>
+<link href="__CSS__/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+</head>
+<body>
+<div style="width:100%; overflow:hidden;">
+   <div class="top_search">
+       <form action="" method="post" class="search_form">
+           <table width="720" border="0" height="40" style="padding-top:3px;">
+              <tr>
+                <td class="th_input1"><input class="input1" type="text" value="" /></td>
+                <td class="th_input2"><input class="input2" type="text" value="" /></td>
+                <td>&nbsp;</td>
+                <td class="th_sea"><input class="sea" type="text" value="输入搜索文字" /></td>
+              </tr>
+            </table>
+       </form>
+   
+   </div>
+   <div class="center_content">
+      <table width="755" bgcolor="#fff" cellpadding="0" cellspacing="0">
+          <tr>
+            <td class="menu"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32" /><font>菜单名称</font></span></td>
+          </tr>
+          <tr>
+            <td class="menu_content">&nbsp;</td>
+          </tr>
+          <tr>
+            <td class="notice"><img style="float:left; margin-left:10px;" src="__IMG__/notice_img.png" /><span>公司通知</span></td>
+          </tr>
+    </table> 
+   </div>
+   <div class="bottom_container">
+        <table width="755" bgcolor="#fff" cellpadding="0" cellspacing="0">
+          <tr>
+            <td class="menu"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32" /><font>菜单名称</font></span></td>
+          </tr>
+          <tr>
+            <td class="container">&nbsp;</td>
+          </tr>
+        </table>
+   
+   
+   </div>
+</div>
+</body>
+</html>
+<script>
+$(document).ready(function(){
+  $(".sea").focus(function(){
+    $(".sea").attr("value","");
+  });
+  $(".sea").blur(function(){
+    $(".sea").attr("value","输入搜索文字");
+  });
+});
+
+</script>

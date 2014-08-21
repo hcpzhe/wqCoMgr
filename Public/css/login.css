@@ -1,0 +1,23 @@
+@charset "utf-8";
+/* CSS Document */
+body{ margin:0; padding:0; FONT-FAMILY: '微软雅黑',Microsoft YaHei,Verdana, Arial,'宋体', Tahoma,Simsun, Arial Unicode MS, Mingliu,  Helvetica;}
+body,a,span,td,a{ font-size:12px; }
+body{  }
+UL {TEXT-ALIGN: left; PADDING: 0px; LIST-STYLE-TYPE: none; MARGIN: 0px; }
+LI {TEXT-ALIGN: left; PADDING: 0px; LIST-STYLE-TYPE: none; MARGIN: 0px; }
+a{ color:#666666; text-decoration:none; }
+a:hover{ color:#FF0000;  text-decoration:none; }
+img{ border:0; }
+
+.b_b{ border-bottom:1px solid #CCCCCC; }
+.pad10{ padding:10px; }
+.padTop10{ padding-top:10px; }
+.lineH2{ line-height:2; }
+
+.body{ background:url(../images/logo_bg.jpg) center center no-repeat; }
+.logo{ background:url(../images/logo.png) no-repeat; width:328px !important; height:57px;}
+.account{ width:326px; height:55px; background:url(../images/account.png) center no-repeat; margin-bottom:15px;}
+.password{width:326px; height:60px; background:url(../images/password.png) center no-repeat; margin-bottom:20px;}
+.input_a{  line-height:20px; font-size:14px; border:0px; margin-left: 110px; height: 40px; width: 210px; outline:none; }
+.btn_submit{  height:46px;}
+.btn_submit input{background:url(../images/login_submit.png) center no-repeat; display:block; width:316px; height:46px; border:0px; color:#FFF; font-size:18px; font-weight:bold; cursor:pointer;}

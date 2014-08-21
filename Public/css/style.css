@@ -1,0 +1,63 @@
+@CHARSET "UTF-8";
+		*{ margin:0 auto; padding:0; text-decoration:none; FONT-FAMILY: '微软雅黑',Microsoft YaHei,Verdana, Arial,'宋体', Tahoma,Simsun, Arial Unicode MS, Mingliu,  Helvetica; }
+        div,span,table { font-size:12px; }
+        ul{ list-style:none; }
+        img{ border:0px; }
+  .wrapper{ margin-top:20px;}  
+        .content{ width:1000px; margin:0 auto; height:auto;}
+        .Menu{ width:217px; float:left; background:#FFF;}
+        .Menu dl{ width:215px; border-left:1px solid #ccc; border-right:1px solid #ccc;}
+        .Menu dt { position:relative; }
+        .Menu dd{ color:#999; height:43px; width:209px; line-height:43px; display:none;}
+		.Menu dd:hover{color:#FFF;  background:url(../images/hei_bg.jpg) no-repeat; width:209px; height:43px; cursor: pointer;}
+        .Menu dd a{ text-decoration:none; float:left; color:#666; font-size:13px;}
+        .Menu dd:hover a{ color:#FFF;}
+        .Menu dd span{ width:30px; height:40px;  background:url(../images/er_hei_dayu.jpg) no-repeat center; float:left; margin-left:30px;}
+		.Menu dd:hover span{width:30px; height:43px; background:url(../images/bai_dayu.png) no-repeat center; float:left;}
+		.Menu .slides{ height:50px; width:209px; color:#333; cursor:pointer; background:url(../images/slideBg.jpg) no-repeat;}
+		.Menu .slides span,.Menu .slides2 span{ font-size:15px;  line-height:43px;}
+		.Menu .slides span,.Menu .slides2 span{ margin-left:40px; line-height:45px;}
+        .Menu .slides:hover{ color:#FFF; background:url(../images/slideBg_hover.jpg) no-repeat; }
+        .Menu .slides a{ color:#fff; text-decoration:none;}
+		.Menu .slides2 { height:50px; color:#FFF;line-height: 43px; cursor: pointer;	background: url(../images/slideBg_hover.jpg) no-repeat;}
+       
+        
+        .right{width:780px; float:right; padding:0 0 20px 0; min-height:560px;}
+        
+		.table{ width:98%; border:1px solid #ccc; border-spacing:0px; border-collapse:collapse; }
+		.table thead tr{ background:#ccc; }
+		.table thead th{ height:30px; border:1px solid #ccc;}
+		.table tbody tr{ background-color:#f1f1f1;}
+		.table tbody td{ height:24px; text-align:center; border:1px solid #ccc;}
+		.table tfoot tr{ background-color:#f7f7f7;}
+		.table tfoot td{ height:25px; text-align:center; border:1px solid #ccc;}
+		.text{ border:1px solid #ccc; height:20px; border-radius:5px; }
+		
+        .submit{ padding:5px 15px 5px 15px; font-weight:bold; }
+
+		.pagea{ color:#999; margin:0px 3px 0 3px; border:1px solid #ccc; padding:3px; height:12px;}
+		.pagea:hover{ background-color:#fff; }
+		.foot{ width:100%; margin:0 auto; text-align:center; background:url(../images/footer_bg.jpg); color:#fff; height:48px; line-height:48px; }
+		.footer{width: 900px; display: block; float: right; margin: 0 auto;}
+		.success{ margin-top:30px; border:1px solid Green; width:98%; text-align:center; color:Green; font-size:14px; line-height:22px;}
+		.error{ margin-top:30px; border:1px solid Red; width:98%; text-align:center; color:Red; font-size:14px; line-height:22px;}
+        .btnsearch{ width:60px; height:20px; line-height:20px; }
+		
+		
+		/**welcome**/
+		.top_search{ background:url(../images/search_bg.png) no-repeat; width:765px; height:43px; padding-bottom:10px;}
+		.search_form{ height:40px; width:720px; margin:0 auto;}
+		.top_search table .th_input1,.top_search table .th_input2{width:179px; height:34px; background:url(../images/input_bg.jpg) no-repeat;}
+		.search_form .input1,.search_form .input2{ width:150px; height:29px; outline:none; border:0px; background:none; margin-left:5px;}
+		.top_search table .th_sea{ width:194px; height:34px; float:right; background:url(../images/search.jpg) no-repeat !important;}
+		.sea{ width:160px; height:29px; background:none; outline:none; border:0px; margin-left:5px; padding-top:3px; font-size:12px; color:#666;}
+		.center_content table td,.bottom_container table td{ width:755px; border:1px solid #ccc;}
+		.menu{ border-bottom:none !important; height:40px;}
+		.menu span{ width:751px; height:38px; margin:0 auto; display:block; background:#1c86cf;}
+		.menu span font{ float:left; height:36px; font-size:15px; line-height:40px; color:#FFF;}
+		.menu_content{ height:100px; border-bottom:none !important;}
+		.notice{ height:30px;}
+		.notice span{ float:left; margin-left:5px;}
+		
+		.bottom_container{ margin-top:10px;}
+		.container{ height:200px;}
