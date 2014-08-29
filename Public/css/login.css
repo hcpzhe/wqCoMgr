@@ -22,6 +22,6 @@ img{ border:0; }
 .logo{ background:url(../images/logo.png) no-repeat; width:328px !important; height:57px;}
 .account{ width:326px; height:55px; background:url(../images/account.png) center no-repeat; margin-bottom:15px;}
 .password{width:326px; height:60px; background:url(../images/password.png) center no-repeat; margin-bottom:20px;}
-.input_a{  line-height:20px; font-size:14px; border:0px; margin-left: 110px; height: 40px; width: 210px; outline:none; }
+.input_a{  line-height:20px; font-size:14px; border:0px; margin-left: 110px; height: 20px; width: 200px; outline:none; }
 .btn_submit{  height:46px;}
 .btn_submit input{background:url(../images/login_submit.png) center no-repeat; display:block; width:316px; height:46px; border:0px; color:#FFF; font-size:18px; font-weight:bold; cursor:pointer;}
