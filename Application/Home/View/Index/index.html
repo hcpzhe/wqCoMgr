@@ -15,26 +15,32 @@
         <!-- menu -->
         <div class="Menu">            
             <div style="background:url(__IMG__/top_img.jpg) no-repeat; width:217px; height:8px;">
-            </div>
-            <!--<dl id="_menuindex">
-                <dt class="slides">分类名称</dt>
-                <dd><a href="{:U('Index/welcome')}" target="main">首页</a></dd>
-            </dl>-->
+            </div>            
             <dl id="_menuteam">
-                <dt class="slides"><span>会员管理</span></dt>
-                <dd><span></span><a href="{:U('Levelup/lists?bef=0&status=1')}" target="main">待审新会员</a></dd>
-                <dd><span></span><a href="{:U('Levelup/lists?bef=0&status=3&tpl=listb0s3')}" target="main">已审新会员</a></dd>
-                <dd><span></span><a href="{:U('Levelup/lists?bef=0&status=2&tpl=listb0s2')}" target="main">被拒绝新会员</a></dd>
-                <dd><span></span><a href="{:U('Member/lists')}" target="main">会员列表</a></dd>
-                <dd><span></span><a href="{:U('Member/lists?level=0&tpl=listl0')}" target="main">临时会员列表</a></dd>
-                <dd><span></span><a href="{:U('Member/atlas')}" target="main">会员图谱</a></dd>
+                <dt class="slides"><span>客户管理</span></dt>
+                <dd><span></span><a href="{:U('Customer/add')}" target="main">客户添加</a></dd>
+                <dd><span></span><a href="{:U('Customer/lists')}" target="main">客户列表</a></dd>
+                <dd><span></span><a href="{:U('Customer/visitlists')}" target="main">拜访记录列表</a></dd>
             </dl>
             <dl id="_menubusiness">
-                <dt class="slides"><span>升级管理</span></dt>
-                <dd><span></span><a href="{:U('Levelup/lists?status=1&tpl=lists1')}" target="main">待审升级记录</a></dd>
-                <dd><span></span><a href="{:U('Levelup/lists?status=3&tpl=lists3')}" target="main">已审升级记录</a></dd>
-                <dd><span></span><a href="{:U('Levelup/lists?status=2&tpl=lists2')}" target="main">拒绝升级记录</a></dd>
-                <dd><span></span><a href="{:U('Levelup/lists?type=2&tpl=listt2')}" target="main">积分升级记录</a></dd>
+                <dt class="slides"><span>订单管理</span></dt>
+                <dd><span></span><a href="{:U('Order/lists')}" target="main">订单列表</a></dd>
+                <dd><span></span><a href="{:U('Order/add')}" target="main">添加订单</a></dd>
+                <dd><span></span><a href="{:U('Order/pay')}" target="main">订单付款记录</a></dd>               
+	        </dl>
+	        <dl id="_menudevelop">
+                <dt class="slides"><span>开发管理</span></dt>
+                <dd><span></span><a href="{:U('Develop/developlists')}" target="main">网站开发订单</a></dd>
+                <dd><span></span><a href="{:U('Develop/seolists')}" target="main">网站优化订单</a></dd>
+                <dd><span></span><a href="{:U('Develop/weihu')}" target="main">后期维护</a></dd>
+
+	        </dl>
+	        <dl id="_menurenew">
+                <dt class="slides"><span>续费管理</span></dt>
+                <dd><span></span><a href="{:U('Renew/orderlists')}" target="main">待续费订单</a></dd>
+                <dd><span></span><a href="{:U('Renew/orderapply')}" target="main">订单续费申请</a></dd>
+                <dd><span></span><a href="{:U('Renew/domainapply')}" target="main">域名续费申请</a></dd>
+                <dd><span></span><a href="{:U('Renew/domainlists')}" target="main">域名库</a></dd>
 	        </dl>
             <dl id="_menufinance">
                 <dt class="slides"><span>财务中心</span></dt>
@@ -56,6 +62,11 @@
                 <dd><span></span><a href="{:U('Article/read?category=联系我们')}" target="main">联系我们</a></dd>
                 <dd><span></span><a href="{:U('Article/read?category=用户欢迎页')}" target="main">用户欢迎页</a></dd>
 	        </dl>
+	        <dl id="_menuuser">
+                <dt class="slides"><span>系统用户管理</span></dt>
+                <dd><span></span><a href="{:U('Index/welcome')}" target="main">返回首页</a></dd>
+                <dd><span></span><a href="{:U('Common/logout')}" onclick="if(confirm(&#39;您确认要退出吗？&#39;)){$(this).RSsubmit();}return false;" target="main">注销</a></dd>
+            </dl>
             <div style="background:url(__IMG__/bottom_img.jpg) no-repeat; width:217px; height:11px;">
             </div>
         </div>
@@ -96,8 +107,8 @@ $(function ($) {
 		SetCwinHeight();
 	})
 	
-    MenuShow("_menuindex");
-    $("#righttitle").css("display", "none");
+    /*MenuShow("_menuindex");
+    $("#righttitle").css("display", "none");*/
     
     $(".Menu dl dt").click(function () {
         MenuShow($(this).parent().attr("id"));
