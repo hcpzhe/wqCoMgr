@@ -11,7 +11,7 @@
         .Menu dt { position:relative; }
         .Menu dd{ color:#999; height:43px; width:209px; line-height:43px; display:none;}
 		.Menu dd:hover{color:#FFF;  background:url(../images/hei_bg.jpg) no-repeat; width:209px; height:43px; cursor: pointer;}
-        .Menu dd a{ text-decoration:none; float:left; color:#666; font-size:13px;}
+        .Menu dd a{ text-decoration:none; float:left; color:#666; font-size:13px; width:100%;}
         .Menu dd:hover a{ color:#FFF;}
         .Menu dd span{ width:30px; height:40px;  background:url(../images/er_hei_dayu.jpg) no-repeat center; float:left; margin-left:30px;}
 		.Menu dd:hover span{width:30px; height:43px; background:url(../images/bai_dayu.png) no-repeat center; float:left;}

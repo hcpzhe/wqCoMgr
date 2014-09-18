@@ -19,7 +19,7 @@ class OrderController extends HomeBaseController{
 	}
 /*添加订单*/
 	public function add_order(){
-		echo "添加订单";
+		$this->display();
 	}		
 	
 	

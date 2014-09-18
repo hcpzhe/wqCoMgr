@@ -4,6 +4,6 @@ use Common\Controller\HomeBaseController;
 class OrdrenController extends HomeBaseController{
 	/*订单续费申请*/
 	public function ord_ren_app(){
-		echo "订单续费申请！！！";
+		$this->display();
 	}
 }
