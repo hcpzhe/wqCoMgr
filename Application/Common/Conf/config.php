@@ -8,10 +8,10 @@ return array(
     'SHOW_PAGE_TRACE'           =>  true,//显示调试信息
     
     'DB_TYPE'                   =>  'mysqli',
-    'DB_HOST'                   =>  '192.168.1.9',
+    'DB_HOST'                   =>  'localhost',
     'DB_NAME'                   =>  'wqerp',
-    'DB_USER'                   =>  'wqseo',
-    'DB_PWD'                    =>  'wqseo',
+    'DB_USER'                   =>  'root',
+    'DB_PWD'                    =>  '',
     'DB_PORT'                   =>  '3306',
     'DB_PREFIX'                 =>  'erp_',
 	

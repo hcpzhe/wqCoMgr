@@ -82,6 +82,5 @@ class CommonController extends Controller {
 		$verify = new Verify();
         $verify->entry(1);//验证码编号为1
     }
-	
-	
+
 }

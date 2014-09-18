@@ -52,7 +52,7 @@
 		.search_form .input1,.search_form .input2{ width:150px; outline:none; border:0px; background:none; margin-left:5px;}
 		.top_search table .th_sea{ width:194px; height:34px; float:right; background:url(../images/search.jpg) no-repeat !important;}
 		.sea{ width:160px; background:none; outline:none; border:0px; margin-left:5px; padding-top:10px; font-size:12px; color:#666;}
-		.center_content table td,.bottom_container table td{ width:755px; border:1px solid #ccc; background:#fff;}
+		.center_content table td,.bottom_container table td{ width:755px; border:1px solid #ccc; background:#fff; padding:5px;}
 		.menu{ border-bottom:none !important; height:40px;}
 		.menu span{ width:751px; height:38px; margin:0 auto; display:block; background:#1c86cf;}
 		.menu span font{ float:left; height:36px; font-size:15px; line-height:40px; color:#FFF;}
