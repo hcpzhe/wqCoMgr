@@ -15,11 +15,7 @@
         <!-- menu -->
         <div class="Menu">            
             <div style="background:url(__IMG__/top_img.jpg) no-repeat; width:217px; height:8px;">
-            </div>
-            <!--<dl id="_menuindex">
-                <dt class="slides">分类名称</dt>
-                <dd><a href="{:U('Index/welcome')}" target="main">首页</a></dd>
-            </dl>-->
+            </div>            
             <dl id="_menuteam">
                 <dt class="slides"><span>客户管理</span></dt>
                 <dd><a href="" target="main"><span></span>客户列表</a></dd>
@@ -35,6 +31,20 @@
                 <dd><a href="{:U('Order/add_order')}" target="main"><span></span>添加订单</a></dd>
                 <dd><a href="{:U('Orderpay/order_pay_record')}" target="main"><span></span>订单付款记录</a></dd>
                 <dd><a href="" target="main"><span></span>积分升级记录</a></dd>
+	        </dl>
+	        <dl id="_menudevelop">
+                <dt class="slides"><span>开发管理</span></dt>
+                <dd><span></span><a href="{:U('Develop/developlists')}" target="main">网站开发订单</a></dd>
+                <dd><span></span><a href="{:U('Develop/seolists')}" target="main">网站优化订单</a></dd>
+                <dd><span></span><a href="{:U('Develop/weihu')}" target="main">后期维护</a></dd>
+
+	        </dl>
+	        <dl id="_menurenew">
+                <dt class="slides"><span>续费管理</span></dt>
+                <dd><span></span><a href="{:U('Renew/orderlists')}" target="main">待续费订单</a></dd>
+                <dd><span></span><a href="{:U('Renew/orderapply')}" target="main">订单续费申请</a></dd>
+                <dd><span></span><a href="{:U('Renew/domainapply')}" target="main">域名续费申请</a></dd>
+                <dd><span></span><a href="{:U('Renew/domainlists')}" target="main">域名库</a></dd>
 	        </dl>
             <dl id="_menufinance">
                 <dt class="slides"><span>开发管理</span></dt>
@@ -55,6 +65,11 @@
             <dl id="_menuconfig">
                 <dt class="slides"><span>配置管理</span></dt>
                 <dd><a href="{:U('Config/info')}" target="main"><span></span>系统配置信息</a></dd>
+            </dl>
+	        <dl id="_menuuser">
+                <dt class="slides"><span>系统用户管理</span></dt>
+                <dd><span></span><a href="{:U('Index/welcome')}" target="main">返回首页</a></dd>
+                <dd><span></span><a href="{:U('Common/logout')}" onclick="if(confirm(&#39;您确认要退出吗？&#39;)){$(this).RSsubmit();}return false;" target="main">注销</a></dd>
             </dl>
             <div style="background:url(__IMG__/bottom_img.jpg) no-repeat; width:217px; height:11px;">
             </div>
@@ -96,8 +111,8 @@ $(function ($) {
 		SetCwinHeight();
 	})
 	
-    MenuShow("_menuindex");
-    $("#righttitle").css("display", "none");
+    /*MenuShow("_menuindex");
+    $("#righttitle").css("display", "none");*/
     
     $(".Menu dl dt").click(function () {
         MenuShow($(this).parent().attr("id"));

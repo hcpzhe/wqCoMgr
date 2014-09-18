@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>客户添加</title>
+<link href="__CSS__/home.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+</head>
+<body>
+<div class="b right">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>添加客户信息</font></span></td>
+      </tr>
+      <tr>
+        <td height="30"></td>
+      </tr>
+      <tr>
+        <td><font class="tishi">模糊查询：因数据较多，存在一家单位多个名称的现象，建议在录入前输入公司简写点击模糊查询，以杜绝重复录入情况。（例如洛阳市万谦网络科技有限公司，可输入万谦进行模糊查询）</font></td>
+      </tr>
+      <tr>
+        <td height="30"></td>
+      </tr>
+      <tr>
+        <td align="center">
+           <form action=" " method="post" name="form1" id="cust_form" onsubmit="return checkfrm1(this);">           
+            <table width="500" border="0">
+                  <tr>
+                    <td width="25%">公司名称：</td>
+                    <td width="75%"><input type="text" name="name"><font class="fontred">*</font><input type="button" value="模糊查询"></td>
+                  </tr>
+                  <tr>
+                    <td>联 系  人：</td>
+                    <td><input type="text" name="contacts"><font class="fontred">*</font></td>
+                  </tr>
+                  <tr>
+                    <td>联系电话：</td>
+                    <td><input type="text" name="phone"><font class="fontred">*</font></td>
+                  </tr>
+                  <tr>
+                    <td>传 &nbsp;&nbsp;&nbsp; 真：</td>
+                    <td><input type="text" name="email"></td>
+                  </tr>
+                  <tr>
+                    <td>地  &nbsp;&nbsp;&nbsp; 址：</td>
+                    <td><input type="text" name="address" style="width:250px"></td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                    <td><input type="submit" name="Submit" value=" 添加 " class="button_submit"></td>
+                  </tr>
+            </table>                              
+           </form>
+        </td>
+      </tr>
+     </tbody>
+  </table>
+</div>
+<script type="text/javascript">
+function checkfrm1(afrm) {
+ if( (afrm.name.value == "") )
+	{
+		alert("用户名不能为空！");
+		afrm.name.focus();
+		return false;
+	}
+	$(afrm).RSsubmit({success_alert:true});
+	return false;
+}
+</script>
+</body>
+</html>
