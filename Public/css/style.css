@@ -62,3 +62,7 @@
 		
 		.bottom_container{ margin-top:10px;}
 		.container{ height:200px;}
+		/*订单列表分页显示样式*/
+		/*页码列表*/
+		a.num{ padding:1px 5px; border:1px solid #ccc; margin-left:10px;}	
+		span.current{ padding:1px 5px; border:1px solid #cc0001; color:#cc0001; margin-left:10px;}	

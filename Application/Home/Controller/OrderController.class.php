@@ -6,7 +6,7 @@ class OrderController extends HomeBaseController{
 /*订单列表*/
 	public function order_list(){
 		$order=new OrderModel();
-		$this->orderlist=$order->orderlist();
+		$this->data=$order->orderlist();
 		$this->display();
 	}
 /*订单详情*/
