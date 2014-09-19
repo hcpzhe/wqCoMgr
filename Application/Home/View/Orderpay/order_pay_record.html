@@ -25,24 +25,30 @@
             <td class="menu"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32" /><font>订单付费列表</font></span></td>
           </tr>
           <tr>
-            <td class="menu_content">&nbsp;</td>
+            <td class="menu_content">
+<!-- 订单付费列表开始 -->
+<table>
+	<tr><td>编号</td><td>客户</td><td>续费金额</td><td>类型</td><td>付款时间</td><td>审核时间</td><td>审核</td><td>操作</td></tr>
+<foreach name="op_list" item="list">
+	<tr>
+		<td>{$list.id}</td>
+		<td>{$list.cname}</td>
+		<td>{$list.money}元</td>
+		<td><if condition="$list.class eq 1">预付款<else/>余款</if></td>
+		<td>{$list.pay_time}</td>
+		<td>{$list.check_time}</td>
+		<td><if condition="$list.check eq 1">通过<elseif condition="$list.check eq 0"/>待审<else/>拒绝</if></td>
+		<td><a href="{:U('Orderpay/op_info?id='.$list['id'])}">详情</a>&nbsp;|&nbsp;<a href="">编辑</a></td>
+	</tr>
+</foreach>
+</table>
+<!-- 订单付费列表结束-->
+            </td>
           </tr>
           <tr>
             <td class="notice"><img style="float:left; margin-left:10px;" src="__IMG__/notice_img.png" /><span>公司通知</span></td>
           </tr>
     </table> 
-   </div>
-   <div class="bottom_container">
-        <table width="755" bgcolor="#fff" cellpadding="0" cellspacing="0">
-          <tr>
-            <td class="menu"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32" /><font>菜单名称</font></span></td>
-          </tr>
-          <tr>
-            <td class="container">&nbsp;</td>
-          </tr>
-        </table>
-   
-   
    </div>
 </div>
 </body>

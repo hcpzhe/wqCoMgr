@@ -39,8 +39,8 @@
 		<td>{$list.pname}</td>
 		<td>{$list.total_fees}元</td>
 		<td>{$list.remark}</td>
-		<td>通过/未通过</td>
-		<td><a href="{:U('Order/orderinfo?id='.$list['id'])}">详情</a>&nbsp;|&nbsp;<a href="">编辑</a></td>
+		<td><if condition="$list.check eq 1">通过<elseif condition="$list.check eq 0"/>待审<else/>拒绝</if></td>
+		<td><a href="{:U('Order/order_info?id='.$list['id'])}">详情</a>&nbsp;|&nbsp;<a href="{:U('Order/ord_u_form?id='.$list['id'])}">编辑</a></td>
 	</tr>
 </foreach>
 </table>
