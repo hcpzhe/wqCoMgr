@@ -28,8 +28,8 @@
             <td class="menu_content">
 <!-- 订单付费列表开始 -->
 <table>
-	<tr><td>编号</td><td>客户</td><td>续费金额</td><td>类型</td><td>付款时间</td><td>审核时间</td><td>审核</td><td>操作</td></tr>
-<foreach name="op_list" item="list">
+	<tr><td>编号</td><td>客户</td><td>续费金额</td><td>类型</td><td>付款时间</td><td>审核时间</td><td>审核</td><td>提交人</td><td>操作</td></tr>
+<foreach name="data['op_list']" item="list">
 	<tr>
 		<td>{$list.id}</td>
 		<td>{$list.cname}</td>
@@ -38,9 +38,11 @@
 		<td>{$list.pay_time}</td>
 		<td>{$list.check_time}</td>
 		<td><if condition="$list.check eq 1">通过<elseif condition="$list.check eq 0"/>待审<else/>拒绝</if></td>
-		<td><a href="{:U('Orderpay/op_info?id='.$list['id'])}">详情</a>&nbsp;|&nbsp;<a href="">编辑</a></td>
+		<td>{$list.uname}</td>
+		<td><a href="">编辑</a></td>
 	</tr>
 </foreach>
+	<tr><td colspan="9" align="center">{$data[show]}</td></tr>
 </table>
 <!-- 订单付费列表结束-->
             </td>

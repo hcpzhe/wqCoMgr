@@ -5,11 +5,15 @@ use Think\Page;
 class OrderModel extends Model{
 	/*显示订单列表*/
 	Public function orderlist(){
+		/*查询数据总条数*/
 		$count=$this->table('erp_order as oe,erp_user as ur,erp_customer as cr,erp_product as pt')
 					->where("oe.user_id=ur.id AND oe.cust_id=cr.id AND oe.prod_id=pt.id AND oe.status=1")
 					->count();
-		$page=new \Think\Page($count,5);
+		/*载入分页类，初始化数据*/
+		$page=new \Think\Page($count,7);
+		/*调用分页链接函数*/
 		$data['show']=$page->show();
+		/*控制数据查询条数*/
 		$data['order_list']=$this->table('erp_order as oe,erp_user as ur,erp_customer as cr,erp_product as pt')
 					->where("oe.user_id=ur.id AND oe.cust_id=cr.id AND oe.prod_id=pt.id AND oe.status=1")
 					->field("oe.id as id,ur.realname as uname,cr.`name` as cname,pt.`name` as pname,oe.total_fees,oe.remark,oe.expired_time,oe.`check`")
