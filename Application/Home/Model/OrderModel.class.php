@@ -8,14 +8,16 @@ class OrderModel extends Model{
 		$count=$this->table('erp_order as oe,erp_user as ur,erp_customer as cr,erp_product as pt')
 					->where("oe.user_id=ur.id AND oe.cust_id=cr.id AND oe.prod_id=pt.id AND oe.status=1")
 					->count();
-		echo $count;
-		$page=new \Think\Page($count,3);
+		$page=new \Think\Page($count,5);
 		$data['show']=$page->show();
 		$data['order_list']=$this->table('erp_order as oe,erp_user as ur,erp_customer as cr,erp_product as pt')
 					->where("oe.user_id=ur.id AND oe.cust_id=cr.id AND oe.prod_id=pt.id AND oe.status=1")
 					->field("oe.id as id,ur.realname as uname,cr.`name` as cname,pt.`name` as pname,oe.total_fees,oe.remark,oe.expired_time,oe.`check`")
-					->limit($Page->firstRow.','.$Page->listRows)->select();	
-
+					->limit($page->firstRow.','.$page->listRows)->select();	
+// 		echo $this->_sql();
+// 		echo "<pre>";
+// 		print_r($data['order_list']);
+// 		echo "</pre>";
 		return $data;
 	} 
 	public function orderinfo($id){
