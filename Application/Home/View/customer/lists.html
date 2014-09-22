@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>客户列表</title>
+<link href="__CSS__/home.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+</head>
+<body>
+<div class="b right">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>客户列表</font></span></td>
+      </tr>
+      <tr>
+        <td height="30"></td>
+      </tr>
+      <tr>
+        <td><font class="tishi">头部提示信息</font></td>
+      </tr>
+      <tr>
+        <td height="30"></td>
+      </tr>
+       <tr>
+        <td height="40">
+              <span id="cust_search">
+	           <form action="__SELF__" method="get">
+	                                        搜索：<input type="text" name="name" class="search" value="" />
+	                <input type=submit value="搜索" class="button_submit" />
+	           </form> 
+	           <script type="text/javascript">
+	               //function idval(){
+	            	 //  for(var i=0;i<com_select.length;i++) {	
+	            		//   if (document.all.com_select[i].checked)  
+	            			//   {
+	            			   //alert( document.all.com_select[i].value); 
+	            			  // var name_id= document.all.com_select[i].value;
+	            			   //}
+	            		//}
+	             //  }
+	               function ChkSel(){
+						var sel = false;
+						$("input[name='s2[]']").each(function(){
+							var ischk = $(this).is(":checked") ;
+							
+							if( ischk){
+								//alert(ischk.value);
+								$(this).attr("checked")=="checked";
+								return sel = true;
+							}
+						});
+						return sel;
+					}
+					function ChkRenew(){  
+						if( ChkSel()){
+							$('#frmRenew').submit();
+						}else{
+							alert( '请选择需要操作的公司!'); 
+							//parent.location.reload();
+						} 
+					}
+	           </script>
+                
+                
+                <a href="#" class="button_submit" onclick="ChkRenew();">查看详细</a>
+                <a href="#" class="button_submit" >添加订单</a> 
+                <a href="#" class="button_submit">查看详细</a> 
+                
+           </span>   
+        </td>
+      </tr>
+      <tr>
+        <td height="10"></td>
+      </tr>
+      <tr>
+        <td align="center">                     
+            <table width="742" border="0" class="cust_list">           
+                  <tr class="liebiao_title">
+                    <th width="105">请选择</th>
+                    <th width="200">公司名称</th>
+                    <th width="105">联系人</th>
+                    <th width="120">联系电话</th>
+                    <th width="105">录入人</th>
+                    <th width="105">状态</th>
+                  </tr>
+               </table>
+           </td>
+      </tr>
+      
+      <tr>
+        <td align="center"> 
+             <form action="{:U('Customer/detailed?id='.$data['id'])}" id="frmRenew" name="frmRenew" method="POST">                 
+            <table width="740" border="0" cellspacing="0" cellpadding="0" class="com_list">  
+                <!-- <foreach name="list" item="data"> -->
+               
+                  <tr height="30">
+                     <td width="105" align="center">
+                       <input type="checkbox" name="s2[]" value="{$data.id}">
+                       <input type="hidden" name="id" value="{$data.id}">
+                     </td>
+                     <td width="200">{$data.name}</td>
+                     <td width="105" align="center">{$data.contacts}</td>
+                     <td width="120" align="center">{$data.phone}</td>
+                     <td width="105" align="center"> 权限未做  </td>
+                     <td width="105" align="center">
+                        <if condition="$data['check'] eq -1 ">拒绝
+                        <elseif condition="$data['check'] eq 0 " />待审
+                        <else /> 通过</if>                                            
+                     </td>
+                  </tr>
+                  
+               <!-- </foreach> -->	                       
+              </table>
+              </form>
+           </td>
+      </tr>                         
+      <tr>
+        <td align="center">                     
+            <table width="740" border="0" style="display: block; border-bottom: 1px solid #ccc; border-right: 1px solid #ccc; border-left: 1px solid #ccc;">
+            <tr><td></td></tr>
+            </table>
+        </td>
+      </tr>
+        
+     </tbody>
+  </table>
+</div>
+</body>
+</html>
