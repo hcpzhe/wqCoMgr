@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>客户详细信息</title>
+<link href="__CSS__/home.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+</head>
+<body>
+<div class="b right">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>客户详细信息</font></span></td>
+      </tr>
+      <tr>
+        <td height="30"></td>
+      </tr>
+      <tr>
+        <td><font class="tishi">客户详细信息查看</font></td>
+      </tr>
+      <tr>
+        <td height="30"></td>
+      </tr>
+      <tr>
+        <td align="center">         
+            <table width="500" border="0" style="font-size: 12px;">
+                  <tr>
+                    <td width="20%">公司名称：</td>
+                    <td width="80%"> 
+                      <input type="hidden" value="{$list['id']}" name="id">                                     
+		                {$list['name']}		                		                               	                                                 
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>联 系  人：</td>
+                    <td>{$list['contacts']}</td>
+                  </tr>
+                  <tr>
+                    <td>联系电话：</td>
+                    <td>{$list['phone']}</td>
+                  </tr>
+                  <tr>
+                    <td>传 &nbsp;&nbsp;&nbsp; 真：</td>
+                    <td>{$list['fax']}</td>
+                  </tr>
+                  <tr>
+                    <td>地  &nbsp;&nbsp;&nbsp; 址：</td>
+                    <td>{$list['address']}</td>
+                  </tr>
+                  <tr>
+                    <td>添加时间：</td>
+                    <td>{:date('Y/m/d H:i:s',$list['add_time'])}</td>
+                  </tr>
+                  <tr>
+                    <td>添 加 人：</td>
+                    <td>权限未做</td>
+                  </tr>                  
+            </table>                              
+        </td>
+      </tr>
+      <tr>
+         <td>添加拜访记录，订单，域名</td>
+      </tr>
+      <tr>
+         <td><a href="{:U('Customer/edit?id='.$list['id'])}">修改公司信息</a></td>
+      </tr>
+     </tbody>
+  </table>
+</div>
+</body>
+</html>
