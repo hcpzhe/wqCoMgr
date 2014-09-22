@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>客户信息修改</title>
+<link href="__CSS__/home.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+</head>
+<body>
+<div class="b right">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>客户信息修改</font></span></td>
+      </tr>
+      <tr>
+        <td height="30"></td>
+      </tr>
+      <tr>
+        <td><font class="tishi">客户信息不得随意更改，请确认信息正确后再修改。</font></td>
+      </tr>
+      <tr>
+        <td height="30"></td>
+      </tr>
+      <tr>
+        <td align="center">
+           <form action="{:U('Customer/update')}" method="post" name="form1" id="form1" onsubmit="$(this).RSsubmit();return true;">           
+            <table width="500" border="0">
+                  <tr>
+                    <td width="20%">公司名称：</td>
+                    <td width="80%"> 
+                      <input type="hidden" value="{$list['id']}" name="id">    
+                      <input type="hidden" value="{$list['name']}" name="name">                                  
+		                {$list['name']}		                		                               	                                                 
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>联 系  人：</td>
+                    <td><input type="text" name="contacts" value="{$list['contacts']}"></td>
+                  </tr>
+                  <tr>
+                    <td>联系电话：</td>
+                    <td><input type="text" name="phone" value="{$list['phone']}"></td>
+                  </tr>
+                  <tr>
+                    <td>传 &nbsp;&nbsp;&nbsp; 真：</td>
+                    <td><input type="text" name="fax" value="{$list['fax']}"></td>
+                  </tr>
+                  <tr>
+                    <td>地  &nbsp;&nbsp;&nbsp; 址：</td>
+                    <td><input type="text" name="address" value="{$list['address']}" style="width:250px"></td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                    <td><input type="submit" name="Submit" value=" 修改 " class="button_submit"></td>
+                  </tr>
+            </table>                              
+           </form>
+        </td>
+      </tr>
+     </tbody>
+  </table>
+</div>
+</body>
+</html>
