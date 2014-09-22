@@ -4,11 +4,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>客户列表</title>
 <link href="__CSS__/home.css" rel="stylesheet" type="text/css">
+<link href="__CSS__/style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="__JS__/jquery.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
 </head>
 <body>
-<div class="b right">
+<div class="b right_next">
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tbody>
       <tr>
@@ -65,7 +66,7 @@
                 
                 
                 <a href="#" class="button_submit" onclick="ChkRenew();">查看详细</a>
-                <a href="#" class="button_submit" >添加订单</a> 
+                <a href="{:U('Order/add_order')}" class="button_submit" >添加订单</a> 
                 <a href="#" class="button_submit">查看详细</a> 
                 
            </span>   
@@ -91,10 +92,9 @@
       
       <tr>
         <td align="center"> 
-             <form action="{:U('Customer/detailed?id='.$data['id'])}" id="frmRenew" name="frmRenew" method="POST">                 
+           <form action="{:U('Customer/detailed?id='.$data['id'])}" id="frmRenew" name="frmRenew" method="POST">                 
             <table width="740" border="0" cellspacing="0" cellpadding="0" class="com_list">  
-                <!-- <foreach name="list" item="data"> -->
-               
+                <!-- <foreach name="list" item="data"> -->               
                   <tr height="30">
                      <td width="105" align="center">
                        <input type="checkbox" name="s2[]" value="{$data.id}">
@@ -109,17 +109,20 @@
                         <elseif condition="$data['check'] eq 0 " />待审
                         <else /> 通过</if>                                            
                      </td>
-                  </tr>
-                  
-               <!-- </foreach> -->	                       
+                  </tr>                  
+               <!-- </foreach> -->	 
+                                     
               </table>
               </form>
            </td>
-      </tr>                         
+      </tr> 
+                            
       <tr>
         <td align="center">                     
             <table width="740" border="0" style="display: block; border-bottom: 1px solid #ccc; border-right: 1px solid #ccc; border-left: 1px solid #ccc;">
-            <tr><td></td></tr>
+            <tr style="display: block; padding-top: 10px;">
+              <td height="30" style="display: block; text-align: center;">{$page}</td>
+            </tr>
             </table>
         </td>
       </tr>
@@ -129,3 +132,8 @@
 </div>
 </body>
 </html>
+<script>
+$(document).ready(function(){
+    $(".com_list tr:odd").css("background","#F0F0F0");
+});
+</script>

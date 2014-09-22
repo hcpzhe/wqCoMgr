@@ -3,21 +3,38 @@ body{ margin:0; padding:0; FONT-FAMILY: '微软雅黑',Microsoft YaHei,Verdana, 
 /*body{ background:#c8c8c8; }*/
 UL {TEXT-ALIGN: left; PADDING: 0px; LIST-STYLE-TYPE: none; MARGIN: 0px; }
 LI {TEXT-ALIGN: left; PADDING: 0px; LIST-STYLE-TYPE: none; MARGIN: 0px; }
-a{ color:#666666; text-decoration:none; }
-a:hover{ color:#FF0000;  text-decoration:none; }
+a{ text-decoration:none; }
+a:hover{  text-decoration:none; }
 img{ border:0; }
 table{ margin:0 auto;}
+tbody{ display: block;}
 
 .b{ border:1px solid #CCCCCC; }
 .pad10{ padding:10px; }
 .padTop10{ padding-top:10px; }
-.fontred{ color:red; padding-left:10px;}
+.fontred{ color:red; padding-left:10px; padding-right: 10px;}
 
 /***右边部分样式**/
-.right{ min-height:600px; width:755px; margin:0 auto; background:#FFF;}
+.right_next{ min-height:600px; width:755px; margin:0 auto; background:#FFF !important;}
 .r_c1_title{  height: 38px; color:#FFF; border-bottom:1px solid #ccc; }
 .r_c1_title span{width: 753px; height: 38px; display: block; float: left; margin: 1px; background: #1C86CF; font-size:15px !important; line-height:38px;}
 .r_c1_title font{ float:left;}
-#cust_form tr{ line-height:30px; font-size:14px; letter-spacing: 3px;}
-.button_submit{ background: url(../images/submit_bg.png) no-repeat; width:60px; height:30px; border:0; color: #FFF;}
+#form1 tr{ line-height:30px; font-size:14px; letter-spacing: 3px;}
+.button_submit{ background: url(../images/submit_bg.png) no-repeat; width: 60px; height: 30px; display: inline-block; color: #FFF; vertical-align: middle; border:0; cursor: pointer;text-align: center; line-height: 30px;}
 .tishi{font-size: 12px; color: #F00; width:700px; margin:0 auto; display: block;}
+
+
+/**客户列表页*/
+#cust_search{ background: url(../images/liebiao_bg.jpg) repeat-x; width: 740px; height: 38px; line-height: 38px; border: 1px solid #CCC; margin: 0 auto; font-size: 12px; display:block;}
+#cust_search form{ display: inline; padding-left: 10px;}
+#cust_search span{ margin-left: 20px;}
+.search{ background: #E9E9E9; border: 1px solid #CCC; height: 25px;}
+.cust_list{ font-size:12px; display: block;}
+.com_list{ display: block; border-right: 1px solid #ccc; border-left: 1px solid #ccc; font-size: 12px;}
+.com_list tr{ line-height:30px; display: block;}
+
+.liebiao_title{ background: url(../images/liebiao_bg.jpg) repeat-x; display: block; width: 740px; height: 38px; line-height: 38px; border: 1px solid #CCC;}
+.liebiao_title th{ text-align:center;}
+
+/**客户详细信息页**/
+.com_table th,.com_table td{ border:1px solid #ccc; padding:5px;}

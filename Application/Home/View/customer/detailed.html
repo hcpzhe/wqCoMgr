@@ -8,7 +8,7 @@
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
 </head>
 <body>
-<div class="b right">
+<div class="b right_next">
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tbody>
       <tr>
@@ -23,49 +23,118 @@
       <tr>
         <td height="30"></td>
       </tr>
+       <tr>
+        <td height="40">
+              <span id="cust_search">
+	           	<font style="padding-left: 20px;"> 操作： </font>                                      
+                <a href="{:U('Customer/edit?id='.$list['id'])}" class="button_submit">信息修改</a>
+                <a href="{:U('Order/add_order')}" class="button_submit" >添加订单</a> 
+                <a href="{:U('Domain/add_domain')}" class="button_submit">添加域名</a> 
+                
+           </span>   
+        </td>
+      </tr>
+      <tr>
+        <td height="10"></td>
+      </tr>
       <tr>
         <td align="center">         
-            <table width="500" border="0" style="font-size: 12px;">
+            <table width="100%" border="0" style="font-size: 12px;" class="com_table">
+                  <tr>
+                    <th colspan="4" align="left"  style=" width: 742px;">公司信息</th>
+                    
+                  </tr>
                   <tr>
                     <td width="20%">公司名称：</td>
-                    <td width="80%"> 
+                    <td width="30%"> 
                       <input type="hidden" value="{$list['id']}" name="id">                                     
 		                {$list['name']}		                		                               	                                                 
                     </td>
-                  </tr>
-                  <tr>
-                    <td>联 系  人：</td>
-                    <td>{$list['contacts']}</td>
-                  </tr>
+                    <td width="20%">联 系  人：</td>
+                    <td width="30%">{$list['contacts']}</td>
+                  </tr>                 
                   <tr>
                     <td>联系电话：</td>
                     <td>{$list['phone']}</td>
-                  </tr>
-                  <tr>
                     <td>传 &nbsp;&nbsp;&nbsp; 真：</td>
                     <td>{$list['fax']}</td>
                   </tr>
                   <tr>
                     <td>地  &nbsp;&nbsp;&nbsp; 址：</td>
                     <td>{$list['address']}</td>
-                  </tr>
-                  <tr>
                     <td>添加时间：</td>
                     <td>{:date('Y/m/d H:i:s',$list['add_time'])}</td>
                   </tr>
                   <tr>
                     <td>添 加 人：</td>
                     <td>权限未做</td>
+                    <td>其 &nbsp;&nbsp;&nbsp;他： </td>
+                    <td>其他</td>
                   </tr>                  
+            </table>
+            
+            <table width="100%" border="0" style="font-size: 12px;" class="com_table">
+                  <tr>
+                    <th colspan="4" align="left"  style=" width: 742px;">订单信息</th>
+                    
+                  </tr>
+                  <tr>
+                    <td width="20%">订单编号：</td>
+                    <td width="30%"> 
+                      <input type="hidden" value="{$list['id']}" name="id">                                     
+		                {$list['name']}		                		                               	                                                 
+                    </td>
+                    <td width="20%">签单人员：</td>
+                    <td width="30%">{$list['contacts']}</td>
+                  </tr>                 
+                  <tr>
+                    <td>签单产品：</td>
+                    <td>{$list['phone']}</td>
+                    <td>订单金额：</td>
+                    <td>{$list['fax']}</td>
+                  </tr>
+                  <tr>
+                    <td>到期时间：</td>
+                    <td>{$list['address']}</td>
+                    <td>订单状态：</td>
+                    <td>{:date('Y/m/d H:i:s',$list['add_time'])}</td>
+                  </tr>
+                  <tr>
+                    <td>备 &nbsp;&nbsp;&nbsp; 注：</td>
+                    <td colspan="3"></td>
+                  </tr>                  
+            </table>
+            
+            
+             <table width="100%" border="0" style="font-size: 12px;" class="com_table">
+                  <tr>
+                    <th colspan="4" align="left"  style=" width: 742px;">域名信息</th>
+                    
+                  </tr>
+                  <tr>
+                    <td width="20%">域  &nbsp;&nbsp;&nbsp; 名：</td>
+                    <td width="30%"> 
+                      <input type="hidden" value="{$list['id']}" name="id">                                     
+		                {$list['name']}		                		                               	                                                 
+                    </td>
+                    <td width="20%">域名运营商：</td>
+                    <td width="30%">{$list['contacts']}</td>
+                  </tr>                 
+                  <tr>
+                    <td>注册时间：</td>
+                    <td>{$list['phone']}</td>
+                    <td>过期时间：</td>
+                    <td>{$list['fax']}</td>
+                  </tr>
+                  <tr>
+                    <td>域名状态：</td>
+                    <td>{$list['address']}</td>
+                    <td>订单状态：</td>
+                    <td>{:date('Y/m/d H:i:s',$list['add_time'])}</td>
+                  </tr>                                   
             </table>                              
         </td>
-      </tr>
-      <tr>
-         <td>添加拜访记录，订单，域名</td>
-      </tr>
-      <tr>
-         <td><a href="{:U('Customer/edit?id='.$list['id'])}">修改公司信息</a></td>
-      </tr>
+      </tr>      
      </tbody>
   </table>
 </div>
