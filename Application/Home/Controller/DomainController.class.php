@@ -6,4 +6,4 @@ class DomainController extends HomeBaseController{
 	public function domain_list(){
 		$this->display();
 	}
-}
+}     
