@@ -28,8 +28,8 @@
               <span id="cust_search">
 	           	<font style="padding-left: 20px;"> 操作： </font>                                      
                 <a href="{:U('Customer/edit?id='.$list['id'])}" class="button_submit">信息修改</a>
-                <a href="{:U('Order/add_order')}" class="button_submit" >添加订单</a> 
-                <a href="{:U('Domain/add_domain')}" class="button_submit">添加域名</a> 
+                <a href="{:U('Order/add_order?cust_id='.$list['id'])}" class="button_submit" >添加订单</a> 
+                <a href="{:U('Domain/add_domain?cust_id='.$list['id'])}" class="button_submit">添加域名</a> 
                 
            </span>   
         </td>
@@ -38,11 +38,11 @@
         <td height="10"></td>
       </tr>
       <tr>
-        <td align="center">         
+        <td align="center">  
+        <!-- 客户详细信息 -->       
             <table width="100%" border="0" style="font-size: 12px;" class="com_table">
                   <tr>
-                    <th colspan="4" align="left"  style=" width: 742px;">公司信息</th>
-                    
+                    <th colspan="4" align="left"  style=" width: 742px;">公司信息</th>                    
                   </tr>
                   <tr>
                     <td width="20%">公司名称：</td>
@@ -72,65 +72,61 @@
                     <td>其他</td>
                   </tr>                  
             </table>
-            
+            <!-- 订单信息 -->
+             <!-- <foreach name="order_list" item="order_list"> --> 
             <table width="100%" border="0" style="font-size: 12px;" class="com_table">
                   <tr>
-                    <th colspan="4" align="left"  style=" width: 742px;">订单信息</th>
-                    
-                  </tr>
+                    <th colspan="4" align="left"  style=" width: 742px;">订单信息{$order_list['id']}</th>                    
+                  </tr>                
                   <tr>
                     <td width="20%">订单编号：</td>
-                    <td width="30%"> 
-                      <input type="hidden" value="{$list['id']}" name="id">                                     
-		                {$list['name']}		                		                               	                                                 
-                    </td>
+                    <td width="30%">{$order_list['id']}</td>
                     <td width="20%">签单人员：</td>
-                    <td width="30%">{$list['contacts']}</td>
+                    <td width="30%">{$order_list['user_id']}</td>
                   </tr>                 
                   <tr>
                     <td>签单产品：</td>
-                    <td>{$list['phone']}</td>
+                    <td>{$order_list['prod_id']}</td>
                     <td>订单金额：</td>
-                    <td>{$list['fax']}</td>
+                    <td>{$order_list['total_fees']}</td>
                   </tr>
                   <tr>
                     <td>到期时间：</td>
-                    <td>{$list['address']}</td>
+                    <td>{:date('Y/m/d H:i:s',$order_list['expired_time'])}</td>
                     <td>订单状态：</td>
-                    <td>{:date('Y/m/d H:i:s',$list['add_time'])}</td>
+                    <td>{$order_list['status']}</td>
                   </tr>
                   <tr>
                     <td>备 &nbsp;&nbsp;&nbsp; 注：</td>
-                    <td colspan="3"></td>
-                  </tr>                  
+                    <td colspan="3">{$order_list['remark']}</td>
+                  </tr> 
+                                  
             </table>
+             <!-- </foreach> -->
             
-            
+            <!-- 域名信息 -->
+            <!-- <foreach name="domain_list" item="domain_list"> -->
              <table width="100%" border="0" style="font-size: 12px;" class="com_table">
                   <tr>
-                    <th colspan="4" align="left"  style=" width: 742px;">域名信息</th>
-                    
+                    <th colspan="4" align="left"  style=" width: 742px;">域名信息{$domain_list['id']}</th>                   
                   </tr>
                   <tr>
                     <td width="20%">域  &nbsp;&nbsp;&nbsp; 名：</td>
-                    <td width="30%"> 
-                      <input type="hidden" value="{$list['id']}" name="id">                                     
-		                {$list['name']}		                		                               	                                                 
-                    </td>
+                    <td width="30%">{$domain_list['domain']}</td>
                     <td width="20%">域名运营商：</td>
-                    <td width="30%">{$list['contacts']}</td>
+                    <td width="30%">{$domain_list['service']}</td>
                   </tr>                 
                   <tr>
                     <td>注册时间：</td>
-                    <td>{$list['phone']}</td>
+                    <td>{:date('Y/m/d H:i:s',$domain_list['reg_time'])}</td>
                     <td>过期时间：</td>
-                    <td>{$list['fax']}</td>
+                    <td>{:date('Y/m/d H:i:s',$domain_list['expired_time'])}</td>
                   </tr>
                   <tr>
                     <td>域名状态：</td>
-                    <td>{$list['address']}</td>
-                    <td>订单状态：</td>
-                    <td>{:date('Y/m/d H:i:s',$list['add_time'])}</td>
+                    <td>{$domain_list['status']}</td>
+                    <td>审核状态：</td>
+                    <td>{$domain_list['check']}</td>
                   </tr>                                   
             </table>                              
         </td>

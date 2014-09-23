@@ -25,19 +25,26 @@
       </tr>
       <tr>
         <td align="center">
-           <form action="{:U('Customer/insert')}" method="post" name="form1" id="cust_form" onsubmit="return checkfrm1(this);">           
+           <form action="{:U('Customer/insert')}" method="post" name="form1" id="form1" onsubmit="return checkfrm1(this);">           
             <table width="500" border="0">
                   <tr>
-                    <td width="25%">公司名称：</td>
-                    <td width="75%"><input type="text" name="name"><font class="fontred">*</font><input type="button" value="模糊查询"></td>
+                    <td width="20%">公司名称：</td>
+                    <td width="80%">                                      
+		                <input type="text" name="name" id="name" />
+		                <font class="fontred" id="namets">*</font>
+		                <input name="oldname" type="hidden" value="">
+		                <input name="userok" type="hidden" id="userok" value="0">
+		               <!-- <a href="#" class="lanxlink" onclick="return opens(document.form1);">模糊查询</a>-->	
+		                <input type="button" value="模糊查询" onclick="checkcom(this);"/>                	                                                 
+                    </td>
                   </tr>
                   <tr>
                     <td>联 系  人：</td>
-                    <td><input type="text" name="contacts"><font class="fontred">*</font></td>
+                    <td><input type="text" name="contacts"><font class="fontred" id="namets">*</font></td>
                   </tr>
                   <tr>
                     <td>联系电话：</td>
-                    <td><input type="text" name="phone"><font class="fontred">*</font></td>
+                    <td><input type="text" name="phone"><font class="fontred" id="namets">*</font></td>
                   </tr>
                   <tr>
                     <td>传 &nbsp;&nbsp;&nbsp; 真：</td>
@@ -62,13 +69,42 @@
 function checkfrm1(afrm) {
  if( (afrm.name.value == "") )
 	{
-		alert("用户名不能为空！");
+		alert("公司名称不能为空！");
 		afrm.name.focus();
 		return false;
 	}
+ if( (afrm.contacts.value == "") )
+	{
+		alert("联系人不能为空！");
+		afrm.contacts.focus();
+		return false;
+	}
+ if( (afrm.phone.value == "") )
+	{
+		alert("联系电话不能为空！");
+		afrm.phone.focus();
+		return false;
+	}
+ 
 	$(afrm).RSsubmit({success_alert:true});
 	return false;
 }
+
+/** 公司名称模糊查询  **/
+function checkcom(com){
+	
+	var name=$("#name").val();
+	if( name == "" )
+	{
+		alert("公司名称为必填项！");
+	}else{
+		alert(name);		
+		$(this).RSsubmit({url :'Home-Customer-search.html?name='+$("#name").val();,type:'get'});
+		//$(this).RSsubmit({ success_alert:true,url: '{:U(\'Customer/search?name=\'+name)}' });
+		return true;
+	}
+}
+
 </script>
 </body>
 </html>

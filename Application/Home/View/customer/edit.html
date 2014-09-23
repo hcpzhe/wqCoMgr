@@ -25,7 +25,7 @@
       </tr>
       <tr>
         <td align="center">
-           <form action="{:U('Customer/update')}" method="post" name="form1" id="form1" onsubmit="$(this).RSsubmit();return true;">           
+           <form action="{:U('Customer/update')}" method="post" name="form1" id="form1" onsubmit="$(this).RSsubmit({success_alert:true});return false;" >           
             <table width="500" border="0">
                   <tr>
                     <td width="20%">公司名称：</td>

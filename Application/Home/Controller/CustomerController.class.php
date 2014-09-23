@@ -83,14 +83,27 @@ class CustomerController extends HomeBaseController {
 		$model = M('Customer');
 		if (false === $model->create($newdata)) $this->error($model->getError());
 		if (false === $model->where('id='.$id)->save()) $this->error('更新失败');
-		$this->success('更新成功');
+		$this->success('更新成功',U('Customer/lists'));
 	}
 	/*查看详情*/
 	public function detailed(){
-		$cust = M('Customer');
-		$id = (int)I('id');
+		
+		//$id = (int)I('id');
+     $id=1;
+     
+        $cust = M('Customer'); //获取客户详细信息
 		$list = $cust->where('id='.$id)->find();
 		$this->assign('list',$list);
+		
+		$order = M('Order');    //获取订单信息
+		$order_list = $order->where('cust_id='.$id)->select();
+		$this->assign('order_list',$order_list);
+		
+		$domain = M('Domain');    //获取域名信息
+		$domain_list = $domain->where('cust_id='.$id)->select();
+		$this->assign('domain_list',$domain_list);
+// 		print_r($order_list);
+// 		exit();
 		$this->display();
 	}
 	
