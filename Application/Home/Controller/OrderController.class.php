@@ -38,12 +38,10 @@ class OrderController extends HomeBaseController{
 		$id=$_GET['id'];
 		$pid=$_GET['pid'];
 		if($pid==1 || $pid==2 || $pid==3){ 
-			$De_or=new Develop_orderModel();
-			$De_or->add_do($id);
+			$this->redirect('Home/Depord/add_od/'.$id);
 		}
 		if($pid==6){
-			$se_or=new Seo_orderModel();
-			$se_or->add_so($id);
+			$this->redirect('Home/Seoord/add_od/'.$id);
 		}
 	}	
 }
