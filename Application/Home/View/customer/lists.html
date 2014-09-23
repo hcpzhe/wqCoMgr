@@ -19,7 +19,7 @@
         <td height="30"></td>
       </tr>
       <tr>
-        <td><font class="tishi">头部提示信息</font></td>
+        <td><font class="tishi">头部提示信息：公司名称只能选择一个，若多选以最后一个为准！</font></td>
       </tr>
       <tr>
         <td height="30"></td>
@@ -36,13 +36,9 @@
 						var sel = false;
 						
 						$("input[name='s2[]']").each(function(){
-							var ischk = $(this).is(":checked") ;
-							
+							var ischk = $(this).is(":checked") ;							
 							if( ischk ){
-								
-								che = $(this).val();
-								alert(che);
-								//$(this).attr("checked")=="checked";							
+								alert($(this).val());
 								return sel = true;
 							}
 						});
@@ -53,16 +49,10 @@
 							$('#frmRenew').submit();
 						}else{
 							alert( '请选择需要操作的公司!'); 
-							//parent.location.reload();
 						} 
 					}
-	           </script>
-                
-                
-                <a href="#" class="button_submit" onclick="ChkRenew();">查看详细</a>
-                <a href="{:U('Order/add_order')}" class="button_submit" >添加订单</a> 
-                <a href="#" class="button_submit">查看详细</a> 
-                
+	           </script>                              
+                <a href="#" class="button_submit" onclick="ChkRenew();">查看详细</a>                               
            </span>   
         </td>
       </tr>

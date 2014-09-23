@@ -30,17 +30,13 @@ class CustomerController extends HomeBaseController {
 		if ($id>0) $map['id'] = $id;		
 		if(isset($name)){
 			$map['name']   =   array('like', '%'.$name.'%');
-		}	
-		
+		}			
 		$count      = $cust->where($map)->count();// 查询满足要求的总记录数
-		$Page       = new \Think\Page($count,2);// 实例化分页类 传入总记录数和每页显示的记录数(25)
+		$Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
 		$show       = $Page->show();// 分页显示输出// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
 		$list = $cust->where($map)->limit($Page->firstRow.','.$Page->listRows)->select();
 		$this->assign('list',$list);// 赋值数据集
 		$this->assign('page',$show);// 赋值分页输出
-		
-// 		$list = $cust->where($map)->select();						
-// 		$this->assign('list',$list);
 		$this->assign('status', $map['status']); //用于搜索条件的显示
 		$this->assign('name', $name);           //用于搜索条件的显示
 		if (isset($tpl)) $this->display($tpl);
@@ -69,7 +65,7 @@ class CustomerController extends HomeBaseController {
 	public function edit(){
 		$cust = M('Customer');
 		$id = (int)I('id');
-		$list = $cust->where($id)->find();
+		$list = $cust->where('id='.$id)->find();
 		$this->assign('list',$list);
         $this->display();
 	}
@@ -93,11 +89,7 @@ class CustomerController extends HomeBaseController {
 	public function detailed(){
 		$cust = M('Customer');
 		$id = (int)I('id');
-// 		print_r($id);
-// 		exit();
-		$list = $cust->where($id)->find();
-// 						print_r($list);
-// 						exit();
+		$list = $cust->where('id='.$id)->find();
 		$this->assign('list',$list);
 		$this->display();
 	}
