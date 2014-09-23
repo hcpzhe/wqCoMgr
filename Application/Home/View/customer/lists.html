@@ -31,24 +31,18 @@
 	                                        搜索：<input type="text" name="name" class="search" value="" />
 	                <input type=submit value="搜索" class="button_submit" />
 	           </form> 
-	           <script type="text/javascript">
-	               //function idval(){
-	            	 //  for(var i=0;i<com_select.length;i++) {	
-	            		//   if (document.all.com_select[i].checked)  
-	            			//   {
-	            			   //alert( document.all.com_select[i].value); 
-	            			  // var name_id= document.all.com_select[i].value;
-	            			   //}
-	            		//}
-	             //  }
+	           <script type="text/javascript">	             
 	               function ChkSel(){
 						var sel = false;
+						
 						$("input[name='s2[]']").each(function(){
 							var ischk = $(this).is(":checked") ;
 							
-							if( ischk){
-								//alert(ischk.value);
-								$(this).attr("checked")=="checked";
+							if( ischk ){
+								
+								che = $(this).val();
+								alert(che);
+								//$(this).attr("checked")=="checked";							
 								return sel = true;
 							}
 						});
@@ -92,12 +86,14 @@
       
       <tr>
         <td align="center"> 
-           <form action="{:U('Customer/detailed?id='.$data['id'])}" id="frmRenew" name="frmRenew" method="POST">                 
+          <!-- <foreach name="list" item="data"> -->        
+          <form action="{:U('Customer/detailed?id='.$data['id'])}" id="frmRenew" name="frmRenew" method="GET">     
             <table width="740" border="0" cellspacing="0" cellpadding="0" class="com_list">  
-                <!-- <foreach name="list" item="data"> -->               
+                   
+                             
                   <tr height="30">
                      <td width="105" align="center">
-                       <input type="checkbox" name="s2[]" value="{$data.id}">
+                       <input type="checkbox" name="s2[]" value="{$data.id}" name="check">
                        <input type="hidden" name="id" value="{$data.id}">
                      </td>
                      <td width="200">{$data.name}</td>
@@ -109,29 +105,28 @@
                         <elseif condition="$data['check'] eq 0 " />待审
                         <else /> 通过</if>                                            
                      </td>
-                  </tr>                  
-               <!-- </foreach> -->	 
-                                     
+                  </tr>                         
               </table>
-              </form>
+             </form>  
+             <!-- </foreach> -->
            </td>
       </tr> 
                             
       <tr>
         <td align="center">                     
-            <table width="740" border="0" style="display: block; border-bottom: 1px solid #ccc; border-right: 1px solid #ccc; border-left: 1px solid #ccc;">
+          <table width="740" border="0" style="display: block; border-bottom: 1px solid #ccc; border-right: 1px solid #ccc; border-left: 1px solid #ccc;">
             <tr style="display: block; padding-top: 10px;">
               <td height="30" style="display: block; text-align: center;">{$page}</td>
             </tr>
-            </table>
+          </table>
         </td>
-      </tr>
-        
+      </tr>        
      </tbody>
   </table>
 </div>
 </body>
 </html>
+
 <script>
 $(document).ready(function(){
     $(".com_list tr:odd").css("background","#F0F0F0");
