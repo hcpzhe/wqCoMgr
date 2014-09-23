@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>订单付费详情</title>
+<link href="__CSS__/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<body>
+<div style="width:100%; overflow:hidden; background: #f2f2f2;">
+   <div class="center_content">
+      <table width="755" bgcolor="#fff" cellpadding="0" cellspacing="0">
+          <tr>
+            <td class="menu"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32" /><font>订单付费列表</font></span></td>
+          </tr>
+          <tr>
+            <td class="menu_content">
+<!-- 订单付费详情开始 -->
+<form method='post' action="{:U('Orderpay/up?id='.$opinfo['id'])}">
+<table>
+	<tr><td>客户名称:</td><td>{$opinfo.cname}</td></tr>
+	<tr><td>续费金额:</td><td><input type="text" name="money" value="{$opinfo.money}"></td></tr>
+	<tr><td>续费日期:</td><td><input type="text" name="pay_time" value="{$opinfo.pay_time}"></td></tr>
+	<tr><td>备　　注:</td><td>暂无</td></tr>
+	<tr><td>提 交 人:</td><td>{$opinfo.uname}</td></tr>
+	<tr><td><input type="submit" value="提交"></td><td><input type="submit" value="取消"></td></tr>
+</table>
+</form>
+<!-- 订单付费详情结束-->
+            </td>
+          </tr>
+          <tr>
+            <td class="notice"><img style="float:left; margin-left:10px;" src="__IMG__/notice_img.png" /><span>公司通知</span></td>
+          </tr>
+    </table> 
+   </div>
+</div>
+</body>
+</html>
+<script>
+$(document).ready(function(){
+  $(".sea").focus(function(){
+    $(".sea").attr("value","");
+  });
+  $(".sea").blur(function(){
+    $(".sea").attr("value","输入搜索文字");
+  });
+});
+
+</script>

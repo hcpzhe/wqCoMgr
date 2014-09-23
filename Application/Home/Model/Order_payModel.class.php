@@ -19,5 +19,15 @@ class Order_payModel extends Model{
 		->limit($page->firstRow.','.$page->listRows)->select();
 		return $data;
 	}
+	/*订单付款详情*/
+	public function opinfo($id){
+		$op_list=$this->table('erp_order_pay as op,erp_order as oe,erp_customer as cr,erp_user as ur')
+		->where("op.order_id=oe.id AND oe.cust_id=cr.id AND oe.user_id=ur.id AND oe.status=1 AND op.id=$id")
+		->field("op.id as id,cr.name as cname,op.money as money,op.class as class,op.`check` as `check`,op.pay_time as pay_time,op.check_time as check_time,ur.realname as uname")
+		->find();	
+// 		print_r($op_list);
+// 		echo $this->_sql();
+		return $op_list;
+	}
 
 }

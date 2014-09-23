@@ -39,7 +39,7 @@
 		<td>{$list.check_time}</td>
 		<td><if condition="$list.check eq 1">通过<elseif condition="$list.check eq 0"/>待审<else/>拒绝</if></td>
 		<td>{$list.uname}</td>
-		<td><a href="">编辑</a></td>
+		<td><a href="{:U('Orderpay/op_info?id='.$list['id'])}">编辑</a></td>
 	</tr>
 </foreach>
 	<tr><td colspan="9" align="center">{$data[show]}</td></tr>
