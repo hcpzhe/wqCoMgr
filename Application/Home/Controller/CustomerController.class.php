@@ -32,8 +32,8 @@ class CustomerController extends HomeBaseController {
 			$map['name']   =   array('like', '%'.$name.'%');
 		}			
 		$count      = $cust->where($map)->count();// 查询满足要求的总记录数
-		$Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(25)
-		$show       = $Page->show();// 分页显示输出// 进行分页数据查询 注意limit方法的参数要使用Page类的属性
+		$Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(10)
+		$show       = $Page->show();// 分页显示输出
 		$list = $cust->where($map)->limit($Page->firstRow.','.$Page->listRows)->select();
 		$this->assign('list',$list);// 赋值数据集
 		$this->assign('page',$show);// 赋值分页输出
@@ -85,12 +85,10 @@ class CustomerController extends HomeBaseController {
 		if (false === $model->where('id='.$id)->save()) $this->error('更新失败');
 		$this->success('更新成功',U('Customer/lists'));
 	}
-	/*查看详情*/
+	/*查看公司详情*/
 	public function detailed(){
 		
-		//$id = (int)I('id');
-     $id=1;
-     
+		$id = (int)I('id');     
         $cust = M('Customer'); //获取客户详细信息
 		$list = $cust->where('id='.$id)->find();
 		$this->assign('list',$list);
@@ -106,5 +104,5 @@ class CustomerController extends HomeBaseController {
 // 		exit();
 		$this->display();
 	}
-	
+			
 }
