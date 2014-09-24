@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>拜访记录列表</title>
+<link href="__CSS__/home.css" rel="stylesheet" type="text/css">
+<link href="__CSS__/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+</head>
+<body>
+<div class="b right_next">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>拜访记录列表</font></span></td>
+      </tr>
+      <tr>
+        <td height="30"></td>
+      </tr>
+      <tr>
+        <td><font class="tishi">头部提示信息：下面所列的是所有客户的拜访记录！</font></td>
+      </tr>
+      <tr>
+        <td height="30"></td>
+      </tr>
+      <tr>
+        <td height="10"></td>
+      </tr>
+      <tr>
+        <td align="center">                     
+            <table width="742" border="0" class="cust_list">           
+                  <tr class="liebiao_title">
+                    <th width="100">编号</th>
+                    <th width="105">客户</th>
+                    <th width="120">员工</th>
+                    <th width="210">拜访内容</th>
+                     <th width="100">拜访时间</th>
+                    <th width="105">操作</th>
+                  </tr>
+               </table>
+           </td>
+      </tr>
+      
+      <tr>
+        <td align="center"> 
+          <!-- <foreach name="visit_lisit" item="data"> -->        
+            <table width="740" border="0" cellspacing="0" cellpadding="0" class="com_list">                                                  
+                  <tr height="30">
+                     <td width="100" align="center">{$data.id}</td>
+                     <td width="105" align="center">{$data.cust_id}</td>
+                     <td width="120" align="center">{$data.user_id}</td>
+                     <td width="210" align="center"> {$data.content|mb_substr=0,24}  </td>
+                     <td width="210" align="center"> {:date('Y/m/d H:i:s',$data['visit_time'])}  </td>
+                     <td width="105" align="center"> 沟通记录  </td>
+                  </tr>                         
+              </table>
+             <!-- </foreach> -->
+           </td>
+      </tr> 
+                            
+      <tr>
+        <td align="center">                     
+          <table width="740" border="0" style="display: block; border-bottom: 1px solid #ccc; border-right: 1px solid #ccc; border-left: 1px solid #ccc;">
+            <tr style="display: block; padding-top: 10px;">
+              <td height="30" style="display: block; text-align: center;">{$page}</td>
+            </tr>
+          </table>
+        </td>
+      </tr>        
+     </tbody>
+  </table>
+</div>
+</body>
+</html>
+
+<script>
+$(document).ready(function(){
+    $(".com_list tr:odd").css("background","#F0F0F0");
+});
+</script>
