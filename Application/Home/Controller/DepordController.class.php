@@ -10,7 +10,8 @@ class DepordController extends HomeBaseController{
 	/*增加一条开发记录*/
 	public function add_od(){
 		$depord=new Develop_orderModel();
-		$id=$GET['_URL_'][3];;
-		echo $id;
+		$depord->add_do($_REQUEST['id']);
+		
+		
 	}
 }

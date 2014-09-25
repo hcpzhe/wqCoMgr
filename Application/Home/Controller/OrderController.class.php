@@ -38,10 +38,10 @@ class OrderController extends HomeBaseController{
 		$id=$_GET['id'];
 		$pid=$_GET['pid'];
 		if($pid==1 || $pid==2 || $pid==3){ 
-			$this->redirect('Home/Depord/add_od/'.$id);
+			$this->redirect('Home/Depord/add_od/', array('id' => $id));
 		}
 		if($pid==6){
-			$this->redirect('Home/Seoord/add_od/'.$id);
+			$this->redirect('Home/Seoord/add_od/', array('id' => $id));
 		}
 	}	
 }
