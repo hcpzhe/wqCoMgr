@@ -4,6 +4,7 @@ use Common\Controller\HomeBaseController;
 use Home\Model\OrderModel;
 use Home\Model\Develop_orderModel;
 use Home\Model\Seo_orderModel;
+use Home\Model\ProductModel;
 class OrderController extends HomeBaseController{
 /*订单列表*/
 	public function order_list(){
@@ -21,8 +22,12 @@ class OrderController extends HomeBaseController{
 /*订单修改*/
 	public function ord_u_form(){
 		$id=$_GET['id'];
+		/*查询数据*/
 		$order=new OrderModel();
 		$this->orderinfo=$order->orderinfo($id);
+		/*查询产品分类*/
+		$product=new ProductModel();
+		$this->p_list=$product->p_list();
 		$this->display();
 	}	
 /*添加订单*/
