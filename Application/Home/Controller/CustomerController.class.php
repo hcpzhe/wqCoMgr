@@ -3,6 +3,7 @@ namespace Home\Controller;
 use Think\Page;
 use Common\Controller\HomeBaseController;
 use Home\Model\CustomerModel;
+use Think\Model;
 
 class CustomerController extends HomeBaseController {
     /**客户添加***/
@@ -86,23 +87,40 @@ class CustomerController extends HomeBaseController {
 		$this->success('更新成功',U('Customer/lists'));
 	}
 	/*查看公司详情*/
-	public function detailed(){
-		
+	public function detailed(){		
 		$id = (int)I('id');     
         $cust = M('Customer'); //获取客户详细信息
 		$list = $cust->where('id='.$id)->find();
 		$this->assign('list',$list);
 		
-		$order = M('Order');    //获取订单信息
-		$order_list = $order->where('cust_id='.$id)->select();
+		$order = M('Order');    //获取订单信息		
+		$order_list = $cust->table('erp_customer as cr,erp_order as ord,erp_product as pt,erp_user as ur')
+		->where("cr.id=ord.cust_id AND pt.id=ord.prod_id AND ord.user_id=ur.id AND cr.id=$id")
+		->getField("ord.id as id,ur.realname as uname,pt.name as pname,ord.total_fees as total_fees,ord.expired_time as expired_time,ord.status as status,ord.remark as remark");
 		$this->assign('order_list',$order_list);
+			
 		
 		$domain = M('Domain');    //获取域名信息
 		$domain_list = $domain->where('cust_id='.$id)->select();
 		$this->assign('domain_list',$domain_list);
-// 		print_r($order_list);
-// 		exit();
+
 		$this->display();
+	}
+	
+	/**提交 待审申请**/
+	public function check(){
+		$id = (int)I('param.id');
+		if ($id <= 0) $this->error('参数非法');		
+		$newdata = array();
+		$newdata['id'] = I('param.id');	
+		$newdata['check'] = 1;
+		$newdata['check_time'] = time();
+		$model = M('Customer');
+		if (false === $model->create($newdata)) $this->error($model->getError());
+		if (false === $model->where('id='.$id)->save()) $this->error('审核失败');
+		$this->success('审核成功',U('Customer/lists'));
+// 		print_r($newdata['check_time']);
+// 		exit();
 	}
 			
 }

@@ -24,6 +24,5 @@ class CustomerModel extends Model {
 	protected $_auto		=	array(
 			array('add_time','time',self::MODEL_INSERT,'function'),
 	);
-	
-	
+		
 }
