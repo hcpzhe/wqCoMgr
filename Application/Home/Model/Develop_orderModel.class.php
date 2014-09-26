@@ -16,6 +16,23 @@ class Develop_orderModel extends Model{
 	}
 	/*网站开发订单列表*/
 	public function dor_list(){
-		
+		/*查询数据总条数*/
+		$count=$this->table('erp_develop_order as edo,erp_order as eo')
+		->where("edo.order_id=eo.id")
+		->count();
+		/*载入分页类，初始化数据*/
+		$page=new \Think\Page($count,7);
+		/*调用分页链接函数*/
+		$data['show']=$page->show();
+		/*控制数据查询条数*/
+		$data['dep_list']=$this->table('erp_develop_order as edo,erp_order as eo')
+		->where("edo.order_id=eo.id AND edo.status=1")
+		->field("eo.id as id,eo.total_fees as money")
+		->limit($page->firstRow.','.$page->listRows)->select();
+// 				echo $this->_sql();
+// 				echo "<pre>";
+// 				print_r($data['order_list']);
+// 				echo "</pre>";
+		return $data;
 	}
 }
