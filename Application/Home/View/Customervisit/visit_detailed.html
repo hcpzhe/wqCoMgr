@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>客户拜访详细信息</title>
+<link href="__CSS__/home.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+</head>
+<body>
+<div class="b right_next">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>客户拜访详细信息</font></span></td>
+      </tr>
+      <tr>
+        <td height="30"></td>
+      </tr>
+      <tr>
+        <td><font class="tishi">客户拜访详细信息查看</font></td>
+      </tr>
+      <tr>
+        <td height="30"></td>
+      </tr>
+       <tr>
+        <td height="40">
+              <span id="cust_search">
+	           	<font style="padding-left: 20px;"> 操作： </font>                                                      
+                <a href="{:U('Domain/add_domain?cust_id='.$list['id'])}" class="button_submit">添加拜访</a>                 
+           </span>   
+        </td>
+      </tr>
+      <tr>
+        <td height="10"></td>
+      </tr>
+      <tr>
+        <td align="center">  
+        <!-- 客户详细信息 -->       
+            <table width="100%" border="0" style="font-size: 12px;" class="com_table">
+                  <tr>
+                    <th colspan="4" align="left"  style=" width: 742px;">拜访记录</th>                    
+                  </tr>
+                 <!-- <foreach name="data" item="data"> --> 
+                  <tr>
+                    <td width="20%">编号：</td>
+                    <td width="30%"> 
+                      <input type="hidden" value="{$data['id']}" name="id">                                     
+		                	{$data['id']}      		                               	                                                 
+                    </td>
+                    <td width="20%">公司名称：</td>
+                    <td width="30%">{$data.cname}</td>
+                  </tr>                 
+                  <tr>
+                    <td>员 &nbsp;&nbsp; 工：</td>
+                    <td>{$data.uname}</td>
+                    <td>拜访时间：</td>
+                    <td>{:date('Y/m/d H:i:s',$data['add_time'])}</td>
+                  </tr>
+                  <tr>
+                    <td>拜访内容：</td>
+                    <td colspan="3">{$data['fax']}</td>                    
+                  </tr> 
+                  <!-- </foreach> -->                                 
+            </table>
+            
+            <!-- 沟通记录 -->
+             <if condition="$visit_prod_list eq '' "><font color="red">未添加沟通记录</font> <br/>
+             <else />
+             
+             <div style=" width: 735px; border: 1px solid #ccc; text-align: left; padding: 5px; font-size: 12px; font-weight: bold;">沟通记录</div> 
+                                                                          
+	            <table width="100%" border="0" style="font-size: 12px;" class="com_table">                                  
+	                  <tr>
+	                    <td width="149">拜访记录编号：</td>
+	                    <td width="222">{$visit_prod_list['visit_id']}</td>
+	                    <td width="149">所谈产品：</td>
+	                    <td width="222">{$visit_prod_list['pname']} </td>
+	                  </tr>                 
+	                  <tr>
+	                    <td>沟通内容：</td>
+	                    <td colspan="3">{$visit_prod_list['content']}</td>                   
+	                  </tr>                                                   
+	            </table>            
+           
+            </if>                         
+        </td>
+      </tr>      
+     </tbody>
+  </table>
+</div>
+</body>
+</html>

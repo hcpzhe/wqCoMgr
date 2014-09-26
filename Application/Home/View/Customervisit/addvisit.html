@@ -25,8 +25,7 @@
       </tr>
       <tr>
         <td align="center">
-           <form action="{:U('Customervisit/addvisit_insert')}" method="post" >           
-           
+           <form action="{:U('Customervisit/addvisit_insert')}" method="post" onsubmit="$(this).RSsubmit({success_alert:true});return false;">                      
             <table width="500" border="0">
                   <tr>
                     <td width="20%">拜访客户：</td>
