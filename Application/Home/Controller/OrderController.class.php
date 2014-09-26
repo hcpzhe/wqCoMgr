@@ -55,13 +55,41 @@ class OrderController extends HomeBaseController{
  * 如果为优化订单，erp_seo_order增加一条记录
  * 如果两者都不是不进行其他操作*/
 	public function check_order(){
+		/*改变订单审核状态*/
 		$id=$_GET['id'];
 		$pid=$_GET['pid'];
-		if($pid==1 || $pid==2 || $pid==3){ 
-			$this->redirect('Home/Depord/add_od/', array('id' => $id));
-		}
-		if($pid==6){
-			$this->redirect('Home/Seoord/add_od/', array('id' => $id));
+		$order=new OrderModel();
+		/*判断是否为网站开发订单*/
+		if($pid==1 || $pid==2 || $pid==3){
+			/*网站开发模型*/
+			$dor=new Develop_orderModel();
+			$flag1=$dor->add_do($id);
+			/*如果是否重复审核审核失败*/
+			if($flag1==0){ $this->error('审核重复');}
+			else {/*否则审核继续*/ 
+				/*改变审核状态操作*/
+				$flag11=$order->where("id=$id")->setField("check","1");
+				/*判断操作结果*/
+				if($flag11==0){ $this->error('审核失败');}
+				else { $this->success('审核成功');}
+			}
+		}elseif ($pid==6){/*判断是否为优化开发*/
+			/*优化模型*/
+			$sor=new Seo_orderModel();
+			$flag2=$sor->add_so($id);
+			/*如果审核重复则审核失败*/
+			if($flag2==0){ $this->error('审核重复');}
+			else {/*审核继续*/
+				/*之心审核操作*/
+				$flag22=$order->where("id=$id")->setField("check","1");
+				/*判断审核结果*/
+				if($flag22==0){ $this->error('审核失败');}
+				else { $this->success('审核成功');}
+			}
+		}else{/*其他类型产品*/
+			$flag3=$order->where("id=$id")->setField("check","1");
+			if($flag3==0){ $this->error('审核失败');}
+			else { $this->success('审核成功');}
 		}
 	}	
 }

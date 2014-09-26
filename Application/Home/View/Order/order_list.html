@@ -49,8 +49,8 @@
 		<td>{$list.total_fees}元</td>
 		<td>{$list.remark}</td>
 		<td>
-			<!-- <if condition="$list.check eq 1">通过<elseif condition="$list.check eq 0"/>待审<else/>拒绝</if> -->
 			<a href="{:U('Order/check_order?id='.$list['id'].'&& pid='.$list['pid'])}">审核</a>
+			(<if condition="$list.check eq 1">通过<elseif condition="$list.check eq 0"/>待审<else/>拒绝</if>)
 		</td>
 		<td><a href="{:U('Order/order_info?id='.$list['id'])}">详情</a></td>
 	</tr>
