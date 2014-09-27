@@ -1,5 +1,5 @@
 <?php
-namespace Home\Controller;
+namespace Home\Model;
 use Think\Model;
 class DepartModel extends Model{
 	

@@ -28,12 +28,13 @@
           </tr>
           <tr>
             <td class="menu_content">
-			<form method="post" action="">
+			<form method="post" action="{:U('Develop_user/add_du')}">
 				<select name="user">
 				<!-- <foreach name="data" item="list"> -->
 					<option value="{$list.id}">{$list.realname}</option>
 				<!-- </foreach> -->	
 				</select>
+				<input type="hidden" value="{$id}" name="oid" > 
 				<input type="submit" value="分配">
 			</form>
             </td>

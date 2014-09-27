@@ -19,6 +19,7 @@ class DepordController extends HomeBaseController{
 		/*查询技术部所有人员*/
 		$user=new UserModel();
 		$this->data=$user->tech_list();
+		$this->id=$_GET['id'];
 		$this->display();
 	}	
 }
