@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>沟通记录添加</title>
+<link href="__CSS__/home.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+</head>
+<body>
+<div class="b right_next">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>沟通记录添加</font></span></td>
+      </tr>
+      <tr>
+        <td height="30"></td>
+      </tr>
+      <tr>
+        <td><font class="tishi">添加沟通记录</font></td>
+      </tr>
+      <tr>
+        <td height="30"></td>
+      </tr>
+      <tr>
+        <td align="center">
+           <form action="{:U('Customervisit/visit_prod_insert')}" method="post" onsubmit="$(this).RSsubmit({success_alert:true});return false;">                      
+            <table width="500" border="0">
+                  <tr>
+                    <td width="20%">客户名称：</td>
+                    <td width="80%">{$newdata['cname']}<input type="hidden" name="visit_id" value="{$newdata['visit_id']}"></td>
+                  </tr> 
+                  <tr>
+                  <tr>
+                    <td width="20%">销售人员：</td>
+                    <td width="80%">{$newdata['uname']}</td>
+                  </tr> 
+                  <tr>
+                    <td width="20%">拜访时间：</td>
+                    <td width="80%">{:date('Y/m/d H:i:s',$newdata['visit_time'])}</td>
+                  </tr> 
+                   <tr>
+                    <td width="20%">沟通产品：</td>
+                    <td width="80%"> 
+                         <select  name="prod_id">
+                           <!-- <foreach name="product_list" item="product"> --> 
+                             <option value="{$product[id]}">{$product[name]}
+                           <!-- </foreach> -->
+                         </select>
+                    </td>
+                  </tr>                 
+                  <tr>
+                    <td>沟通情况：</td>
+                    <td><textarea name="content" cols="50" rows="8"></textarea></td>
+                  </tr>
+                 
+                  <tr>
+                    <td>&nbsp;</td>
+                    <td><input type="submit" name="Submit" value=" 添加 " class="button_submit"></td>
+                  </tr>
+            </table>                              
+           </form>
+        </td>
+      </tr>
+     </tbody>
+  </table>
+</div>
+
+</body>
+</html>
