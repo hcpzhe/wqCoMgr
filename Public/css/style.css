@@ -66,3 +66,9 @@
 		/*页码列表*/
 		a.num{ padding:1px 5px; border:1px solid #ccc; margin-left:10px;}	
 		span.current{ padding:1px 5px; border:1px solid #cc0001; color:#cc0001; margin-left:10px;}	
+		
+		
+		
+		
+/*网站开发订单列表未分配订单*/
+a.red{ color:#cc0001;}		

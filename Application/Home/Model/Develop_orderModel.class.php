@@ -40,4 +40,12 @@ class Develop_orderModel extends Model{
 		$map['check']=1;
 		$this->where("order_id=$oid")->save($map);
 	}
+	/*查询指定订单的详细信息*/
+	public function depinfo($oid){
+		$data=$this->table('erp_develop_order as edo,erp_order as eo,erp_customer as ec,erp_user as eu')
+		->where("edo.order_id=eo.id AND eo.cust_id=ec.id AND eo.user_id=eu.id AND edo.status=1")
+		->field("eo.id as id,eo.total_fees as money,ec.name as cname,ec.contacts as contacts,eu.realname as rname,ec.phone as phone,edo.remark as remark,edo.check as checks,edo.start_time as start_time,edo.end_time as end_time,edo.status as status")
+		->find();
+		return $data;
+	}
 }

@@ -54,10 +54,10 @@
 			<if condition="$list.checks eq 1">
 				<a href="{:U('Depord/dist?id='.$list['id'])}">已分配</a>
 			<elseif condition="$list.checks eq 0"/>
-				<a href="{:U('Depord/dist?id='.$list['id'])}">未分配</a>
+				<a href="{:U('Depord/dist?id='.$list['id'])}" class="red">未分配</a>
 			<else/>失效</if>
 		</td>
-		<td><a href="{:U('Order/order_info?id='.$list['id'])}">详情</a></td>
+		<td><a href="{:U('Depord/dep_info?id='.$list['id'])}">详情</a></td>
 	</tr>
 <!-- </foreach> -->
 	<tr><td colspan="9" align="center">{$data[show]}</td></tr>
