@@ -46,8 +46,7 @@ class CustomervisitController extends HomeBaseController {
 		$model = new Customer_visitModel();			
 		$data = $model->data($data)->add();
 
-	//	$this->redirect('Customervisit/add_visit_prod/visit_id/'.$data,'页面跳转中~');
-		$this->success('添加成功',U('Customervisit/add_visit_prod?visit_id'.$data));  
+		$this->success('添加成功',U('Customervisit/visitlists'));  
 			
 	}
 	
