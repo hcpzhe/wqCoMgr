@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>优化订单列表</title>
+<title>网站订单列表</title>
 <link href="__CSS__/style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="__JS__/jquery.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
@@ -24,38 +24,43 @@
    <div class="center_content">
       <table width="755" bgcolor="#fff" cellpadding="0" cellspacing="0">
           <tr>
-            <td class="menu"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32" /><font>订单列表</font></span></td>
+            <td class="menu"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32" /><font>优化列表</font></span></td>
           </tr>
           <tr>
             <td class="menu_content">
 <!-- 订单列表开始 -->
-<table>
+<table cellpadding="0" cellspacing="0">
 	<tr>
 		<td>订单号</td>
-		<td>签单人员</td>
 		<td>客户</td>
-		<td>产品</td>
+		<td>联系人</td>
+		<td>联系方式</td>
 		<td>金额</td>
+		<td>销售</td>
 		<td>备注</td>
 		<td>审核</td>
 		<td>操作</td>
 	</tr>
-<foreach name="data['order_list']" item="list">
+<!-- <foreach name="data['dep_list']" item="list"> -->
 	<tr>
 		<td>{$list.id}</td>
-		<td>{$list.uname}</td>
 		<td>{$list.cname}</td>
-		<td>{$list.pname}</td>
-		<td>{$list.total_fees}元</td>
+		<td>{$list.contacts}</td>
+		<td>{$list.phone}</td>
+		<td>{$list.money}元</td>
+		<td>{$list.rname}</td>
 		<td>{$list.remark}</td>
 		<td>
-			<a href="{:U('Order/check_order?id='.$list['id'].'&& pid='.$list['pid'])}">审核</a>
-			(<if condition="$list.check eq 1">通过<elseif condition="$list.check eq 0"/>待审<else/>拒绝</if>)
+			<if condition="$list.checks eq 1">
+				<a href="{:U('Seoord/dist?id='.$list['id'])}">已分配</a>
+			<elseif condition="$list.checks eq 0"/>
+				<a href="{:U('Seoord/dist?id='.$list['id'])}" class="red">未分配</a>
+			<else/>失效</if>
 		</td>
-		<td><a href="{:U('Order/order_info?id='.$list['id'])}">详情</a></td>
+		<td><a href="{:U('Seoord/seo_info?id='.$list['id'])}">详情</a></td>
 	</tr>
-</foreach>
-	<tr><td colspan="8" align="center">{$data[show]}</td></tr>
+<!-- </foreach> -->
+	<tr><td colspan="9" align="center">{$data[show]}</td></tr>
 </table>
 <!-- 订单列表结束-->
 			</td>

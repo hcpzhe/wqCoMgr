@@ -36,7 +36,7 @@ class DepordController extends HomeBaseController{
 		$oid=$_GET['id'];
 		/*查询技术部所有人员*/
 		$user=new UserModel();
-		$this->users=$user->tech_list();
+		$this->users=$user->tech_list(4);
 		/*查询该订单已经分配的人员*/
 		$de_user=new Develop_userModel();
 		$this->data=$de_user->s_dist($oid);

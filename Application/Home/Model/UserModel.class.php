@@ -71,8 +71,7 @@ class UserModel extends Model {
 	
 	}
 	/** 查询技术部人员*/
-	public function tech_list(){
-		$id = 4; //技术部
+	public function tech_list($id){
 		$model = new DepartModel();
 		$deptids = $model->allDept($id);
 		$deptids[] = $id;
@@ -80,7 +79,7 @@ class UserModel extends Model {
 		$user_M = new Model('User');
 		$user_map = array('depart_id'=>array('in',$deptids));
 		$user_M->where($user_map)->select();
-		$t_list=$this->where("status=1 AND depart_id=4")->select();
+		$t_list=$this->where("status=1 AND depart_id=$id")->select();
 		return $t_list;
 	}		
 }

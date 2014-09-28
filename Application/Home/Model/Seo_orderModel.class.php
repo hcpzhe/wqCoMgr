@@ -14,7 +14,37 @@ class Seo_orderModel extends Model{
 			return 1;}	
 	}
 	/*优化开发订单列表*/
-	public function sr_list(){
-	
+	public function seo_list(){
+		/*查询数据总条数*/
+		$count=$this->table('erp_seo_order as eso,erp_order as eo')
+		->where("eso.order_id=eo.id")
+		->count();
+		/*载入分页类，初始化数据*/
+		$page=new \Think\Page($count,7);
+		/*调用分页链接函数*/
+		$data['show']=$page->show();
+		/*控制数据查询条数*/
+		$data['dep_list']=$this->table('erp_seo_order as eso,erp_order as eo,erp_customer as ec,erp_user as eu')
+		->where("eso.order_id=eo.id AND eo.cust_id=ec.id AND eo.user_id=eu.id AND eso.status=1")
+		->field("eo.id as id,eo.total_fees as money,ec.name as cname,ec.contacts as contacts,eu.realname as rname,ec.phone as phone,eso.remark as remark,eso.check as checks")
+		->limit($page->firstRow.','.$page->listRows)->select();
+		// 				echo $this->_sql();
+		// 				echo "<pre>";
+		// 				print_r($data['order_list']);
+		// 				echo "</pre>";
+		return $data;
+	}	
+	/*查询指定订单的详细信息*/
+	public function seoinfo($oid){
+		$data=$this->table('erp_seo_order as eso,erp_order as eo,erp_customer as ec,erp_user as eu')
+		->where("eso.order_id=eo.id AND eo.cust_id=ec.id AND eo.user_id=eu.id AND eso.status=1")
+		->field("eo.id as id,eo.total_fees as money,ec.name as cname,ec.contacts as contacts,eu.realname as rname,ec.phone as phone,eso.remark as remark,eso.check as checks,eso.start_time as start_time,eso.end_time as end_time,eso.status as status")
+		->find();
+		return $data;
+	}	
+	/*修改网站开发订单的状态*/
+	public function up_check($oid){
+		$map['check']=1;
+		$this->where("order_id=$oid")->save($map);
 	}	
 }
