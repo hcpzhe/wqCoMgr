@@ -18,7 +18,7 @@
             <td class="menu_content">
 <!-- 订单详情开始 -->            
 <table width="100%"  cellpadding="0" cellspacing="0" >
-  <tr><td colspan="4">基本信息<a href="{:U('Order/ord_u_form?id='.$orderinfo['id'])}" style="float:right">修改</a></td></tr>	
+  <tr><td colspan="4">基本信息<a href="{:U('Order/ord_u_form?id='.$orderinfo['id'])}" style="float:right"><!-- 修改 --></a></td></tr>	
   <tr>
     <td align="right" bgcolor="#F0F0F0">销售专员：</td>
     <td bgcolor="#FFFFFF">{$data.rname}</td>
@@ -68,7 +68,14 @@
   			<span>{$list.realname}</span>
   		<!-- </foreach> -->
   	</td>
-  </tr>  
+  </tr>
+  <tr><td colspan="4">
+  	<h2>开发沟通记录：</h2>
+  	<!-- <foreach name="conments" item="list"> -->
+		<p style="padding-left:50px;">{$list.realname}：{$list.content} [{$list.post_time}]</p>
+  	<!-- </foreach> -->
+  	</td>
+  </tr> 
 </table>	
 <!-- 订单详情结束 -->    
 			</td>

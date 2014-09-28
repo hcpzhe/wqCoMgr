@@ -5,6 +5,7 @@ use Home\Model\Develop_orderModel;
 use Home\Model\UserModel;
 use Home\Model\Develop_userModel;
 use Home\Model\OrderModel;
+use Home\Model\Develop_order_commentModel;
 class DepordController extends HomeBaseController{
 	/*网站开发订单列表*/
 	public function dep_list(){
@@ -25,6 +26,9 @@ class DepordController extends HomeBaseController{
 		/*开发人员*/
 		$dep_user=new Develop_userModel();
 		$this->users=$dep_user->s_dist($oid);
+		/*订单沟通记录*/
+		$doc=new Develop_order_commentModel();
+		$this->conments=$doc->doc_list($oid);
 		$this->display();
 	}
 	/*跳转到分单页面*/
