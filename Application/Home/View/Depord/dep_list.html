@@ -51,9 +51,9 @@
 		<td>{$list.rname}</td>
 		<td>{$list.remark}</td>
 		<td>
-			<if condition="$list.check eq 1">
+			<if condition="$list.checks eq 1">
 				<a href="{:U('Depord/dist?id='.$list['id'])}">已分配</a>
-			<elseif condition="$list.check eq 0"/>
+			<elseif condition="$list.checks eq 0"/>
 				<a href="{:U('Depord/dist?id='.$list['id'])}">未分配</a>
 			<else/>失效</if>
 		</td>

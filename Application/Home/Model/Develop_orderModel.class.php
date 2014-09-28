@@ -35,4 +35,9 @@ class Develop_orderModel extends Model{
 // 				echo "</pre>";
 		return $data;
 	}
+	/*修改网站开发订单的状态*/
+	public function up_check($oid){
+		$map['check']=1;
+		$this->where("order_id=$oid")->save($map);
+	}
 }

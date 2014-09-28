@@ -27,10 +27,19 @@
             <td class="menu"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32" /><font>分单</font></span></td>
           </tr>
           <tr>
+          	<td>订单名称：{$cname.cname}
+          	<p> 分配人员：
+          		<!-- <foreach name="data" item="list"> -->
+					{$list.realname}
+				<!-- </foreach> -->	
+			</p>	
+          	</td>
+          </tr>
+          <tr>
             <td class="menu_content">
 			<form method="post" action="{:U('Developuser/add_pu?oid='.$id)}">
 				<select name="user">
-				<!-- <foreach name="data" item="list"> -->
+				<!-- <foreach name="users" item="list"> -->
 					<option value="{$list.id}">{$list.realname}</option>
 				<!-- </foreach> -->	
 				</select>

@@ -23,12 +23,20 @@ class OrderModel extends Model{
 // 		print_r($data['order_list']);
 // 		echo "</pre>";
 		return $data;
-	} 
+	}
+	/*c查询指定订单的详细内容*/	
 	public function orderinfo($id){
 		$order_info =$this->table('erp_order as oe,erp_user as ur,erp_customer as cr,erp_product as pt')
 		->where("oe.user_id=ur.id AND oe.cust_id=cr.id AND oe.prod_id=pt.id AND oe.id=$id")
 		->field("oe.id as id,cr.phone as phone,cr.fax as fx,cr.contacts as contacts,ur.realname as uname,cr.`name` as cname,pt.`name` as pname,oe.total_fees as money,oe.status as status,oe.remark,oe.expired_time extime,oe.`check`")->find();
 // 		print_r($order_info);exit();
 		return $order_info;
+	}
+	/**查询指定订单的名称*/
+	public function s_cname($oid){
+		$cname=$this->table('erp_order as eo,erp_customer as ec')
+		->where("eo.cust_id=ec.id ANd eo.id=$oid")
+		->field("ec.`name` as cname")->find();
+		return $cname;
 	}
 }
