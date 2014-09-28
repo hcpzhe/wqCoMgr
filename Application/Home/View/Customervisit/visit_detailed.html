@@ -27,7 +27,7 @@
         <td height="40">
               <span id="cust_search">
 	           	<font style="padding-left: 20px;"> 操作： </font>                                                      
-                <a href="{:U('Domain/add_domain?cust_id='.$list['id'])}" class="button_submit">添加拜访</a>                 
+                <a href="{:U('Customervisit/add_visit_prod',array('visit_id'=>$data['id'],'cname'=>$data['cname'],'uname'=>$data['uname'],'visit_time'=>$data['visit_time']))}" class="button_submit">添加沟通</a>                 
            </span>   
         </td>
       </tr>
@@ -43,7 +43,7 @@
                   </tr>
                  <!-- <foreach name="data" item="data"> --> 
                   <tr>
-                    <td width="20%">编号：</td>
+                    <td width="20%">拜访编号：</td>
                     <td width="30%"> 
                       <input type="hidden" value="{$data['id']}" name="id">                                     
 		                	{$data['id']}      		                               	                                                 
@@ -52,37 +52,34 @@
                     <td width="30%">{$data.cname}</td>
                   </tr>                 
                   <tr>
-                    <td>员 &nbsp;&nbsp; 工：</td>
+                    <td>拜访员工：</td>
                     <td>{$data.uname}</td>
                     <td>拜访时间：</td>
-                    <td>{:date('Y/m/d H:i:s',$data['add_time'])}</td>
+                    <td>{:date('Y/m/d H:i:s',$data['visit_time'])}</td>
                   </tr>
                   <tr>
                     <td>拜访内容：</td>
-                    <td colspan="3">{$data['fax']}</td>                    
+                    <td colspan="3">{$data['content']}</td>                    
                   </tr> 
                   <!-- </foreach> -->                                 
             </table>
             
             <!-- 沟通记录 -->
              <if condition="$visit_prod_list eq '' "><font color="red">未添加沟通记录</font> <br/>
-             <else />
-             
+             <else />             
              <div style=" width: 735px; border: 1px solid #ccc; text-align: left; padding: 5px; font-size: 12px; font-weight: bold;">沟通记录</div> 
-                                                                          
+                <!-- <foreach name="visit_prod_list" item="visit_prod_list"> -->                                                           
 	            <table width="100%" border="0" style="font-size: 12px;" class="com_table">                                  
 	                  <tr>
-	                    <td width="149">拜访记录编号：</td>
-	                    <td width="222">{$visit_prod_list['visit_id']}</td>
 	                    <td width="149">所谈产品：</td>
-	                    <td width="222">{$visit_prod_list['pname']} </td>
+	                    <td width="620">{$visit_prod_list['name']} </td>
 	                  </tr>                 
 	                  <tr>
 	                    <td>沟通内容：</td>
-	                    <td colspan="3">{$visit_prod_list['content']}</td>                   
+	                    <td>{$visit_prod_list['content']}</td>                   
 	                  </tr>                                                   
 	            </table>            
-           
+           <!-- </foreach> -->
             </if>                         
         </td>
       </tr>      

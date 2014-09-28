@@ -39,7 +39,7 @@
       </tr>      
       <tr>
         <td align="center"> 
-          <!-- <foreach name="data['visit_list']" item="data"> -->        
+          <!-- <foreach name="visit_lisit" item="data"> -->        
             <table width="740" border="0" cellspacing="0" cellpadding="0" class="com_list">                                                  
                   <tr height="30">
                      <td width="100" align="center">{$data.id}</td>
@@ -48,7 +48,7 @@
                      <td width="150" align="center">{:date('Y/m/d H:i:s',$data['visit_time'])}</td>
                      <td width="150" align="center">
                        <a href="{:U('Customervisit/visit_detailed?id='.$data['id'])}">查看详细</a> | 
-                       <a href="{:U('Customervisit/add_visit_prod?visit_id='.$data['id'])}">添加沟通记录 </a>
+                       <a href="{:U('Customervisit/add_visit_prod',array('visit_id'=>$data['id'],'cname'=>$data['cname'],'uname'=>$data['uname'],'visit_time'=>$data['visit_time']))}">添加沟通记录 </a>
                      </td>
                   </tr>                         
               </table>
@@ -60,7 +60,7 @@
         <td align="center">                     
           <table width="740" border="0" style="display: block; border-bottom: 1px solid #ccc; border-right: 1px solid #ccc; border-left: 1px solid #ccc;">
             <tr style="display: block; padding-top: 10px;">
-              <td height="30" style="display: block; text-align: center;">{$data[show]}</td>
+              <td height="30" style="display: block; text-align: center;">{$show}</td>
             </tr>
           </table>
         </td>
