@@ -3,58 +3,129 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>域名库</title>
+<link href="__CSS__/home.css" rel="stylesheet" type="text/css">
 <link href="__CSS__/style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="__JS__/jquery.js"></script>
+<script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+</head>
 <body>
-<div style="width:100%; overflow:hidden; background: #f2f2f2;">
-   <div class="top_search">
-       <form action="" method="post" class="search_form">
-           <table width="720" border="0" height="40" style="padding-top:3px;">
-              <tr>
-                <td class="th_input1"><input class="input1" type="text" value="" /></td>
-                <td class="th_input2"><input class="input2" type="text" value="" /></td>
-                <td>&nbsp;</td>
-                <td class="th_sea"><input class="sea" type="text" value="输入搜索文字" /></td>
-              </tr>
-            </table>
-       </form> 
-   </div>
-   <div class="center_content">
-      <table width="755" bgcolor="#fff" cellpadding="0" cellspacing="0">
-          <tr>
-            <td class="menu"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32" /><font>域名库</font></span></td>
-          </tr>
-          <tr>
-            <td class="menu_content">&nbsp;</td>
-          </tr>
-          <tr>
-            <td class="notice"><img style="float:left; margin-left:10px;" src="__IMG__/notice_img.png" /><span>公司通知</span></td>
-          </tr>
-    </table> 
-   </div>
-   <div class="bottom_container">
-        <table width="755" bgcolor="#fff" cellpadding="0" cellspacing="0">
-          <tr>
-            <td class="menu"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32" /><font>菜单名称</font></span></td>
-          </tr>
-          <tr>
-            <td class="container">&nbsp;</td>
-          </tr>
-        </table>
-   
-   
-   </div>
+<div class="b right_next">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>域名库</font></span></td>
+      </tr>
+      <tr>
+        <td height="30"></td>
+      </tr>
+      <tr>
+        <td><font class="tishi">头部提示信息：下面所列的是告诉所有域名信息！</font></td>
+      </tr>
+      <tr>
+        <td height="30"></td>
+      </tr>   
+      <tr>
+        <td height="40">
+              <span id="cust_search">
+	           <form action="__SELF__" method="get">
+	                                        搜索：<input type="text" name="domain" class="search" value="" />
+	                <input type=submit value="搜索" class="button_submit" />
+	           </form> 
+	           <script type="text/javascript">	 
+	                //查看域名详细信息    跳转 
+					function Detailed(){
+						$("input[name='domain_check']").each(function(){
+							if($(this).attr("checked")=="checked"){								
+								var id=$(this).val();								
+								var url="__URL__-domain_detailed-id-"+id;
+	                            location.href=url;
+								}
+							});
+					}
+					//编辑客户信息   跳转 
+					function Edit(){
+						$("input[name='domain_check']").each(function(){
+							if($(this).attr("checked")=="checked"){								
+								var id=$(this).val();								
+								var url="__URL__-edit-id-"+id;
+	                            location.href=url;
+								}
+							});
+					}
+					//域名续费申请    跳转 
+					function Dom_ren_app(){
+						$("input[name='domain_check']").each(function(){
+							if($(this).attr("checked")=="checked"){								
+								var id=$(this).val();								
+								var url="__MODULE__-Domren-dom_ren_app-cust_id-"+id;
+	                            location.href=url;
+								}
+							});
+					}
+	           </script>                              
+                <a href="javascript:void(0)" class="button_submit" onclick="Detailed();">查看详细</a>
+                <a href="javascript:void(0)" class="button_submit" onclick="Edit();">编辑</a> 
+                <a href="javascript:void(0)" class="button_submit" onclick="Dom_ren_app();">续费</a>
+                                             
+           </span>   
+        </td>
+      </tr>
+      <tr>
+        <td height="10"></td>
+      </tr> 
+      <tr>
+        <td align="center">                     
+            <table width="742" border="0" class="cust_list">           
+                  <tr class="liebiao_title">
+                    <th width="100">请选择</th>
+                    <th width="220">域名</th>
+                    <th width="120">域名运营商</th>
+                     <th width="150">注册时间</th>
+                    <th width="150">状态</th>
+                  </tr>
+               </table>
+           </td>
+      </tr>      
+      <tr>
+        <td align="center"> 
+          <!-- <foreach name="domain_list" item="data"> -->        
+            <table width="740" border="0" cellspacing="0" cellpadding="0" class="com_list">                                                  
+                  <tr height="30">
+                     <td width="100" align="center">
+                        <input type="checkbox" name="domain_check" value="{$data.id}">
+                        <input type="hidden" name="cust_id" value="{$data.cust_id}">
+                     </td>
+                     <td width="220" align="center">{$data.domain}</td>
+                     <td width="120" align="center">{$data.service}</td>
+                     <td width="150" align="center">{:date('Y/m/d H:i:s',$data['reg_time'])}</td>
+                     <td width="150" align="center">
+                        <if condition="$data['check'] eq -1 ">拒绝
+                        <elseif condition="$data['check'] eq 0 " /><a href="{:U('Domain/check?id='.$data['id'])}">待审</a>
+                        <else /> 通过</if>  
+                     </td>
+                  </tr>                         
+              </table>
+             <!-- </foreach> -->
+           </td>
+      </tr> 
+                            
+      <tr>
+        <td align="center">                     
+          <table width="740" border="0" style="display: block; border-bottom: 1px solid #ccc; border-right: 1px solid #ccc; border-left: 1px solid #ccc;">
+            <tr style="display: block; padding-top: 10px;">
+              <td height="30" style="display: block; text-align: center;">{$show}</td>
+            </tr>
+          </table>
+        </td>
+      </tr>        
+     </tbody>
+  </table>
 </div>
 </body>
 </html>
+
 <script>
 $(document).ready(function(){
-  $(".sea").focus(function(){
-    $(".sea").attr("value","");
-  });
-  $(".sea").blur(function(){
-    $(".sea").attr("value","输入搜索文字");
-  });
+    $(".com_list tr:odd").css("background","#F0F0F0");
 });
-
 </script>

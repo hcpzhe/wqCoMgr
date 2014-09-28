@@ -25,19 +25,24 @@
       </tr>
       <tr>
         <td align="center">
-           <form action="{:U('Domain/insert')}" method="post" name="form1" id="form1" onsubmit="return checkfrm1(this);">           
+           <form action="{:U('Domain/insert')}" method="post" name="domainform" id="domainform">           
             <table width="500" border="0">
                   <tr>
-                    <td width="20%">域名：</td>
-                    <td width="80%">                                      
+                    <td width="30%">域名：</td>
+                    <td width="70%">                                      
 		                <input type="text" name="domain" id="domain" />
+		                <input type="hidden" name="cust_id" value="{$cust_id}">
 		                <font class="fontred" id="namets">*</font>		                           	                                                 
                     </td>
                   </tr>
                   <tr>
+                    <td>使用年限：</td>
+                    <td><input type="text" name="year"><font class="fontred" id="namets">*</font></td>
+                  </tr> 
+                  <tr>
                     <td>域名运营商：</td>
-                    <td><input type="text" name="service"><font class="fontred" id="namets">*</font></td>
-                  </tr>                 
+                    <td><input type="text" name="service"></td>
+                  </tr>                                  
                   <tr>
                     <td>&nbsp;</td>
                     <td><input type="submit" name="Submit" value=" 添加 " class="button_submit"></td>
@@ -50,7 +55,7 @@
   </table>
 </div>
 <script type="text/javascript">
-function checkfrm1(afrm) {
+function checkdomainfrm(afrm) {
  if( (afrm.domain.value == "") )
 	{
 		alert("公司名称不能为空！");
