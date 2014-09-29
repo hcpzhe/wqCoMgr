@@ -34,7 +34,7 @@
 	           <script type="text/javascript">	 
 	                //查看域名详细信息    跳转 
 					function Detailed(){
-						$("input[name='domain_check']").each(function(){
+						$("input[name='domain_id']").each(function(){
 							if($(this).attr("checked")=="checked"){								
 								var id=$(this).val();								
 								var url="__URL__-domain_detailed-id-"+id;
@@ -44,7 +44,7 @@
 					}
 					//编辑客户信息   跳转 
 					function Edit(){
-						$("input[name='domain_check']").each(function(){
+						$("input[name='domain_id']").each(function(){
 							if($(this).attr("checked")=="checked"){								
 								var id=$(this).val();								
 								var url="__URL__-edit-id-"+id;
@@ -54,10 +54,10 @@
 					}
 					//域名续费申请    跳转 
 					function Dom_ren_app(){
-						$("input[name='domain_check']").each(function(){
+						$("input[name='domain_id']").each(function(){
 							if($(this).attr("checked")=="checked"){								
 								var id=$(this).val();								
-								var url="__MODULE__-Domren-dom_ren_app-cust_id-"+id;
+								var url="__MODULE__-Domren-dom_ren_app-id-"+id;
 	                            location.href=url;
 								}
 							});
@@ -77,11 +77,12 @@
         <td align="center">                     
             <table width="742" border="0" class="cust_list">           
                   <tr class="liebiao_title">
-                    <th width="100">请选择</th>
-                    <th width="220">域名</th>
-                    <th width="120">域名运营商</th>
-                     <th width="150">注册时间</th>
-                    <th width="150">状态</th>
+                    <th width="80">请选择</th>
+                    <th width="130">域名</th>
+                    <th width="110">域名运营商</th>
+                    <th width="160">注册时间</th>
+                    <th width="160">到期时间</th>
+                    <th width="100">状态</th>
                   </tr>
                </table>
            </td>
@@ -91,14 +92,15 @@
           <!-- <foreach name="domain_list" item="data"> -->        
             <table width="740" border="0" cellspacing="0" cellpadding="0" class="com_list">                                                  
                   <tr height="30">
-                     <td width="100" align="center">
-                        <input type="checkbox" name="domain_check" value="{$data.id}">
+                     <td width="80" align="center">
+                        <input type="checkbox" name="domain_id" value="{$data.id}">
                         <input type="hidden" name="cust_id" value="{$data.cust_id}">
                      </td>
-                     <td width="220" align="center">{$data.domain}</td>
-                     <td width="120" align="center">{$data.service}</td>
-                     <td width="150" align="center">{:date('Y/m/d H:i:s',$data['reg_time'])}</td>
-                     <td width="150" align="center">
+                     <td width="130" align="center">{$data.domain}</td>
+                     <td width="110" align="center">{$data.service}</td>
+                     <td width="160" align="center">{:date('Y/m/d H:i:s',$data['reg_time'])}</td>
+                     <td width="160" align="center">{:date('Y/m/d H:i:s',$data['expired_time'])}</td>
+                     <td width="100" align="center">
                         <if condition="$data['check'] eq -1 ">拒绝
                         <elseif condition="$data['check'] eq 0 " /><a href="{:U('Domain/check?id='.$data['id'])}">待审</a>
                         <else /> 通过</if>  

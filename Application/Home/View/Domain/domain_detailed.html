@@ -27,7 +27,8 @@
         <td height="40">
               <span id="cust_search">
 	           	<font style="padding-left: 20px;"> 操作： </font>                                                      
-                <a href="{:U('Customervisit/add_visit_prod',array('visit_id'=>$data['id'],'cname'=>$data['cname'],'uname'=>$data['uname'],'visit_time'=>$data['visit_time']))}" class="button_submit">添加沟通</a>                 
+                <a href="{:U('Domain/add_domain?cust_id='.$cust_id)}" class="button_submit">添加新域名</a> 
+                <a href="{:U('Domren/dom_ren_app?id='.$id)}" class="button_submit">续费</a>                
            </span>   
         </td>
       </tr>
@@ -39,13 +40,13 @@
         <!-- 客户详细信息 -->       
             <table width="100%" border="0" style="font-size: 12px;" class="com_table">
                   <tr>
-                    <th colspan="4" align="left"  style=" width: 742px;">拜访记录</th>                    
+                    <th colspan="4" align="left"  style=" width: 742px;">域名信息</th>                    
                   </tr>
                  <!-- <foreach name="domain_list" item="domain_list"> --> 
                   <tr>
                     <td width="20%">域名编号：</td>
                     <td width="30%"> 
-                      <input type="hidden" value="{$domain_list['id']}" name="id">                                     
+                      <input type="hidden" value="{$domain_list['cust_id']}" name="cust_id">                                     
 		                	{$domain_list['id']}      		                               	                                                 
                     </td>
                     <td width="20%">公司名称：</td>
@@ -67,7 +68,7 @@
                     <td>域名状态：</td>
                     <td>
                         <if condition="$domain_list['status'] eq -1 ">删除
-                        <elseif condition="$domain_list['check'] eq 0 " />禁用
+                        <elseif condition="$domain_list['status'] eq 0 " />禁用
                         <else /> 正常</if>
                     </td>
                     <td>审核状态：</td>

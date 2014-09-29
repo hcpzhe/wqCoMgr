@@ -30,18 +30,13 @@ class DomainController extends HomeBaseController{
 		$this->display();
 	}
 	/**域名添加   提交接口**/
-	public function insert(){
-		$cust_id = (int)I('cust_id');
-		
-		$data['cust_id'] = $cust_id;
+	public function insert(){	
+		$data['cust_id'] = (int)I('cust_id');
 		$data['domain'] =  I('param.domain');
 		$data['service'] =  I('param.service');
 		$data['reg_time'] = time();
-		$data['year'] = I('param.year');
-		$time =strtotime(I('param.year'));
-		$data['expired_time'] = time()+ $time;
-// 		print_r($data);
-// 		exit();
+		$data['year_num'] = I('param.year');   //新注域名使用年限
+		$data['expired_time'] = $data['reg_time'] + $data['year_num']*60*60*24*365;  //域名到期时间计算
 		$model = new DomainModel();
 		$data = $model->data($data)->add();
 		
@@ -50,16 +45,14 @@ class DomainController extends HomeBaseController{
 	/**域名详细信息**/
 	public function domain_detailed(){
 		$id = (int)I('id');
-// 		$cust_id = (int)I('cust_id');
-// 		print_r($cust_id);
-// 		exit();
+
 		$domain = M('Domain'); //获取域名详细信息
 		$domain_list = $domain->table('erp_customer as cr,erp_domain as dom')
 		->where("cr.id=dom.cust_id AND dom.id=$id")
-		->getField("cr.id as cust_id,cr.`name` as `name`,dom.id as id,dom.domain as domain,dom.service as service,dom.reg_time as reg_time,dom.expired_time as expired_time,dom.`check` as `check`,dom.check_time as check_time,dom.`status` as `status`");
-		
-// 		print_r($domain_list);
-// 		exit();
+		->getField("dom.id as id,cr.id as cust_id,cr.`name` as `name`,dom.domain as domain,dom.service as service,dom.reg_time as reg_time,dom.expired_time as expired_time,dom.`check` as `check`,dom.check_time as check_time,dom.`status` as `status`");
+       
+        $this->assign('cust_id',$domain_list[$id]['cust_id']);  //公司id
+        $this->assign('id',$domain_list[$id]['id']);  //公司域名所对应的id
 		$this->assign('domain_list',$domain_list);
 		$this->display();
 	}
