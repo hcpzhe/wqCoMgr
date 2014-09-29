@@ -25,8 +25,9 @@
       </tr>
       <tr>
         <td align="center">
-           <form action="{:U('Customervisit/visit_prod_insert')}" method="post" onsubmit="$(this).RSsubmit({success_alert:true});return false;">                      
+           <form action="{:U('Customervisit/visit_prod_insert')}" method="post">                      
             <table width="500" border="0">
+            <!-- <foreach name="newdata" item="newdata"> -->        
                   <tr>
                     <td width="20%">客户名称：</td>
                     <td width="80%">{$newdata['cname']}<input type="hidden" name="visit_id" value="{$newdata['visit_id']}"></td>
@@ -54,7 +55,7 @@
                     <td>沟通情况：</td>
                     <td><textarea name="content" cols="50" rows="8"></textarea></td>
                   </tr>
-                 
+                 <!-- </foreach> -->
                   <tr>
                     <td>&nbsp;</td>
                     <td><input type="submit" name="Submit" value=" 添加 " class="button_submit"></td>

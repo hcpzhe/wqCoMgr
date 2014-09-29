@@ -45,8 +45,10 @@ class CustomervisitController extends HomeBaseController {
 		$data['visit_time'] = time();	
 		$model = new Customer_visitModel();			
 		$data = $model->data($data)->add();
-
-		$this->success('添加成功',U('Customervisit/visitlists'));  
+		
+        
+		$this->redirect('Customervisit/add_visit_prod',array('visit_id'=>$data),1,'拜访记录添加成功，请添加沟通记录'); //拜访记录添加成功后跳转到添加沟通记录页面
+		//$this->success('添加成功',U('Customervisit/visitlists'),2);  
 			
 	}
 	
@@ -80,22 +82,29 @@ class CustomervisitController extends HomeBaseController {
 		$product_list = $product->select();
 		$this->assign('product_list',$product_list);
 
-		
+		$model = M('customer_visit');
 		$visit_id = (int)I('visit_id');
-		$newdata = array();
-		$newdata['visit_id'] = I('param.visit_id');
-		$newdata['uname'] = I('param.uname');
-		$newdata['cname'] = I('param.cname');
-		$newdata['visit_time'] = I('param.visit_time');
-		$this->assign('newdata',$newdata);
+		$visit_list = $model->table('erp_customer_visit as cv,erp_customer as cu,erp_user as us')
+		->where("cv.cust_id=cu.id AND us.id=cv.user_id AND cv.id=$visit_id")
+		->getField("cv.id as visit_id,us.realname as uname,cu.name as cname,cv.visit_time as visit_time");
+//         print_r($visit_list);
+//         exit();
+// 		$newdata = array();
+// 		$newdata['visit_id'] = I('param.visit_id');
+// 		$newdata['uname'] = I('param.uname');
+// 		$newdata['cname'] = I('param.cname');
+// 		$newdata['visit_time'] = I('param.visit_time');
+		$this->assign('newdata',$visit_list);
 		
 		
 		$this->display();
 	}
 	/**沟通记录添加   提交接口**/
-	public function visit_prod_insert(){
-		$model = new Visit_prodModel(); 
-		$data = $model->create();
+	public function visit_prod_insert(){		 
+		$data['visit_id'] = I('param.visit_id');
+		$data['prod_id'] = I('param.prod_id');
+		$data['content'] = I('param.content');
+		$model = M('Visit_prod');
 		$model->add($data);
 		$this->success('添加成功',U('Customervisit/visitlists'));
 		
