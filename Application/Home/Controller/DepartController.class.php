@@ -9,4 +9,11 @@ class DepartController extends HomeBaseController{
 		$this->depa_list=$depa->depalist();
 		$this->display();
 	}	
+	/* 跳转到添加部门页面 */
+	public function depa_form(){
+		/**查询所有部门 */
+		$depa=new DepartModel();
+		$this->alldepart=$depa->depalist();
+		$this->display();
+	}
 }

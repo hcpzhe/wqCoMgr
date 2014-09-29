@@ -26,5 +26,9 @@ class DepartModel extends Model{
 		$data=$this->where('status=1')->select();
 		return $data;
 	}
-	
+	/* 查询所有部门 */
+	public function alldepart(){
+		$data=$this->where('status=1')->select();
+		return $data;
+	}
 }
