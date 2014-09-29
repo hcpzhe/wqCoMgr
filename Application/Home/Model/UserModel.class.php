@@ -82,4 +82,13 @@ class UserModel extends Model {
 		$t_list=$this->where("status=1 AND depart_id=$id")->select();
 		return $t_list;
 	}		
+	/** 查询系统用户列表 * /
+	 */
+	public function userlist(){
+		$data=$this->table('erp_user as user,erp_depart as depart')
+				->where('user.depart_id=depart.id AND user.status=1')
+				->field('user.id as id,user.account as account,user.realname as realname,depart.name as dname,user.status as status')
+				->select();
+		return $data;
+	}
 }

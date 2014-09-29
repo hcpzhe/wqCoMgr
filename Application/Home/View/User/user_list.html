@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>订单列表</title>
+<link href="__CSS__/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+</head>
+<body>
+<div style="width:100%; overflow:hidden; background: #f2f2f2;">
+   <div class="top_search">
+       <form action="" method="post" class="search_form">
+           <table width="720" border="0" height="40" style="padding-top:3px;">
+              <tr>
+                <td class="th_input1"><input class="input1" type="text" value="" /></td>
+                <td class="th_input2"><input class="input2" type="text" value="" /></td>
+                <td>&nbsp;</td>
+                <td class="th_sea"><input class="sea" type="text" value="输入搜索文字" /></td>
+              </tr>
+            </table>
+       </form> 
+   </div>
+   <div class="center_content">
+      <table width="755" bgcolor="#fff" cellpadding="0" cellspacing="0">
+          <tr>
+            <td class="menu"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32" /><font>订单列表</font></span></td>
+          </tr>
+          <tr>
+            <td class="menu_content">
+<!-- 订单列表开始 -->
+<table cellpadding="0" cellspacing="0">
+	<tr>
+		<td>编号</td>
+		<td>用户名</td>
+		<td>姓名</td>
+		<td>职位</td>
+		<td>所属部门</td>
+		<td>入职时间</td>
+		<td>状态</td>
+		<td>操作</td>
+	</tr>
+<!-- <foreach name="user_list" item="list"> -->   
+	<tr>
+		<td>{$list.id}</td>
+		<td>{$list.account}</td>
+		<td>{$list.realname}</td>
+		<td>职员</td>
+		<td>{$list.dname}</td>
+		<td>时间不定</td>
+		<td>{$list.status}</td>
+		<td><a href="{:U('/?id='.$list['id'])}">详情</a></td>
+	</tr>
+<!-- </foreach> -->  
+	<tr><td colspan="8" align="center">{$data[show]}</td></tr>
+</table>
+<!-- 订单列表结束-->
+			</td>
+          </tr>
+          <tr>
+            <td class="notice"><img style="float:left; margin-left:10px;" src="__IMG__/notice_img.png" /><span>公司通知</span></td>
+          </tr>
+    </table> 
+   </div>
+</div>   
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>订单列表</title>
+<link href="__CSS__/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+</head>
+<body>
+<div style="width:100%; overflow:hidden; background: #f2f2f2;">
+   <div class="center_content">
+      <table width="755" bgcolor="#fff" cellpadding="0" cellspacing="0">
+          <tr>
+            <td class="menu"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32" /><font>订单列表</font></span></td>
+          </tr>
+          <tr>
+            <td class="menu_content">
+<!-- 部门列表开始 -->
+<table width="100%" border="0" border="0" cellspacing="0" cellpadding="0" >
+            <tr>
+              <td width="8%" align="center">编号</td>
+              <td width="29%" align="center">部门名称</td>
+              <td width="27%" align="center">操作</td>
+            </tr>
+<!-- <foreach name="depa_list" item="list"> -->            
+            <tr>
+              <td width="8%" align="center">{$list.id}</td>
+              <td width="29%" align="center">{$list.name}</td>
+              <td width="27%" align="center"><a href="" class="lanxlink">编辑</a>｜<a href="" class="lanxlink">删除</a></td>
+            </tr>   
+<!-- </foreach> -->                     
+</table>
+<!-- 部门列表结束-->
+			</td>
+          </tr>
+          <tr>
+            <td class="notice"><img style="float:left; margin-left:10px;" src="__IMG__/notice_img.png" /><span>公司通知</span></td>
+          </tr>
+    </table> 
+   </div>
+</div>   
+</body>
+</html>

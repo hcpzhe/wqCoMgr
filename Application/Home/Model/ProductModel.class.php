@@ -6,5 +6,4 @@ class ProductModel extends Model{
 		$product=M('Product');
  		return  $product->where("status=1")->select();	
 	}
-
 }
