@@ -21,6 +21,10 @@ class DepartModel extends Model{
 		}
 		return $return;
 	}
-	
+	/**获取部门列表 */
+	public function depalist(){
+		$data=$this->where('status=1')->select();
+		return $data;
+	}
 	
 }
