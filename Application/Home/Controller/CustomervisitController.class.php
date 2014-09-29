@@ -57,16 +57,18 @@ class CustomervisitController extends HomeBaseController {
 		$data = $model->table('erp_customer_visit as cu,erp_user as ur,erp_customer as cr')
 		->where("cu.user_id=ur.id AND cu.cust_id=cr.id AND cu.id=$visit_id")
 		->getField("cu.id as id,ur.realname as uname,cr.name as cname,cu.visit_time,cu.content");	
-// 		print_r($data);
-// 		exit();	
+
+        $this->assign('visit_id',$visit_id);   //拜访编号
+        $this->assign('cname',$data[$visit_id]['cname']);   //公司名称
+        $this->assign('uname',$data[$visit_id]['uname']);   //拜访员工
+        $this->assign('visit_time',$data[$visit_id]['visit_time']);  //拜访时间
 		$this->assign('data',$data);
 		
 		//与拜访记录有关的沟通信息
 		$visit_prod_list = $model->table('erp_customer_visit as cu,erp_product as pt,erp_visit_prod as vd')
 		->where("cu.id=vd.visit_id AND pt.id=vd.prod_id AND cu.id=$visit_id")
 		->select();
-// 		print_r($visit_prod_list);
-// 		exit();
+
 
 		$this->assign('visit_prod_list',$visit_prod_list);
 		$this->display();
@@ -77,8 +79,7 @@ class CustomervisitController extends HomeBaseController {
 		$product = M('product');
 		$product_list = $product->select();
 		$this->assign('product_list',$product_list);
-// 		print_r($product_name);
-// 		exit();
+
 		
 		$visit_id = (int)I('visit_id');
 		$newdata = array();
