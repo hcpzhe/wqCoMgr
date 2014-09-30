@@ -35,7 +35,7 @@ class CustomerController extends HomeBaseController {
 		$count      = $cust->where($map)->count();// 查询满足要求的总记录数
 		$Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(10)
 		$show       = $Page->show();// 分页显示输出
-		$list = $cust->where($map)->limit($Page->firstRow.','.$Page->listRows)->select();
+		$list = $cust->where($map)->limit($Page->firstRow.','.$Page->listRows)->order('id desc')->select();
 		$this->assign('list',$list);// 赋值数据集
 		$this->assign('page',$show);// 赋值分页输出
 		$this->assign('status', $map['status']); //用于搜索条件的显示
@@ -45,21 +45,24 @@ class CustomerController extends HomeBaseController {
 	}
 	
 	/***客户名称模糊检索***/
-	public function search($name=''){
+	public function search($name=null){	
 		$name = I('name');
-// 		print_r($name);
-// 		exit();
-// 		if (!empty($name)) {
-// 			$Form = M("Customer");
-// 			if ($Form->getByName($name)) {
-// 				$this->error('名称已经存在');
-// 			} else {
-// 				$this->success('名称可以使用!');
-// 			}
-// 			} else {
-// 				$this->error('名称必须');
-// 			}
-				$this->display();		
+		if(!empty($name)){
+			$Form = M("Customer");
+			$map['name']   =   array('like', '%'.$name.'%');		
+			$count      = $Form->where($map)->count();// 查询满足要求的总记录数
+			$Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(10)
+			$show       = $Page->show();// 分页显示输出			
+			$list = $Form->where($map)->order('id desc')->select();		
+			if (!empty($list)){
+				$this->assign('page',$show);// 赋值分页输出
+				$this->assign('list',$list);					
+				$this->display();
+			}else{				
+				echo "用户名不存在，可以添加！";
+			}
+		}
+				
 		
 	}
 	/**公司信息修改**/
@@ -98,8 +101,7 @@ class CustomerController extends HomeBaseController {
 		->where("cr.id=ord.cust_id AND pt.id=ord.prod_id AND ord.user_id=ur.id AND cr.id=$id")
 		->getField("ord.id as id,ur.realname as uname,pt.name as pname,ord.total_fees as total_fees,ord.expired_time as expired_time,ord.status as status,ord.remark as remark");
 		$this->assign('order_list',$order_list);
-			
-		
+					
 		$domain = M('Domain');    //获取域名信息
 		$domain_list = $domain->where('cust_id='.$id)->select();
 		$this->assign('domain_list',$domain_list);
@@ -119,8 +121,6 @@ class CustomerController extends HomeBaseController {
 		if (false === $model->create($newdata)) $this->error($model->getError());
 		if (false === $model->where('id='.$id)->save()) $this->error('审核失败');
 		$this->success('审核成功',U('Customer/lists'));
-// 		print_r($newdata['check_time']);
-// 		exit();
 	}
 			
 }

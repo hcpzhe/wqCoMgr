@@ -20,6 +20,7 @@ tbody{ display: block;}
 .r_c1_title span{width: 753px; height: 38px; display: block; float: left; margin: 1px; background: #1C86CF; font-size:15px !important; line-height:38px;}
 .r_c1_title font{ float:left;}
 #form1 tr{ line-height:30px; font-size:14px; letter-spacing: 3px;}
+#form1 td{ text-align:left;}
 .button_submit{ background: url(../images/submit_bg.png) no-repeat; width: 60px; height: 30px; display: inline-block; color: #FFF; vertical-align: middle; border:0; cursor: pointer;text-align: center; line-height: 30px;}
 .tishi{font-size: 12px; color: #F00; width:700px; margin:0 auto; display: block;}
 
@@ -38,3 +39,14 @@ tbody{ display: block;}
 
 /**客户详细信息页**/
 .com_table th,.com_table td{ border:1px solid #ccc; padding:5px;}
+
+
+/**公司名称模糊搜索**/
+.search_next{ width: 650px; margin: 0 auto;}
+.search_title{ height: 38px; color: #FFF; border-bottom: 1px solid #CCC;}
+.search_title span{ width: 648px; height: 38px; display: block; float: left; margin: 1px; background: #1C86CF; font-size: 15px !important; line-height: 38px;}
+.search_tishi{font-size: 12px; color: #F00; width:600px; margin:0 auto; display: block;}
+.sea_liebiao_title{ background: url(../images/liebiao_bg.jpg) repeat-x; display: block; width: 600px; height: 38px; line-height: 38px; border: 1px solid #CCC;}
+.sea_liebiao_title th{ text-align:center;}
+
+
