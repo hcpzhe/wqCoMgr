@@ -6,10 +6,13 @@
 <link href="__CSS__/home.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="__JS__/jquery.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
-<script>
+<script type="text/javascript">	
 function checkname(){
-	$("#btn").click(function(){					
-		var name=$('#name').val();								
+		var name=$('#name').val();	
+		if( (name == "") )
+		{
+			alert("请输入要查询的公司！");			
+		}else{
 		  $.ajax({    
 		        type:'get',        
 		        url:'__URL__-search',    
@@ -19,8 +22,8 @@ function checkname(){
 		        success:function(list){ 
 		        	window.open ('__URL__-search-name-'+name,'newwindow', 'height=500, width=700, scrollbars=yes, resizable=yes');
 		        }    
-		    }); 		
-		});
+		    }); 
+		}
 }
 </script>
 </head>
@@ -49,7 +52,7 @@ function checkname(){
                     <td width="400">                                      
 		                <input type="text" name="name" id="name" />
 		                <font class="fontred" id="namets">*</font>		               
-		                <a href="#" id="btn" onclick="checkname()"> 模糊查询 </a>              	                                                 
+		                <a href="javascript:void(0)" id="btnsearch" onclick="checkname();">模糊查询 </a>              	                                                 
                     </td>
                   </tr>
                   <tr>
