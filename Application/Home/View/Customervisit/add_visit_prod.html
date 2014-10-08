@@ -25,7 +25,7 @@
       </tr>
       <tr>
         <td align="center">
-           <form action="{:U('Customervisit/visit_prod_insert')}" method="post">                      
+           <form action="{:U('Customervisit/visit_prod_insert')}" method="post" onsubmit="$(this).RSsubmit({success_alert:true});return false;">                      
             <table width="500" border="0">
             <!-- <foreach name="newdata" item="newdata"> -->        
                   <tr>
