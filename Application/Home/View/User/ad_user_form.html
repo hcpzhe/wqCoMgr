@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>添加订单</title>
+<link href="__CSS__/home.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+</head>
+<body>
+<div class="b right_next">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>添加订单</font></span></td>
+      </tr>
+      <tr>
+        <td align="center">
+<!-- 添加用户开始 -->        
+           <form action="{:U('User/ad_user')}" method="post" name="form1" id="form1" >           
+            <table width="500" border="0" style="margin-top:50px;">
+                  <tr>
+                    <td width="100">用 户 名 ：</td>
+                    <td width="400"><input type="text" name="uname"></td>
+                  </tr>
+                  <tr>
+                    <td width="100">密 &nbsp;&nbsp;&nbsp; 码：</td>
+                    <td width="400"><input type="password" name="upwd"><font class="fontred" id="money">*</font></td>
+                  </tr>
+                  <tr>
+                    <td width="100">真实姓名：</td>
+                    <td width="400"><input type="text" name="name"><font class="fontred" id="money">*</font></td>
+                  </tr>
+                  <tr>
+                    <td width="100">性 &nbsp;&nbsp;&nbsp; 别：</td>
+                    <td width="400">
+                    	<input type="radio" name="sex" value="1" checked="checked">
+                    	<input type="radio" name="sex" value="0">
+                    	</td>
+                  </tr>
+                  <tr>
+                    <td>所属部门：</td>
+                    <td>
+                    	<select name='dp'>
+    					<!-- <foreach  name="depa_list" item="dp_list"> -->
+    					<option value="{$dp_list.id}">{$dp_list.name}</option>
+    					<!-- </foreach> -->	
+    					</select>
+                    	<font class="fontred" id="namets">*</font>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>职 &nbsp;&nbsp;&nbsp; 位：</td>
+                    <td><input type="text" name="position" value='12'></td>
+                  </tr>
+                  <tr>
+                    <td>入职时间：</td>
+                    <td><input type="text" name="startime"></td>
+                  </tr>
+                  <tr>
+                    <td>出生日期：</td>
+                    <td><input type="text" name="birthday"></td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                    <td><input type="submit" name="Submit" value=" 添加 " class="button_submit"></td>
+                  </tr>
+            </table>                              
+           </form>
+<!-- 添加用户结束 -->            
+        </td>
+      </tr>
+     </tbody>
+  </table>
+</div>
+</body>
+</html>
