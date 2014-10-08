@@ -18,7 +18,7 @@ class OrderModel extends Model{
 					->where("oe.user_id=ur.id AND oe.cust_id=cr.id AND oe.prod_id=pt.id AND oe.status=1")
 					->field("oe.id as id,ur.realname as uname,cr.`name` as cname,pt.`name` as pname,pt.`id` as pid,oe.total_fees,oe.remark,oe.expired_time,oe.`check`")
 					->limit($page->firstRow.','.$page->listRows)->select();	
-// 		echo $this->_sql();
+// 		echo $this->_sql();exit();
 // 		echo "<pre>";
 // 		print_r($data['order_list']);
 // 		echo "</pre>";

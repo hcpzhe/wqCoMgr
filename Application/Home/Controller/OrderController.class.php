@@ -5,6 +5,7 @@ use Home\Model\OrderModel;
 use Home\Model\Develop_orderModel;
 use Home\Model\Seo_orderModel;
 use Home\Model\ProductModel;
+use Home\Model\CustomerModel;
 class OrderController extends HomeBaseController{
 /*订单列表*/
 	public function order_list(){
@@ -45,10 +46,30 @@ class OrderController extends HomeBaseController{
 		if($flag==1){ $this->success('保存成功！');}
 		else{ $this->error('保存失败');}
 	}	
-/*添加订单*/
-	public function add_order(){
+/*跳转到添加订单页面*/
+	public function add_order_form(){
+		/*查询产品分类*/
+		$product=new ProductModel();
+		$this->p_list=$product->p_list();
+		/*查询所有客户*/
+		$customer=new CustomerModel();
+		$this->cus_list=$customer->cus_list();
 		$this->display();
 	}		
+/** 添加订单 */
+	public function add_order(){
+		$map['cust_id']=$_POST['cusid'];
+		$map['total_fees']=$_POST['money'];
+		$map['prod_id']=$_POST['proid'];
+		$map['user_id']=$_POST['userid'];
+// 		$map['year']=$_POST['year'];
+// 		$map['domain']=$_POST['domain'];
+		$map['remark']=$_POST['remark'];
+		$order=new OrderModel();
+		$flag=$order->add($map);
+		if($flag==0){	$this->error('添加失败！');
+		}else{	$this->success('添加成功！');}
+	}	
 /*
  * 审核订单
  * 如果为订单为网站，erp_develop_order增加一条记录

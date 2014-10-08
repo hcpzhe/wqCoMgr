@@ -24,5 +24,10 @@ class CustomerModel extends Model {
 	protected $_auto		=	array(
 			array('add_time','time',self::MODEL_INSERT,'function'),
 	);
+	/*查询所有客户*/
+	public function cus_list(){
+		$data=$this->where("status=1 AND `check`=1")->select();
+		return $data;
+	}
 		
 }

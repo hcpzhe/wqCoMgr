@@ -40,7 +40,7 @@
 		<td>审核</td>
 		<td>操作</td>
 	</tr>
-<foreach name="data['order_list']" item="list">
+<!-- <foreach name="data['order_list']" item="list"> -->
 	<tr>
 		<td>{$list.id}</td>
 		<td>{$list.uname}</td>
@@ -48,13 +48,16 @@
 		<td>{$list.pname}</td>
 		<td>{$list.total_fees}元</td>
 		<td>{$list.remark}</td>
+		<!-- 显示审核状态 -->
 		<td>
-			<a href="{:U('Order/check_order?id='.$list['id'].'&& pid='.$list['pid'])}">审核</a>
-			(<if condition="$list.check eq 1">通过<elseif condition="$list.check eq 0"/>待审<else/>拒绝</if>)
+			<!-- <if condition="$list.check eq 1"> -->通过
+			<!-- <elseif condition="$list.check eq 0"/> -->
+			<a href="{:U('Order/check_order?id='.$list['id'].'&& pid='.$list['pid'])}">待审</a>
+			<!-- <else/> -->拒绝<!-- </if> -->
 		</td>
 		<td><a href="{:U('Order/order_info?id='.$list['id'])}">详情</a></td>
 	</tr>
-</foreach>
+<!-- </foreach> -->
 	<tr><td colspan="8" align="center">{$data[show]}</td></tr>
 </table>
 <!-- 订单列表结束-->

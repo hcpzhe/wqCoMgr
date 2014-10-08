@@ -47,5 +47,4 @@ class DepordController extends HomeBaseController{
 		$this->id=$oid;
 		$this->display();
 	}	
-	
 }
