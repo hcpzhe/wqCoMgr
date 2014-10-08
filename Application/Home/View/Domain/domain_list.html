@@ -47,7 +47,7 @@
 						$("input[name='domain_id']").each(function(){
 							if($(this).attr("checked")=="checked"){								
 								var id=$(this).val();								
-								var url="__URL__-edit-id-"+id;
+								var url="__URL__-domain_edit-id-"+id;
 	                            location.href=url;
 								}
 							});
@@ -65,7 +65,7 @@
 	           </script>                              
                 <a href="javascript:void(0)" class="button_submit" onclick="Detailed();">查看详细</a>
                 <a href="javascript:void(0)" class="button_submit" onclick="Edit();">编辑</a> 
-                <a href="javascript:void(0)" class="button_submit" onclick="Dom_ren_app();">续费</a>
+                <a href="javascript:void(0)" class="button_submit" onclick="Dom_ren_app();">申请续费</a>
                                              
            </span>   
         </td>
