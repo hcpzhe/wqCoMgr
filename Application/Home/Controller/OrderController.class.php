@@ -20,10 +20,10 @@ class OrderController extends HomeBaseController{
 		$this->orderinfo=$order->orderinfo($id);
 		$this->display();
 	}
-/*订单修改表单*/
+/**  订单修改表单 */
 	public function ord_u_form(){
 		$id=$_GET['id'];
-		/*查询数据*/
+		/** 查询数据   */
 		$order=new OrderModel();
 		$this->orderinfo=$order->orderinfo($id);
 		/*查询产品分类*/
@@ -31,7 +31,7 @@ class OrderController extends HomeBaseController{
 		$this->p_list=$product->p_list();
 		$this->display();
 	}	
-/*修改订单*/
+/**  修改订单 */
 	public function up(){
 		$id=$_GET['id'];
 		$p=$_POST['pid'];
@@ -46,7 +46,7 @@ class OrderController extends HomeBaseController{
 		if($flag==1){ $this->success('保存成功！');}
 		else{ $this->error('保存失败');}
 	}	
-/*跳转到添加订单页面*/
+/** 跳转到添加订单页面*/
 	public function add_order_form(){
 		/*查询产品分类*/
 		$product=new ProductModel();

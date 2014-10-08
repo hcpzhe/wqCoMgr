@@ -21,14 +21,19 @@ class DepartModel extends Model{
 		}
 		return $return;
 	}
-	/**获取部门列表 */
+	/**  获取部门列表 */
 	public function depalist(){
 		$data=$this->where('status=1')->select();
 		return $data;
 	}
-	/* 查询所有部门 */
+	/** 查询所有部门 */
 	public function alldepart(){
 		$data=$this->where('status=1')->select();
 		return $data;
 	}
+	/** 查询某一部门的详细信息 */
+	public function s_one($id){
+		return $this->where("status=1 AND id=$id")->find();
+	}
+	
 }
