@@ -23,9 +23,9 @@
 	部门名称：<input type="text" name="name" value="{$curr.name}">
 	所属部门：<select name='parent_id'>
 			   <option value="{$curr.parent_id}">
-			   		<!-- <if condition="$curr.parent eq 0"> -->
+			   		<!-- <if condition="$curr.parent_id eq 0"> -->
 			   			无
-			   		<!-- <else> -->
+			   		<!-- <else/> -->
 			   			{$par.name}
 			   		<!-- </if> -->
 			   </option>
