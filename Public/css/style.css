@@ -52,7 +52,8 @@
 		.search_form .input1,.search_form .input2{ width:150px; outline:none; border:0px; background:none; margin-left:5px;}
 		.top_search table .th_sea{ width:194px; height:34px; float:right; background:url(../images/search.jpg) no-repeat !important;}
 		.sea{ width:160px; background:none; outline:none; border:0px; margin-left:5px; padding-top:10px; font-size:12px; color:#666;}
-		.center_content table td,.bottom_container table td{ width:755px; border:1px solid #ccc; background:#fff; padding:5px;}
+		/* 信息列表*/
+		.center_content table td,.bottom_container table td{ border:1px solid #ccc; background:#fff; padding:5px;}
 		.menu{ border-bottom:none !important; height:40px;}
 		.menu span{ width:751px; height:38px; margin:0 auto; display:block; background:#1c86cf;}
 		.menu span font{ float:left; height:36px; font-size:15px; line-height:40px; color:#FFF;}
@@ -72,3 +73,7 @@
 		
 /*网站开发订单列表未分配订单*/
 a.red{ color:#cc0001;}		
+/*table列表边框*/
+.info_list{ border:1px solid #ccc; width:755px;padding-bottom: 30px;}
+.info_list td{ border:0px !important;}
+.info_list th{ padding:10px; background:#f4f4f4; border-bottom:1px solid #ccc;}

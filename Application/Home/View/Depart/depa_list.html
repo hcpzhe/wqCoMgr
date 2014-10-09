@@ -17,14 +17,14 @@
           <tr>
             <td class="menu_content">
 <!-- 部门列表开始 -->
-<table width="100%" border="0" border="0" cellspacing="0" cellpadding="0" >
+<table width="100%" border="0" border="0" cellspacing="0" cellpadding="0" class="info_list">
             <tr>
-              <td width="8%" align="center">编号</td>
-              <td width="29%" align="center">部门名称</td>
-              <td width="27%" align="center">操作 ( <a href="{:U('Depart/ad_dp_form')}">添加部门</a> )</td>
+              <th width="8%" align="center">编号</th>
+              <th width="29%" align="center">部门名称</th>
+              <th width="27%" align="center">操作 ( <a href="{:U('Depart/ad_dp_form')}">添加部门</a> )</th>
             </tr>
 <!-- <foreach name="depa_list" item="list"> -->            
-            <tr>
+            <tr class="list_tr">
               <td width="8%" align="center">{$list.id}</td>
               <td width="29%" align="center">{$list.name}</td>
               <td width="27%" align="center">
