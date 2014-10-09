@@ -6,6 +6,26 @@
 <link href="__CSS__/home.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="__JS__/jquery.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+<script type="text/javascript">	
+function checkdomain(){
+		var domain = $('#domain').val();	
+		if( (domain == "") )
+		{
+			alert("请输入要查询的域名！");			
+		}else{
+		  $.ajax({    
+		        type:'get',        
+		        url:'__URL__-search',    
+		        data:'domain='+domain,    
+		        cache:false,    
+		        dataType:'html',    
+		        success:function(list){ 
+		        	window.open ('__URL__-search-domain-'+domain,'newwindow', 'height=500, width=700, scrollbars=yes, resizable=yes');
+		        }    
+		    }); 
+		}
+}
+</script>
 </head>
 <body>
 <div class="b right_next">
@@ -28,16 +48,17 @@
            <form action="{:U('Domain/insert')}" method="post" name="domainform" id="domainform" onsubmit="return checkdomainfrm(this);">           
             <table width="500" border="0">
                   <tr>
-                    <td width="30%">域名：</td>
-                    <td width="70%">                                      
+                    <td width="20%">&nbsp;&nbsp;域 &nbsp;&nbsp;&nbsp; 名&nbsp;&nbsp;：</td>
+                    <td width="80%">                                      
 		                <input type="text" name="domain" id="domain" />
 		                <input type="hidden" name="cust_id" value="{$cust_id}">
-		                <font class="fontred" id="namets">*</font>		                           	                                                 
+		                <font class="fontred" id="namets">*</font>
+		                <a href="javascript:void(0)" id="btnsearch" onclick="checkdomain();">模糊查询 </a>		                           	                                                 
                     </td>
                   </tr>
                   <tr>
-                    <td>使用年限：</td>
-                    <td><input type="text" name="year"><font class="fontred" id="namets">*</font></td>
+                    <td>使 用 年 限：</td>
+                    <td><input type="text" name="year"><font class="fontred" id="namets"> *</font></td>
                   </tr> 
                   <tr>
                     <td>域名运营商：</td>

@@ -2,6 +2,7 @@
 namespace Home\Controller;
 use Common\Controller\HomeBaseController;
 use Home\Model\DomainModel;
+use Think\Page;
 
 class DomainController extends HomeBaseController{
 	/*域名庫*/
@@ -29,6 +30,27 @@ class DomainController extends HomeBaseController{
 		$this->assign('cust_id',$cust_id);
 		$this->display();
 	}
+	
+	/***域名模糊检索***/
+	public function search($domain=null){
+		$domain = I('domain');
+		if(!empty($domain)){
+			$Form = M("Domain");
+			$map['domain']   =   array('like', '%'.$domain.'%');
+			$count      = $Form->where($map)->count();// 查询满足要求的总记录数
+			$Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(10)
+			$show       = $Page->show();// 分页显示输出
+			$list = $Form->where($map)->order('id desc')->select();
+			if (!empty($list)){
+				$this->assign('page',$show);// 赋值分页输出
+				$this->assign('list',$list);
+				$this->display();
+			}else{
+				echo "域名不存在，可以添加！";
+			}
+		}	
+	}
+	
 	/**域名添加   提交接口**/
 	public function insert(){	
 		$data['cust_id'] = (int)I('cust_id');
@@ -55,6 +77,33 @@ class DomainController extends HomeBaseController{
         $this->assign('id',$domain_list[$id]['id']);  //公司域名所对应的id
 		$this->assign('domain_list',$domain_list);
 		$this->display();
+	}
+	
+	/**域名信息修改**/
+	public function domain_edit(){
+		$domain = M('Domain');
+		$id = (int)I('id');
+		$list = $domain->where('id='.$id)->find();
+		$this->assign('list',$list);
+		$this->display();
+	}
+	/**域名信息修改提交  接口**/
+	public function update(){
+		$id = (int)I('param.id');
+		if ($id <= 0) $this->error('参数非法');
+		$newdata = array();
+		$newdata['id'] = I('param.id');
+		$newdata['domain'] = I('param.domain');
+		$newdata['service'] = I('param.service');
+		$newdata['reg_time'] = I('param.reg_time');
+		$newdata['expired_time'] = I('param.expired_time');
+		$newdata['address'] = I('param.address');
+		$newdata['check'] = I('param.check');
+		$newdata['status'] = I('param.status');
+		$model = M('Domain');
+		if (false === $model->create($newdata)) $this->error($model->getError());
+		if (false === $model->where('id='.$id)->save()) $this->error('更新失败');
+		$this->success('更新成功',U('Domain/domain_list'));
 	}
 	
 	/**提交 待审申请**/
