@@ -21,13 +21,16 @@
             <tr>
               <td width="8%" align="center">编号</td>
               <td width="29%" align="center">部门名称</td>
-              <td width="27%" align="center">操作 <a href="{:U('Depart/depa_form')}">添加部门</a></td>
+              <td width="27%" align="center">操作 ( <a href="{:U('Depart/ad_dp_form')}">添加部门</a> )</td>
             </tr>
 <!-- <foreach name="depa_list" item="list"> -->            
             <tr>
               <td width="8%" align="center">{$list.id}</td>
               <td width="29%" align="center">{$list.name}</td>
-              <td width="27%" align="center"><a href="" class="lanxlink">编辑</a>｜<a href="" class="lanxlink">删除</a></td>
+              <td width="27%" align="center">
+              	<a href="{:U('Depart/up_dp_form?id='.$list['id'])}" class="lanxlink">编辑</a>｜
+              	<a href="{:U('Depart/del_dp?id='.$list['id'])}" class="lanxlink">删除</a>
+              </td>
             </tr>   
 <!-- </foreach> -->                     
 </table>

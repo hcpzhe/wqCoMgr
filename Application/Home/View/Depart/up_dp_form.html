@@ -18,10 +18,23 @@
             <td class="menu_content">
 <!-- 部门列表开始 -->
 
-<form action="" method="post">
-	<input type="" name="">
+<form action="{:U('Depart/up_dp')}" method="post">
+		  <input type="hidden" value="{$curr.id}" name="id">
+	部门名称：<input type="text" name="name" value="{$curr.name}">
+	所属部门：<select name='parent_id'>
+			   <option value="{$curr.parent_id}">
+			   		<!-- <if condition="$curr.parent_id eq 0"> -->
+			   			无
+			   		<!-- <else/> -->
+			   			{$par.name}
+			   		<!-- </if> -->
+			   </option>
+    	  <!-- <foreach  name="depa_list" item="dp_list"> -->
+    	       <option value="{$dp_list.id}">{$dp_list.name}</option>
+          <!-- </foreach> -->	
+          </select>
+    <input type="submit" value="修改">      
 </form>
-
 <!-- 部门列表结束-->
 			</td>
           </tr>
