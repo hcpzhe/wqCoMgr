@@ -34,14 +34,14 @@
 		<td>编号</td>
 		<td>产品名称</td>
 		<td>状态</td>
-		<td>操作 <a href="">添加产品</a></td>
+		<td>操作 <a href="{:U('Product/ad_pro_form')}">添加产品</a></td>
 	</tr>
 <!-- <foreach name="pro_list" item="list"> -->   
 	<tr>
 		<td>{$list.id}</td>
 		<td>{$list.name}</td>
 		<td>{$list.status}</td>
-		<td><a href="{:U('/?id='.$list['id'])}">详情</a></td>
+		<td><a href="{:U('Product/pro_info?id='.$list['id'])}">详情</a> <a href="{:U('Product/del_pro?id='.$list['id'])}">删除</a></td>
 	</tr>
 <!-- </foreach> -->  
 	<tr><td colspan="8" align="center">{$data[show]}</td></tr>

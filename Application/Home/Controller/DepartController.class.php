@@ -22,8 +22,8 @@ class DepartController extends HomeBaseController{
 		$map['parent_id']=$_POST['parent_id'];
 		$depart=new DepartModel();
 		$flag=$depart->add($map);
-		if($flag==0){	$this->success('添加失败！');
-		}else{	$this->error('添加成功！');}
+		if($flag==0){	$this->error('添加失败！');
+		}else{	$this->success('添加成功！');}
 	}
 	/** 跳转到编辑页面 */
 	public function up_dp_form(){

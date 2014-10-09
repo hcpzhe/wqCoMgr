@@ -91,4 +91,8 @@ class UserModel extends Model {
 				->select();
 		return $data;
 	}
+	/** 查询某个用户的详细信息  */
+	public function userinfo($id){
+		return $this->table("erp_user as ur,erp_depart as dp")->where("ur.depart_id=dp.id AND ur.id=$id")->field("ur.account as uname,ur.realname as name,ur.sex as sex,ur.birthday as birthday,dp.name as dpname")->find();
+	}	
 }
