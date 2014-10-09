@@ -41,7 +41,7 @@
 		<td>{$list.id}</td>
 		<td>{$list.name}</td>
 		<td>{$list.status}</td>
-		<td><a href="{:U('/?id='.$list['id'])}">详情</a></td>
+		<td><a href="{:U('Product/pro_info?id='.$list['id'])}">详情</a> <a href="{:U('Product/del_pro?id='.$list['id'])}">删除</a></td>
 	</tr>
 <!-- </foreach> -->  
 	<tr><td colspan="8" align="center">{$data[show]}</td></tr>
