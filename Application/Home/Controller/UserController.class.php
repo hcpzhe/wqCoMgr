@@ -29,8 +29,8 @@ class  UserController extends HomeBaseController{
 		$data['birthday']=$_POST['birthday'];
 		$user=new UserModel();
 		$flag=$user->add($data);
-		if($flag==0){	$this->success('添加失败！');
-		}else{	$this->error('添加成功！');}
+		if($flag==0){	$this->error('添加失败！');
+		}else{	$this->success('添加成功！');}
 	}
 	/** 查询某个用户的详细信息  */
 	public function user_info(){
