@@ -40,4 +40,11 @@ class  UserController extends HomeBaseController{
 		$this->info=$user->userinfo($id);
 		$this->display();
 	}
+	/** 删除某个用户*/
+	public function del_user($id){
+		$user=new UserModel();
+		$flag=$user->where("id=$id")->setField('status','-1');
+		if($flag==1){	$this->success('删除成功！');
+		}else{	$this->error('删除失败！');}
+	}
 }
