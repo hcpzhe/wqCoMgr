@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>域名续费申请</title>
+<link href="__CSS__/home.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+</head>
+<body>
+<div class="b right_next">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>域名续费申请</font></span></td>
+      </tr>
+      <tr>
+        <td height="30"></td>
+      </tr>
+      <tr>
+        <td><font class="tishi">模糊查询：因数据较多，存在一家单位多个名称的现象，建议在录入前输入公司简写点击模糊查询，以杜绝重复录入情况。（例如洛阳市万谦网络科技有限公司，可输入万谦进行模糊查询）</font></td>
+      </tr>
+      <tr>
+        <td height="30"></td>
+      </tr>
+      <tr>
+        <td align="center">
+           <form action="{:U('Domren/insert')}" method="post" onsubmit="$(this).RSsubmit({success_alert:true});return false;">           
+            <table width="500" border="0">
+                  <tr>
+                    <td width="100"> &nbsp;&nbsp;&nbsp;域 &nbsp;&nbsp;&nbsp;&nbsp;名 &nbsp;&nbsp;: </td>
+                    <td width="400">  
+                        <input type="hidden" name="domain_id" value="{$domain_mess.id}" /> 
+                          {$domain_mess.domain}                                 		                	                             	                                                 
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="100">域名运营商：</td>
+                    <td width="400">{$domain_mess.service}</td>
+                  </tr>
+                  <tr>
+                    <td width="100">续 费 金 额：</td>
+                    <td width="400"><input type="text" name="money"></td>
+                  </tr>
+                  <tr>
+                    <td width="100">付 款 时 间：</td>
+                    <td width="400"><input type="text" name="pay_time"></td>
+                  </tr>
+                  <tr>
+                    <td>注 册 时 间：</td>
+                    <td><input type="hidden" name="reg_time" value="{$domain_mess.reg_time}">{:date('Y/m/d H:i:s',$domain_mess['reg_time'])}</td>
+                  </tr>
+                  <tr>
+                    <td>过 期 时 间：</td>
+                    <td><input type="hidden" name="expired_time" value="{$domain_mess.expired_time}">{:date('Y/m/d H:i:s',$domain_mess['expired_time'])}</td>
+                  </tr>
+                  <tr>
+                    <td>续 费 年 限：</td>
+                    <td><input type="text" name="year"></td>
+                  </tr>
+                  <tr>
+                    <td>域 名 状 态：</td>
+                    <td>
+                        <if condition="$domain_mess['status'] eq -1 ">删除
+                        <elseif condition="$domain_mess['status'] eq 0 " />禁用
+                        <else /> 正常</if>
+                    </td>
+                  </tr>                 
+                  <tr>
+                    <td>&nbsp;</td>
+                    <td><input type="submit" name="Submit" value=" 添加 " class="button_submit"></td>
+                  </tr>
+            </table>                              
+           </form>
+        </td>
+      </tr>
+      <tr>
+         <td id="showResult">
+              <if condition="$list eq '' ">
+                       
+                        <else />无结果</if> 
+         
+         </td>
+      </tr>
+     </tbody>
+  </table>
+</div>
+</body>
+</html>
