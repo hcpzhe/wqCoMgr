@@ -17,7 +17,7 @@ class DomainController extends HomeBaseController{
 		$count=$model->where($map)->count();       // 查询满足要求的总记录数
 		$Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(10)
 		$show       = $Page->show();// 分页显示输出
-		$domain_list = $model->where($map)->limit($Page->firstRow.','.$Page->listRows)->order('expired_time desc')->select();
+		$domain_list = $model->where($map)->limit($Page->firstRow.','.$Page->listRows)->order('expired_time')->select();
 		$this->assign('domain_list',$domain_list);
 		$this->assign('show',$show);   //分页显示
 		$this->assign('domain', $domain);           //用于搜索条件的显示
@@ -60,15 +60,22 @@ class DomainController extends HomeBaseController{
 		$data['year_num'] = I('param.year');   //新注域名使用年限
 		$data['expired_time'] = $data['reg_time'] + $data['year_num']*60*60*24*365;  //域名到期时间计算
 		$model = new DomainModel();
-		$data = $model->data($data)->add();
-		
+		$data = $model->data($data)->add();		
 		$this->success('添加成功',U('Domain/domain_list'));
 	}
 	/**域名详细信息**/
 	public function domain_detailed(){
 		$id = (int)I('id');
-
-		$domain = M('Domain'); //获取域名详细信息
+		$domain = M('Domain');
+		//查询域名过期时间		
+		$expired_time = $domain->where('id='.$id)->getField('expired_time');
+		if ($expired_time < time()){
+			$domain->where('id='.$id)->setField('status','0');     // 过期域名的状态为 禁用
+		}else {
+			$domain->where('id='.$id)->setField('status','1');
+		}
+		
+		 //获取域名详细信息
 		$domain_list = $domain->table('erp_customer as cr,erp_domain as dom')
 		->where("cr.id=dom.cust_id AND dom.id=$id")
 		->getField("dom.id as id,cr.id as cust_id,cr.`name` as `name`,dom.domain as domain,dom.service as service,dom.reg_time as reg_time,dom.expired_time as expired_time,dom.`check` as `check`,dom.check_time as check_time,dom.`status` as `status`");
@@ -118,10 +125,6 @@ class DomainController extends HomeBaseController{
 		if (false === $model->create($newdata)) $this->error($model->getError());
 		if (false === $model->where('id='.$id)->save()) $this->error('审核失败');
 		$this->success('审核成功',U('Domain/domain_list'));
-		// 		print_r($newdata['check_time']);
-		// 		exit();
 	}
-	
-	
-	
+		
 }     

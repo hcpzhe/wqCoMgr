@@ -29,10 +29,16 @@ class CustomervisitController extends HomeBaseController {
 	public function addvisit(){
 		$cust_id = (int)I('cust_id');
 		$cust = M('customer');
+		$check = $cust->where('id='.$cust_id)->getField('check');
+		//域名审核通过后 才能提交续费申请
+		if ($check == 0 || $check == -1){
+			$this->redirect('Customer/lists',array('id'=>$cust_id),1,'公司信息还未经过审核,审核通过后才能添加拜访记录，请审核！');
+		}else {
 		$cust_name = $cust->where('id='.$cust_id)->getField('name');
 		$this->assign('cust_id',$cust_id);
 		$this->assign('cust_name',$cust_name);
 		$this->display();
+		}
 		
 	}
 	
@@ -45,11 +51,8 @@ class CustomervisitController extends HomeBaseController {
 		$data['visit_time'] = time();	
 		$model = new Customer_visitModel();			
 		$data = $model->data($data)->add();
-		
-        
-		$this->redirect('Customervisit/add_visit_prod',array('visit_id'=>$data),1,'拜访记录添加成功，请添加沟通记录'); //拜访记录添加成功后跳转到添加沟通记录页面
-		//$this->success('添加成功',U('Customervisit/visitlists'),2);  
-			
+		       
+		$this->redirect('Customervisit/add_visit_prod',array('visit_id'=>$data),1,'拜访记录添加成功，请添加沟通记录'); //拜访记录添加成功后跳转到添加沟通记录页面			
 	}
 	
 	/**查看拜访记录的详细信息**/
@@ -70,8 +73,6 @@ class CustomervisitController extends HomeBaseController {
 		$visit_prod_list = $model->table('erp_customer_visit as cu,erp_product as pt,erp_visit_prod as vd')
 		->where("cu.id=vd.visit_id AND pt.id=vd.prod_id AND cu.id=$visit_id")
 		->select();
-
-
 		$this->assign('visit_prod_list',$visit_prod_list);
 		$this->display();
 
@@ -87,16 +88,8 @@ class CustomervisitController extends HomeBaseController {
 		$visit_list = $model->table('erp_customer_visit as cv,erp_customer as cu,erp_user as us')
 		->where("cv.cust_id=cu.id AND us.id=cv.user_id AND cv.id=$visit_id")
 		->getField("cv.id as visit_id,us.realname as uname,cu.name as cname,cv.visit_time as visit_time");
-//         print_r($visit_list);
-//         exit();
-// 		$newdata = array();
-// 		$newdata['visit_id'] = I('param.visit_id');
-// 		$newdata['uname'] = I('param.uname');
-// 		$newdata['cname'] = I('param.cname');
-// 		$newdata['visit_time'] = I('param.visit_time');
-		$this->assign('newdata',$visit_list);
-		
-		
+		$this->assign('newdata',$visit_list);   //客户信息
+				
 		$this->display();
 	}
 	/**沟通记录添加   提交接口**/
@@ -106,7 +99,7 @@ class CustomervisitController extends HomeBaseController {
 		$data['content'] = I('param.content');
 		$model = M('Visit_prod');
 		$model->add($data);
-		$this->success('添加成功',U('Customervisit/visitlists'));
+		$this->success('沟通记录添加成功',U('Customervisit/visitlists'));
 		
 	}
 	
