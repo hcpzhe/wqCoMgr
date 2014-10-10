@@ -26,55 +26,55 @@
       <tr>
         <td align="center">  
         <!-- 域名详细信息 -->       
-            <table width="100%" border="0" style="font-size: 12px;" class="com_table">
+            <table width="95%" style="font-size: 12px;" class="com_table"  cellpadding="0" cellspacing="0">
                   <tr>
                     <th colspan="4" align="left"  style=" width: 742px;">域名续费信息</th>                    
                   </tr>
                  <!-- <foreach name="apply_list" item="apply_list"> -->
                   <tr>
-                    <td width="20%">域名申请编号：</td>
+                    <td width="20%">域名申请编号</td>
                     <td width="30%"> 
                       <input type="hidden" value="{$apply_list['id']}" name="id">                                     
 		                	{$apply_list['id']}	                		                               	                                                 
                     </td>
-                    <td width="20%">公司名称：</td>
+                    <td width="20%"> 公 司 名 称 </td>
                     <td width="30%">{$apply_list['name']}</td>
                   </tr>                 
                   <tr>
-                    <td>联 系  人：</td>
+                    <td> 联  系   人 </td>
                     <td>{$apply_list['contacts']}</td>
-                    <td>联系电话：</td>
+                    <td> 联 系 电 话 </td>
                     <td>{$apply_list['phone']}</td>
                   </tr>
                   <tr>
-                    <td>域 &nbsp;&nbsp;&nbsp; 名：</td>
+                    <td> 域 &nbsp;&nbsp;&nbsp; 名 </td>
                     <td>{$apply_list['domain']}</td>
-                    <td>域名运营商：</td>
+                    <td> 域名运营商</td>
                     <td>{$apply_list['service']}</td>
                   </tr>
                   <tr>
-                    <td>注册时间：</td>
+                    <td> 注 册 时 间 </td>
                     <td>{:date('Y/m/d H:i:s',$apply_list['reg_time'])}</td>
-                    <td>续费金额： </td>
-                    <td>{$apply_list['money']}</td>
+                    <td> 续 费 金 额 </td>
+                    <td>{$apply_list['money']} 元</td>
                   </tr>
                   <tr>
-                    <td>原过期时间：</td>
+                    <td>原过期时间</td>
                     <td> {:date('Y/m/d H:i:s',$apply_list['org_expired_time'])} </td>
-                    <td>新过期时间：</td>
+                    <td>新过期时间</td>
                     <td>{:date('Y/m/d H:i:s',$apply_list['new_expired_time'])}</td>
                   </tr> 
                    <tr>
-                    <td>付款时间：</td>
+                    <td> 付 款 时 间 </td>
                     <td> {$apply_list['pay_time']} </td>
-                    <td>审核时间：</td>
+                    <td> 审 核 时 间 </td>
                     <td>
                        <if condition="$apply_list['check'] eq 0 "><font color="red">该信息还未审核</font>
                       <else />{:date('Y/m/d H:i:s',$apply_list['check_time'])}</if>
                     </td>
                   </tr> 
                   <tr>
-                    <td>审核状态：</td>
+                    <td> 审 核 状 态 </td>
                     <td colspan="3">
                          <if condition="$apply_list['check'] eq -1 ">拒绝
                         <elseif condition="$apply_list['check'] eq 0 " /><a href="{:U('Domren/check?id='.$data['id'])}">待审</a>
@@ -84,7 +84,10 @@
                   <!-- </foreach> -->                
             </table>                                     
         </td>
-      </tr>      
+      </tr>   
+      <style>
+         .com_table td{ border:1px solid #ccc;  border-collapse:collapse;}
+      </style>   
      </tbody>
   </table>
 </div>

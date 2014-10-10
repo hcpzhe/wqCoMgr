@@ -150,7 +150,7 @@
                     <td>域名状态：</td>
                     <td>
                        <if condition="$domain_list['status'] eq -1 ">删除
-                        <elseif condition="$domain_list['status'] eq 0 " />禁用
+                        <elseif condition="$domain_list['status'] eq 0 " />禁用  <font color="red"> 该域名已过期，请抓紧时间续费！</font>
                         <else />正常</if>
                     </td>
                     <td>审核状态：</td>

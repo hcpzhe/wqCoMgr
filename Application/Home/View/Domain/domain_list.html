@@ -55,8 +55,8 @@
 					//域名续费申请    跳转 
 					function Dom_ren_app(){
 						$("input[name='domain_id']").each(function(){
-							if($(this).attr("checked")=="checked"){								
-								var id=$(this).val();								
+							if($(this).attr("checked")=="checked"){									
+								var id=$(this).val();
 								var url="__MODULE__-Domren-apply_renewal-id-"+id;
 	                            location.href=url;
 								}
@@ -101,6 +101,7 @@
                      <td width="160" align="center">{:date('Y/m/d H:i:s',$data['reg_time'])}</td>
                      <td width="160" align="center">{:date('Y/m/d H:i:s',$data['expired_time'])}</td>
                      <td width="100" align="center">
+                        <input type="hidden" name="check" value="{$data['check']}" id="check">
                         <if condition="$data['check'] eq -1 ">拒绝
                         <elseif condition="$data['check'] eq 0 " /><a href="{:U('Domain/check?id='.$data['id'])}">待审</a>
                         <else /> 通过</if>  

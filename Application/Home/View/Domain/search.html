@@ -28,10 +28,10 @@
         <td align="center">                     
             <table width="600" border="0" class="cust_list">           
                   <tr class="sea_liebiao_title">
-                    <th width="200">域名</th>
+                    <th width="150">域名</th>
                     <th width="100">域名运营商</th>
-                    <th width="120">注册时间</th>
-                    <th width="100">到期时间</th>
+                    <th width="130">注册时间</th>
+                    <th width="130">到期时间</th>
                     <th width="100">状态</th>
                   </tr>
                </table>
@@ -43,10 +43,10 @@
           <!-- <foreach name="list" item="data"> -->          
             <table width="600" border="0" cellspacing="0" cellpadding="0" class="com_list">                                                 
                   <tr height="30">         
-                     <td width="200" align="center">{$data.domain}</td>
+                     <td width="150" align="center">{$data.domain}</td>
                      <td width="100" align="center">{$data.service}</td>
-                     <td width="120" align="center">{:date('Y/m/d H:i:s',$data['reg_time'])}</td>
-                     <td width="100" align="center">{:date('Y/m/d H:i:s',$data['expired_time'])}</td>
+                     <td width="130" align="center">{:date('Y/m/d H:i:s',$data['reg_time'])}</td>
+                     <td width="130" align="center">{:date('Y/m/d H:i:s',$data['expired_time'])}</td>
                      <td width="100" align="center">
                         <if condition="$data['check'] eq -1 ">拒绝
                         <elseif condition="$data['check'] eq 0 " /><a href="{:U('Customer/check?id='.$data['id'])}">待审</a>
