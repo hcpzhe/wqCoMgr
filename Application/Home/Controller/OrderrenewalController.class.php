@@ -7,7 +7,7 @@ class OrderrenewalController extends HomeBaseController{
 	/** 订单续费申请列表 */
 	public function or_list(){
 		$Ordren=new Order_renewalModel();
-		$this->orlist=$order->orlist();
+		$this->or=$Ordren->orlist();
 		$this->display();
 	}
 	/** 续费申请表单rene */
