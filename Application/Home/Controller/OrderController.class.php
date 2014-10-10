@@ -7,13 +7,19 @@ use Home\Model\Seo_orderModel;
 use Home\Model\ProductModel;
 use Home\Model\CustomerModel;
 class OrderController extends HomeBaseController{
-/*订单列表*/
+/** 订单列表 */
 	public function order_list(){
 		$order=new OrderModel();
 		$this->data=$order->orderlist();
 		$this->display();
 	}
-/*订单详情*/
+/** 带续费订单列表 (距订单到期时间三个月进入带续费期)*/
+	public function renewal_order(){
+		$order=new OrderModel();
+		$this->rene=$order->renelist();
+		$this->display();
+	}	
+/**   订单详情   */
 	public function order_info(){
 		$id=$_GET['id'];
 		$order=new OrderModel();
@@ -113,4 +119,18 @@ class OrderController extends HomeBaseController{
 			else { $this->success('审核成功');}
 		}
 	}	
+	/** 停止订单 */
+	public function stop($id){
+		$order=new OrderModel();
+		$flag=$order->where("id=$id")->setField("status","0");
+		if($flag==1){ $this->success('成功');}
+		else{ $this->error('失败');}
+	}
+	/** 开始订单 */
+	public function star($id){
+		$order=new OrderModel();
+		$flag=$order->where("id=$id")->setField("status","1");
+		if($flag==1){ $this->success('成功');}
+		else{ $this->error('失败');}
+	}
 }

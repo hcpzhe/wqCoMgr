@@ -16,7 +16,7 @@ class OrderModel extends Model{
 		/*控制数据查询条数*/
 		$data['order_list']=$this->table('erp_order as oe,erp_user as ur,erp_customer as cr,erp_product as pt')
 					->where("oe.user_id=ur.id AND oe.cust_id=cr.id AND oe.prod_id=pt.id AND oe.status=1")
-					->field("oe.id as id,ur.realname as uname,cr.`name` as cname,pt.`name` as pname,pt.`id` as pid,oe.total_fees,oe.remark,oe.expired_time,oe.`check`")
+					->field("oe.id as id,ur.realname as uname,cr.`name` as cname,pt.`name` as pname,pt.`id` as pid,oe.total_fees,oe.expired_time as expired_time,oe.`check`")
 					->limit($page->firstRow.','.$page->listRows)->select();	
 // 		echo $this->_sql();exit();
 // 		echo "<pre>";
@@ -39,4 +39,25 @@ class OrderModel extends Model{
 		->field("ec.`name` as cname")->find();
 		return $cname;
 	}
+	/*显示带续费订单列表（三个月）*/
+	Public function renelist(){
+		/*查询数据总条数*/
+		$count=$this->table('erp_order as oe,erp_user as ur,erp_customer as cr,erp_product as pt')
+		->where("oe.user_id=ur.id AND oe.cust_id=cr.id AND oe.prod_id=pt.id AND oe.status=1")
+		->count();
+		/*载入分页类，初始化数据*/
+		$page=new \Think\Page($count,7);
+		/*调用分页链接函数*/
+		$data['show']=$page->show();
+		/*控制数据查询条数*/
+		$data['order_list']=$this->table('erp_order as oe,erp_user as ur,erp_customer as cr,erp_product as pt')
+		->where("oe.user_id=ur.id AND oe.cust_id=cr.id AND oe.prod_id=pt.id")
+		->field("oe.id as id,ur.realname as uname,cr.`name` as cname,pt.`name` as pname,pt.`id` as pid,cr.contacts as contacts,cr.phone as phone,oe.total_fees,oe.expired_time as expired_time,oe.`check`,oe.status as status")
+		->limit($page->firstRow.','.$page->listRows)->select();
+		// 		echo $this->_sql();exit();
+		// 		echo "<pre>";
+		// 		print_r($data['order_list']);
+		// 		echo "</pre>";
+		return $data;
+	}	
 }
