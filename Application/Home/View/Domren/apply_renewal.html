@@ -8,6 +8,7 @@
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
 </head>
 <body>
+<div style="width:100%; overflow:hidden; background: #f2f2f2;">
 <div class="b right_next">
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tbody>
@@ -29,34 +30,38 @@
             <table width="500" border="0">
                   <tr>
                     <td width="100"> &nbsp;&nbsp;域 &nbsp;&nbsp;&nbsp;名 &nbsp; : </td>
-                    <td width="400">  
+                    <td width="400" align="left">  
                         <input type="hidden" name="domain_id" value="{$domain_mess.id}" /> 
                           {$domain_mess.domain}                                 		                	                             	                                                 
                     </td>
                   </tr>
                   <tr>
                     <td width="100">域名运营商：</td>
-                    <td width="400">{$domain_mess.service}</td>
+                    <td width="400" align="left">{$domain_mess.service}</td>
                   </tr>
                   <tr>
                     <td width="100">续 费 金 额：</td>
-                    <td width="400"><input type="text" name="money"></td>
+                    <td width="400" align="left"><input type="text" name="money"></td>
                   </tr>
                   <tr>
                     <td width="100">付 款 时 间：</td>
-                    <td width="400"><input type="text" name="pay_time"></td>
+                    <td width="400" align="left"><input type="text" name="pay_time"></td>
+                  </tr>
+                   <tr>
+                    <td width="100"> 申  &nbsp; 请  &nbsp; 人 ：</td>
+                    <td width="400" align="left"><input type="text" name="apply_user"></td>
                   </tr>
                   <tr>
                     <td>注 册 时 间：</td>
-                    <td><input type="hidden" name="reg_time" value="{$domain_mess.reg_time}">{:date('Y/m/d H:i:s',$domain_mess['reg_time'])}</td>
+                    <td align="left"><input type="hidden" name="reg_time" value="{$domain_mess.reg_time}">{:date('Y/m/d H:i:s',$domain_mess['reg_time'])}</td>
                   </tr>
                   <tr>
                     <td>过 期 时 间：</td>
-                    <td><input type="hidden" name="expired_time" value="{$domain_mess.expired_time}">{:date('Y/m/d H:i:s',$domain_mess['expired_time'])}</td>
+                    <td align="left"><input type="hidden" name="expired_time" value="{$domain_mess.expired_time}">{:date('Y/m/d H:i:s',$domain_mess['expired_time'])}</td>
                   </tr>
                   <tr>
                     <td>续 费 年 限：</td>
-                    <td>
+                    <td align="left">
                        <select name="year">
                            <option value="1">一年</option>
                            <option value="2">二年</option>
@@ -68,7 +73,7 @@
                   </tr>
                   <tr>
                     <td>域 名 状 态：</td>
-                    <td>
+                    <td align="left">
                         <if condition="$domain_mess['status'] eq -1 ">删除
                         <elseif condition="$domain_mess['status'] eq 0 " />禁用
                         <else /> 正常</if>
@@ -76,22 +81,15 @@
                   </tr>                 
                   <tr>
                     <td>&nbsp;</td>
-                    <td><input type="submit" name="Submit" value=" 添加 " class="button_submit"></td>
+                    <td align="left"><input type="submit" name="Submit" value=" 申请 " class="button_submit"></td>
                   </tr>
             </table>                              
            </form>
         </td>
-      </tr>
-      <tr>
-         <td id="showResult">
-              <if condition="$list eq '' ">
-                       
-                        <else />无结果</if> 
-         
-         </td>
-      </tr>
+      </tr>   
      </tbody>
   </table>
+</div>
 </div>
 </body>
 </html>

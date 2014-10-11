@@ -8,6 +8,7 @@
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
 </head>
 <body>
+<div style="width:100%; overflow:hidden; background: #f2f2f2;">
 <div class="b right_next">
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tbody>
@@ -26,19 +27,19 @@
       <tr>
         <td align="center">  
         <!-- 域名详细信息 -->       
-            <table width="95%" style="font-size: 12px;" class="com_table"  cellpadding="0" cellspacing="0">
+            <table width="740" class="com_table"  cellpadding="0" cellspacing="0">
                   <tr>
                     <th colspan="4" align="left"  style=" width: 742px;">域名续费信息</th>                    
                   </tr>
                  <!-- <foreach name="apply_list" item="apply_list"> -->
                   <tr>
-                    <td width="20%">域名申请编号</td>
-                    <td width="30%"> 
+                    <td width="150">域名申请编号</td>
+                    <td width="220"> 
                       <input type="hidden" value="{$apply_list['id']}" name="id">                                     
 		                	{$apply_list['id']}	                		                               	                                                 
                     </td>
-                    <td width="20%"> 公 司 名 称 </td>
-                    <td width="30%">{$apply_list['name']}</td>
+                    <td width="150"> 公 司 名 称 </td>
+                    <td width="220">{$apply_list['name']}</td>
                   </tr>                 
                   <tr>
                     <td> 联  系   人 </td>
@@ -67,29 +68,29 @@
                    <tr>
                     <td> 付 款 时 间 </td>
                     <td> {$apply_list['pay_time']} </td>
+                    <td> 申 &nbsp; 请  &nbsp; 人 </td>
+                    <td> {$apply_list['apply_user']}   </td>
+                  </tr> 
+                  <tr>
+                    <td> 审 核 状 态 </td>
+                    <td>
+                         <if condition="$apply_list['check'] eq -1 ">拒绝
+                        <elseif condition="$apply_list['check'] eq 0 " /><a href="{:U('Domren/check?id='.$data['id'])}">待审</a>
+                        <else /> 通过</if>
+                    </td>
                     <td> 审 核 时 间 </td>
                     <td>
                        <if condition="$apply_list['check'] eq 0 "><font color="red">该信息还未审核</font>
                       <else />{:date('Y/m/d H:i:s',$apply_list['check_time'])}</if>
                     </td>
-                  </tr> 
-                  <tr>
-                    <td> 审 核 状 态 </td>
-                    <td colspan="3">
-                         <if condition="$apply_list['check'] eq -1 ">拒绝
-                        <elseif condition="$apply_list['check'] eq 0 " /><a href="{:U('Domren/check?id='.$data['id'])}">待审</a>
-                        <else /> 通过</if>
-                    </td>
                   </tr>    
                   <!-- </foreach> -->                
             </table>                                     
         </td>
-      </tr>   
-      <style>
-         .com_table td{ border:1px solid #ccc;  border-collapse:collapse;}
-      </style>   
+      </tr>      
      </tbody>
   </table>
+</div>
 </div>
 </body>
 </html>

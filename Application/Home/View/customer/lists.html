@@ -9,6 +9,7 @@
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
 </head>
 <body>
+<div style="width:100%; overflow:hidden; background: #f2f2f2;">
 <div class="b right_next">
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tbody>
@@ -102,7 +103,7 @@
       <tr>
         <td align="center"> 
           <!-- <foreach name="list" item="data"> -->          
-            <table width="740" border="0" cellspacing="0" cellpadding="0" class="com_list">                                                 
+            <table width="742" border="0" cellspacing="0" cellpadding="0" class="com_list">                                                 
                   <tr height="30">
                      <td width="105" align="center">
                        <input type="checkbox" name="s2[]" value="{$data.id}" id="check">
@@ -124,15 +125,16 @@
                             
       <tr>
         <td align="center">                     
-          <table width="740" border="0" style="display: block; border-bottom: 1px solid #ccc; border-right: 1px solid #ccc; border-left: 1px solid #ccc;">
+          <table width="742" border="0" style="display: block; border-bottom: 1px solid #ccc; border-right: 1px solid #ccc; border-left: 1px solid #ccc;">
             <tr style="display: block; padding-top: 10px;">
-              <td height="30" style="display: block; text-align: center;">{$page}</td>
+              <td height="40" style="display: block; text-align: center;line-height: 40px;">{$page}</td>
             </tr>
           </table>
         </td>
       </tr>        
      </tbody>
   </table>
+</div>
 </div>
 </body>
 </html>

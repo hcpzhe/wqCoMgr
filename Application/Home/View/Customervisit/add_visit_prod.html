@@ -8,6 +8,7 @@
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
 </head>
 <body>
+<div style="width:100%; overflow:hidden; background: #f2f2f2;">
 <div class="b right_next">
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tbody>
@@ -30,20 +31,20 @@
             <!-- <foreach name="newdata" item="newdata"> -->        
                   <tr>
                     <td width="20%">客户名称：</td>
-                    <td width="80%">{$newdata['cname']}<input type="hidden" name="visit_id" value="{$newdata['visit_id']}"></td>
+                    <td width="80%" align="left">{$newdata['cname']}<input type="hidden" name="visit_id" value="{$newdata['visit_id']}"></td>
                   </tr> 
                   <tr>
                   <tr>
                     <td width="20%">销售人员：</td>
-                    <td width="80%">{$newdata['uname']}</td>
+                    <td width="80%" align="left">{$newdata['uname']}</td>
                   </tr> 
                   <tr>
                     <td width="20%">拜访时间：</td>
-                    <td width="80%">{:date('Y/m/d H:i:s',$newdata['visit_time'])}</td>
+                    <td width="80%" align="left">{:date('Y/m/d H:i:s',$newdata['visit_time'])}</td>
                   </tr> 
                    <tr>
                     <td width="20%">沟通产品：</td>
-                    <td width="80%"> 
+                    <td width="80%" align="left"> 
                          <select  name="prod_id">
                            <!-- <foreach name="product_list" item="product"> --> 
                              <option value="{$product[id]}">{$product[name]}
@@ -53,12 +54,12 @@
                   </tr>                 
                   <tr>
                     <td>沟通情况：</td>
-                    <td><textarea name="content" cols="50" rows="8"></textarea></td>
+                    <td align="left"><textarea name="content" cols="45" rows="8"></textarea></td>
                   </tr>
                  <!-- </foreach> -->
                   <tr>
                     <td>&nbsp;</td>
-                    <td><input type="submit" name="Submit" value=" 添加 " class="button_submit"></td>
+                    <td align="left"><input type="submit" name="Submit" value=" 添加 " class="button_submit"></td>
                   </tr>
             </table>                              
            </form>
@@ -67,6 +68,6 @@
      </tbody>
   </table>
 </div>
-
+</div>
 </body>
 </html>

@@ -8,6 +8,7 @@
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
 </head>
 <body>
+<div style="width:100%; overflow:hidden; background: #f2f2f2;">
 <div class="b right_next">
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tbody>
@@ -37,28 +38,28 @@
       <tr>
         <td align="center">  
         <!-- 客户详细信息 -->       
-            <table width="100%" border="0" style="font-size: 12px;" class="com_table">
-                  <tr>
-                    <th colspan="4" align="left"  style=" width: 742px;">拜访记录</th>                    
+            <table width="740" border="0" style="font-size: 12px;" class="com_table" cellspacing="0" cellpadding="0">
+                  <tr style="height: 40px;">
+                    <th colspan="4" align="left">拜访记录</th>                    
                   </tr>
                  <!-- <foreach name="data" item="data"> --> 
                   <tr>
-                    <td width="20%">拜访编号：</td>
-                    <td width="30%"> 
+                    <td width="120">拜访编号</td>
+                    <td width="250"> 
                       <input type="hidden" value="{$data['id']}" name="id">                                     
 		                	{$data['id']}      		                               	                                                 
                     </td>
-                    <td width="20%">公司名称：</td>
-                    <td width="30%">{$data.cname}</td>
+                    <td width="120">公司名称</td>
+                    <td width="250">{$data.cname}</td>
                   </tr>                 
                   <tr>
-                    <td>拜访员工：</td>
+                    <td>拜访员工</td>
                     <td>{$data.uname}</td>
-                    <td>拜访时间：</td>
+                    <td>拜访时间</td>
                     <td>{:date('Y/m/d H:i:s',$data['visit_time'])}</td>
                   </tr>
                   <tr>
-                    <td>拜访内容：</td>
+                    <td>拜访内容</td>
                     <td colspan="3">{$data['content']}</td>                    
                   </tr> 
                   <!-- </foreach> -->                                 
@@ -67,15 +68,15 @@
             <!-- 沟通记录 -->
              <if condition="$visit_prod_list eq '' "><font color="red">未添加沟通记录</font> <br/>
              <else />             
-             <div style=" width: 735px; border: 1px solid #ccc; text-align: left; padding: 5px; font-size: 12px; font-weight: bold;">沟通记录</div> 
+             <div class="order_title">沟通记录</div> 
                 <!-- <foreach name="visit_prod_list" item="visit_prod_list"> -->                                                           
-	            <table width="100%" border="0" style="font-size: 12px;" class="com_table">                                  
+	            <table width="740" border="0" class="com_table" cellpadding="0" cellspacing="0">                                  
 	                  <tr>
-	                    <td width="149">所谈产品：</td>
-	                    <td width="620">{$visit_prod_list['name']} </td>
+	                    <td width="140"> 所 谈 产 品 </td>
+	                    <td width="600">{$visit_prod_list['name']} </td>
 	                  </tr>                 
 	                  <tr>
-	                    <td>沟通内容：</td>
+	                    <td> 沟 通 内 容 </td>
 	                    <td>{$visit_prod_list['content']}</td>                   
 	                  </tr>                                                   
 	            </table>            
@@ -85,6 +86,7 @@
       </tr>      
      </tbody>
   </table>
+</div>
 </div>
 </body>
 </html>

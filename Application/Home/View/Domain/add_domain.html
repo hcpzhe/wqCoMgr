@@ -7,6 +7,7 @@
 <script type="text/javascript" src="__JS__/jquery.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
 <script type="text/javascript">	
+//域名模糊查询 
 function checkdomain(){
 		var domain = $('#domain').val();	
 		if( (domain == "") )
@@ -28,6 +29,7 @@ function checkdomain(){
 </script>
 </head>
 <body>
+<div style="width:100%; overflow:hidden; background: #f2f2f2;">
 <div class="b right_next">
   <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tbody>
@@ -49,7 +51,7 @@ function checkdomain(){
             <table width="500" border="0">
                   <tr>
                     <td width="100">&nbsp;&nbsp;域 &nbsp;&nbsp; 名 &nbsp;&nbsp;：</td>
-                    <td width="400">                                      
+                    <td width="400" align="left">                                      
 		                <input type="text" name="domain" id="domain" />
 		                <input type="hidden" name="cust_id" value="{$cust_id}">
 		                <font class="fontred" id="namets">*</font>
@@ -58,7 +60,7 @@ function checkdomain(){
                   </tr>
                   <tr>
                     <td>使 用 年 限：</td>
-                    <td>
+                    <td align="left">
                        <select name="year">
                           <option value="1"> 一 年 </option>
                           <option value="2"> 二 年 </option>
@@ -71,11 +73,11 @@ function checkdomain(){
                   </tr> 
                   <tr>
                     <td>域名运营商：</td>
-                    <td><input type="text" name="service"></td>
+                    <td align="left"><input type="text" name="service"></td>
                   </tr>                                  
                   <tr>
                     <td>&nbsp;</td>
-                    <td><input type="submit" name="Submit" value=" 添加 " class="button_submit"></td>
+                    <td align="left"><input type="submit" name="Submit" value=" 添加 " class="button_submit"></td>
                   </tr>
             </table>                              
            </form>
@@ -83,6 +85,7 @@ function checkdomain(){
       </tr>
      </tbody>
   </table>
+</div>
 </div>
 <script type="text/javascript">
 function checkdomainfrm(afrm) {
