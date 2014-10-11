@@ -46,7 +46,8 @@
 		
 		
 		/**welcome**/
-		.top_search{ background:url(../images/search_bg.png) no-repeat; width:765px; height:43px; padding-bottom:10px;}
+		.top_search{ background:url(../images/search_bg.png) no-repeat; width:765px; height:43px; line-height:45px;}
+		.top_search select{ width:130px;}
 		.search_form{ height:40px; width:720px; margin:0 auto;}
 		.top_search table .th_input1,.top_search table .th_input2{width:179px; height:34px; background:url(../images/input_bg.jpg) no-repeat;}
 		.search_form .input1,.search_form .input2{ width:150px; outline:none; border:0px; background:none; margin-left:5px;}

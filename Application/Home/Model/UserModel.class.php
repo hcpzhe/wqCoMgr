@@ -91,6 +91,19 @@ class UserModel extends Model {
 				->select();
 		return $data;
 	}
+	/** 按条件查询系统用户列表 * /
+	 */
+	public function sealist($where){
+		$where="user.depart_id=depart.id ".$where;
+// 		$a="1=1";
+// 		echo $where;exit();
+		$data=$this->table('erp_user as user,erp_depart as depart')
+		->where($where)
+		->field('user.id as id,user.account as account,user.realname as realname,depart.name as dname,user.status as status')
+		->select();
+// 		echo $this->_sql();
+		return $data;
+	}
 	/** 查询某个用户的详细信息  */
 	public function userinfo($id){
 		return $this->table("erp_user as ur,erp_depart as dp")->where("ur.depart_id=dp.id AND ur.id=$id")->field("ur.account as uname,ur.realname as name,ur.sex as sex,ur.birthday as birthday,dp.name as dpname")->find();

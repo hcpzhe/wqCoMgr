@@ -10,6 +10,27 @@ class  UserController extends HomeBaseController{
 		$this->user_list=$user->userlist();
 		$this->display();
 	}
+	/*按条件查询系统用户*/
+	public  function search_list(){
+		/*获取搜索条件*/
+		$depart=$_POST['depart'];
+		$status=$_POST['status'];
+		$key=$_POST['key'];
+		/** 拼接where条件 */
+		if(!empty($depart)){
+			$where=" AND user.depart_id=".$depart;
+		}
+		if($status==" "){
+			$where=$where." AND user.status=".$status;
+		}else{ $where=$where." AND user.status>=0";}
+		
+		if(!empty($key)){
+			$where=$where." AND ( depart.name like '%".$key."%' or `user`.account like '%".$key."%' or `user`.realname like '%".$key."%')";
+		}
+		$user=new UserModel();
+		$this->user_list=$user->sealist($where);
+		$this->display();
+	}
 	/** 跳转到添加系统用户页面 */
 	public function ad_user_form(){
 		/** 查询所有部门  */
