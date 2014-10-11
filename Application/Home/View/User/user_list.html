@@ -21,8 +21,9 @@
 			       <form action="{:U('User/search_list')}" method="post" class="search_form">
 						<select name="depart">
 							<option value="">所有部门</option>
-							<option value="1">1</option>
-							<option value="4">1</option>
+								<!-- <foreach  name="depa_list" item="dp_list"> -->
+	    						<option value="{$dp_list.id}">{$dp_list.name}</option>
+	    						<!-- </foreach> -->	
 						</select>
 						<select name="status">
 							<option value="">所有状态</option>

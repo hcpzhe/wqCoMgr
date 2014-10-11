@@ -8,6 +8,9 @@ class  UserController extends HomeBaseController{
 	public  function user_list(){
 		$user=new UserModel();
 		$this->user_list=$user->userlist();
+		/** 查询所有部门  */
+		$depart=new DepartModel();
+		$this->depa_list=$depart->depalist();
 		$this->display();
 	}
 	/*按条件查询系统用户*/
@@ -20,7 +23,7 @@ class  UserController extends HomeBaseController{
 		if(!empty($depart)){
 			$where=" AND user.depart_id=".$depart;
 		}
-		if($status==" "){
+		if($status){
 			$where=$where." AND user.status=".$status;
 		}else{ $where=$where." AND user.status>=0";}
 		
@@ -29,6 +32,9 @@ class  UserController extends HomeBaseController{
 		}
 		$user=new UserModel();
 		$this->user_list=$user->sealist($where);
+		/** 查询所有部门  */
+		$dp=new DepartModel();
+		$this->depa_list=$dp->alldepart();
 		$this->display();
 	}
 	/** 跳转到添加系统用户页面 */
