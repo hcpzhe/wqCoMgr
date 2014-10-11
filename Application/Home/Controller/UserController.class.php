@@ -47,4 +47,18 @@ class  UserController extends HomeBaseController{
 		if($flag==1){	$this->success('删除成功！');
 		}else{	$this->error('删除失败！');}
 	}
+	/** 禁用 */
+	public function stop($id){
+		$user=new UserModel();
+		$flag=$user->where("id=$id")->setField("status","0");
+		if($flag==1){ $this->success('成功');}
+		else{ $this->error('失败');}
+	}
+	/** 启用 */
+	public function star($id){
+		$user=new UserModel();
+		$flag=$user->where("id=$id")->setField("status","1");
+		if($flag==1){ $this->success('成功');}
+		else{ $this->error('失败');}
+	}	
 }

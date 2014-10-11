@@ -86,7 +86,7 @@ class UserModel extends Model {
 	 */
 	public function userlist(){
 		$data=$this->table('erp_user as user,erp_depart as depart')
-				->where('user.depart_id=depart.id AND user.status=1')
+				->where('user.depart_id=depart.id AND user.status>=0')
 				->field('user.id as id,user.account as account,user.realname as realname,depart.name as dname,user.status as status')
 				->select();
 		return $data;

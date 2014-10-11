@@ -42,4 +42,18 @@ class ProductController extends HomeBaseController{
 		$this->proinfo=$product->where("status=1 AND id=$id")->find();
 		$this->display();
 	}
+	/** 禁用 */
+	public function stop($id){
+		$product=new ProductModel();
+		$flag=$product->where("id=$id")->setField("status","0");
+		if($flag==1){ $this->success('成功');}
+		else{ $this->error('失败');}
+	}
+	/** 启用 */
+	public function star($id){
+		$product=new ProductModel();
+		$flag=$product->where("id=$id")->setField("status","1");
+		if($flag==1){ $this->success('成功');}
+		else{ $this->error('失败');}
+	}	
 }

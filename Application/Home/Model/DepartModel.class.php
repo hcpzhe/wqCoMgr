@@ -23,7 +23,7 @@ class DepartModel extends Model{
 	}
 	/**  获取部门列表 */
 	public function depalist(){
-		$data=$this->where('status=1')->select();
+		$data=$this->where('status>=0')->select();
 		return $data;
 	}
 	/** 查询所有部门 */
