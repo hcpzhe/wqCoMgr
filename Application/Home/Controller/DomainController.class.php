@@ -27,8 +27,15 @@ class DomainController extends HomeBaseController{
 	/*添加域名*/
 	public function add_domain(){
 		$cust_id = (int)I('param.cust_id');
+		$domain = M('Customer');
+		//查询客户信息的审核状态
+		$check = $domain->where('id='.$cust_id)->getField('check');
+		if ($check == 0 || $check == -1){
+			$this->error('公司信息通过审核后才能添加域名！');
+		}else {		
 		$this->assign('cust_id',$cust_id);
 		$this->display();
+		}
 	}
 	
 	/***域名模糊检索***/

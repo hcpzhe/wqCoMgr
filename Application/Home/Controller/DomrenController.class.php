@@ -29,7 +29,8 @@ class DomrenController extends HomeBaseController{
 		$check = $domain->where('id='.$domain_id)->getField('check');
 		//域名审核通过后 才能提交续费申请
 		if ($check == 0 || $check == -1){
-			$this->redirect('Domain/domain_list',array('id'=>$domain_id),1,'域名还未经过审核,请审核！'); 
+			//$this->redirect('Domain/domain_list',array('id'=>$domain_id),1,'域名还未经过审核,请审核！'); 
+			$this->error('域名还未经过审核,请审核！');
 		}else {
 		$domain_mess = $domain->where('id='.$domain_id)->find();
 		$this->assign('domain_mess',$domain_mess);
@@ -44,6 +45,7 @@ class DomrenController extends HomeBaseController{
 		$data['year_num'] = I('param.year');   //域名续费年限
 		$data['new_expired_time'] = $data['org_expired_time'] + $data['year_num']*60*60*24*365;  //域名到期时间计算      新过期时间
 		$data['pay_time'] = I('param.pay_time');
+		$data['apply_user'] =  I('param.apply_user');
 		if ($data['org_expired_time'] < time())
 		$data['status'] = 0;
 		$model = M('Domain_renewal');
@@ -87,7 +89,7 @@ class DomrenController extends HomeBaseController{
 		
 		$apply_list = $model->table('erp_domain as dn,erp_domain_renewal as dr,erp_customer as cu')
 		->where("dn.id=dr.domain_id AND cu.id=dn.cust_id AND dr.id=$id")
-		->getField("dr.id,dr.domain_id,dn.domain,dn.service,dn.reg_time,dr.money,dr.org_expired_time,dr.new_expired_time,dr.pay_time,dr.`check`,dr.check_time,cu.name,cu.contacts,cu.phone");
+		->getField("dr.id,dr.domain_id,dn.domain,dn.service,dn.reg_time,dr.money,dr.apply_user,dr.org_expired_time,dr.new_expired_time,dr.pay_time,dr.`check`,dr.check_time,cu.name,cu.contacts,cu.phone");
 	    $this->assign('apply_list',$apply_list);
 		$this->display();	
 		
