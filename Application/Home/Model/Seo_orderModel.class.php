@@ -14,10 +14,11 @@ class Seo_orderModel extends Model{
 			return 1;}	
 	}
 	/*优化开发订单列表*/
-	public function seo_list(){
+	public function seo_list($where){
+		$where="eso.order_id=eo.id AND eo.cust_id=ec.id AND eo.user_id=eu.id AND eso.status=1 ".$where;
 		/*查询数据总条数*/
-		$count=$this->table('erp_seo_order as eso,erp_order as eo')
-		->where("eso.order_id=eo.id")
+		$count=$this->table('erp_seo_order as eso,erp_order as eo,erp_customer as ec,erp_user as eu')
+		->where($where)
 		->count();
 		/*载入分页类，初始化数据*/
 		$page=new \Think\Page($count,7);
@@ -25,7 +26,7 @@ class Seo_orderModel extends Model{
 		$data['show']=$page->show();
 		/*控制数据查询条数*/
 		$data['dep_list']=$this->table('erp_seo_order as eso,erp_order as eo,erp_customer as ec,erp_user as eu')
-		->where("eso.order_id=eo.id AND eo.cust_id=ec.id AND eo.user_id=eu.id AND eso.status=1")
+		->where($where)
 		->field("eo.id as id,eo.total_fees as money,ec.name as cname,ec.contacts as contacts,eu.realname as rname,ec.phone as phone,eso.remark as remark,eso.check as checks")
 		->limit($page->firstRow.','.$page->listRows)->select();
 		// 				echo $this->_sql();
