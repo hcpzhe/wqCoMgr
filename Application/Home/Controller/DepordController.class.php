@@ -9,8 +9,19 @@ use Home\Model\Develop_order_commentModel;
 class DepordController extends HomeBaseController{
 	/*网站开发订单列表*/
 	public function dep_list(){
+		/*获取搜索条件*/
+		$check=$_POST['check'];
+		$key=$_POST['key'];
+		/** 拼接where条件 */
+		if($check==1){
+			$where=$where." AND edo.check=1";
+		}else if($check==2){ $where=$where." AND edo.check=0";}
+		
+		if(!empty($key)){
+			$where=$where." AND ( ec.name like '%".$key."%' or ec.contacts like '%".$key."%' or eu.realname like '%".$key."%')";
+		}
 		$dep=new Develop_orderModel();
-		$this->data=$dep->dor_list();
+		$this->data=$dep->dor_list($where);
 		$this->display();
 	}
 	/*增加一条开发记录*/
