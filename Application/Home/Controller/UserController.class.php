@@ -4,15 +4,6 @@ use Common\Controller\HomeBaseController;
 use Home\Model\UserModel;
 use Home\Model\DepartModel;
 class  UserController extends HomeBaseController{
-// 	/*获取系统用户列表*/
-// 	public  function user_list(){
-// 		$user=new UserModel();
-// 		$this->user_list=$user->userlist();
-// 		/** 查询所有部门  */
-// 		$depart=new DepartModel();
-// 		$this->depa_list=$depart->depalist();
-// 		$this->display();
-// 	}
 	/*按条件查询系统用户*/
 	public  function search_list(){
 		/*获取搜索条件*/
@@ -28,7 +19,7 @@ class  UserController extends HomeBaseController{
 			$where=$where." AND ( depart.name like '%".$key."%' or `user`.account like '%".$key."%' or `user`.realname like '%".$key."%')";
 		}
 		$user=new UserModel();
-		$this->user_list=$user->sealist($where);
+		$this->data=$user->sealist($where);
 		/** 查询所有部门  */
 		$dp=new DepartModel();
 		$this->depa_list=$dp->alldepart();

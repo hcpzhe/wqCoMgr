@@ -95,11 +95,28 @@ class UserModel extends Model {
 	 */
 	public function sealist($where){
 		$where="user.depart_id=depart.id AND user.status>=0 ".$where;
-		$data=$this->table('erp_user as user,erp_depart as depart')
+		/*查询数据总条数*/
+		$count=$this->table('erp_user as user,erp_depart as depart')
 		->where($where)
-		->field('user.id as id,user.account as account,user.realname as realname,depart.name as dname,user.status as status')
-		->select();
+		->count();
+		/*载入分页类，初始化数据*/
+		$page=new \Think\Page($count,7);
+		/*调用分页链接函数*/
+		$data['show']=$page->show();
+		/*控制数据查询条数*/
+		$data['order_list']=$this->table('erp_user as user,erp_depart as depart')
+		->where($where)
+		->field("user.id as id,user.account as account,user.realname as realname,depart.name as dname,user.status as status")
+		->limit($page->firstRow.','.$page->listRows)->select();
+// 				echo $this->_sql();exit();
+// 				echo "<pre>";
+// 				print_r($data['order_list']);
+// 				echo "</pre>";
 		return $data;
+		
+		
+		
+		
 	}
 	/** 查询某个用户的详细信息  */
 	public function userinfo($id){
