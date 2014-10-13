@@ -4,10 +4,11 @@ use Think\Model;
 use Think\Page;
 class OrderModel extends Model{
 	/*显示订单列表*/
-	Public function orderlist(){
+	Public function orderlist($where){
+		$where="oe.user_id=ur.id AND oe.cust_id=cr.id AND oe.prod_id=pt.id AND oe.status=1 ".$where;
 		/*查询数据总条数*/
 		$count=$this->table('erp_order as oe,erp_user as ur,erp_customer as cr,erp_product as pt')
-					->where("oe.user_id=ur.id AND oe.cust_id=cr.id AND oe.prod_id=pt.id AND oe.status=1")
+					->where($where)
 					->count();
 		/*载入分页类，初始化数据*/
 		$page=new \Think\Page($count,7);
@@ -15,13 +16,9 @@ class OrderModel extends Model{
 		$data['show']=$page->show();
 		/*控制数据查询条数*/
 		$data['order_list']=$this->table('erp_order as oe,erp_user as ur,erp_customer as cr,erp_product as pt')
-					->where("oe.user_id=ur.id AND oe.cust_id=cr.id AND oe.prod_id=pt.id AND oe.status=1")
+					->where($where)
 					->field("oe.id as id,ur.realname as uname,cr.`name` as cname,pt.`name` as pname,pt.`id` as pid,oe.total_fees,oe.expired_time as expired_time,oe.`check`")
 					->limit($page->firstRow.','.$page->listRows)->select();	
-// 		echo $this->_sql();exit();
-// 		echo "<pre>";
-// 		print_r($data['order_list']);
-// 		echo "</pre>";
 		return $data;
 	}
 	/*c查询指定订单的详细内容*/	

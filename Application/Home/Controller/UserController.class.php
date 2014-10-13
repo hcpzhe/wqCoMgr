@@ -12,7 +12,7 @@ class  UserController extends HomeBaseController{
 		$key=$_POST['key'];
 		/** 拼接where条件 */
 		if(!empty($depart)){
-			$where=" AND user.depart_id=".$depart;
+			$where=$where." AND user.depart_id=".$depart;
 		}
 	
 		if(!empty($key)){
