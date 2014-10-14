@@ -28,10 +28,17 @@ class CustomerController extends HomeBaseController {
 		$cust = M('Customer');
 		$map['status'] = $status;
 		$id = (int)I('param.id');
-		if ($id>0) $map['id'] = $id;		
-		if(isset($name)){
+		$key = (int)I('param.key');
+		if ($id>0) $map['id'] = $id;
+		/*判断搜索方式*/
+		if($key == 1){  //按公司名称搜索
 			$map['name']   =   array('like', '%'.$name.'%');
-		}			
+		}else{  //按录入人搜索
+			$map['add_user']   =   array('like', '%'.$name.'%');
+		}				
+// 		if(isset($name)){
+// 			$map['name']   =   array('like', '%'.$name.'%');
+// 		}			
 		$count      = $cust->where($map)->count();// 查询满足要求的总记录数
 		$Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(10)
 		$show       = $Page->show();// 分页显示输出
@@ -105,6 +112,15 @@ class CustomerController extends HomeBaseController {
 		$domain = M('Domain');    //获取域名信息
 		$domain_list = $domain->where('cust_id='.$id)->select();
 		$this->assign('domain_list',$domain_list);
+		
+ 		//判断是否有拜访记录
+		$cust_vi = M('Customer_visit');
+		$res = $cust_vi->table('erp_customer as cr,erp_customer_visit as cv')
+		->where("cr.id=cv.cust_id AND cr.id=$id")
+		->count();
+		$this->assign('res',$res);
+// 		print_r($res);
+// 		exit();
 
 		$this->display();
 	}

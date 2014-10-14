@@ -29,7 +29,11 @@
         <td height="40">
               <span id="cust_search">
 	           <form action="__SELF__" method="get">
-	                                        搜索：<input type="text" name="name" class="search" value="" />
+	                                        搜索：<select name="key" class="search">	                                       
+	                  <option value="1">公司名称</option>   
+	                  <option value="2">录入人</option>                      
+	                </select>
+	                <input type="text" name="name" class="search" value="" />	                                        
 	                <input type=submit value="搜索" class="button_submit" />
 	           </form> 
 	           <script type="text/javascript">	 

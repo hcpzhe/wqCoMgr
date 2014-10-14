@@ -29,8 +29,9 @@
               <span id="cust_search">
 	           	<font style="padding-left: 20px;"> 操作： </font>                                      
                 <a href="{:U('Customer/edit?id='.$list['id'])}" class="button_submit">信息修改</a>
+                <a href="{:U('Customervisit/addvisit?cust_id='.$list['id'])}" class="button_submit">添加拜访</a>
                 <a href="{:U('Order/add_order_form?cust_id='.$list['id'])}" class="button_submit" >添加订单</a> 
-                <a href="{:U('Domain/add_domain?cust_id='.$list['id'])}" class="button_submit">添加域名</a>                 
+                <a href="{:U('Domain/add_domain?cust_id='.$list['id'])}" class="button_submit">添加域名</a>              
            </span>   
         </td>
       </tr>
@@ -74,14 +75,14 @@
                    <tr>
                     <td> 状 &nbsp;&nbsp;&nbsp;态 </td>
                     <td>
-                        <if condition="$list['check'] eq -1 ">拒绝
-                        <elseif condition="$list['check'] eq 0 " /><a href="{:U('Customer/check?id='.$list['id'])}">待审</a>
-                        <else />通过</if>
+                        <!-- <if condition="$list['check'] eq -1 "> -->拒绝
+                        <!-- <elseif condition="$list['check'] eq 0 " /> --><a href="{:U('Customer/check?id='.$list['id'])}">待审</a>
+                        <!-- <else /> -->通过<!-- </if> -->
                     </td>
                     <td>审核时间</td>
                     <td>
-                       <if condition="$list['check'] eq 0 "><font color="red">该信息还未审核</font>
-                      <else />{:date('Y/m/d H:i:s',$list['check_time'])}</if>
+                      <!-- <if condition="$list['check'] eq 0 "> --><font color="red">该信息还未审核</font>
+                      <!-- <else /> -->{:date('Y/m/d H:i:s',$list['check_time'])}<!-- </if> -->
                     </td>
                   </tr> 
                   <tr>
@@ -90,13 +91,16 @@
                   </tr>                    
             </table>
             
+            <!-- <if condition="$res eq 0 "> --><font color="red">该公司还未添加拜访记录</font> <br/>
+            <!-- <else /> --><!-- </if> -->
+            
             <!-- 订单信息 -->
-             <if condition="$order_list eq '' "><font color="red">该公司还未有订单</font> <br/>
-             <else />
+             <!-- <if condition="$order_list eq '' "> --><font color="red">该公司还未有订单</font> <br/>
+             <!-- <else /> -->
              
              <div class="order_title">订单信息</div> 
              <!-- <foreach name="order_list" item="order_list"> -->                                                                    
-            <table width="740" border="0" class="com_table" cellpadding="0" cellspacing="0">                                                   
+               <table width="740" border="0" class="com_table" cellpadding="0" cellspacing="0">                                                   
                   <tr>
                     <td width="150">订单编号</td>
                     <td width="220">{$order_list['id']}</td>
@@ -114,22 +118,22 @@
                     <td>{:date('Y/m/d H:i:s',$order_list['expired_time'])}</td>
                     <td>订单状态</td>
                     <td>
-                        <if condition="$order_list['status'] eq -1 ">删除
-                        <elseif condition="$order_list['status'] eq 0 " />禁用
-                        <else />正常</if>
+                        <!-- <if condition="$order_list['status'] eq -1 "> -->删除
+                        <!-- <elseif condition="$order_list['status'] eq 0 " /> -->禁用
+                        <!-- <else /> -->正常<!-- </if> -->
                     </td>
                   </tr>
                   <tr>
                     <td>备 &nbsp;&nbsp;&nbsp; 注</td>
                     <td colspan="3">{$order_list['remark']}</td>
                   </tr>                                   
-            </table>            
+               </table>            
              <!-- </foreach> -->
-            </if>
+            <!-- </if> -->
             
             <!-- 域名信息 -->
-             <if condition="$domain_list eq '' "><font color="red">该公司还未有域名</font> <br/>
-             <else />             
+             <!-- <if condition="$domain_list eq '' "> --><font color="red">该公司还未有域名</font> <br/>
+             <!-- <else /> -->             
                <div class="order_title">域名信息</div>            
             <!-- <foreach name="domain_list" item="domain_list"> -->
              <table width="740" border="0" class="com_table" cellpadding="0" cellspacing="0">                  
@@ -148,20 +152,20 @@
                   <tr>
                     <td>域 名 状 态</td>
                     <td>
-                       <if condition="$domain_list['status'] eq -1 ">删除
-                        <elseif condition="$domain_list['status'] eq 0 " />禁用  <font color="red"> 该域名已过期，请抓紧时间续费！</font>
-                        <else />正常</if>
+                       <!-- <if condition="$domain_list['status'] eq -1 "> -->删除
+                       <!-- <elseif condition="$domain_list['status'] eq 0 " /> -->禁用  <font color="red"> 该域名已过期，请抓紧时间续费！</font>
+                       <!-- <else /> -->正常<!-- </if> -->
                     </td>
                     <td>审 核 状 态</td>
                     <td>
-                       <if condition="$domain_list['check'] eq -1 ">拒绝
-                        <elseif condition="$domain_list['check'] eq 0 " /><a href="{:U('Domain/check?id='.$domain_list['id'])}">待审</a>
-                        <else />通过</if>
+                       <!-- <if condition="$domain_list['check'] eq -1 "> -->拒绝
+                       <!-- <elseif condition="$domain_list['check'] eq 0 " /> --><a href="{:U('Domain/check?id='.$domain_list['id'])}">待审</a>
+                       <!-- <else /> -->通过<!-- </if> -->
                     </td>
                   </tr>                                   
             </table> 
             <!-- </foreach> -->  
-           </if>                           
+           <!-- </if> -->                           
         </td>
       </tr>      
      </tbody>
