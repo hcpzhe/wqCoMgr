@@ -20,12 +20,16 @@
             <table width="500" border="0" style="margin-top:50px;">
                   <tr>
                     <td width="100">客户名称：</td>
-                    <td width="400">                                     
-		                <select name='cusid'>
-    					<!-- <foreach  name="cus_list" item="c_list"> -->
-    					<option value="{$c_list.id}">{$c_list.name}</option>
-    					<!-- </foreach> -->	
-    					</select>          	                                                 
+                    <td width="400">                            	   
+    					<select name='cusid'>
+    						<empty name="cus">
+    						<!-- <foreach  name="cus_list" item="c_list"> -->
+	    						<option value="{$c_list.id}">{$c_list.name}</option>
+	    					<!-- </foreach> -->
+    						<else/>
+    						<option value="{$cus.id}">{$cus.name}</option>
+    						</empty>
+    					</select> 					                                                
                     </td>
                   </tr>
                   <tr>

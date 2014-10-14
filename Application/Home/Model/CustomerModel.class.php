@@ -29,5 +29,9 @@ class CustomerModel extends Model {
 		$data=$this->where("status=1 AND `check`=1")->select();
 		return $data;
 	}
-		
+	/** 根据客户id查询 客户信息*/
+	public function one($id){
+		$data=$this->field('id,name')->where("id=$id and status=1")->find();
+		return $data;
+	}	
 }
