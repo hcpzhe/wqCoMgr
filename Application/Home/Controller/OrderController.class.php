@@ -96,6 +96,12 @@ class OrderController extends HomeBaseController{
 	}	
 /** 跳转到添加订单页面*/
 	public function add_order_form(){/** 判断是否传出客户id */
+		/** 接收客户id */
+		$id=$_GET['id'];
+		if(!empty($id)){
+			$customer=new CustomerModel();
+			$this->cus=$customer->one($id);
+		}
 		/*查询产品分类*/
 		$product=new ProductModel();
 		$this->p_list=$product->p_list();
