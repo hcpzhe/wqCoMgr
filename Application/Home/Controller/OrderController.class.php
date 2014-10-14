@@ -34,7 +34,7 @@ class OrderController extends HomeBaseController{
 		$this->pro_list=$product->p_list();
 		$this->display();
 	}
-/** 带续费订单列表 (距订单到期时间三个月进入带续费期)*/
+/** 待续费订单列表 (距订单到期时间三个月进入带续费期)*/
 	public function renewal_order(){
 		/*获取搜索条件*/
 		$pro=$_POST['product'];
@@ -60,7 +60,8 @@ class OrderController extends HomeBaseController{
 		$product=new ProductModel();
 		$this->pro_list=$product->p_list();
 		$this->display();
-	}	
+	}
+	
 /**   订单详情   */
 	public function order_info(){
 		$id=$_GET['id'];
