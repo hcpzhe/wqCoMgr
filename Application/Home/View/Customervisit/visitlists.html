@@ -24,14 +24,35 @@
       </tr>
       <tr>
         <td height="30"></td>
-      </tr>    
+      </tr> 
+      <tr>
+        <td height="40">
+              <span id="cust_search">
+	           <form action="__SELF__" method="get">
+	            <!--   公司名称：<input type="text" name="name" class="search" value="" />
+	                                       拜访人员： <input type="text" name="user_name" class="search" value="" /> -->
+	                        搜索条件：<select name="key" class="search">
+	                  <option value="1">公司名称</option>   
+	                  <option value="2">拜访人员</option>                      
+	                </select>
+	                <input type="text" name="name" class="search" value="" />                       
+	                <input type=submit value="搜索" class="button_submit" />
+	           </form> 
+             
+                                             
+           </span>   
+        </td>
+      </tr>
+      <tr>
+        <td height="10"></td>
+      </tr>   
       <tr>
         <td align="center">                     
             <table width="742" border="0" class="cust_list">           
                   <tr class="liebiao_title">
                     <th width="100">编号</th>
-                    <th width="220">客户</th>
-                    <th width="120">员工</th>
+                    <th width="220">公司名称</th>
+                    <th width="120">拜访员工</th>
                      <th width="150">拜访时间</th>
                     <th width="150">操作</th>
                   </tr>
