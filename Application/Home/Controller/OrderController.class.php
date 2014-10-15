@@ -7,6 +7,7 @@ use Home\Model\Seo_orderModel;
 use Home\Model\ProductModel;
 use Home\Model\CustomerModel;
 use Home\Model\DepartModel;
+use Home\Model\UserModel;
 class OrderController extends HomeBaseController{
 /** 订单列表 */
 	public function order_list(){
@@ -107,6 +108,9 @@ class OrderController extends HomeBaseController{
 		/*查询产品分类*/
 		$product=new ProductModel();
 		$this->p_list=$product->p_list();
+		/** 查询系统 用户 */
+		$user=new UserModel();
+		$this->user_list=$user->alluser();
 		/*查询所有客户*/
 		$customer=new CustomerModel();
 		$this->cus_list=$customer->cus_list();
