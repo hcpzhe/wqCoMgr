@@ -46,12 +46,6 @@
   <tr>
     <td align="right" bgcolor="#F0F0F0">联 系 人：</td>
     <td bgcolor="#FFFFFF">{$orderinfo.contacts}</td>
-    <td align="right" bgcolor="#F0F0F0">签单日期：</td>
-    <td bgcolor="#FFFFFF"><span class="fontqing"></span></td>
-  </tr>
-  <tr>
-    <td align="right" bgcolor="#F0F0F0">到期时间：</td>
-    <td bgcolor="#FFFFFF"><span class="fontqing">{$orderinfo.extime}</span></td>
     <td align="right" bgcolor="#F0F0F0">订单状态：</td>
     <td bgcolor="#FFFFFF"><span class="fontlv">
     	<if condition="$orderinfo.status eq 1">
@@ -60,6 +54,12 @@
     	禁用
     	</if>
     </span></td>
+  </tr>
+  <tr>
+  	<td align="right" bgcolor="#F0F0F0">签单日期：</td>
+    <td bgcolor="#FFFFFF">{$orderinfo.signed_time}</td>
+    <td align="right" bgcolor="#F0F0F0">到期时间：</td>
+    <td bgcolor="#FFFFFF"><span class="fontqing">{$orderinfo.extime}</span></td>
   </tr>
 
   <tr>

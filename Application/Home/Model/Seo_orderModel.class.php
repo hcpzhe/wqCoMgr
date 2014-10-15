@@ -1,6 +1,7 @@
 <?php
 namespace Home\Model;
 use Think\Model;
+use Home\Controller\DepartController;
 class Seo_orderModel extends Model{
 	/*添加一条优化记录*/
 	public function add_so($id){
@@ -47,5 +48,5 @@ class Seo_orderModel extends Model{
 	public function up_check($oid){
 		$map['check']=1;
 		$this->where("order_id=$oid")->save($map);
-	}	
+	}		
 }

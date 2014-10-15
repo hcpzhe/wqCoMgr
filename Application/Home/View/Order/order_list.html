@@ -71,7 +71,7 @@ function push(){
 		<th>客户</th>
 		<th>产品</th>
 		<th>金额</th>
-		<th>到期时间</th>
+		<th>签单时间</th>
 		<th>审核</th>
 	</tr>
 <form method="post" name="ches">		
@@ -82,7 +82,7 @@ function push(){
 		<td>{$list.cname}</td>
 		<td>{$list.pname}</td>
 		<td>{$list.total_fees}元</td>
-		<td>{$list.expired_time}</td>
+		<td>{$list.signed_time}</td>
 		<!-- 显示审核状态 -->
 		<td>
 			<!-- <if condition="$list.check eq 1"> -->通过

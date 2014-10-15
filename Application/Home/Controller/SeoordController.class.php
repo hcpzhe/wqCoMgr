@@ -6,6 +6,7 @@ use Home\Model\Seo_userModel;
 use Home\Model\UserModel;
 use Home\Model\OrderModel;
 use Home\Model\Seo_order_commentModel;
+use Home\Model\DepartModel;
 class SeoordController extends HomeBaseController{
 	/*优化订单*/
 	public function seo_list(){
@@ -53,5 +54,37 @@ class SeoordController extends HomeBaseController{
 	
 		$this->id=$oid;
 		$this->display();
+	}	
+	/** 推送订单至下一个部门      表单 */
+	public function push_form($id){
+		/** 查询订单信息  判断该订单是否通过审核 */
+		// 		$order=new OrderModel();
+		// 		$flag=$order->field('check')->where("id=$id")->find();
+		// 		if($flag['check']==0){ $this->error('订单未审核');}
+		/** 查询所有部门 */
+		$depart=new DepartModel();
+		$this->id=$id;
+		$this->dp=$depart->alldepart(); 
+		$this->display();
+	}
+	/** 推送至下一个部门 */
+	public function push($id){ 
+		$dp_id=$_POST['dp'];
+		/**技术 */
+		if($dp_id==1){
+			/*网站开发模型*/
+			$dor=new Develop_orderModel();
+			$flag1=$dor->add_do($id);
+			if($flag1==1){ 	$this->success('推送成功');}
+			else{ $this->error('推送失败');}
+		}else if($dp_id==2){/** 优化 */
+			/*优化模型*/
+			$sor=new Seo_orderModel();
+			$flag2=$sor->add_so($id);
+			if($flag2==1){ $this->success('推送成功');}
+			else{ $this->error('推送失败');}
+		}else if($dp_id==11){/** 客服 */
+	
+		}else{ $this->error('禁止向该部门推送');}
 	}	
 }

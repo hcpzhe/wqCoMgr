@@ -16,6 +16,15 @@ function info(){
 			}
 		});
 }
+function push(){
+	$("input[name='che[]']").each(function(){
+		if($(this).attr("checked")=="checked"){								
+			var id=$(this).val();		
+            var url="__URL__-push_form-id-"+id;
+            location.href=url;
+			}
+		});
+}
 </script>
 </head>
 <body>
@@ -39,6 +48,7 @@ function info(){
 						关键字<input type="text" name="key">
 						<input type="submit" value="搜索" class="button_submit">
 						<a href="javascript:void(0)" class="button_submit" onclick="info();">详情</a>	
+						<a href="javascript:void(0)" class="button_submit" onclick="push();">推送</a>	
 					</form> 
 			   </div>            
             <!-- 搜索结束 -->
@@ -57,7 +67,7 @@ function info(){
 		<th>金额</th>
 		<th>销售</th>
 		<th>备注</th>
-		<th>审核</th>
+		<th>分配</th>
 	</tr>
 <form method="post" name="ches">		
 <!-- <foreach name="data['dep_list']" item="list"> -->
