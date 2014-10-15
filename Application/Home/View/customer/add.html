@@ -70,7 +70,13 @@ function checkname(){
                   </tr>
                   <tr>
                     <td>录 入 人：</td>
-                    <td><input type="text" name="add_user"></td>
+                    <td>
+                        <select name="user_id">
+                           <!-- <foreach name="user_list" item="user_list"> --> 
+                           <option value="{$user_list['id']}">{$user_list['realname']}</option>
+                           <!-- </foreach> -->
+                        </select>
+                    </td>
                   </tr>
                   <tr>
                     <td>地  &nbsp;&nbsp;&nbsp; 址：</td>

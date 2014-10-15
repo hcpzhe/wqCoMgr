@@ -112,10 +112,10 @@
                      <td width="105" align="center">
                        <input type="checkbox" name="s2[]" value="{$data.id}" id="check">
                      </td>
-                     <td width="200">{$data.name|mb_substr=0,48}</td>
+                     <td width="200">{$data.cname|mb_substr=0,45}</td>
                      <td width="105" align="center">{$data.contacts}</td>
                      <td width="120" align="center">{$data.phone}</td>
-                     <td width="105" align="center">{$data.add_user}</td>
+                     <td width="105" align="center">{$data.uname}</td>
                      <td width="105" align="center">
                         <if condition="$data['check'] eq -1 ">拒绝
                         <elseif condition="$data['check'] eq 0 " /><a href="{:U('Customer/check?id='.$data['id'])}">待审</a>

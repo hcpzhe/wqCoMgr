@@ -8,6 +8,9 @@ use Think\Model;
 class CustomerController extends HomeBaseController {
     /**客户添加***/
 	public function add(){
+		$User = M("User");
+		$user_list = $User->where('status=1')->select();
+		$this->assign('user_list',$user_list);  //录入人
 		$this->display();					
 	}
 	
@@ -20,35 +23,31 @@ class CustomerController extends HomeBaseController {
 		$model->add($data);
 		$this->success('添加成功',U('Customer/lists'));
 	}
-	
-	
+		
 	/**客户列表     公司名称搜索**/
-	public function lists($name=null, $status=1, $tpl=null) {				
-		$map=array();
-		$cust = M('Customer');
-		$map['status'] = $status;
-		$id = (int)I('param.id');
-		$key = (int)I('param.key');
-		if ($id>0) $map['id'] = $id;
-		/*判断搜索方式*/
-		if($key == 1){  //按公司名称搜索
-			$map['name']   =   array('like', '%'.$name.'%');
-		}else{  //按录入人搜索
-			$map['add_user']   =   array('like', '%'.$name.'%');
-		}				
-// 		if(isset($name)){
-// 			$map['name']   =   array('like', '%'.$name.'%');
-// 		}			
-		$count      = $cust->where($map)->count();// 查询满足要求的总记录数
+	public function lists() {				
+		$key = (int)I('param.key'); //选择搜索条件
+		$name = I('param.name');    //输入的搜索信息
+		$visit = M('Customer');
+		$where = "cr.user_id=ur.id AND cr.status=1";  //多表查询条件
+		if($key == 1){
+			$where=$where." AND ( cr.name like '%".$name."%')"; //公司名称模糊检索
+		}else{
+			$where=$where." AND ( ur.realname like '%".$name."%')"; //按照录入人进行模糊检索
+		}
+		$count=$visit->table('erp_user as ur,erp_customer as cr')
+		->where($where)
+		->count();       // 查询满足要求的总记录数
 		$Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(10)
 		$show       = $Page->show();// 分页显示输出
-		$list = $cust->where($map)->limit($Page->firstRow.','.$Page->listRows)->order('id desc')->select();
-		$this->assign('list',$list);// 赋值数据集
-		$this->assign('page',$show);// 赋值分页输出
-		$this->assign('status', $map['status']); //用于搜索条件的显示
-		$this->assign('name', $name);           //用于搜索条件的显示
-		if (isset($tpl)) $this->display($tpl);
-        else $this->display();
+		$list = $visit->table('erp_user as ur,erp_customer as cr')
+		->where($where)
+		->field("cr.id as id,ur.realname as uname,cr.`name` as cname,cr.contacts,cr.phone,cr.check")
+		->limit($Page->firstRow.','.$Page->listRows)->order('cr.id desc')->select();
+		$this->assign('list',$list);
+		$this->assign('page',$show);   //分页显示
+		$this->display();
+		
 	}
 	
 	/***客户名称模糊检索***/
@@ -56,11 +55,16 @@ class CustomerController extends HomeBaseController {
 		$name = I('name');
 		if(!empty($name)){
 			$Form = M("Customer");
-			$map['name']   =   array('like', '%'.$name.'%');		
-			$count      = $Form->where($map)->count();// 查询满足要求的总记录数
+			$where = "cr.user_id=ur.id AND cr.status=1";  //多表查询条件
+			$where=$where." AND ( cr.name like '%".$name."%')"; //公司名称模糊检索
+			//$map['name']   =   array('like', '%'.$name.'%');		
+			$count  = $Form->table('erp_user as ur,erp_customer as cr')
+			->where($where)->count();// 查询满足要求的总记录数
 			$Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(10)
 			$show       = $Page->show();// 分页显示输出			
-			$list = $Form->where($map)->order('id desc')->select();		
+			$list = $Form->table('erp_user as ur,erp_customer as cr')->where($where)
+			->field("cr.id as id,ur.realname as uname,cr.`name` as cname,cr.contacts,cr.phone,cr.check")
+		    ->limit($Page->firstRow.','.$Page->listRows)->order('cr.id desc')->select();
 			if (!empty($list)){
 				$this->assign('page',$show);// 赋值分页输出
 				$this->assign('list',$list);					
@@ -68,9 +72,7 @@ class CustomerController extends HomeBaseController {
 			}else{				
 				echo "用户名不存在，可以添加！";
 			}
-		}
-				
-		
+		}						
 	}
 	/**公司信息修改**/
 	public function edit(){
@@ -100,11 +102,13 @@ class CustomerController extends HomeBaseController {
 	public function detailed(){		
 		$id = (int)I('id');     
         $cust = M('Customer'); //获取客户详细信息
-		$list = $cust->where('id='.$id)->find();
+		$list = $cust->table('erp_customer as cr,erp_user as ur')
+		->where('cr.user_id=ur.id AND cr.id='.$id)
+		->getField("cr.id as id,cr.`name` as `name`,cr.contacts as contacts,cr.phone as phone,cr.fax as fax,cr.address as address,cr.add_time as add_time,cr.`check` as `check`,cr.check_time as check_time,cr.remark as remark,ur.realname as realname");
 		$this->assign('list',$list);
-		
+
 		$order = M('Order');    //获取订单信息		
-		$order_list = $cust->table('erp_customer as cr,erp_order as ord,erp_product as pt,erp_user as ur')
+		$order_list = $order->table('erp_customer as cr,erp_order as ord,erp_product as pt,erp_user as ur')
 		->where("cr.id=ord.cust_id AND pt.id=ord.prod_id AND ord.user_id=ur.id AND cr.id=$id")
 		->getField("ord.id as id,ur.realname as uname,pt.name as pname,ord.total_fees as total_fees,ord.expired_time as expired_time,ord.status as status,ord.remark as remark");
 		$this->assign('order_list',$order_list);
@@ -119,8 +123,6 @@ class CustomerController extends HomeBaseController {
 		->where("cr.id=cv.cust_id AND cr.id=$id")
 		->count();
 		$this->assign('res',$res);
-// 		print_r($res);
-// 		exit();
 
 		$this->display();
 	}

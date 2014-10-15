@@ -29,16 +29,14 @@
         <td height="40">
               <span id="cust_search">
 	           <form action="__SELF__" method="get">
-	            <!--   公司名称：<input type="text" name="name" class="search" value="" />
-	                                       拜访人员： <input type="text" name="user_name" class="search" value="" /> -->
-	                        搜索条件：<select name="key" class="search">
+	                                          搜索条件：<select name="key" class="search">
 	                  <option value="1">公司名称</option>   
 	                  <option value="2">拜访人员</option>                      
 	                </select>
 	                <input type="text" name="name" class="search" value="" />                       
 	                <input type=submit value="搜索" class="button_submit" />
 	           </form> 
-             
+              <a href="{:U('Customervisit/addvisit')}" class="button_submit">添加拜访</a>
                                              
            </span>   
         </td>
@@ -82,7 +80,7 @@
         <td align="center">                     
           <table width="742" border="0" style="display: block; border-bottom: 1px solid #ccc; border-right: 1px solid #ccc; border-left: 1px solid #ccc;">
             <tr style="display: block; padding-top: 10px;">
-              <td height="40" style="display: block; text-align: center; line-height: 40px;">{$show}</td>
+              <td height="40" style="display: block; text-align: center; line-height: 40px;">{$page}</td>
             </tr>
           </table>
         </td>
