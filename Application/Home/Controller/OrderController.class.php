@@ -118,8 +118,10 @@ class OrderController extends HomeBaseController{
 		$map['total_fees']=$_POST['money'];
 		$map['prod_id']=$_POST['proid'];
 		$map['user_id']=$_POST['userid'];
-// 		$map['year']=$_POST['year'];
+ 		$map['time_limit']=$_POST['time_limit'];$day=$map['time_limit']*365;//获取服务年限
 // 		$map['domain']=$_POST['domain'];
+		$map['signed_time']=date('Y-m-d',time());//获取当前日期
+		$map['expired_time']=date("Y-m-d",strtotime("$day day"));//获取订单到期日期
 		$map['remark']=$_POST['remark'];
 		$order=new OrderModel();
 		$flag=$order->add($map);
