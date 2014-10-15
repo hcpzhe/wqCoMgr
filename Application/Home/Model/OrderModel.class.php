@@ -17,7 +17,7 @@ class OrderModel extends Model{
 		/*控制数据查询条数*/
 		$data['order_list']=$this->table('erp_order as oe,erp_user as ur,erp_customer as cr,erp_product as pt')
 					->where($where)
-					->field("oe.id as id,ur.realname as uname,cr.`name` as cname,pt.`name` as pname,pt.`id` as pid,oe.total_fees,oe.expired_time as expired_time,oe.`check`")
+					->field("oe.id as id,ur.realname as uname,cr.`name` as cname,pt.`name` as pname,pt.`id` as pid,oe.total_fees,oe.signed_time as signed_time,oe.`check`")
 					->limit($page->firstRow.','.$page->listRows)->select();	
 		return $data;
 	}
@@ -25,7 +25,7 @@ class OrderModel extends Model{
 	public function orderinfo($id){
 		$order_info =$this->table('erp_order as oe,erp_user as ur,erp_customer as cr,erp_product as pt')
 		->where("oe.user_id=ur.id AND oe.cust_id=cr.id AND oe.prod_id=pt.id AND oe.id=$id")
-		->field("oe.id as id,cr.phone as phone,cr.fax as fx,cr.contacts as contacts,ur.realname as uname,cr.`name` as cname,pt.`name` as pname,oe.total_fees as money,oe.status as status,oe.remark,oe.expired_time extime,oe.`check`")->find();
+		->field("oe.id as id,cr.phone as phone,cr.fax as fx,cr.contacts as contacts,ur.realname as uname,cr.`name` as cname,pt.`name` as pname,oe.total_fees as money,oe.status as status,oe.remark,oe.expired_time extime,signed_time as signed_time,oe.`check`")->find();
 // 		print_r($order_info);exit();
 		return $order_info;
 	}

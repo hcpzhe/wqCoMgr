@@ -7,6 +7,7 @@ use Home\Model\Seo_orderModel;
 use Home\Model\ProductModel;
 use Home\Model\CustomerModel;
 use Home\Model\DepartModel;
+use Home\Model\UserModel;
 class OrderController extends HomeBaseController{
 /** 订单列表 */
 	public function order_list(){
@@ -107,6 +108,9 @@ class OrderController extends HomeBaseController{
 		/*查询产品分类*/
 		$product=new ProductModel();
 		$this->p_list=$product->p_list();
+		/** 查询系统 用户 */
+		$user=new UserModel();
+		$this->user_list=$user->alluser();
 		/*查询所有客户*/
 		$customer=new CustomerModel();
 		$this->cus_list=$customer->cus_list();
@@ -118,8 +122,10 @@ class OrderController extends HomeBaseController{
 		$map['total_fees']=$_POST['money'];
 		$map['prod_id']=$_POST['proid'];
 		$map['user_id']=$_POST['userid'];
-// 		$map['year']=$_POST['year'];
+ 		$map['time_limit']=$_POST['time_limit'];$day=$map['time_limit']*365;//获取服务年限
 // 		$map['domain']=$_POST['domain'];
+		$map['signed_time']=date('Y-m-d',time());//获取当前日期
+		$map['expired_time']=date("Y-m-d",strtotime("$day day"));//获取订单到期日期
 		$map['remark']=$_POST['remark'];
 		$order=new OrderModel();
 		$flag=$order->add($map);
