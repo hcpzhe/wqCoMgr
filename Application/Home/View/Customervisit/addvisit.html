@@ -28,9 +28,29 @@
         <td align="center">
            <form action="{:U('Customervisit/addvisit_insert')}" method="post">                      
             <table width="500" border="0">
-                  <tr>
+                 <tr>
                     <td width="100">拜访客户：</td>
-                    <td width="400" align="left">{$cust_name}<input type="hidden" name="cust_id" value="{$cust_id}">  </td>
+                    <td width="400" align="left">
+                      <select name='cust_id'>
+    						<!-- <notempty name="cust_list"> -->
+    						<!-- <foreach  name="cust_list" item="cust_list"> -->
+	    						<option value="{$cust_list.id}">{$cust_list.name}</option>
+	    					<!-- </foreach> -->
+    						<!-- <else /> --> 
+    						<option value="{$cust_id}">{$cust_name}</option>
+    						<!-- </notempty> -->
+    					</select>
+                    </td>
+                  </tr>
+                  <tr>
+                     <td>拜访员工：</td>
+                     <td>
+                         <select name="user_id">
+                          <!-- <foreach name="user_list" item="data"> -->
+                             <option value="{$data['id']}">{$data['realname']}</option>
+                           <!-- </foreach> -->  
+                         </select>
+                     </td> 
                   </tr>                 
                   <tr>
                     <td>拜访情况：</td>

@@ -28,38 +28,43 @@ class CustomervisitController extends HomeBaseController {
 		->field("cu.id as id,ur.realname as uname,cr.`name` as cname,cu.visit_time,cu.`content`")
 		->limit($Page->firstRow.','.$Page->listRows)->order('visit_time desc')->select();       
  		$this->assign('visit_lisit',$visit_list);
-        $this->assign('show',$show);   //分页显示
-		$this->display();
-		
-	}
-	
+        $this->assign('page',$show);   //分页显示
+		$this->display();		
+	}	
 	/**拜访记录添加**/
 	public function addvisit(){
 		$cust_id = (int)I('cust_id');
 		$cust = M('customer');
-		$check = $cust->where('id='.$cust_id)->getField('check');
-		//域名审核通过后 才能提交续费申请
-		if ($check == 0 || $check == -1){
-			$this->redirect('Customer/lists',array('id'=>$cust_id),1,'公司信息还未经过审核,审核通过后才能添加拜访记录，请审核！');
-		}else {
-		$cust_name = $cust->where('id='.$cust_id)->getField('name');
-		$this->assign('cust_id',$cust_id);
-		$this->assign('cust_name',$cust_name);
-		$this->display();
+		if(empty($cust_id)){   //未被选中制定公司  添加拜访记录
+			$newdata['check'] = 1; //公司信息审核通过后 才能添加拜访记录
+			$cust_list=$cust->where($newdata)->select();
+			$this->assign('cust_list',$cust_list);
+		}else {		
+		    $check = $cust->where('id='.$cust_id)->getField('check');
+		    //公司信息审核通过后 才能添加拜访记录
+			if ($check == 0 || $check == -1){
+				$this->redirect('Customer/lists',array('id'=>$cust_id),1,'公司信息还未经过审核,审核通过后才能添加拜访记录，请审核！');
+			}else {
+			$cust_name = $cust->where('id='.$cust_id)->getField('name');
+			$this->assign('cust_id',$cust_id);
+			$this->assign('cust_name',$cust_name);		
+		    }
 		}
-		
+		$User = M("User");
+		$user_list = $User->where('status=1')->select();
+		$this->assign('user_list',$user_list);  //拜访员工
+		$this->display();		
 	}
 	
 	/**拜访记录添加  提交接口**/
 	public function addvisit_insert(){
 		$cust_id = (int)I('cust_id');
 		$data['cust_id'] = $cust_id;
-		$data['user_id']  = UID;
+		$data['user_id']  = (int)I('user_id');
 		$data['content'] =  I('param.content');
 		$data['visit_time'] = time();	
 		$model = new Customer_visitModel();			
-		$data = $model->data($data)->add();
-		       
+		$data = $model->data($data)->add();		       
 		$this->redirect('Customervisit/add_visit_prod',array('visit_id'=>$data),1,'拜访记录添加成功，请添加沟通记录'); //拜访记录添加成功后跳转到添加沟通记录页面			
 	}
 	
