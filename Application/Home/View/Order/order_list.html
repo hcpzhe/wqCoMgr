@@ -16,6 +16,15 @@ function info(){
 			}
 		});
 }
+function push(){
+	$("input[name='che[]']").each(function(){
+		if($(this).attr("checked")=="checked"){								
+			var id=$(this).val();		
+            var url="__URL__-push_form-id-"+id;
+            location.href=url;
+			}
+		});
+}
 </script>
 </head>
 <body>
@@ -44,7 +53,8 @@ function info(){
 						关键字<input type="text" name="key">
 						<input type="submit" value="搜索" class="button_submit">
 						<a href="javascript:void(0)" class="button_submit" onclick="info();">详情</a>	
-						 <a href="{:U('Order/add_order_form')}" class="button_submit">添加订单</a>
+						<a href="{:U('Order/add_order_form')}" class="button_submit">添加订单</a>
+						<a href="javascript:void(0)" class="button_submit" onclick="push();">推送</a> 
 			       </form> 
 			   </div>            
             <!-- 搜索结束 -->

@@ -6,6 +6,7 @@ use Home\Model\Develop_orderModel;
 use Home\Model\Seo_orderModel;
 use Home\Model\ProductModel;
 use Home\Model\CustomerModel;
+use Home\Model\DepartModel;
 class OrderController extends HomeBaseController{
 /** 订单列表 */
 	public function order_list(){
@@ -133,41 +134,77 @@ class OrderController extends HomeBaseController{
 	public function check_order(){
 		/*改变订单审核状态*/
 		$id=$_GET['id'];
-		$pid=$_GET['pid'];
+		/*改变审核状态操作*/
 		$order=new OrderModel();
-		/*判断是否为网站开发订单*/
-		if($pid==1 || $pid==2 || $pid==3){
+		$flag11=$order->where("id=$id")->setField("check","1");
+		/*判断操作结果*/
+		if($flag11==0){ $this->error('审核失败');}
+		else { $this->success('审核成功');}
+		
+		
+// 		$pid=$_GET['pid'];
+		
+// 		/*判断是否为网站开发订单*/
+// 		if($pid==1 || $pid==2 || $pid==3){
+// 			/*网站开发模型*/
+// 			$dor=new Develop_orderModel();
+// 			$flag1=$dor->add_do($id);
+// 			/*如果是否重复审核审核失败*/
+// 			if($flag1==0){ $this->error('审核重复');}
+// 			else {/*否则审核继续*/ 
+				
+// 			}
+// 		}elseif ($pid==6){/*判断是否为优化开发*/
+// 			/*优化模型*/
+// 			$sor=new Seo_orderModel();
+// 			$flag2=$sor->add_so($id);
+// 			/*如果审核重复则审核失败*/
+// 			if($flag2==0){ $this->error('审核重复');}
+// 			else {/*审核继续*/
+// 				/*之心审核操作*/
+// 				$flag22=$order->where("id=$id")->setField("check","1");
+// 				/*判断审核结果*/
+// 				if($flag22==0){ $this->error('审核失败');}
+// 				else { $this->success('审核成功');}
+// 			}
+// 		}else{/*其他类型产品*/
+// 			$flag3=$order->where("id=$id")->setField("check","1");
+// 			if($flag3==0){ $this->error('审核失败');}
+// 			else { $this->success('审核成功');}
+// 		}
+	}	
+	/** 推送订单至下一个部门      表单 */
+	public function push_form($id){
+		/** 查询订单信息  判断该订单是否通过审核 */
+		$order=new OrderModel();
+		$flag=$order->field('check')->where("id=$id")->find();
+		if($flag['check']==0){ $this->error('订单未审核');}
+		/** 查询所有部门 */
+		$depart=new DepartModel();
+		$this->id=$id;
+		$this->dp=$depart->alldepart();
+		$this->display();
+	}
+	/** 推送至下一个部门 */
+	public function push($id){
+		$dp_id=$_POST['dp'];
+		/**技术 */
+		if($dp_id==1){
 			/*网站开发模型*/
 			$dor=new Develop_orderModel();
 			$flag1=$dor->add_do($id);
-			/*如果是否重复审核审核失败*/
-			if($flag1==0){ $this->error('审核重复');}
-			else {/*否则审核继续*/ 
-				/*改变审核状态操作*/
-				$flag11=$order->where("id=$id")->setField("check","1");
-				/*判断操作结果*/
-				if($flag11==0){ $this->error('审核失败');}
-				else { $this->success('审核成功');}
-			}
-		}elseif ($pid==6){/*判断是否为优化开发*/
+			if($flag1==1){ 	$this->success('推送成功');}
+			else{ $this->error('推送失败');}
+		}else if($dp_id==2){/** 优化 */
 			/*优化模型*/
 			$sor=new Seo_orderModel();
 			$flag2=$sor->add_so($id);
-			/*如果审核重复则审核失败*/
-			if($flag2==0){ $this->error('审核重复');}
-			else {/*审核继续*/
-				/*之心审核操作*/
-				$flag22=$order->where("id=$id")->setField("check","1");
-				/*判断审核结果*/
-				if($flag22==0){ $this->error('审核失败');}
-				else { $this->success('审核成功');}
-			}
-		}else{/*其他类型产品*/
-			$flag3=$order->where("id=$id")->setField("check","1");
-			if($flag3==0){ $this->error('审核失败');}
-			else { $this->success('审核成功');}
-		}
-	}	
+			if($flag2==1){ $this->success('推送成功');}
+			else{ $this->error('推送失败');}
+		}else if($dp_id==11){/** 客服 */
+			
+		}else{ $this->error('禁止向该部门推送');}
+	}
 	/** 停止订单 */
 	public function stop($id){
 		$order=new OrderModel();
