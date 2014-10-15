@@ -34,6 +34,13 @@ class DomrenController extends HomeBaseController{
 		}else {
 		$domain_mess = $domain->where('id='.$domain_id)->find();
 		$this->assign('domain_mess',$domain_mess);
+		$User = M('User');     //只有客服人员才能进行域名续费申请
+		$where = "de.id=us.depart_id";		
+		$where = $where." AND ( de.name like '%"."客服"."%')"; 
+		$user_list = $User->table('erp_user as us,erp_depart as de')
+		->where($where)
+		->getField("us.id,de.name,us.realname");
+		$this->assign('user_list',$user_list);
 		$this->display();
 		}
 	}
@@ -45,7 +52,7 @@ class DomrenController extends HomeBaseController{
 		$data['year_num'] = I('param.year');   //域名续费年限
 		$data['new_expired_time'] = $data['org_expired_time'] + $data['year_num']*60*60*24*365;  //域名到期时间计算      新过期时间
 		$data['pay_time'] = I('param.pay_time');
-		$data['apply_user'] =  I('param.apply_user');
+		$data['user_id'] =  (int)I('user_id');
 		if ($data['org_expired_time'] < time())
 		$data['status'] = 0;
 		$model = M('Domain_renewal');
@@ -87,10 +94,12 @@ class DomrenController extends HomeBaseController{
 		$id = (int)I('param.id');		
 		$model = M('Domain_renewal');
 		
-		$apply_list = $model->table('erp_domain as dn,erp_domain_renewal as dr,erp_customer as cu')
-		->where("dn.id=dr.domain_id AND cu.id=dn.cust_id AND dr.id=$id")
-		->getField("dr.id,dr.domain_id,dn.domain,dn.service,dn.reg_time,dr.money,dr.apply_user,dr.org_expired_time,dr.new_expired_time,dr.pay_time,dr.`check`,dr.check_time,cu.name,cu.contacts,cu.phone");
+		$apply_list = $model->table('erp_domain as dn,erp_domain_renewal as dr,erp_customer as cu,erp_user as ur')
+		->where("dn.id=dr.domain_id AND cu.id=dn.cust_id AND ur.id=dr.user_id AND dr.id=$id")
+		->getField("dr.id,dr.domain_id,dn.domain,dn.service,dn.reg_time,dr.money,dr.org_expired_time,dr.new_expired_time,dr.pay_time,dr.`check`,dr.check_time,cu.`name`,cu.contacts,cu.phone,ur.realname");
 	    $this->assign('apply_list',$apply_list);
+// 	    print_r($apply_list);
+// 	    exit();
 		$this->display();	
 		
 	}

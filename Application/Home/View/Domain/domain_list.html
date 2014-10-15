@@ -29,7 +29,19 @@
         <td height="40">
               <span id="cust_search">
 	           <form action="__SELF__" method="get">
-	                                        域名搜索：<input type="text" name="domain" class="search" value="" />
+	               <!-- 域名搜索：<input type="text" name="domain" class="search" value="" />
+	                <input type=submit value="搜索" class="button_submit" /> -->
+	                                     搜索条件：<select name="check" class="search">	
+	                  <option value="">审核状态</option>                                                           
+	                  <option value="1">审核通过</option>  
+	                  <option value="2">待审</option>                      
+	                </select>
+	                <select name="status" class="search">
+	                 <option value="">域名状态</option>	                                       
+	                  <option value="1">域名正常</option>  
+	                  <option value="2">禁用</option>                      
+	                </select>
+	                <input type="text" name="domain" class="search" value="" />	                                        
 	                <input type=submit value="搜索" class="button_submit" />
 	           </form> 
 	           <script type="text/javascript">	 
@@ -63,11 +75,21 @@
 								}
 							});
 					}
+					//域名删除 
+					function Domain_del(){
+						$("input[name='domain_id']").each(function(){
+							if($(this).attr("checked")=="checked"){									
+								var id=$(this).val();
+								var url="__MODULE__-Domain-domain_del-id-"+id;
+	                            location.href=url;
+								}
+							});
+					}
 	           </script>                              
                 <a href="javascript:void(0)" class="button_submit" onclick="Detailed();">查看详细</a>
                 <a href="javascript:void(0)" class="button_submit" onclick="Edit();">编辑</a> 
                 <a href="javascript:void(0)" class="button_submit" onclick="Dom_ren_app();">申请续费</a>
-                                             
+                <a href="javascript:void(0)" class="button_submit" onclick="Domain_del();">删除</a>                             
            </span>   
         </td>
       </tr>
@@ -97,8 +119,8 @@
                         <input type="checkbox" name="domain_id" value="{$data.id}">
                         <input type="hidden" name="cust_id" value="{$data.cust_id}">
                      </td>
-                     <td width="130" align="center">{$data.domain}</td>
-                     <td width="110" align="center">{$data.service}</td>
+                     <td width="130" align="center">{$data.domain|mb_substr=0,30}</td>
+                     <td width="110" align="center">{$data.service|mb_substr=0,27}</td>
                      <td width="160" align="center">{:date('Y/m/d H:i:s',$data['reg_time'])}</td>
                      <td width="160" align="center">{:date('Y/m/d H:i:s',$data['expired_time'])}</td>
                      <td width="100" align="center">
@@ -117,7 +139,7 @@
         <td align="center">                     
           <table width="742" border="0" style="display: block; border-bottom: 1px solid #ccc; border-right: 1px solid #ccc; border-left: 1px solid #ccc;">
             <tr style="display: block; padding-top: 10px;">
-              <td height="40" style="display: block; text-align: center; line-height: 40px;">{$show}</td>
+              <td height="40" style="display: block; text-align: center; line-height: 40px;">{$page}</td>
             </tr>
           </table>
         </td>

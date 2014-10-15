@@ -10,6 +10,20 @@ class DomainController extends HomeBaseController{
 		$map=array();
 		$model=new DomainModel();
 		$id = (int)I('param.id');
+		$check = (int)I('param.check');  //按照审核状态搜索
+		$status = (int)I('param.status');  //按照域名状态搜索
+		//$domain = (int)I('param.domain');
+		if (!empty($check) && $check == 1){
+			$map['check'] = 1; //审核通过
+		}elseif (!empty($check) && $check == 2){
+			$map['check'] = 0; //待审
+		}
+		if (!empty($status) && $status == 1){
+			$map['status'] = 1; //域名正常
+		}elseif (!empty($status) && $status == 2){
+			$map['status'] = 0; //域名专题为禁用
+		}
+		
 		if ($id>0) $map['id'] = $id;
 		if(isset($domain)){
 			$map['domain']   =   array('like', '%'.$domain.'%');
@@ -19,7 +33,7 @@ class DomainController extends HomeBaseController{
 		$show       = $Page->show();// 分页显示输出
 		$domain_list = $model->where($map)->limit($Page->firstRow.','.$Page->listRows)->order('expired_time')->select();
 		$this->assign('domain_list',$domain_list);
-		$this->assign('show',$show);   //分页显示
+		$this->assign('page',$show);   //分页显示
 		$this->assign('domain', $domain);           //用于搜索条件的显示
 		if (isset($tpl)) $this->display($tpl);
 		else $this->display();
@@ -38,7 +52,7 @@ class DomainController extends HomeBaseController{
 		}
 	}
 	
-	/***域名模糊检索***/
+	/***添加域名时 域名的模糊检索***/
 	public function search($domain=null){
 		$domain = I('domain');
 		if(!empty($domain)){
@@ -132,6 +146,13 @@ class DomainController extends HomeBaseController{
 		if (false === $model->create($newdata)) $this->error($model->getError());
 		if (false === $model->where('id='.$id)->save()) $this->error('审核失败');
 		$this->success('审核成功',U('Domain/domain_list'));
+	}
+	/***域名删除**/
+	public function domain_del(){
+		$id = (int)I('param.id');
+		$model = M('Domain');
+		$model-> where('id='.$id)->setField('status','-1');
+		$this->success('域名删除成功',U('Domain/domain_list'));
 	}
 		
 }     

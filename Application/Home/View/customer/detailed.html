@@ -24,6 +24,7 @@
       <tr>
         <td height="30"></td>
       </tr>
+       <!-- <foreach name="list" item="list"> -->
        <tr>
         <td height="40">
               <span id="cust_search">
@@ -44,7 +45,7 @@
             <table width="740" border="0" class="com_table" cellpadding="0" cellspacing="0">
                   <tr style="height: 40px;">
                     <th colspan="4" align="left">公司信息</th>                    
-                  </tr>
+                  </tr>                  
                   <tr>
                     <td width="150"> 编&nbsp;&nbsp;&nbsp;&nbsp;号 </td>
                     <td width="220"> 
@@ -68,7 +69,7 @@
                   </tr>
                   <tr>
                     <td> 添  加  人 </td>
-                    <td>{$list['add_user']}</td>
+                    <td>{$list['realname']}</td>
                     <td>添加时间 </td>
                     <td>{:date('Y/m/d H:i:s',$list['add_time'])}</td>
                   </tr>
@@ -88,7 +89,8 @@
                   <tr>
                     <td>备 &nbsp;&nbsp;&nbsp;注</td>
                     <td colspan="3">{$list['remark']}</td>
-                  </tr>                    
+                  </tr>   
+                  <!-- </foreach> -->                 
             </table>
             
             <!-- <if condition="$res eq 0 "> --><font color="red">该公司还未添加拜访记录</font> <br/>

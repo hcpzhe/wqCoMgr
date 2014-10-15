@@ -69,19 +69,19 @@
                     <td> 付 款 时 间 </td>
                     <td> {$apply_list['pay_time']} </td>
                     <td> 申 &nbsp; 请  &nbsp; 人 </td>
-                    <td> {$apply_list['apply_user']}   </td>
+                    <td> {$apply_list['realname']}   </td>
                   </tr> 
                   <tr>
                     <td> 审 核 状 态 </td>
                     <td>
-                         <if condition="$apply_list['check'] eq -1 ">拒绝
-                        <elseif condition="$apply_list['check'] eq 0 " /><a href="{:U('Domren/check?id='.$data['id'])}">待审</a>
-                        <else /> 通过</if>
+                         <!-- <if condition="$apply_list['check'] eq -1 "> -->拒绝
+                        <!-- <elseif condition="$apply_list['check'] eq 0 " /> --><a href="{:U('Domren/check?id='.$data['id'])}">待审</a>
+                        <!-- <else /> --> 通过<!-- </if> -->
                     </td>
                     <td> 审 核 时 间 </td>
                     <td>
-                       <if condition="$apply_list['check'] eq 0 "><font color="red">该信息还未审核</font>
-                      <else />{:date('Y/m/d H:i:s',$apply_list['check_time'])}</if>
+                       <!-- <if condition="$apply_list['check'] eq 0 "> --><font color="red">该信息还未审核</font>
+                      <!-- <else /> -->{:date('Y/m/d H:i:s',$apply_list['check_time'])}<!-- </if> -->
                     </td>
                   </tr>    
                   <!-- </foreach> -->                
