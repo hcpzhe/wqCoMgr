@@ -49,11 +49,15 @@ class DomrenController extends HomeBaseController{
 		$domain_id = (int)I('id');		
 		$domain = M('Domain');
 		$check = $domain->where('id='.$domain_id)->getField('check');
+		$doamin_user = $domain->where('id='.$domain_id)->getField('doamin_user');
+		
 		//域名审核通过后 才能提交续费申请
-		if ($check == 0 || $check == -1){
-			//$this->redirect('Domain/domain_list',array('id'=>$domain_id),1,'域名还未经过审核,请审核！'); 
+		if ($check == 0 || $check == -1){ 
 			$this->error('域名还未经过审核,请审核！');
 		}else {
+			if ($doamin_user == 1){
+				$this->error('域名为客户所有，没有申请权限！');
+			}
 		$domain_mess = $domain->where('id='.$domain_id)->find();
 		$this->assign('domain_mess',$domain_mess);
 		$User = M('User');     //只有客服人员才能进行域名续费申请
@@ -78,8 +82,7 @@ class DomrenController extends HomeBaseController{
 		if ($data['org_expired_time'] < time())
 		$data['status'] = 0;
 		$model = M('Domain_renewal');
-		$data = $model->data($data)->add();
-	
+		$data = $model->data($data)->add();	
 		$this->success('域名续费申请成功',U('Domren/dom_ren_app'));
 	}
 	
@@ -120,10 +123,6 @@ class DomrenController extends HomeBaseController{
 		->where("dn.id=dr.domain_id AND cu.id=dn.cust_id AND ur.id=dr.user_id AND dr.id=$id")
 		->getField("dr.id,dr.domain_id,dn.domain,dn.service,dn.reg_time,dr.money,dr.org_expired_time,dr.new_expired_time,dr.pay_time,dr.`check`,dr.check_time,cu.`name`,cu.contacts,cu.phone,ur.realname");
 	    $this->assign('apply_list',$apply_list);
-// 	    print_r($apply_list);
-// 	    exit();
-		$this->display();	
-		
-	}
-	
+		$this->display();			
+	}	
 }

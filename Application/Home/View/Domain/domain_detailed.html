@@ -68,23 +68,29 @@
                   <tr>
                     <td>域 名 状 态</td>
                     <td>
-                        <if condition="$domain_list['status'] eq -1 ">删除
-                        <elseif condition="$domain_list['status'] eq 0 " />禁用   <font color="red"> 该域名已过期，请抓紧时间续费！</font>
-                        <else /> 正常</if>
+                        <!-- <if condition="$domain_list['status'] eq -1 "> -->删除
+                        <!-- <elseif condition="$domain_list['status'] eq 0 " /> -->禁用   <font color="red"> 该域名已过期，请抓紧时间续费！</font>
+                        <!-- <else /> --> 正常<!-- </if> -->
                     </td>
                     <td>审 核 状 态</td>
                     <td>
-                        <if condition="$domain_list['check'] eq -1 ">拒绝
-                        <elseif condition="$domain_list['check'] eq 0 " /><a href="{:U('Domain/check?id='.$domain_list['id'])}">待审</a> &nbsp;&nbsp;   <font color="red"> 请尽快审核！</font>
-                        <else /> 通过</if>                      
+                        <!-- <if condition="$domain_list['check'] eq -1 "> -->拒绝
+                        <!-- <elseif condition="$domain_list['check'] eq 0 " /> --><a href="{:U('Domain/check?id='.$domain_list['id'])}">待审</a>
+                        <!-- <else /> --> 通过<!-- </if> -->                      
                     </td>
-                  </tr>
-                  <if condition="$domain_list['check'] egt 1 ">
+                  </tr>              
                   <tr>
                     <td>审 核 时 间</td>
-                    <td colspan="3">{:date('Y/m/d H:i:s',$domain_list['check_time'])}</td>                   
+                    <td>
+                      <!-- <if condition="$domain_list['check'] egt 1 "> -->{:date('Y/m/d H:i:s',$domain_list['check_time'])}
+                      <!-- <else /> --><font color="red">域名还未通过审核</font><!-- </if> -->
+                    </td>  
+                    <td>域名归属</td>
+                    <td>
+                       <!-- <if condition="$domain_list['doamin_user'] eq 0 "> -->公司
+                       <!-- <else /> -->客户<!-- </if> -->
+                    </td>                 
                   </tr>
-                   <else /> </if>
                   <!-- </foreach> -->                                 
             </table>                          
         </td>
