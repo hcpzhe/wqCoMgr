@@ -77,6 +77,7 @@ class DomainController extends HomeBaseController{
 		$data['cust_id'] = (int)I('cust_id');
 		$data['domain'] =  I('param.domain');
 		$data['service'] =  I('param.service');
+		$data['doamin_user'] =  I('param.doamin_user');
 		$data['reg_time'] = time();
 		$data['year_num'] = I('param.year');   //新注域名使用年限
 		$data['expired_time'] = $data['reg_time'] + $data['year_num']*60*60*24*365;  //域名到期时间计算
@@ -99,7 +100,7 @@ class DomainController extends HomeBaseController{
 		 //获取域名详细信息
 		$domain_list = $domain->table('erp_customer as cr,erp_domain as dom')
 		->where("cr.id=dom.cust_id AND dom.id=$id")
-		->getField("dom.id as id,cr.id as cust_id,cr.`name` as `name`,dom.domain as domain,dom.service as service,dom.reg_time as reg_time,dom.expired_time as expired_time,dom.`check` as `check`,dom.check_time as check_time,dom.`status` as `status`");
+		->getField("dom.id as id,cr.id as cust_id,cr.`name` as `name`,dom.domain as domain,dom.service as service,dom.reg_time as reg_time,dom.expired_time as expired_time,dom.`check` as `check`,dom.check_time as check_time,dom.`status` as `status`,dom.doamin_user");
        
         $this->assign('cust_id',$domain_list[$id]['cust_id']);  //公司id
         $this->assign('id',$domain_list[$id]['id']);  //公司域名所对应的id
