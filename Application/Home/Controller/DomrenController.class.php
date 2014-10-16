@@ -7,19 +7,41 @@ use Think\Page;
 class DomrenController extends HomeBaseController{
 	/*域名续费申请  列表*/
 	public function dom_ren_app(){
-		$model = M('Domain_renewal');		
-		$count=$model->table('erp_domain as dn,erp_domain_renewal as dr')
-		->where("dn.id=dr.domain_id AND 'status'=0 or 'status'=1")
+		$model = M('Domain_renewal');	
+		$check = (int)I('param.check');  //按照审核状态搜索
+		$status = (int)I('param.status');  //按照域名状态搜索
+		$domain = I('param.domain');  //搜索关键字
+		$where = "dn.id=dr.domain_id";   //查询条件 连接
+		if (!empty($check) && $check == 1){
+			//审核通过
+			$where = $where." AND dr.`check`=1";
+		}elseif (!empty($check) && $check == 2){
+			 //待审
+			$where = $where." AND dr.`check`=0";
+		}
+		if (!empty($status) && $status == 1){
+			 //域名正常
+			$where = $where." AND dr.`status`=1";
+		}elseif (!empty($status) && $status == 2){
+			 //域名状态为禁用
+			$where = $where." AND dr.`status`=0";
+		}			
+		if(isset($domain)){
+			//搜索域名  关键字
+			$where=$where." AND ( dn.domain like '%".$domain."%')";
+		}
+		$count = $model->table('erp_domain as dn,erp_domain_renewal as dr')
+		->where($where)
 		->count();       // 查询满足要求的总记录数
 		$Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(10)
 		$show       = $Page->show();// 分页显示输出
 		//续费申请的信息		
 		$apply_list = $model->table('erp_domain as dn,erp_domain_renewal as dr')
-		->where("dn.id=dr.domain_id AND 'status'=0 or 'status'=1")
+		->where($where)
 		->order('dr.id desc')
 		->getField("dr.id,dr.domain_id,dn.domain,dr.money,dr.org_expired_time,dr.new_expired_time,dr.pay_time,dr.`check`");
-        $this->assign('apply_list',$apply_list);
-        $this->assign('show',$show);   //分页显示
+		$this->assign('apply_list',$apply_list);
+        $this->assign('page',$show);   //分页显示
 		$this->display();
 	}
 	/**域名申请续费 **/

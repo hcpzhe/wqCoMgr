@@ -28,7 +28,20 @@
       <tr>
         <td height="40">
               <span id="cust_search">
-	           <span> 操作 ： </span>
+                 <form action="__SELF__" method="get">
+	                                        搜索：<select name="check" class="search">	
+	                  <option value="">审核状态</option>                                                           
+	                  <option value="1">审核通过</option>  
+	                  <option value="2">待审</option>                      
+	                </select>
+	                <select name="status" class="search">
+	                 <option value="">域名状态</option>	                                       
+	                  <option value="1">域名正常</option>  
+	                  <option value="2">禁用</option>                      
+	                </select>
+	                <input type="text" name="domain" class="search" value="" />	                                        
+	                <input type=submit value="搜索" class="button_submit" />
+	           </form> 	     
 	           <script type="text/javascript">	 
 	                //查看域名详细信息    跳转 
 					function Detailed(){
@@ -92,7 +105,7 @@
         <td align="center">                     
           <table width="742" border="0" style="display: block; border-bottom: 1px solid #ccc; border-right: 1px solid #ccc; border-left: 1px solid #ccc;">
             <tr style="display: block; padding-top: 10px;">
-              <td height="40" style="display: block; text-align: center; line-height: 40px;">{$show}</td>
+              <td height="40" style="display: block; text-align: center; line-height: 40px;">{$page}</td>
             </tr>
           </table>
         </td>
