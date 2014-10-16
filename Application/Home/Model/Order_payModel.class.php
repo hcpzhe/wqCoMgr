@@ -30,5 +30,10 @@ class Order_payModel extends Model{
 // 		echo $this->_sql();
 		return $op_list;
 	}
+	/** 查询指定订单的付款记录 */
+	public function o_list($id){
+		$olist=$this->where("order_id=$id AND status=1")->select();
+		return $olist;
+	}
 
 }

@@ -33,7 +33,7 @@
   </tr>
   <tr>
     <td align="right" bgcolor="#F0F0F0">购买产品：</td>
-    <td bgcolor="#FFFFFF">{$orderinfo.pname}</td>
+    <td bgcolor="#FFFFFF">{$orderinfo.pname}( {$orderinfo.limitime} 年)</td>
     <td align="right" bgcolor="#F0F0F0">订单金额：</td>
     <td bgcolor="#FFFFFF">{$orderinfo.money}元</td>
   </tr>
@@ -70,6 +70,83 @@
 <!-- 订单详情结束 -->    
 			</td>
           </tr>
+          <tr><td>
+<table cellpadding="0" cellspacing="0" class="info_list">
+	<tr><th colspan="5"><h3>订单备案信息</h3></th></tr>
+</table>
+	      </td></tr>    
+          <tr><td>
+<!-- 订单付款记录 --> 
+<table cellpadding="0" cellspacing="0" class="info_list">
+	<tr><th colspan="5"><h3>订单付款记录</h3></th></tr>
+	<tr>
+		<th>编号</th>
+		<th>金额</th>
+		<th>类型</th>
+		<th>付款日期</th>
+		<th>审核状态</th>
+	</tr>
+<!-- <foreach name="pay_list" item="plist"> -->
+	<tr class="list_tr">
+		<td>{$plist.id}</td>
+		<td>{$plist.money}</td>
+		<td><!-- <if condition="$plist.class eq 1"> -->预付款<!-- <else/> -->余款<!-- </if> --></td>
+		<td>{$plist.pay_time}</td>
+		<td><!-- <if condition="$list.check eq 1"> -->通过<!-- <elseif condition="$list.check eq 0"/> -->待审<!-- <else/> -->拒绝<!-- </if> --></td>
+	</tr>
+<!-- </foreach> -->
+	<tr><td colspan="8" align="center">{$data[show]}</td></tr>
+</table>
+<!-- 订单付款记录 -->         
+          </td></tr>
+          <tr><td>
+<!-- 订单续费记录 --> 
+<table cellpadding="0" cellspacing="0" class="info_list">
+	<tr><th colspan="5"><h3>订单续费记录</h3></th></tr>
+	<tr>
+		<th>编号</th>
+		<th>金额</th>
+		<th>类型</th>
+		<th>付款日期</th>
+		<th>审核状态</th>
+	</tr>
+<!-- <foreach name="pay_list" item="plist"> -->
+	<tr class="list_tr">
+		<td>{$plist.id}</td>
+		<td>{$plist.money}</td>
+		<td><!-- <if condition="$plist.class eq 1"> -->预付款<!-- <else/> -->余款<!-- </if> --></td>
+		<td>{$plist.pay_time}</td>
+		<td><!-- <if condition="$list.check eq 1"> -->通过<!-- <elseif condition="$list.check eq 0"/> -->待审<!-- <else/> -->拒绝<!-- </if> --></td>
+	</tr>
+<!-- </foreach> -->
+	<tr><td colspan="8" align="center">{$data[show]}</td></tr>
+</table>
+<!-- 订单续费记录 -->         
+          </td></tr>   
+          <tr><td>
+<!-- 订单回访记录 --> 
+<table cellpadding="0" cellspacing="0" class="info_list">
+	<tr><th colspan="5"><h3>订单回访记录</h3></th></tr>
+	<tr>
+		<th>编号</th>
+		<th>金额</th>
+		<th>类型</th>
+		<th>付款日期</th>
+		<th>审核状态</th>
+	</tr>
+<!-- <foreach name="pay_list" item="plist"> -->
+	<tr class="list_tr">
+		<td>{$plist.id}</td>
+		<td>{$plist.money}</td>
+		<td><!-- <if condition="$plist.class eq 1"> -->预付款<!-- <else/> -->余款<!-- </if> --></td>
+		<td>{$plist.pay_time}</td>
+		<td><!-- <if condition="$list.check eq 1"> -->通过<!-- <elseif condition="$list.check eq 0"/> -->待审<!-- <else/> -->拒绝<!-- </if> --></td>
+	</tr>
+<!-- </foreach> -->
+	<tr><td colspan="8" align="center">{$data[show]}</td></tr>
+</table>
+<!-- 订单回访 -->         
+          </td></tr>                 
           <tr>
             <td class="notice"><img style="float:left; margin-left:10px;" src="__IMG__/notice_img.png" /><span>公司通知</span></td>
           </tr>

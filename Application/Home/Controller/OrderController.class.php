@@ -8,6 +8,7 @@ use Home\Model\ProductModel;
 use Home\Model\CustomerModel;
 use Home\Model\DepartModel;
 use Home\Model\UserModel;
+use Home\Model\Order_payModel;
 class OrderController extends HomeBaseController{
 /** 订单列表 */
 	public function order_list(){
@@ -67,8 +68,14 @@ class OrderController extends HomeBaseController{
 /**   订单详情   */
 	public function order_info(){
 		$id=$_GET['id'];
+		/** 订单信息 */
 		$order=new OrderModel();
 		$this->orderinfo=$order->orderinfo($id);
+		/** 订单付款记录*/
+		
+		/** 订单续费记录 */
+		$order_pay=new Order_payModel();
+		$this->pay_list=$order_pay->o_list($id);
 		$this->display();
 	}
 /**  订单修改表单 */
@@ -194,6 +201,7 @@ class OrderController extends HomeBaseController{
 	/** 推送至下一个部门 */
 	public function push($id){
 		$dp_id=$_POST['dp'];
+		/**  */
 		/**技术 */
 		if($dp_id==1){
 			/*网站开发模型*/

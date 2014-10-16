@@ -80,3 +80,5 @@ a.red{ color:#cc0001;}
 .info_list th{ padding:10px; background:#f4f4f4; border-bottom:1px solid #ccc; text-align:center;}
 /* 信息列表头部操作按钮样式*/
 .button_submit{ background: url(../images/submit_bg.png) no-repeat; width: 60px; height: 30px; display: inline-block; color: #FFF; vertical-align: middle; border:0; cursor: pointer;text-align: center; line-height: 30px;}
+/* 头部提示文字*/
+.tishi {font-size: 12px;color: #F00;width: 700px;margin: 0 auto;display: block;}
