@@ -59,6 +59,7 @@ function apy(){
 		<th>产品</th>
 		<th>客户</th>
 		<th>续费金额</th>
+		<th>付款时间</th>
 		<th>原到期时间</th>
 		<th>现到期时间</th>
 		<th>提交人</th>
@@ -69,8 +70,9 @@ function apy(){
 		<td>{$list.pname}</td>
 		<td>{$list.cname}</td>
 		<td>{$list.money}元</td>
-		<td>昨天</td>
-		<td>今天</td>
+		<td>{$list.pay_time}</td>
+		<td>{$list.org_expired_time}</td>
+		<td>{$list.new_expired_time}</td>
 		<td>超管</td>
 		<!-- 显示审核状态 -->
 		<td>
