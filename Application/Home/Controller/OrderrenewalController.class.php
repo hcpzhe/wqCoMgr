@@ -44,7 +44,19 @@ class OrderrenewalController extends HomeBaseController{
 		$map['order_id']=$id;
 		$map['money']=$_POST['money'];
 		$map['remark']=$_POST['remark'];
-		$map['org_expired_time']=$_POST['expired_time'];
+		/** 当前日期*/
+		$map['pay_time']=date('Y-m-d',time());//获取当前日期
+		/** 原过期时间  */
+		$order=new OrderModel();
+		$data=$order->s_cname($id);
+		$map['org_expired_time']=$data['expired_time'];//原到期时间
+		/** 现过期时间  */
+		$map['ren_time']=$_POST['time_limit'];
+		$day=$map['ren_time']*365;//获取服务年限
+		$map['new_expired_time']=date("Y-m-d",strtotime("$day day"));//获取订单新到期日期
+// 		echo "<pre>";
+// 		print_r($map);
+// 		echo "</pre>";exit();
 		$flag=$Ordren->add($map);
 		if($flag==0){	$this->error('添加失败！');
 		}else{	$this->success('添加成功！');}

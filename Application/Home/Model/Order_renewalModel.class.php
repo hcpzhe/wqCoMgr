@@ -25,4 +25,9 @@ class Order_renewalModel extends  Model{
 // 				echo "</pre>";
 		return $data;
 	}
+	/** 订单续费列表 */
+	public function o_list($id){
+		$olist=$this->where("order_id=$id AND status=1")->select();
+		return $olist;
+	}
 }

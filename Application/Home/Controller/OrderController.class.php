@@ -9,6 +9,7 @@ use Home\Model\CustomerModel;
 use Home\Model\DepartModel;
 use Home\Model\UserModel;
 use Home\Model\Order_payModel;
+use Home\Model\Order_renewalModel;
 class OrderController extends HomeBaseController{
 /** 订单列表 */
 	public function order_list(){
@@ -71,9 +72,10 @@ class OrderController extends HomeBaseController{
 		/** 订单信息 */
 		$order=new OrderModel();
 		$this->orderinfo=$order->orderinfo($id);
-		/** 订单付款记录*/
-		
 		/** 订单续费记录 */
+		$order_ren=new Order_renewalModel();
+		$this->ren_list=$order_ren->o_list($id);
+		/** 订单付款记录*/
 		$order_pay=new Order_payModel();
 		$this->pay_list=$order_pay->o_list($id);
 		$this->display();

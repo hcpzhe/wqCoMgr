@@ -33,7 +33,7 @@ class OrderModel extends Model{
 	public function s_cname($oid){
 		$cname=$this->table('erp_order as eo,erp_customer as ec')
 		->where("eo.cust_id=ec.id ANd eo.id=$oid")
-		->field("ec.`name` as cname")->find();
+		->field("ec.`name` as cname,eo.expired_time as expired_time")->find();
 		return $cname;
 	}
 	/*显示带续费订单列表（三个月）*/

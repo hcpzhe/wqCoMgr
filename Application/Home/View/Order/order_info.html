@@ -23,7 +23,7 @@
     <td align="right" bgcolor="#F0F0F0">销售专员：</td>
     <td bgcolor="#FFFFFF">{$orderinfo.uname}</td>
     <td align="right" bgcolor="#F0F0F0">审核结果</td>
-    <td bgcolor="#FFFFFF"><if condition="$orderinfo.check eq 1">通过<elseif condition="$orderinfo.check eq 0"/>待审<else/>拒绝</if></td>
+    <td bgcolor="#FFFFFF"><!-- <if condition="$orderinfo.check eq 1"> -->通过<!-- <elseif condition="$orderinfo.check eq 0"/> -->待审<!-- <else/> -->拒绝<!-- </if> --></td>
   </tr>
   <tr>
     <td align="right" bgcolor="#F0F0F0">合同编号：</td>
@@ -48,11 +48,11 @@
     <td bgcolor="#FFFFFF">{$orderinfo.contacts}</td>
     <td align="right" bgcolor="#F0F0F0">订单状态：</td>
     <td bgcolor="#FFFFFF"><span class="fontlv">
-    	<if condition="$orderinfo.status eq 1">
+    	<!-- <if condition="$orderinfo.status eq 1"> -->
     	正常
-    	<elseif condition="$orderinfo.status eq 0"/>
+    	<!-- <elseif condition="$orderinfo.status eq 0"/> -->
     	禁用
-    	</if>
+    	<!-- </if> -->
     </span></td>
   </tr>
   <tr>
@@ -95,7 +95,6 @@
 		<td><!-- <if condition="$list.check eq 1"> -->通过<!-- <elseif condition="$list.check eq 0"/> -->待审<!-- <else/> -->拒绝<!-- </if> --></td>
 	</tr>
 <!-- </foreach> -->
-	<tr><td colspan="8" align="center">{$data[show]}</td></tr>
 </table>
 <!-- 订单付款记录 -->         
           </td></tr>
@@ -110,16 +109,15 @@
 		<th>付款日期</th>
 		<th>审核状态</th>
 	</tr>
-<!-- <foreach name="pay_list" item="plist"> -->
+<!-- <foreach name="ren_list" item="rlist"> -->
 	<tr class="list_tr">
-		<td>{$plist.id}</td>
-		<td>{$plist.money}</td>
-		<td><!-- <if condition="$plist.class eq 1"> -->预付款<!-- <else/> -->余款<!-- </if> --></td>
-		<td>{$plist.pay_time}</td>
-		<td><!-- <if condition="$list.check eq 1"> -->通过<!-- <elseif condition="$list.check eq 0"/> -->待审<!-- <else/> -->拒绝<!-- </if> --></td>
+		<td>{$rlist.id}</td>
+		<td>{$rlist.money}</td>
+		<td><!-- <if condition="$rlist.class eq 1"> -->预付款<!-- <else/> -->余款<!-- </if> --></td>
+		<td>{$rlist.pay_time}</td>
+		<td><!-- <if condition="$rlist.check eq 1"> -->通过<!-- <elseif condition="$rlist.check eq 0"/> -->待审<!-- <else/> -->拒绝<!-- </if> --></td>
 	</tr>
 <!-- </foreach> -->
-	<tr><td colspan="8" align="center">{$data[show]}</td></tr>
 </table>
 <!-- 订单续费记录 -->         
           </td></tr>   
@@ -143,7 +141,6 @@
 		<td><!-- <if condition="$list.check eq 1"> -->通过<!-- <elseif condition="$list.check eq 0"/> -->待审<!-- <else/> -->拒绝<!-- </if> --></td>
 	</tr>
 <!-- </foreach> -->
-	<tr><td colspan="8" align="center">{$data[show]}</td></tr>
 </table>
 <!-- 订单回访 -->         
           </td></tr>                 
