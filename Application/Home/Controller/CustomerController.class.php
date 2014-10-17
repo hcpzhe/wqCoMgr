@@ -29,9 +29,9 @@ class CustomerController extends HomeBaseController {
 		$key = (int)I('param.key'); //选择搜索条件
 		$name = I('param.name');    //输入的搜索信息
 		$visit = new CustomerModel();
-		if($key == 1){
-			$where=$where." AND ( cr.name like '%".$name."%')"; //公司名称模糊检索
-		}elseif ($key == 2){
+		if(!empty($name) && $key == 1){
+			$where=$where." AND ( cr.`name` like '%".$name."%')"; //公司名称模糊检索
+		}elseif (!empty($name) && $key == 2){
 			$where=$where." AND ( ur.realname like '%".$name."%')"; //按照录入人进行模糊检索
 		}
 	    $this->data=$visit->customer_lists($where);
