@@ -6,33 +6,13 @@
 <link href="__CSS__/style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="__JS__/jquery.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
-<script type="text/javascript">
-function info(){
-	$("input[name='che[]']").each(function(){
-		if($(this).attr("checked")=="checked"){								
-			var id=$(this).val();		
-            var url="__URL__-order_info-id-"+id;
-            location.href=url;
-			}
-		});
-}
-function push(){
-	$("input[name='che[]']").each(function(){
-		if($(this).attr("checked")=="checked"){								
-			var id=$(this).val();		
-            var url="__URL__-push_form-id-"+id;
-            location.href=url;
-			}
-		});
-}
-</script>
 </head>
 <body>
 <div style="width:100%; overflow:hidden; background: #f2f2f2;">
    <div class="center_content">
       <table width="755" bgcolor="#fff" cellpadding="0" cellspacing="0">
           <tr>
-            <td class="menu"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32" /><font>订单列表</font></span></td>
+            <td class="menu"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32" /><font>业绩列表</font></span></td>
           </tr>
           <tr>
         	<td height="70" style="border:0px;"><font class="tishi">头部提示信息：每个订单只可向一个部门推送一次,请谨慎操作！</font></td>
@@ -42,23 +22,16 @@ function push(){
             <td class="menu">
             <!-- 搜索开始 -->
 			   <div class="top_search">
-			       <form action="{:U('Order/order_list')}" method="post" class="search_form" name="search">
+			       <form action="{:U('Results/reslist')}" method="post" class="search_form" name="search">
 						<select name="product">
 							<option value="">所有产品</option>
 							<!-- <foreach  name="pro_list" item="po_list"> -->
     						<option value="{$po_list.id}">{$po_list.name}</option>
     						<!-- </foreach> -->	
 						</select>
-						<select name="check">
-							<option>审核</option>
-							<option value="1">审核通过</option>
-							<option value="2">未审核</option>
-						</select>
+						<input type="hidden" name="check" value="1">
 						关键字<input type="text" name="key">
 						<input type="submit" value="搜索" class="button_submit">
-						<a href="javascript:void(0)" class="button_submit" onclick="info();">详情</a>	
-						<a href="{:U('Order/add_order_form')}" class="button_submit">添加订单</a>
-						<a href="javascript:void(0)" class="button_submit" onclick="push();">推送</a> 
 			       </form> 
 			   </div>            
             <!-- 搜索结束 -->
@@ -71,33 +44,23 @@ function push(){
 <table cellpadding="0" cellspacing="0" class="info_list">
 	<tr>
 		<th>订单号</th>
-		<th>签单人员</th>
-		<th>客户</th>
+		<th>销售专员</th>
 		<th>产品</th>
 		<th>金额</th>
 		<th>签单时间</th>
-		<th>审核</th>
 	</tr>
 <form method="post" name="ches">		
 <!-- <foreach name="data['order_list']" item="list"> -->
 	<tr class="list_tr">
-		<td><input type="checkbox" name="che[]" value="{$list.id}"></td>
+		<td>{$list.id}</td>
 		<td>{$list.uname}</td>
-		<td>{$list.cname}</td>
 		<td>{$list.pname}</td>
 		<td>{$list.total_fees}元</td>
 		<td>{$list.signed_time}</td>
-		<!-- 显示审核状态 -->
-		<td>
-			<!-- <if condition="$list.check eq 1"> -->通过
-			<!-- <elseif condition="$list.check eq 0"/> -->
-			<a href="{:U('Order/check_order?id='.$list['id'].'&& pid='.$list['pid'])}">待审</a>
-			<!-- <else/> -->拒绝<!-- </if> -->
-		</td>
 	</tr>
 <!-- </foreach> -->
 </form>
-	<tr><td colspan="8" align="center">{$data[show]}</td></tr>
+	<tr><td colspan="5" align="center">{$data[show]}</td></tr>
 </table>
 <!-- 订单列表结束-->
 			</td>
