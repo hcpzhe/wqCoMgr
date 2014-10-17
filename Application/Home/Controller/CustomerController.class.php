@@ -28,26 +28,14 @@ class CustomerController extends HomeBaseController {
 	public function lists() {				
 		$key = (int)I('param.key'); //选择搜索条件
 		$name = I('param.name');    //输入的搜索信息
-		$visit = M('Customer');
-		$where = "cr.user_id=ur.id AND cr.status=1";  //多表查询条件
+		$visit = new CustomerModel();
 		if($key == 1){
 			$where=$where." AND ( cr.name like '%".$name."%')"; //公司名称模糊检索
-		}else{
+		}elseif ($key == 2){
 			$where=$where." AND ( ur.realname like '%".$name."%')"; //按照录入人进行模糊检索
 		}
-		$count=$visit->table('erp_user as ur,erp_customer as cr')
-		->where($where)
-		->count();       // 查询满足要求的总记录数
-		$Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(10)
-		$show       = $Page->show();// 分页显示输出
-		$list = $visit->table('erp_user as ur,erp_customer as cr')
-		->where($where)
-		->field("cr.id as id,ur.realname as uname,cr.`name` as cname,cr.contacts,cr.phone,cr.check")
-		->limit($Page->firstRow.','.$Page->listRows)->order('cr.id desc')->select();
-		$this->assign('list',$list);
-		$this->assign('page',$show);   //分页显示
-		$this->display();
-		
+	    $this->data=$visit->customer_lists($where);
+		$this->display();		
 	}
 	
 	/***客户名称模糊检索***/
