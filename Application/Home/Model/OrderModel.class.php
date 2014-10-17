@@ -54,4 +54,12 @@ class OrderModel extends Model{
 					->limit($page->firstRow.','.$page->listRows)->select();	
 		return $data;
 	}	
+	/** 业绩排行 */
+	public function result(){
+		$data=$this->table('erp_order AS eo,erp_user as eu')
+		->where("eo.user_id=eu.id AND eo.`check`=1")
+		->field("eu.realname as uname,SUM(eo.total_fees) as money")
+		->group('eu.realname')->select();
+		return $data;
+	}
 }
