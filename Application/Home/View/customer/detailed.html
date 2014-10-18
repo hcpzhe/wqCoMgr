@@ -31,7 +31,7 @@
 	           	<font style="padding-left: 20px;"> 操作： </font>                                      
                 <a href="{:U('Customer/edit?id='.$list['id'])}" class="button_submit">信息修改</a>
                 <a href="{:U('Customervisit/addvisit?cust_id='.$list['id'])}" class="button_submit">添加拜访</a>
-                <a href="{:U('Order/add_order_form?cust_id='.$list['id'])}" class="button_submit" >添加订单</a> 
+                <a href="{:U('Order/add_order_form?id='.$list['id'])}" class="button_submit" >添加订单</a> 
                 <a href="{:U('Domain/add_domain?cust_id='.$list['id'])}" class="button_submit">添加域名</a>              
            </span>   
         </td>
@@ -164,7 +164,19 @@
                        <!-- <elseif condition="$domain_list['check'] eq 0 " /> --><a href="{:U('Domain/check?id='.$domain_list['id'])}">待审</a>
                        <!-- <else /> -->通过<!-- </if> -->
                     </td>
-                  </tr>                                   
+                  </tr> 
+                   <tr>
+                    <td>审 核 时 间</td>
+                    <td>
+                      <!-- <if condition="$domain_list['check'] egt 1 "> -->{:date('Y/m/d H:i:s',$domain_list['check_time'])}
+                      <!-- <else /> --><font color="red">域名还未通过审核</font><!-- </if> -->
+                    </td>  
+                    <td>域 名 归 属</td>
+                    <td>
+                       <!-- <if condition="$domain_list['doamin_user'] eq 0 "> -->公司
+                       <!-- <else /> -->客户<!-- </if> -->
+                    </td>                 
+                  </tr>                                  
             </table> 
             <!-- </foreach> -->  
            <!-- </if> -->                           
