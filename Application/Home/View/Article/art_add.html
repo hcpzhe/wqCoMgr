@@ -44,7 +44,7 @@ KindEditor.ready(function(K) {
       </tr>
       <tr>
         <td align="center">
-           <form action="{:U('Article/art_insert')}" method="post" id="form" onsubmit="return checkfrm(this);">           
+           <form action="{:U('Article/art_insert')}" method="post" id="form">           
             <table width="700" border="0">
                   <tr>
                     <td width="100">文章标题：</td>
@@ -92,23 +92,5 @@ KindEditor.ready(function(K) {
   </table>
 </div>
 </div>
-<script type="text/javascript">
-function checkfrm(afrm) {
- if( (afrm.title.value == "") )
-	{
-		alert("文章标题不能为空！");
-		afrm.title.focus();
-		return false;
-	}
- if( (afrm.content.value == "") )
-	{
-		alert("还未添加内容！");
-		afrm.content.focus();
-		return false;
-	} 
-	$(afrm).RSsubmit({success_alert:true});
-	return false;
-}
-</script>
 </body>
 </html>

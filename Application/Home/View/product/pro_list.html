@@ -15,36 +15,36 @@
             <td class="menu"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32" /><font>产品列表</font></span></td>
           </tr>
           <tr>
-            <td class="menu_content">
-<!-- 订单列表开始 -->
-<table width="100%" border="0" cellspacing="0" cellpadding="0" class="info_list">
-	<tr>
-		<th>编号</th>
-		<th>产品名称</th>
-		<th>状态</th>
-		<th>操作 <a href="{:U('Product/ad_pro_form')}">添加产品</a></th>
-	</tr>
-<!-- <foreach name="pro_list" item="list"> -->   
-	<tr class="list_tr">
-		<td>{$list.id}</td>
-		<td>{$list.name}</td>
-		<td>
-				<!-- <if condition="$list.status eq 1"> -->
-				<a href="{:U('Product/stop?id='.$list['id'])}"><img src="__PUBLIC__/images/yes.gif"></a>
-				<!-- <else/> -->
-				<a href="{:U('Product/star?id='.$list['id'])}"><img src="__PUBLIC__/images/no.gif"></a>
-				<!-- </if> -->
-		</td>
-		<td><a href="{:U('Product/pro_info?id='.$list['id'])}">详情</a> <a href="{:U('Product/del_pro?id='.$list['id'])}">删除</a></td>
-	</tr>
-<!-- </foreach> -->  
-	<tr><td colspan="8" align="center">{$data[show]}</td></tr>
-</table>
-<!-- 订单列表结束-->
+            <td class="menu_content pad">
+				<!-- 订单列表开始 -->
+				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="info_list">
+					<tr>
+						<th>编号</th>
+						<th>产品名称</th>
+						<th>状态</th>
+						<th>操作 <a href="{:U('Product/ad_pro_form')}">添加产品</a></th>
+					</tr>
+				<!-- <foreach name="pro_list" item="list"> -->   
+					<tr class="list_tr">
+						<td>{$list.id}</td>
+						<td>{$list.name}</td>
+						<td>
+								<!-- <if condition="$list.status eq 1"> -->
+								<a href="{:U('Product/stop?id='.$list['id'])}"><img src="__PUBLIC__/images/yes.gif"></a>
+								<!-- <else/> -->
+								<a href="{:U('Product/star?id='.$list['id'])}"><img src="__PUBLIC__/images/no.gif"></a>
+								<!-- </if> -->
+						</td>
+						<td><a href="{:U('Product/pro_info?id='.$list['id'])}">详情</a> <a href="{:U('Product/del_pro?id='.$list['id'])}">删除</a></td>
+					</tr>
+				<!-- </foreach> -->  
+					<tr><td colspan="8" align="center">{$data[show]}</td></tr>
+				</table>
+				<!-- 订单列表结束-->
 			</td>
           </tr>
           <tr>
-            <td class="notice"><img style="float:left; margin-left:10px;" src="__IMG__/notice_img.png" /><span>公司通知</span></td>
+            <td height="20"></td>
           </tr>
     </table> 
    </div>

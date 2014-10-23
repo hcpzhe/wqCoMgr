@@ -63,11 +63,11 @@
       </tr> 
       <tr>
         <td align="center">                     
-            <table width="742" border="0" class="cust_list">           
+            <table width="752" border="0" class="cust_list">           
                   <tr class="liebiao_title">
                     <th width="80">请选择</th>
                     <th width="120">域名</th>
-                    <th width="90">续费金额</th>
+                    <th width="100">续费金额</th>
                     <th width="100">付款时间</th>
                     <th width="130">原过期时间</th>
                     <th width="130">新过期时间</th>
@@ -79,32 +79,31 @@
       <tr>
         <td align="center"> 
           <!-- <foreach name="apply_list" item="data"> -->        
-            <table width="742" border="0" cellspacing="0" cellpadding="0" class="com_list">                                                  
+            <table width="752" border="0" cellspacing="0" cellpadding="0" class="com_list">                                                  
                   <tr height="30">
                      <td width="80" align="center">
                         <input type="checkbox" name="domain_id" value="{$data.id}">
                         <input type="hidden" name="cust_id" value="{$data.domain_id}">
                      </td>
                      <td width="120" align="center">{$data.domain}</td>
-                     <td width="90" align="center">{$data.money} 元</td>
+                     <td width="100" align="center">{$data.money} 元</td>
                      <td width="100" align="center">{$data.pay_time}</td>
                      <td width="130" align="center">{:date('Y/m/d H:i:s',$data['org_expired_time'])}</td>
                      <td width="130" align="center">{:date('Y/m/d H:i:s',$data['new_expired_time'])}</td>
                      <td width="90" align="center">
-                        <if condition="$data['check'] eq -1 ">拒绝
-                        <elseif condition="$data['check'] eq 0 " /><a href="{:U('Domren/check?id='.$data['id'])}">待审</a>
-                        <else /> 通过</if>  
+                        <!-- <if condition="$data['check'] eq -1 "> -->拒绝
+                        <!-- <elseif condition="$data['check'] eq 0 " /> --><a href="{:U('Domren/check?id='.$data['id'])}">待审</a>
+                        <!-- <else /> --> 通过<!-- </if> -->  
                      </td>
                   </tr>                         
               </table>
              <!-- </foreach> -->
            </td>
-      </tr> 
-                            
+      </tr>                             
       <tr>
         <td align="center">                     
-          <table width="742" border="0" style="display: block; border-bottom: 1px solid #ccc; border-right: 1px solid #ccc; border-left: 1px solid #ccc;">
-            <tr style="display: block; padding-top: 10px;">
+          <table width="752" border="0" style="display: block; border-bottom: 1px solid #ccc; border-right: 1px solid #ccc; border-left: 1px solid #ccc;">
+            <tr style="display: block;">
               <td height="40" style="display: block; text-align: center; line-height: 40px;">{$page}</td>
             </tr>
           </table>
@@ -116,10 +115,3 @@
 </div>
 </body>
 </html>
-
-<script>
-//列表页隔行背景 
-$(document).ready(function(){
-    $(".com_list tr:odd").css("background","#F0F0F0");
-});
-</script>

@@ -70,16 +70,12 @@ class ArticleController extends HomeBaseController {
 		$this->assign('big',$big);  //最大的 id+1
 		$this->assign('content',htmlspecialchars_decode($list[$id]['content']));//HTML实体转换为字符     文章的内容
 		$this->assign('list',$list);
-		
-// 		print_r($list);
-// 		exit();
+
 		$comment = M('Comment'); //获取文章评论信息
 		$data = $comment->table('erp_comment as co,erp_user as ur')
 		->where('co.user_id=ur.id AND co.art_id='.$id)
 		->getField("co.id as id,co.add_time as add_time,co.content as content,ur.realname as realname");
 		$this->assign('data',$data);
-// 		print_r($list);
-// 		exit();
 		$this->display();
 	}
 	/***文章评论的添加***/
@@ -87,14 +83,10 @@ class ArticleController extends HomeBaseController {
 		$data['add_time'] = time();  //评论的时间
 		$data['user_id'] = UID;   //参与评论的员工
 		$data['art_id'] = (int)I('id');     //参与评论的文章id
-		$data['content'] = I('param.content');  //评论的内容
-		
-		$model = new CommentModel();	
-		
-		//$data = $model->create();	
-// 		print_r($data);
-// 		exit();
-		$model->data($data)->add();
+		$data['content'] = I('param.content');  //评论的内容		
+		$model = new CommentModel();		
+		$data = $model->create($data);	
+		$model->add();
 		$this->success('添加成功');
 	}			
 }

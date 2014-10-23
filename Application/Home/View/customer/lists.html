@@ -7,36 +7,7 @@
 <link href="__CSS__/style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="__JS__/jquery.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
-</head>
-<body>
-<div style="width:100%; overflow:hidden; background: #f2f2f2;">
-<div class="b right_next">
-  <table width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tbody>
-      <tr>
-        <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>客户列表</font></span></td>
-      </tr>
-      <tr>
-        <td height="30"></td>
-      </tr>
-      <tr>
-        <td><font class="tishi">头部提示信息：公司名称只能选择一个，若多选以最后一个为准！</font></td>
-      </tr>
-      <tr>
-        <td height="30"></td>
-      </tr>
-       <tr>
-        <td height="40">
-              <span id="cust_search">
-	           <form action="{:U('Customer/lists?p=1')}" method="get">
-	                                        搜索：<select name="key" class="search">                                       
-	                  <option value="1">公司名称</option>   
-	                  <option value="2">录入人</option>                      
-	                </select>
-	                <input type="text" name="name" class="search" value="" />	                                        
-	                <input type=submit value="搜索" class="button_submit" />
-	           </form> 
-	           <script type="text/javascript">	 
+<script type="text/javascript">	 
 	                //查看详细   跳转 
 					function Detailed(){
 						$("input[name='s2[]']").each(function(){
@@ -77,12 +48,40 @@
 								}
 							});
 					}
-	           </script>                              
+	           </script>
+</head>
+<body>
+<div style="width:100%; overflow:hidden; background: #f2f2f2;">
+<div class="b right_next">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>客户列表</font></span></td>
+      </tr>
+      <tr>
+        <td height="30"></td>
+      </tr>
+      <tr>
+        <td><font class="tishi">头部提示信息：公司名称只能选择一个，若多选以最后一个为准！</font></td>
+      </tr>
+      <tr>
+        <td height="30"></td>
+      </tr>
+       <tr>
+        <td height="40">
+              <span id="cust_search">
+	           <form action="{:U('Customer/lists?p=1')}" method="get">
+	                                        搜索：<select name="key" class="search">                                       
+	                  <option value="1">公司名称</option>   
+	                  <option value="2">录入人</option>                      
+	                </select>
+	                <input type="text" name="name" class="search" value="" />	                                        
+	                <input type=submit value="搜索" class="button_submit" />
+	           </form> 	                                         
                 <a href="javascript:void(0)" class="button_submit" onclick="Detailed();">查看详细</a>
                 <a href="javascript:void(0)" class="button_submit" onclick="Edit();">编辑</a> 
                 <a href="javascript:void(0)" class="button_submit" onclick="Add_order();">添加订单</a>
-                <a href="javascript:void(0)" class="button_submit" onclick="Addvisit();">添加拜访</a>
-                                             
+                <a href="javascript:void(0)" class="button_submit" onclick="Addvisit();">添加拜访</a>                                             
            </span>   
         </td>
       </tr>
@@ -91,10 +90,10 @@
       </tr>
       <tr>
         <td align="center">                     
-            <table width="742" border="0" class="cust_list">           
+            <table width="752" border="0" class="cust_list">           
                   <tr class="liebiao_title">
                     <th width="105">请选择</th>
-                    <th width="200">公司名称</th>
+                    <th width="210">公司名称</th>
                     <th width="105">联系人</th>
                     <th width="120">联系电话</th>
                     <th width="105">录入人</th>
@@ -102,17 +101,16 @@
                   </tr>
                </table>
            </td>
-      </tr>
-      
+      </tr>     
       <tr>
         <td align="center"> 
           <!-- <foreach name="data['list']" item="data1"> -->          
-            <table width="742" border="0" cellspacing="0" cellpadding="0" class="com_list">                                                 
+            <table width="752" border="0" cellspacing="0" cellpadding="0" class="com_list">                                                 
                   <tr height="30">
                      <td width="105" align="center">
                        <input type="checkbox" name="s2[]" value="{$data1.id}" id="check">
                      </td>
-                     <td width="200">{$data1.cname|mb_substr=0,45}</td>
+                     <td width="210">{$data1.cname|mb_substr=0,45}</td>
                      <td width="105" align="center">{$data1.contacts}</td>
                      <td width="120" align="center">{$data1.phone}</td>
                      <td width="105" align="center">{$data1.uname}</td>
@@ -129,8 +127,8 @@
                             
       <tr>
         <td align="center">                     
-          <table width="742" border="0" style="display: block; border-bottom: 1px solid #ccc; border-right: 1px solid #ccc; border-left: 1px solid #ccc;">
-            <tr style="display: block; padding-top: 10px;">
+          <table width="752" border="0" style="display: block; border-bottom: 1px solid #ccc; border-right: 1px solid #ccc; border-left: 1px solid #ccc;">
+            <tr style="display: block;">
               <td height="40" style="display: block; text-align: center;line-height: 40px;">{$data[show]}</td>
             </tr>
           </table>
@@ -142,9 +140,3 @@
 </div>
 </body>
 </html>
-
-<script>
-$(document).ready(function(){
-    $(".com_list tr:odd").css("background","#F0F0F0");
-});
-</script>

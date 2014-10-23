@@ -11,7 +11,7 @@ class OrderModel extends Model{
 					->where($where)
 					->count();
 		/*载入分页类，初始化数据*/
-		$page=new \Think\Page($count,7);
+		$page=new \Think\Page($count,10);
 		/*调用分页链接函数*/
 		$data['show']=$page->show();
 		/*控制数据查询条数*/
