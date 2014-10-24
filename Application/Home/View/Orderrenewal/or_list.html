@@ -2,21 +2,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>订单列表</title>
+<title>订单续费申请列表</title>
 <link href="__CSS__/style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="__JS__/jquery.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
-<script type="text/javascript">
-function apy(){
-	$("input[name='che[]']").each(function(){
-		if($(this).attr("checked")=="checked"){								
-			var id=$(this).val();		
-            var url="__URL__-order_info-id-"+id;
-            location.href=url;
-			}
-		});
-}
-</script>
 </head>
 <body>
 <div style="width:100%; overflow:hidden; background: #f2f2f2;">

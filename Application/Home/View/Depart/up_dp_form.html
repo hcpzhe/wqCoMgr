@@ -15,31 +15,33 @@
             <td class="menu"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32" /><font>添加部门</font></span></td>
           </tr>
           <tr>
-            <td class="menu_content">
-<!-- 部门列表开始 -->
-
-<form action="{:U('Depart/up_dp')}" method="post">
-		  <input type="hidden" value="{$curr.id}" name="id">
-	部门名称：<input type="text" name="name" value="{$curr.name}">
-	所属部门：<select name='parent_id'>
-			   <option value="{$curr.parent_id}">
-			   		<!-- <if condition="$curr.parent_id eq 0"> -->
-			   			无
-			   		<!-- <else/> -->
-			   			{$par.name}
-			   		<!-- </if> -->
-			   </option>
-    	  <!-- <foreach  name="depa_list" item="dp_list"> -->
-    	       <option value="{$dp_list.id}">{$dp_list.name}</option>
-          <!-- </foreach> -->	
-          </select>
-    <input type="submit" value="修改">      
-</form>
-<!-- 部门列表结束-->
+             <td height="20"></td>
+          </tr>
+          <tr>
+            <td class="push_content">
+				<!-- 部门列表开始 -->				
+				<form action="{:U('Depart/up_dp')}" method="post">
+						  <input type="hidden" value="{$curr.id}" name="id">
+					部门名称：<input type="text" name="name" value="{$curr.name}" class="search_bg">
+					所属部门：<select name='parent_id' class="search_bg">
+							   <option value="{$curr.parent_id}">
+							   		<!-- <if condition="$curr.parent_id eq 0"> -->
+							   			无
+							   		<!-- <else/> -->
+							   			{$par.name}
+							   		<!-- </if> -->
+							   </option>
+				    	  <!-- <foreach  name="depa_list" item="dp_list"> -->
+				    	       <option value="{$dp_list.id}">{$dp_list.name}</option>
+				          <!-- </foreach> -->	
+				          </select>
+				    <input type="submit" value="修改" class="button_submit">      
+				</form>
+				<!-- 部门列表结束-->
 			</td>
           </tr>
           <tr>
-            <td class="notice"><img style="float:left; margin-left:10px;" src="__IMG__/notice_img.png" /><span>公司通知</span></td>
+            <td height="20"></td>
           </tr>
     </table> 
    </div>

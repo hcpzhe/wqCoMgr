@@ -46,7 +46,7 @@
 		.pad{ padding-top:10px;}
 		
 		/**welcome**/
-		.seach_td{ height: 40px; padding-bottom: 10px;}
+		.seach_td{ height: 40px;}
 		.top_search{ background:url(../images/search_bg.png) no-repeat; width:765px; height:43px; line-height:40px;}
 		.top_search select{ width:130px;}
 		.search_form{ height:40px; width:720px; margin:0 auto;}
@@ -56,28 +56,32 @@
 		.sea{ width:160px; background:none; outline:none; border:0px; margin-left:5px; padding-top:10px; font-size:12px; color:#666;}
 		.search_bg{ background: #E9E9E9; border: 1px solid #CCC; height: 25px; vertical-align: middle; line-height: 25px;}
 		/* 信息列表*/
-		.center_content{ border:1px solid #ccc; width: 765px; margin: 0 auto;}
+		.center_content{ border:1px solid #ccc; width: 765px; margin: 0 auto; min-height: 600px; background: #FFF;}
 		.menu{ height:40px; border-bottom: 1px solid #CCC;}
 		.menu span{ width:763px; height:38px; margin:0 auto; display:block; background:#1c86cf;}
 		.menu span font{ float:left; height:36px; font-size:15px; line-height:40px; color:#FFF;}
 		.menu_content{ }
+		/*.menu_content form{ margin-left:20px;}*/
 		.notice{ height:30px;}
 		.notice span{ float:left; margin-left:5px;}
 		
-		.bottom_container{ margin-top:10px;}
-		.container{ height:200px;}
 		/*订单列表分页显示样式*/
 		/*页码列表*/
 		a.num{ padding:1px 5px; border:1px solid #ccc; margin-left:10px;}	
 		span.current{ padding:1px 5px; border:1px solid #cc0001; color:#cc0001; margin-left:10px;}	
-		
+		.xin_table{ line-height:30px;}
 		
 		
 		
 /*网站开发订单列表未分配订单 */
 a.red{ color:#cc0001;}		
+
+
+.order_info{ margin-top: 10px; background: #F4F4F4; border: 1px solid #CCC; line-height: 30px; }
+.push_content{padding-left: 20px;}
+
 /*table列表边框*/
-.info_list{ border:1px solid #ccc; width:755px;}
+.info_list{ border:1px solid #ccc; width:755px; margin-top: 10px; }
 .info_list td{ border:0px !important; text-align:center; line-height: 30px;}
 .info_list th{ padding:10px; background:#f4f4f4; border-bottom:1px solid #ccc; text-align:center;}
 /* 信息列表头部操作按钮样式*/

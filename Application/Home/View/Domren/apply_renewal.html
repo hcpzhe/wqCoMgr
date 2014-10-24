@@ -16,40 +16,34 @@
         <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>域名续费申请</font></span></td>
       </tr>
       <tr>
-        <td height="30"></td>
-      </tr>
-      <tr>
-        <td><font class="tishi">申请域名续费</font></td>
-      </tr>
-      <tr>
-        <td height="30"></td>
+        <td height="20"></td>
       </tr>
       <tr>
         <td align="center">
            <form action="{:U('Domren/insert')}" method="post">           
-            <table width="500" border="0">
+            <table border="0">
                   <tr>
-                    <td width="100"> &nbsp;&nbsp;域 &nbsp;&nbsp;&nbsp;名 &nbsp; : </td>
-                    <td width="400" align="left">  
+                    <td> &nbsp;&nbsp;域 &nbsp;&nbsp;&nbsp;名 &nbsp; : </td>
+                    <td align="left">  
                         <input type="hidden" name="domain_id" value="{$domain_mess.id}" /> 
                           {$domain_mess.domain}                                 		                	                             	                                                 
                     </td>
                   </tr>
                   <tr>
-                    <td width="100">域名运营商：</td>
-                    <td width="400" align="left">{$domain_mess.service}</td>
+                    <td>域名运营商：</td>
+                    <td align="left">{$domain_mess.service}</td>
                   </tr>
                   <tr>
-                    <td width="100">续 费 金 额：</td>
-                    <td width="400" align="left"><input type="text" name="money"></td>
+                    <td>续 费 金 额：</td>
+                    <td align="left"><input type="text" name="money"></td>
                   </tr>
                   <tr>
-                    <td width="100">付 款 时 间：</td>
-                    <td width="400" align="left"><input type="text" name="pay_time"></td>
+                    <td>付 款 时 间：</td>
+                    <td align="left"><input type="text" name="pay_time"></td>
                   </tr>
                    <tr>
-                    <td width="100"> 申  &nbsp; 请  &nbsp; 人 ：</td>
-                    <td width="400" align="left">
+                    <td> 申  &nbsp; 请  &nbsp; 人 ：</td>
+                    <td align="left">
                         <select name="user_id">
                           <!-- <foreach name="user_list" item="user"> -->
                            <option value="{$user['id']}">{$user['realname']}</option>
@@ -86,8 +80,7 @@
                     </td>
                   </tr>                 
                   <tr>
-                    <td>&nbsp;</td>
-                    <td align="left"><input type="submit" name="Submit" value=" 申请 " class="button_submit"></td>
+                    <td colspan="2" align="center"><input type="submit" name="Submit" value=" 申请 " class="button_submit"></td>
                   </tr>
             </table>                              
            </form>

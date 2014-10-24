@@ -27,10 +27,10 @@
       <tr>
         <td align="center">
            <form action="{:U('Domain/update')}" method="post" onsubmit="$(this).RSsubmit({success_alert:true});return false;" >           
-            <table width="500" border="0">
+            <table border="0">
                   <tr>
-                    <td width="25%">&nbsp;&nbsp; 域&nbsp;&nbsp; 名 &nbsp;&nbsp;：</td>
-                    <td width="75%" align="left"> 
+                    <td>&nbsp;&nbsp; 域&nbsp;&nbsp; 名 &nbsp;&nbsp;：</td>
+                    <td align="left"> 
                       <input type="hidden" value="{$list['id']}" name="id">
                       <input type="hidden" value="{$list['domain']}" name="domain">                                   
 		                {$list['domain']}		                		                               	                                                 
@@ -80,8 +80,7 @@
                 	});                                  
                   </script>
                   <tr>
-                    <td>&nbsp;</td>
-                    <td align="left"><input type="submit" name="Submit" value=" 修改 " class="button_submit"></td>
+                    <td colspan="2" align="center"><input type="submit" name="Submit" value=" 修改 " class="button_submit"></td>
                   </tr>
             </table>                              
            </form>

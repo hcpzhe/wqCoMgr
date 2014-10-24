@@ -26,7 +26,7 @@ form{ line-height:30px; font-size:14px; letter-spacing: 1px;}
 
 
 /**客户列表页*/
-#cust_search{ background:url(../images/search_bg.png) no-repeat; width:765px; height:43px; line-height:40px; display: block; font-size: 12px;}
+#cust_search{ background:url(../images/search_bg.png) no-repeat; width:765px; height:43px; line-height:40px; display: block; font-size: 12px; }
 #cust_search form{ display: inline-block; padding-left: 20px;}
 #cust_search span{ margin-left: 20px;}
 .search{ background: #E9E9E9; border: 1px solid #CCC; height: 25px; vertical-align: middle; line-height: 25px;}
@@ -39,8 +39,9 @@ form{ line-height:30px; font-size:14px; letter-spacing: 1px;}
 
 /**客户详细信息页**/
 .com_table{border-right:1px solid #ccc; border-bottom:1px solid #ccc; margin-bottom: 10px;}
+.com_table th{ background: #F4F4F4;}
 .com_table th,.com_table td{ border-left:1px solid #ccc; border-top:1px solid #ccc; padding:5px; font-size: 12px; text-align: center;}
-.order_title{width: 728px; height: 30px; line-height: 30px; text-align:center; border: 1px solid #ccc; border-bottom:0; padding: 5px; font-size: 12px; font-weight: bold;}
+.order_title{width: 738px; height: 30px; line-height: 30px; text-align:center; border: 1px solid #ccc; border-bottom:0; padding: 5px; font-size: 12px; font-weight: bold; background: #F4F4F4;}
 
 /**公司名称模糊搜索**/
 .search_next{ width: 650px; margin: 0 auto;}
