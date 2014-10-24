@@ -42,7 +42,7 @@ function push(){
             <td class="seach_td">
             <!-- 搜索开始 -->
 			   <div class="top_search">
-			       <form action="{:U('Order/order_list')}" method="post" class="search_form" name="search">
+			       <form action="{:U('Order/order_list')}" method="get" class="search_form" name="search">
 						<select name="product" class="search_bg">
 							<option value="">所有产品</option>
 							<!-- <foreach  name="pro_list" item="po_list"> -->
@@ -50,7 +50,7 @@ function push(){
     						<!-- </foreach> -->	
 						</select>
 						<select name="check" class="search_bg">
-							<option>审核</option>
+							<option value="">审核状态</option>
 							<option value="1">审核通过</option>
 							<option value="2">未审核</option>
 						</select>

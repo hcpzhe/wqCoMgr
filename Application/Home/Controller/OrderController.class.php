@@ -14,22 +14,21 @@ class OrderController extends HomeBaseController{
 /** 订单列表 */
 	public function order_list(){
 		/*获取搜索条件*/
-		$pro=$_POST['product'];
-		$check=$_POST['check'];
-		$key=$_POST['key'];
+		$pro = I('param.product');  
+		$check = I('param.check');  //按照审核状态搜索
+		$key = I('param.key');  //按照审核状态搜索
 		/** 拼接where条件 */
 		if(!empty($pro)){
 			$where=$where." AND pt.id=".$pro;
 		}
 		/*通过，待审核*/
-		if($check==1){
+		if(!empty($check) && $check==1){
 			$where=$where." AND oe.check=1";
-		}else if($check==2){
+		}else if(!empty($check) && $check==2){
 			$where=$where." AND oe.check=0";
-		}else{ $where=$where." AND oe.check>=0";}
-		
+		}		
 		if(!empty($key)){
-			$where=$where." AND ( pt.name like '%".$key."%' or cr.name like '%".$key."%' or ur.realname like '%".$key."%')";
+			$where=$where." AND ( cr.name like '%".$key."%' or ur.realname like '%".$key."%')";
 		}
 		$order=new OrderModel();
 		$this->data=$order->orderlist($where);
