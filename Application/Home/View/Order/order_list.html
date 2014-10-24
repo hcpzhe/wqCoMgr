@@ -16,6 +16,16 @@ function info(){
 			}
 		});
 }
+/***添加订单 按钮 ***/
+function add_order(){
+	$("input[name='che[]']").each(function(){
+		if($(this).attr("checked")=="checked"){								
+			var id=$(this).val();		
+            var url="__URL__-add_order_form-id-"+id;
+            location.href=url;
+			}
+		});
+}
 function push(){
 	$("input[name='che[]']").each(function(){
 		if($(this).attr("checked")=="checked"){								
@@ -57,7 +67,7 @@ function push(){
 						关键字  <input type="text" name="key" class="search_bg">
 						<input type="submit" value="搜索" class="button_submit">
 						<a href="javascript:void(0)" class="button_submit" onclick="info();">详情</a>	
-						<a href="{:U('Order/add_order_form')}" class="button_submit">添加订单</a>
+						<a href="javascript:void(0)" class="button_submit" onclick="add_order();">添加订单</a>
 						<a href="javascript:void(0)" class="button_submit" onclick="push();">推送</a> 
 			       </form> 
 			   </div>            

@@ -22,13 +22,13 @@
                     <td width="100">客户名称：</td>
                     <td width="400">                            	   
     					<select name='cusid'>
-    						<empty name="cus">
+    						<!-- <empty name="cus"> -->
     						<!-- <foreach  name="cus_list" item="c_list"> -->
 	    						<option value="{$c_list.id}">{$c_list.name}</option>
 	    					<!-- </foreach> -->
-    						<else/>
+    						<!-- <else/> -->
     						<option value="{$cus.id}">{$cus.name}</option>
-    						</empty>
+    						<!-- </empty> -->
     					</select> 					                                                
                     </td>
                   </tr>
@@ -48,7 +48,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td>录 入 人：</td>
+                    <td>签单员工：</td>
                     <td>
                     <select name="userid">
                     <!-- <foreach name="user_list" item="ulist"> -->
@@ -68,10 +68,6 @@
     					<option value="5">服务五年</option>
     					</select>
 					</td>
-                  </tr>
-                  <tr>
-                    <td>域 &nbsp;&nbsp;&nbsp; 名：</td>
-                    <td><input type="text" name="domain"></td>
                   </tr>
                   <tr>
                     <td>备  &nbsp;&nbsp;&nbsp; 注：</td>
