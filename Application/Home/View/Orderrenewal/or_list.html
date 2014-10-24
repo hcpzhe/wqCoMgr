@@ -22,7 +22,7 @@
             <td class="seach_td">
             <!-- 搜索开始 -->
 			   <div class="top_search">
-			       <form action="{:U('Orderrenewal/or_list')}" method="post" class="search_form" name="search">
+			       <form action="{:U('Orderrenewal/or_list')}" method="get" class="search_form" name="search">
 						<select name="product" class="search_bg">
 							<option value="">所有产品</option>
 							<!-- <foreach  name="pro_list" item="po_list"> -->
@@ -30,7 +30,7 @@
     						<!-- </foreach> -->	
 						</select>
 						<select name="check" class="search_bg">
-							<option value="">审核</option>
+							<option value="">审核状态</option>
 							<option value="1">审核通过</option>
 							<option value="2">未审核</option>
 						</select>
@@ -57,7 +57,7 @@
 						<th>提交人</th>
 						<th>审核</th>
 					</tr>
-				<!-- <foreach name="or['order_list']" item="list"> -->
+				<!-- <foreach name="data['order_list']" item="list"> -->
 					<tr class="list_tr">
 						<td>{$list.pname}</td>
 						<td>{$list.cname}</td>
