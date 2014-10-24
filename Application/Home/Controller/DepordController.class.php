@@ -11,13 +11,12 @@ class DepordController extends HomeBaseController{
 	/*网站开发订单列表*/
 	public function dep_list(){
 		/*获取搜索条件*/
-		$check=$_POST['check'];
-		$key=$_POST['key'];
+		$check = (int)I('param.check'); 
+		$key = I('param.key');
 		/** 拼接where条件 */
-		if($check==1){
+		if(!empty($check) && $check==1){
 			$where=$where." AND edo.check=1";
-		}else if($check==2){ $where=$where." AND edo.check=0";}
-		
+		}else if(!empty($check) && $check==2){ $where=$where." AND edo.check=0";}		
 		if(!empty($key)){
 			$where=$where." AND ( ec.name like '%".$key."%' or ec.contacts like '%".$key."%' or eu.realname like '%".$key."%')";
 		}

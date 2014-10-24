@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>网站订单列表</title>
+<title>网站开发订单列表</title>
 <link href="__CSS__/style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="__JS__/jquery.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
@@ -32,7 +32,7 @@ function push(){
    <div class="center_content">
       <table width="755" bgcolor="#fff" cellpadding="0" cellspacing="0">
           <tr>
-            <td class="menu"><span style="height: 37px;"><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32" /><font>订单列表</font></span></td>
+            <td class="menu"><span style="height: 37px;"><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32" /><font>网站开发订单列表</font></span></td>
           </tr>
           <tr>
             <td height="10"></td>
@@ -42,9 +42,9 @@ function push(){
             <td class="seach_td">
             <!-- 搜索开始 -->
 			   <div class="top_search">
-			       <form action="{:U('Depord/dep_list')}" method="post" class="search_form" name="search">
+			       <form action="{:U('Depord/dep_list')}" method="get" class="search_form" name="search">
 						<select name="check" class="search_bg">
-    						<option value="">分配</option>
+    						<option value="">是否分配</option>
 							<option value="1">已分配</option>
     						<option value="2">未分配</option>
 						</select>
