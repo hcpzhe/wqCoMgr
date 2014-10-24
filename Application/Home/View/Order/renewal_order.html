@@ -42,7 +42,7 @@ function xufei(){
             <td class="seach_td">
             <!-- 搜索开始 -->
 			   <div class="top_search">
-			       <form action="{:U('Order/renewal_order')}" method="post" class="search_form" name="search">
+			       <form action="{:U('Order/renewal_order')}" method="get" class="search_form" name="search">
 						<select name="product" class="search_bg">
 							<option value="">所有产品</option>
 							<!-- <foreach  name="pro_list" item="po_list"> -->
@@ -50,6 +50,7 @@ function xufei(){
     						<!-- </foreach> -->	
 						</select>
 						<select name="check" class="search_bg">
+						    <option value="">审核状态</option>
 							<option value="1">审核通过</option>
 							<option value="2">未审核</option>
 						</select>
@@ -76,11 +77,11 @@ function xufei(){
 						<th>到期时间</th>
 						<th>操作</th>
 					</tr>
-				<!-- <foreach name="rene['order_list']" item="list"> -->
+				<!-- <foreach name="data['order_list']" item="list"> -->
 					<tr class="list_tr">
 						<td><input type="checkbox" name="che[]" value="{$list.id}"></td>
 						<td>{$list.pname}</td>
-						<td>{$list.cname}</td>
+						<td>{$list.cname|mb_substr=0,54}</td>
 						<td>{$list.contacts}</td>
 						<td>{$list.phone}</td>
 						<td>{$list.total_fees} 元</td>

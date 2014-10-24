@@ -69,18 +69,16 @@ function push(){
 						<th>联系方式</th>
 						<th>金额</th>
 						<th>销售</th>
-						<th>备注</th>
 						<th>分配</th>
 					</tr>		
 				<!-- <foreach name="data['dep_list']" item="list"> -->
 					<tr class="list_tr">
 						<td><input type="checkbox" name="che[]" value="{$list.id}"></td>
-						<td>{$list.cname}</td>
+						<td>{$list.cname|mb_substr=0,45}</td>
 						<td>{$list.contacts}</td>
 						<td>{$list.phone}</td>
 						<td>{$list.money}元</td>
 						<td>{$list.rname}</td>
-						<td>{$list.remark}</td>
 						<td>
 							<!-- <if condition="$list.checks eq 1"> -->已分配
 							<!-- <elseif condition="$list.checks eq 0"/> -->	
