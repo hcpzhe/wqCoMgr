@@ -42,7 +42,7 @@ function del(){
             <td class="seach_td">
             <!-- 搜索开始 -->
 			   <div class="top_search">
-			       <form action="{:U('User/search_list')}" method="post" class="search_form" name="search">
+			       <form action="{:U('User/search_list')}" method="get" class="search_form" name="search">
 						<select name="depart" class="search_bg">
 							<option value="">所有部门</option>
 							<!-- <foreach  name="depa_list" item="dp_list"> -->
@@ -78,9 +78,9 @@ function del(){
 						<td><input type="checkbox" name="che[]" value="{$list.id}"></td>
 						<td>{$list.account}</td>
 						<td>{$list.realname}</td>
-						<td>职员</td>
+						<td>{$list.position}</td>
 						<td>{$list.dname}</td>
-						<td>时间不定</td>
+						<td>{$list.startime}</td>
 						<td>
 							<!-- <if condition="$list.status eq 1"> -->
 							<a href="{:U('User/stop?id='.$list['id'])}"><img src="__PUBLIC__/images/yes.gif"></a>
