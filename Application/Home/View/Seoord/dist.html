@@ -24,7 +24,7 @@
 					<tr><td>  分  配 人 员：</td><td><!-- <foreach name="data" item="list"> -->{$list.realname}<!-- </foreach> -->	</td></tr>
 					<tr><td colspan="2"> 
 						<form method="post" action="{:U('Seouser/add_pu?oid='.$id)}">
-							<select name="user">
+							<select name="user" class="search_bg">
 							<!-- <foreach name="users" item="list"> -->
 								<option value="{$list.id}">{$list.realname}</option>
 							<!-- </foreach> -->	

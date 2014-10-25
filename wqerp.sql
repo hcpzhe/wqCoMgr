@@ -1,4 +1,4 @@
-﻿/*
+/*
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50524
 File Encoding         : 65001
 
-Date: 2014-10-21 14:33:45
+Date: 2014-10-25 16:38:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -28,7 +28,7 @@ CREATE TABLE `erp_article` (
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '文章状态：为1正常，为0禁用,-1为删除',
   `title` varchar(50) NOT NULL COMMENT '标题',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='文章表';
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8 COMMENT='文章表';
 
 -- ----------------------------
 -- Records of erp_article
@@ -50,7 +50,7 @@ INSERT INTO `erp_article` VALUES ('14', '9', '2', '&lt;p&gt;\r\n	&lt;br /&gt;\r\
 INSERT INTO `erp_article` VALUES ('15', '11', '2', '&lt;ol&gt;\r\n	&lt;li&gt;\r\n		&lt;span style=&quot;font-family:KaiTi_GB2312;&quot;&gt;测试&lt;/span&gt; \r\n	&lt;/li&gt;\r\n	&lt;li&gt;\r\n		&lt;span style=&quot;font-family:KaiTi_GB2312;&quot;&gt;测试&lt;/span&gt; \r\n	&lt;/li&gt;\r\n&lt;/ol&gt;', '1413857267', '1', '测试');
 INSERT INTO `erp_article` VALUES ('16', '7', '2', '&lt;div style=&quot;text-align:center;&quot;&gt;\r\n	&lt;span style=&quot;line-height:1.5;&quot;&gt;&lt;strong&gt;成功案例&lt;/strong&gt;&lt;/span&gt;\r\n&lt;/div&gt;', '1413857502', '1', '成功案例');
 INSERT INTO `erp_article` VALUES ('17', '4', '2', '<p class=\"MsoNormal\" align=\"left\" style=\"text-indent:32pt;\">\r\n	<span style=\"font-size:18px;\">春节即将来临，为切实做好春节期间豫西监狱监管改造秩序的安全稳定，防止在押人员非正常死亡、脱逃、行凶、越狱、暴狱等事故的发生，&nbsp;2月</span><span style=\"font-size:18px;\">8</span><span style=\"font-size:18px;\">日主管我院监所工作的副检察长李淑梅同志带领监所检察科全体干警对豫西监狱进行了一次全方位的安全检查：从在押人员食堂到狱内超市，主要对食品安全进行了检查，在检查过程中，李检对监狱陪同领导一再强调，食品安全一定要重视，食堂一定要保持卫生，超市的食品一定不能有过期的商品；</span>\r\n</p>\r\n<p class=\"MsoNormal\" align=\"left\" style=\"text-indent:32pt;\">\r\n	<span style=\"font-size:18px;\">从监区、禁闭室到接见室，对其有关情况向陪同监狱领导一一进行询问，同时在接见室查看接见记录，其中，在禁闭室，李检专门询问了在押人员在禁闭期间是否吃的饱，向值班干警指出虽然禁闭是一种惩罚方式，但也一定要保证禁闭人员能够吃得饱，吃的卫生，以防止意外情形的发生；在钢球生产车间，看到个别犯人没带口罩，驻狱检察室主任耿燕玲同志立即向监狱带班干警询问不带口罩的原因，监狱干警进行了解释并保证以后不再有类似情况的出现；</span>\r\n</p>\r\n<p class=\"MsoNormal\" align=\"left\" style=\"text-indent:32pt;\">\r\n	<span style=\"font-size:18px;\">检查结束后，李检对监狱陪同领导及干警指出“安全重于泰山”，安全无小事，对于安全一定要高度重视，她特别强调医院、食堂、超市、禁闭室等四大容易出现安全隐患的死角，一定要加强安全防范，以确保春节期间监狱的安全稳定。</span>\r\n</p>\r\n<p class=\"MsoNormal\">\r\n	<span> </span> \r\n</p>', '1413858958', '1', '洛阳市老城区人民检察院互联网门户网站管理实施细则');
-INSERT INTO `erp_article` VALUES ('18', '4', '2', '	<p class=\"MsoNormal\">\r\n		<br />\r\n	</p>', '1413859020', '1', '洛阳市老城区人民检察院贯彻落实十八大精神宣传活动方案');
+INSERT INTO `erp_article` VALUES ('18', '4', '2', '<p class=\"MsoNormal\" align=\"left\" style=\"text-indent:24pt;\">\r\n	<span style=\"font-size:18px;\">政法干警核心价值观教育实践活动开展以来，在上级党委、市院的安排部署下，在新任检察长宋涛同志的带领下，老城区检察院按照“落实责任，实干争先”的工作思路，立足“小处着手、实处着手，不求标新立异、只把虚工实做”，把教育实践活动作为全心全意为人民服务宗旨在检察工作中的生动实践来抓，及时动员部署，制定方案，坚持走“突出特色、注重实效、统筹推进”之路，取得了阶段性成效。近三年来，我院先后荣获\r\n“全省先进基层党组织”、“全省人民满意的政法单位”、“洛阳市志愿服务工作先进单位”、洛阳市政法系统“结对帮扶工作先进单位”等称号，以实际行动较好的践行了政法干警核心价值观。我们的主要做法是：</span>\r\n</p>\r\n<p class=\"MsoNormal\" align=\"left\" style=\"text-indent:24.1pt;\">\r\n	<b><span style=\"font-size:18px;\">一、突出榜样示范特色，让干警在学习先进典型中强化对核心价值观的思想认同。</span></b> \r\n</p>\r\n<p class=\"MsoNormal\" align=\"left\" style=\"text-indent:24pt;\">\r\n	<span style=\"font-size:18px;\">思想是行动的先导。我们在开展核心价值观教育实践活动中，注意发掘身边人身边事，树立身边典型，重点宣传“中原卫士”、“省维护妇女儿童合法权益先进个人”\r\n、践行政法干警核心价值观楷模、我院侦查监督科科长全市检察机关践行政法干警核心价值观“十大标兵”梁香敏同志的先进事迹，为广大干警树立标杆，更有效地引导干警在人生观、价值观层面增强对政法核心价值的思想认同，有力提升了教育实效。一是拨亮先进典型的闪光点，发挥榜样的引导作用。组织干警学习典型，注重从理性层面引导干警深入挖掘和提炼先进典型思想深处的闪光点，通过运用内部网络、宣传板报、简报、电子屏等各种宣传方式，让我院干警在理性思考中明白，梁香敏同志身上所体现的精神中，最核心、最闪耀的就是牺牲奉献精神，这种精神切合了“忠诚、为民、公正、廉洁”政法干警核心价值观的特性。选择了检察官这个职业就是选择了牺牲奉献，提高了干警对职能使命和自身价值的思想认识，提升了爱岗敬业、尽职尽责、自觉奉献、勇于牺牲的思想境界。二是挖掘先进典型的社会价值，发挥榜样的教育作用。我们通过梁香敏同志鲜活感人的事例和言传身教，使观念成为习惯、规范变为行动，在学用统一、知行合一、教育与实践相结合的过程中挖掘出其蕴含的社会价值，发挥好其教育人鞭策人鼓舞人激励人的作用。在这种操作性很强的教育示范作用中，核心价值观成为一种看得见摸得着的事物，为广大干警所感知、所认同、所接受。三是揭示先进典型的人格力量，发挥榜样的激励作用。积极的人生态度有助于干警自觉树立政法核心价值观。我们在活动开展过程中，大力宣扬雷锋、白洁、梁香敏等先进典型积极进取、乐观有为的人生态度，引导干警面对基层检察机关的繁重任务和严峻挑战，将核心价值观转化为执法办案的行为习惯，通过实际行动树立和维护人民检察院公正司法、廉洁司法、为民司法的良好形象。</span>\r\n</p>\r\n<p class=\"MsoNormal\" align=\"left\" style=\"text-indent:24.1pt;\">\r\n	<b><span style=\"font-size:18px;\">二、注重精神启迪作用，让干警在学习先进典型中强化对核心价值观的理论认同</span></b> \r\n</p>\r\n<p class=\"MsoNormal\" align=\"left\" style=\"text-indent:24pt;\">\r\n	<span style=\"font-size:18px;\">理论只有说服人，才能掌握群众。我们注重揭示先进典型对核心价值观真学、真信和真用的坚定性，在宣传先进人物的过程中，营造一种学先进、赶先进的浓厚氛围，充分利用精神启迪作用，帮助干警从理论上认同核心价值观的根本要求。一是老戏台，唱新歌。我们充分利用现有资源，着力打造以党建教育为核心，以政策理论学习为内容，以传统文化为特色的教育活动中心。把市院开展的“两个经常性”工作和主题教育实践活动结合起来，利用周五学习日制度，在全院开展“干警大讲堂”、“河洛文化道德大讲堂”活动，组织干警讲身边事、讲身边人，比照先进找差距，营造浓郁的学习氛围。二是新瓶子，装旧酒。我院针对以往活动开展中，由于形式单一、内容单调、生动性不强，存在检察人员疲于参与的问题，及时转变观念，积极丰富活动载体，把专题辅导与座谈讨论结合起来，组织干警交流学习感悟和心得体会；把理论授课与业务学习结合起来，启迪干警在工作中思索核心价值观的实际意义；把先进人物宣讲与业务竞赛结合起来，引领干警将榜样带来的激励发挥到本职工作中去。三是改旧衣换新装。把开大会变为搞活动，把念文件变为作实践，把读报纸变为作交流，组织先进人物进行事迹报告、组织青年干警结合工作谈领悟、组织人员结合活动做宣传。精心组织开展“文明道德大讲堂”活动，先后邀请市、区道德楷模讲课</span><span style=\"font-size:18px;\">9</span><span style=\"font-size:18px;\">次，做到内容生动化、载体丰富化、形式多样化，干警的参与积极性和教育成效均有了明显提高。</span>\r\n</p>\r\n<p class=\"MsoNormal\" align=\"left\" style=\"text-indent:24.1pt;\">\r\n	<b><span style=\"font-size:18px;\">三、树立理念领航坐标，让干警在学习典型中强化对核心价值观的实践认同。</span></b> \r\n</p>\r\n<p class=\"MsoNormal\" align=\"left\" style=\"text-indent:24pt;\">\r\n	<span style=\"font-size:18px;\">实践是检验真理的唯一标准。先进典型的根本特征是立足本职岗位创一流、争先进。我们引导干警围绕我院“落实责任、实干争先”的工作思路，努力践行核心价值观，将一项项口头承诺、书面行动，外化为了一份份沉甸甸的责任、一个个强有力的行动。一是请进来、真情换实意。以梁香敏同志先进事迹为动力，按照核心价值观的要求，从增强群众感情入手，凡是群众来访，一律坚持“来访必接、不推脱，有问必答、不敷衍，有求必应、不懈怠”的原则，让群众清清楚楚知缘由，明明白白走出去，近三年，给付群众困难补助金</span><span style=\"font-size:18px;\">68</span><span style=\"font-size:18px;\">万元，先后化解积案</span><span style=\"font-size:18px;\">7</span><span style=\"font-size:18px;\">件，化解率达到了</span><span style=\"font-size:18px;\">100%</span><span style=\"font-size:18px;\">。在</span><span style=\"font-size:18px;\">2010</span><span style=\"font-size:18px;\">年第四季度和</span><span style=\"font-size:18px;\">2011</span><span style=\"font-size:18px;\">年第三季度，全市公众安全感指标和政法机关执法满意率考评排名中我院名列第一名。二是走出去、人心换人心。我院以核心价值观教育活动为载体，把政法干警核心价值观教育实践活动的课堂放在社区、群众家中。组织干警到帮扶村镇、社区开展“开门评警”“走访困难户、关爱空巢老人”活动，通过“走亲戚、认亲家”，先后组织干警</span><span style=\"font-size:18px;\">100</span><span style=\"font-size:18px;\">余人次到辖区各单位走访人大代表、政协要员、人民群众，让干警了解民情听民意，老百姓的艰辛和淳朴给大家上了一堂生动的核心价值观教育课，让同志们切身体会到了“深入群众鱼得水、脱离群众树断根”的深刻内涵。三是献爱心、真诚为公益。引导干警学习梁香敏同志传承爱心、关心他人、回馈社会的工作理念，组织干警积极参与为灾区、困难人群捐款捐物活动、“我为花会添光彩”志愿服务活动、“万名志愿者助交通”服务活动等社会公益活动，让干警在服务社会中增强为民意识、在回馈社会中累积为民情怀，让核心价值观外践于行、内化于心，为检察干警与百姓之间架起了一座“连心桥”。我院志愿服务队在老城区青年宫广场开展的“学习雷锋志愿服务”活动</span><span style=\"font-size:18px;\">，被洛阳电视台进行了专题报道，并得到辖区群众的称赞。</span>\r\n</p>\r\n<p class=\"MsoNormal\" align=\"left\" style=\"text-indent:24pt;\">\r\n	<span style=\"font-size:18px;\">典型引航方向，榜样传递力量。我们将深入持久地开展学习雷锋、学习白洁等先进典型活动，更多的树立像梁香敏同志这样的身边榜样，引导干警像先进典型一样坚持信仰，坚定信念，躬身实践，牢固树立和自觉践行“忠诚、为民、公正、廉洁”政法核心价值观，进一步坚守忠诚的政治本色、树牢为民的宗旨理念、坚定公正的价值追求、严守廉洁的基本操守，为党的“十八”大胜利召开，为洛阳经济社会发展做出新的更大贡献。</span>\r\n</p>\r\n<p class=\"MsoNormal\">\r\n	<span> </span> \r\n</p>', '1413859020', '1', '洛阳市老城区人民检察院贯彻落实十八大精神宣传活动方案');
 INSERT INTO `erp_article` VALUES ('19', '7', '2', '&lt;h4 style=&quot;text-indent:2em;&quot;&gt;\r\n	&lt;span style=&quot;line-height:1.5;font-family:KaiTi_GB2312;&quot;&gt;测试文章编辑器的使用&lt;/span&gt;&lt;span style=&quot;font-family:KaiTi_GB2312;line-height:1.5;font-weight:normal;&quot;&gt;&lt;strong&gt;&lt;/strong&gt;&lt;/span&gt;&lt;span style=&quot;font-family:KaiTi_GB2312;line-height:1.5;font-weight:normal;&quot;&gt;&lt;strong&gt;测试文章编辑器的使用&lt;/strong&gt;&lt;/span&gt;\r\n&lt;/h4&gt;', '1413859049', '1', '家具展示');
 INSERT INTO `erp_article` VALUES ('20', '5', '2', '测试', '1413861517', '1', '测试');
 INSERT INTO `erp_article` VALUES ('21', '7', '2', '&lt;strong&gt;测试测试&lt;/strong&gt;', '1413861646', '1', '产品名称');
@@ -59,6 +59,11 @@ INSERT INTO `erp_article` VALUES ('23', '5', '2', '&lt;strong&gt;ceshiceshi&lt;/
 INSERT INTO `erp_article` VALUES ('24', '8', '2', '&lt;strong&gt;测试测试测试&lt;/strong&gt;', '1413863849', '1', '友情网站');
 INSERT INTO `erp_article` VALUES ('25', '8', '1', '&lt;strong&gt;测试测试测试测试测试测试测试&lt;/strong&gt;', '1413864005', '1', '产品名称');
 INSERT INTO `erp_article` VALUES ('26', '7', '1', '&lt;p class=&quot;MsoNormal&quot; align=&quot;left&quot; style=&quot;text-indent:32pt;&quot;&gt;\r\n	&lt;span style=&quot;font-size:18px;&quot;&gt;（四）抓好宣传，营造氛围。充分利用检察机关的宣传版面、学习园地、横幅标语，大力营造浓厚的学习氛围。充分发挥新闻媒体、网络媒体的作用，广泛宣传报道检察机关深入学习贯彻党的十八大精神的具体措施和取得的扎实效果。大力宣传开展学习贯彻党的十八大活动中涌现出来的先进典型、好的经验做法和取得的成效。&lt;/span&gt; \r\n&lt;/p&gt;\r\n&lt;p class=&quot;MsoNormal&quot;&gt;\r\n	&lt;br /&gt;\r\n&lt;/p&gt;\r\n&lt;p&gt;\r\n	&lt;br /&gt;\r\n&lt;/p&gt;\r\n&lt;p class=&quot;MsoNormal&quot;&gt;\r\n	&lt;span&gt; &lt;/span&gt; \r\n&lt;/p&gt;', '1413870381', '1', '测试侧啊是');
+INSERT INTO `erp_article` VALUES ('27', '1', '1', '什么是动态网页？动态网页有哪些特点？', '1413878195', '1', '什么是动态网页？动态网页有哪些特点？');
+INSERT INTO `erp_article` VALUES ('28', '7', '2', '心态篇――心态决定成功', '1413878326', '1', '心态篇-心态决定成功');
+INSERT INTO `erp_article` VALUES ('29', '5', '2', '	&lt;b&gt;&lt;span style=&quot;color:windowtext;font-size:12pt;font-family:楷体_GB2312;&quot;&gt;&lt;span&gt;我也许不聪明，但我更努力&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;\r\n&lt;/p&gt;\r\n&lt;span&gt;&lt;/span&gt;\r\n&lt;p style=&quot;font-family:Tahoma, Geneva, sans-serif;font-size:14px;&quot;&gt;\r\n	&lt;b&gt;&lt;span style=&quot;color:windowtext;font-size:12pt;font-family:楷体_GB2312;&quot;&gt;&lt;span&gt;惟有成长令我愉悦&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;\r\n&lt;/p&gt;', '1413878420', '1', '励志语句');
+INSERT INTO `erp_article` VALUES ('30', '1', '1', '&lt;p style=&quot;font-family:Tahoma, Geneva, sans-serif;font-size:14px;&quot;&gt;\r\n	&lt;b&gt;&lt;span style=&quot;color:windowtext;font-size:12pt;font-family:楷体_GB2312;&quot;&gt;&lt;span&gt;不抛弃，不放弃&lt;/span&gt;&lt;br /&gt;\r\n&lt;span&gt;&lt;/span&gt;&lt;span&gt;不抛弃什么？不抛弃亲情、友情、同事情……&lt;/span&gt;&lt;br /&gt;\r\n&lt;span&gt;&lt;/span&gt;&lt;span&gt;不放弃什么？不放弃信念、理想、原则……&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;\r\n&lt;/p&gt;\r\n&lt;span&gt;&lt;/span&gt;\r\n&lt;p style=&quot;font-family:Tahoma, Geneva, sans-serif;font-size:14px;&quot;&gt;\r\n	&lt;b&gt;&lt;span style=&quot;color:windowtext;font-size:12pt;font-family:楷体_GB2312;&quot;&gt;&lt;span&gt;天道酬勤，不是不到，时候未到&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;\r\n&lt;/p&gt;\r\n&lt;span&gt;&lt;/span&gt;\r\n&lt;p style=&quot;font-family:Tahoma, Geneva, sans-serif;font-size:14px;&quot;&gt;\r\n	&lt;b&gt;&lt;span style=&quot;color:windowtext;font-size:12pt;font-family:楷体_GB2312;&quot;&gt;&lt;span&gt;今天耕种，明天收获&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;\r\n&lt;/p&gt;\r\n&lt;span&gt;&lt;/span&gt;\r\n&lt;p style=&quot;font-family:Tahoma, Geneva, sans-serif;font-size:14px;&quot;&gt;\r\n	&lt;b&gt;&lt;span style=&quot;color:windowtext;font-size:12pt;font-family:楷体_GB2312;&quot;&gt;&lt;span&gt;我也许不聪明，但我更努力&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;\r\n&lt;/p&gt;\r\n&lt;span&gt;&lt;/span&gt;\r\n&lt;p style=&quot;font-family:Tahoma, Geneva, sans-serif;font-size:14px;&quot;&gt;\r\n	&lt;b&gt;&lt;span style=&quot;color:windowtext;font-size:12pt;font-family:楷体_GB2312;&quot;&gt;&lt;span&gt;惟有成长令我愉悦&lt;/span&gt;&lt;/span&gt;&lt;/b&gt;\r\n&lt;/p&gt;', '1413878772', '1', '励志语句');
+INSERT INTO `erp_article` VALUES ('31', '1', '1', '&lt;p style=&quot;font-family:Tahoma, Geneva, sans-serif;font-size:14px;&quot;&gt;\r\n	一)、竞争的需要&amp;nbsp;&lt;br /&gt;\r\n国际互联网的用户在迅猛地增长，中国上网用户由1995年的一万户速增至2001年上半年的2650万用户。这增长速度是全世界范围的普遍现象。在美国、欧洲、日本、台湾、港澳及其它许多国家，网站和电子信箱系统已经成为公司立业不可缺少的重要组成部分。人们用电子信箱已经比用电话多了，百分之九十以上的大小企业、学校、政府机关、服务业甚至酒吧都设法在热门网络上设立自己的网站，供数以百万计的人们前来参观、浏览和查询。中国及全世界的上网用户在未来几十年内还会迅速增加。您的企业要为这众多的民众、企业服务就必须建立自己的网站和电子信箱系统，在这信息的高速公路上宣传自己高效的工作。企业网站、电子信箱给客户、潜在客户，特别是大客户及海外客户，带来了便利的联系，增加了了解，增强了信任感。这些企业自然是他们要打交道的首选，没有网站和电子信箱的企业将失去越来越多的机会而最终被淘汰。\r\n&lt;/p&gt;\r\n&lt;p style=&quot;font-family:Tahoma, Geneva, sans-serif;font-size:14px;&quot;&gt;\r\n	二)、可以迅速树立企业形象&amp;nbsp;&lt;br /&gt;\r\n今天，国际互联网络已成为高科技和未来生活的代名词，要显示你公司的实力，提升公司的形象，没有什么比在员工名片、企业信笺、广告及各种公众能看得到的东西上印上自己公司独有的网络地址和专用的集团电子邮件地址更有说服力了。消费者、客户和海外投资者自然对您另眼相看。\r\n&lt;/p&gt;', '1413879586', '1', '企业为什么要做网站？');
 
 -- ----------------------------
 -- Table structure for `erp_auth_group`
@@ -339,10 +344,10 @@ CREATE TABLE `erp_comment` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL COMMENT '评论人id',
   `art_id` int(10) unsigned NOT NULL COMMENT '评论文章的id',
-  `content` text CHARACTER SET utf8 NOT NULL COMMENT '评论的内容',
-  `add_time` varchar(32) CHARACTER SET utf8 NOT NULL DEFAULT '0' COMMENT '评论时间',
+  `content` text NOT NULL COMMENT '评论的内容',
+  `add_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '评论时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8 COMMENT='文章评论表';
+) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COMMENT='文章评论表';
 
 -- ----------------------------
 -- Records of erp_comment
@@ -354,6 +359,12 @@ INSERT INTO `erp_comment` VALUES ('4', '1', '13', '测试评论发布', '1413856
 INSERT INTO `erp_comment` VALUES ('5', '1', '25', '评论测试', '1413869577');
 INSERT INTO `erp_comment` VALUES ('6', '1', '26', '评论已发', '1413873129');
 INSERT INTO `erp_comment` VALUES ('7', '1', '26', '文章已阅读', '1413873167');
+INSERT INTO `erp_comment` VALUES ('20', '1', '21', '测试评论', '1413876107');
+INSERT INTO `erp_comment` VALUES ('21', '1', '29', '评论', '1413878476');
+INSERT INTO `erp_comment` VALUES ('30', '0', '0', '很励志', '0');
+INSERT INTO `erp_comment` VALUES ('31', '1', '30', '评论测试', '1413879403');
+INSERT INTO `erp_comment` VALUES ('32', '1', '30', '测试评论功能', '1413879441');
+INSERT INTO `erp_comment` VALUES ('33', '1', '31', '文章已读过', '1413879612');
 
 -- ----------------------------
 -- Table structure for `erp_config`
@@ -501,21 +512,22 @@ CREATE TABLE `erp_depart` (
   `sort` tinyint(4) DEFAULT '100' COMMENT '排序',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '-1:删除 0:禁用 1:正常',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='部门; 通过class来区别不同类型的部门, 不同\r\n\r\n类型的部门, 管理的数据表不同';
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='部门; 通过class来区别不同类型的部门, 不同\r\n\r\n类型的部门, 管理的数据表不同';
 
 -- ----------------------------
 -- Records of erp_depart
 -- ----------------------------
-INSERT INTO `erp_depart` VALUES ('1', '0', '4', '技术部', '100', '1');
-INSERT INTO `erp_depart` VALUES ('2', '1', '3', '优化1', '100', '1');
-INSERT INTO `erp_depart` VALUES ('3', '4', '8', '程序', '100', '1');
-INSERT INTO `erp_depart` VALUES ('5', '1', '0', '网页设计', '100', '0');
-INSERT INTO `erp_depart` VALUES ('6', '0', '0', '综合部', '100', '1');
-INSERT INTO `erp_depart` VALUES ('7', '0', '0', '行政部', '100', '1');
-INSERT INTO `erp_depart` VALUES ('8', '0', '0', '后勤部', '100', '0');
-INSERT INTO `erp_depart` VALUES ('9', '1', '0', '美工组', '100', '1');
-INSERT INTO `erp_depart` VALUES ('10', '0', '0', '培训部', '100', '1');
-INSERT INTO `erp_depart` VALUES ('11', '0', '0', '客服部', '100', '1');
+INSERT INTO `erp_depart` VALUES ('1', '1', '4', '技术部', '100', '1');
+INSERT INTO `erp_depart` VALUES ('2', '1', '3', '优化', '100', '1');
+INSERT INTO `erp_depart` VALUES ('3', '1', '4', '程序', '100', '1');
+INSERT INTO `erp_depart` VALUES ('5', '1', '4', '网页设计', '100', '0');
+INSERT INTO `erp_depart` VALUES ('6', '6', '5', '综合部', '100', '1');
+INSERT INTO `erp_depart` VALUES ('7', '6', '5', '行政部', '100', '1');
+INSERT INTO `erp_depart` VALUES ('8', '6', '5', '后勤部', '100', '0');
+INSERT INTO `erp_depart` VALUES ('9', '1', '4', '美工组', '100', '1');
+INSERT INTO `erp_depart` VALUES ('10', '3', '3', '产品客服部', '100', '1');
+INSERT INTO `erp_depart` VALUES ('11', '11', '2', '客服部', '100', '1');
+INSERT INTO `erp_depart` VALUES ('12', '10', '0', '优化编辑', '100', '1');
 
 -- ----------------------------
 -- Table structure for `erp_develop_order`
@@ -535,8 +547,9 @@ CREATE TABLE `erp_develop_order` (
 -- Records of erp_develop_order
 -- ----------------------------
 INSERT INTO `erp_develop_order` VALUES ('3', null, '0', '0', '0', '1', '1');
-INSERT INTO `erp_develop_order` VALUES ('4', null, '0', '0', '0', '0', '1');
+INSERT INTO `erp_develop_order` VALUES ('4', null, '0', '0', '0', '1', '1');
 INSERT INTO `erp_develop_order` VALUES ('5', null, '0', '0', '0', '0', '1');
+INSERT INTO `erp_develop_order` VALUES ('1', null, '0', '0', '0', '0', '1');
 
 -- ----------------------------
 -- Table structure for `erp_develop_order_comment`
@@ -589,6 +602,7 @@ INSERT INTO `erp_develop_user` VALUES ('4', '5', '5000.00', '0', '0');
 INSERT INTO `erp_develop_user` VALUES ('4', '6', '5000.00', '0', '0');
 INSERT INTO `erp_develop_user` VALUES ('4', '7', '5000.00', '0', '0');
 INSERT INTO `erp_develop_user` VALUES ('4', '8', '5000.00', '0', '0');
+INSERT INTO `erp_develop_user` VALUES ('4', '15', '5000.00', '0', '0');
 INSERT INTO `erp_develop_user` VALUES ('5', '5', '24135.00', '0', '0');
 INSERT INTO `erp_develop_user` VALUES ('5', '6', '24135.00', '0', '0');
 INSERT INTO `erp_develop_user` VALUES ('5', '7', '24135.00', '0', '0');
@@ -674,19 +688,19 @@ CREATE TABLE `erp_order` (
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '-1:删除 0:禁用 1:正常',
   `time_limit` int(10) DEFAULT NULL COMMENT '订单期限',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COMMENT='订单表; 财务审核后, 由签单人员和签单部门\r\n\r\n来 决定 此订单分配至 哪个订单户池';
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COMMENT='订单表; 财务审核后, 由签单人员和签单部门\r\n\r\n来 决定 此订单分配至 哪个订单户池';
 
 -- ----------------------------
 -- Records of erp_order
 -- ----------------------------
 INSERT INTO `erp_order` VALUES ('1', '2', '1', '6', '5002.00', '无', '2015-1-1', '2014-1-1', '1', '1', null);
-INSERT INTO `erp_order` VALUES ('2', '2', '1', '6', '10000.00', '无', '2015-1-1', '2014-1-1', '0', '1', null);
+INSERT INTO `erp_order` VALUES ('2', '2', '1', '6', '10000.00', '无', '2015-1-1', '2014-1-1', '1', '1', null);
 INSERT INTO `erp_order` VALUES ('3', '4', '2', '6', '4000.00', '无', '2015-1-1', '2014-1-1', '1', '1', null);
 INSERT INTO `erp_order` VALUES ('4', '4', '3', '6', '5000.00', '无', '2015-1-1', '2014-1-1', '1', '1', null);
 INSERT INTO `erp_order` VALUES ('5', '4', '4', '6', '24135.00', '无', '2015-1-1', '2014-1-1', '1', '1', null);
 INSERT INTO `erp_order` VALUES ('8', '4', '1', '6', '41524.00', '无', '2015-1-1', '2014-1-1', '0', '1', null);
 INSERT INTO `erp_order` VALUES ('9', '4', '2', '3', '54545.00', '无', '2015-1-1', '2014-1-1', '1', '1', null);
-INSERT INTO `erp_order` VALUES ('10', '4', '2', '6', '6.00', '无', '2015-1-1', '2014-1-1', '0', '1', null);
+INSERT INTO `erp_order` VALUES ('10', '4', '2', '6', '6.00', '无', '2015-1-1', '2014-1-1', '1', '1', null);
 INSERT INTO `erp_order` VALUES ('11', '4', '3', '6', '3252.00', '无', '2015-1-1', '2014-1-1', '0', '1', null);
 INSERT INTO `erp_order` VALUES ('13', '12', '14', '1', '5000.00', 's', '2015-1-1', '2014-1-1', '0', '1', null);
 INSERT INTO `erp_order` VALUES ('14', '12', '14', '1', '5000.00', 's', '2015-1-1', '2014-1-1', '0', '1', null);
@@ -703,9 +717,11 @@ INSERT INTO `erp_order` VALUES ('24', '12', '1', '1', '0.00', '', '2015-10-15', 
 INSERT INTO `erp_order` VALUES ('25', '12', '6', '4', '5000.00', '111', '2019-10-14', '2014-10-15', '0', '1', '5');
 INSERT INTO `erp_order` VALUES ('26', '12', '12', '1', '5000.00', '当当当', '2016-10-14', '2014-10-15', '0', '1', '2');
 INSERT INTO `erp_order` VALUES ('27', '0', '3', '2', '5000.00', '', '2017-10-14', '2014-10-15', '0', '1', '3');
-INSERT INTO `erp_order` VALUES ('28', '1', '11', '1', '1000.00', '', '2015-10-16', '2014-10-16', '0', '1', '1');
-INSERT INTO `erp_order` VALUES ('29', '1', '7', '1', '1000.00', '', '2015-10-16', '2014-10-16', '0', '1', '1');
-INSERT INTO `erp_order` VALUES ('30', '11', '8', '2', '1000.00', '', '2015-10-16', '2014-10-16', '0', '1', '1');
+INSERT INTO `erp_order` VALUES ('28', '1', '11', '1', '1000.00', '', '2015-10-16', '2014-10-16', '1', '1', '1');
+INSERT INTO `erp_order` VALUES ('29', '1', '7', '1', '1000.00', '', '2015-10-16', '2014-10-16', '1', '1', '1');
+INSERT INTO `erp_order` VALUES ('30', '11', '8', '2', '1000.00', '', '2015-10-16', '2014-10-16', '1', '1', '1');
+INSERT INTO `erp_order` VALUES ('31', '15', '19', '1', '1000.00', '测试', '2014-10-23', '2014-10-24', '1', '1', '2');
+INSERT INTO `erp_order` VALUES ('32', '7', '2', '4', '1000.00', '测试跳转', '2015-10-24', '2014-10-24', '1', '1', '1');
 
 -- ----------------------------
 -- Table structure for `erp_order_depart`
@@ -785,7 +801,7 @@ CREATE TABLE `erp_order_renewal` (
   `remark` varchar(225) DEFAULT NULL COMMENT '备注',
   `ren_time` int(10) DEFAULT NULL COMMENT '续费年限',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='订单续费记录表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='订单续费记录表';
 
 -- ----------------------------
 -- Records of erp_order_renewal
@@ -793,6 +809,7 @@ CREATE TABLE `erp_order_renewal` (
 INSERT INTO `erp_order_renewal` VALUES ('1', '2', '300.00', '2015-1-1', '0', '0', '0', '0', '1', null, null);
 INSERT INTO `erp_order_renewal` VALUES ('2', '3', '5000.00', '2015-1-1', '0', '0', '0', '0', '1', null, null);
 INSERT INTO `erp_order_renewal` VALUES ('3', '3', '5000.00', '2015-1-1', '2017-10-15', '2014-10-16', '0', '0', '1', 'ty', '3');
+INSERT INTO `erp_order_renewal` VALUES ('4', '31', '1000.00', '2014-10-23', '2015-10-25', '2014-10-25', '0', '0', '1', '测试', '1');
 
 -- ----------------------------
 -- Table structure for `erp_product`
@@ -851,7 +868,10 @@ CREATE TABLE `erp_seo_order` (
 -- ----------------------------
 -- Records of erp_seo_order
 -- ----------------------------
+INSERT INTO `erp_seo_order` VALUES ('1', null, '0', '0', '0', '0', '1');
+INSERT INTO `erp_seo_order` VALUES ('2', null, '0', '0', '0', '0', '1');
 INSERT INTO `erp_seo_order` VALUES ('3', null, '0', '0', '0', '0', '1');
+INSERT INTO `erp_seo_order` VALUES ('10', null, '0', '0', '0', '0', '1');
 
 -- ----------------------------
 -- Table structure for `erp_seo_order_comment`
@@ -909,33 +929,36 @@ CREATE TABLE `erp_user` (
   `depart_id` int(10) unsigned NOT NULL COMMENT '所属部门ID',
   `realname` varchar(32) NOT NULL COMMENT '真实姓名',
   `sex` enum('0','1') NOT NULL DEFAULT '1' COMMENT '1男 0女',
+  `position` varchar(32) NOT NULL COMMENT '职位',
+  `startime` varchar(32) NOT NULL DEFAULT '0' COMMENT '入职时间',
   `birthday` varchar(32) DEFAULT '0' COMMENT '生日',
   `login_times` int(10) unsigned NOT NULL DEFAULT '0' COMMENT '登录次数',
   `last_login_time` varchar(32) NOT NULL DEFAULT '0' COMMENT '上次登录时间',
   `last_login_ip` varchar(32) NOT NULL DEFAULT '0' COMMENT '上次登录IP',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '-1:删除 0:禁用 1:正常',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COMMENT='员工表';
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8 COMMENT='员工表';
 
 -- ----------------------------
 -- Records of erp_user
 -- ----------------------------
-INSERT INTO `erp_user` VALUES ('1', 'admin', '6fa0446fa9335c25c3cf97b241210b35', '0', '超管', '1', '0', '0', '0', '0', '1');
-INSERT INTO `erp_user` VALUES ('2', 'administrator', '6fa0446fa9335c25c3cf97b241210b35', '0', '超管', '1', '0', '0', '0', '0', '1');
-INSERT INTO `erp_user` VALUES ('4', 'test', '6fa0446fa9335c25c3cf97b241210b35', '1', '测试人员', '0', '1990.4.5', '3', '20149.18', '192.168.1.48', '-1');
-INSERT INTO `erp_user` VALUES ('5', 'zhao', '', '2', '赵', '1', '0', '0', '0', '0', '1');
-INSERT INTO `erp_user` VALUES ('6', 'qian', '', '3', '钱', '1', '0', '0', '0', '0', '0');
-INSERT INTO `erp_user` VALUES ('7', 'sun', '', '4', '孙', '1', '0', '0', '0', '0', '1');
-INSERT INTO `erp_user` VALUES ('8', 'li', '', '5', '李', '1', '0', '0', '0', '0', '1');
-INSERT INTO `erp_user` VALUES ('9', 'zhou', '', '6', '周', '1', '0', '0', '0', '0', '1');
-INSERT INTO `erp_user` VALUES ('10', 'wu', '', '7', '吴', '1', '0', '0', '0', '0', '1');
-INSERT INTO `erp_user` VALUES ('11', 'zheng', '', '8', '郑', '1', '0', '0', '0', '0', '1');
-INSERT INTO `erp_user` VALUES ('12', 'wang', '', '1', '王', '1', '0', '0', '0', '0', '1');
-INSERT INTO `erp_user` VALUES ('13', 'baidu', '', '2', '百度', '1', '0', '0', '0', '0', '1');
-INSERT INTO `erp_user` VALUES ('14', 'wcd', 'aerwe', '3', '', '1', '342423', '0', '0', '0', '0');
-INSERT INTO `erp_user` VALUES ('15', 'ccd', 'dada', '4', '愁肠断', '1', '3423423', '0', '0', '0', '1');
-INSERT INTO `erp_user` VALUES ('16', 'asdas', '123456', '11', '张三', '1', '1991.12.12', '0', '0', '0', '1');
-INSERT INTO `erp_user` VALUES ('17', 'lisi', 'lisi', '11', '李四', '1', '1991.12.12', '0', '0', '0', '1');
+INSERT INTO `erp_user` VALUES ('1', 'admin', '6fa0446fa9335c25c3cf97b241210b35', '0', '超管', '1', '', '2012.10.12', '0', '0', '0', '0', '1');
+INSERT INTO `erp_user` VALUES ('2', 'administrator', '6fa0446fa9335c25c3cf97b241210b35', '0', '超管', '1', '', '2013.11.15', '0', '0', '0', '0', '1');
+INSERT INTO `erp_user` VALUES ('4', 'test', '6fa0446fa9335c25c3cf97b241210b35', '1', '测试人员', '0', '', '2012.10.13', '1990.4.5', '3', '20149.18', '192.168.1.48', '-1');
+INSERT INTO `erp_user` VALUES ('5', 'zhao', '', '2', '赵', '1', '优化', '2013.10.14', '1990.2.9', '0', '0', '0', '1');
+INSERT INTO `erp_user` VALUES ('6', 'qian', '', '3', '钱', '1', '程序', '2012.2.9', '1991.10.15', '0', '0', '0', '0');
+INSERT INTO `erp_user` VALUES ('7', 'sun', '', '5', '孙', '1', '网页设计', '2014.5.9', '1993.1.8', '0', '0', '0', '1');
+INSERT INTO `erp_user` VALUES ('8', 'li', '', '5', '李', '1', '网页设计', '2013.5.8', '1992.12.12', '0', '0', '0', '1');
+INSERT INTO `erp_user` VALUES ('9', 'zhou', '', '6', '周', '1', '部门经理', '2014.3.9', '1990.1.8', '0', '0', '0', '1');
+INSERT INTO `erp_user` VALUES ('10', 'wu', '', '7', '吴', '1', '前台', '2011.10.12', '1992.10.12', '0', '0', '0', '1');
+INSERT INTO `erp_user` VALUES ('11', 'zheng', '', '8', '郑', '1', '后勤', '2012.8.6', '1990.1.14', '0', '0', '0', '1');
+INSERT INTO `erp_user` VALUES ('12', 'wang', '', '1', '王', '1', '技术主管', '2012.6.4', '1989.4.9', '0', '0', '0', '1');
+INSERT INTO `erp_user` VALUES ('13', 'baidu', '', '2', '百度', '1', '优化', '2013.10.13', '1993.12.4', '0', '0', '0', '1');
+INSERT INTO `erp_user` VALUES ('14', 'wcd', 'aerwe', '3', 'wcd', '1', '程序', '2013.11.18', '1995.12.1', '0', '0', '0', '0');
+INSERT INTO `erp_user` VALUES ('15', 'ccd', 'dada', '5', '愁肠断', '1', '网页设计', '2013.8.6', '1991.1.5', '0', '0', '0', '1');
+INSERT INTO `erp_user` VALUES ('16', 'asdas', '123456', '11', '张三', '1', '客服', '2013.10.14', '1991.12.12', '0', '0', '0', '1');
+INSERT INTO `erp_user` VALUES ('17', 'lisi', 'lisi', '11', '李四', '1', '客服', '2014.2.2', '1991.12.12', '0', '0', '0', '1');
+INSERT INTO `erp_user` VALUES ('18', 'wangwu', 'wangwu', '10', '王五', '1', '优化编辑', '2014.10.10', '1991.12.12', '0', '0', '0', '1');
 
 -- ----------------------------
 -- Table structure for `erp_user_cust_apply`
