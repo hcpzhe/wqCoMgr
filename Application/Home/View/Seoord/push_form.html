@@ -16,22 +16,25 @@
             <td class="menu"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32" /><font>订单列表</font></span></td>
           </tr>
           <tr>
-            <td class="menu_content">
-<!-- 推送表开始 -->
-<form method="post" action="{:U('Order/push')}">
-	<select name="dp">
-	<!-- <foreach name="dp" item="list"> -->
-		<option value="{$list.id}">{$list.name}</option>
-	<!-- </foreach> -->	
-	<input type="hidden" value="{$id}" name="id" >
-	<input type="submit" value="推送" >
-	</select>
-</form>
-<!-- 推送结束-->
+             <td height="20"></td>
+          </tr>
+          <tr>
+            <td class="push_content">
+				<!-- 推送表开始 -->
+				<form method="post" action="{:U('Order/push')}">
+					<select name="dp" class="search_bg">
+					<!-- <foreach name="dp" item="list"> -->
+						<option value="{$list.id}">{$list.name}</option>
+					<!-- </foreach> -->	
+					<input type="hidden" value="{$id}" name="id" >
+					<input type="submit" value="推送" class="button_submit">
+					</select>
+				</form>
+				<!-- 推送结束-->
 			</td>
           </tr>
           <tr>
-            <td class="notice"><img style="float:left; margin-left:10px;" src="__IMG__/notice_img.png" /><span>公司通知</span></td>
+            <td height="20"></td>
           </tr>
     </table> 
    </div>

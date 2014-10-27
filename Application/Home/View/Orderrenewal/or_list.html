@@ -2,21 +2,10 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>订单列表</title>
+<title>订单续费申请列表</title>
 <link href="__CSS__/style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="__JS__/jquery.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
-<script type="text/javascript">
-function apy(){
-	$("input[name='che[]']").each(function(){
-		if($(this).attr("checked")=="checked"){								
-			var id=$(this).val();		
-            var url="__URL__-order_info-id-"+id;
-            location.href=url;
-			}
-		});
-}
-</script>
 </head>
 <body>
 <div style="width:100%; overflow:hidden; background: #f2f2f2;">
@@ -25,24 +14,27 @@ function apy(){
           <tr>
             <td class="menu"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32" /><font>订单续费申请列表</font></span></td>
           </tr>
+          <tr>
+            <td height="10"></td>
+          </tr> 
           <!-- 搜索，操作 -->
           <tr>
-            <td class="menu">
+            <td class="seach_td">
             <!-- 搜索开始 -->
 			   <div class="top_search">
-			       <form action="{:U('Orderrenewal/or_list')}" method="post" class="search_form" name="search">
-						<select name="product">
+			       <form action="{:U('Orderrenewal/or_list')}" method="get" class="search_form" name="search">
+						<select name="product" class="search_bg">
 							<option value="">所有产品</option>
 							<!-- <foreach  name="pro_list" item="po_list"> -->
     						<option value="{$po_list.id}">{$po_list.name}</option>
     						<!-- </foreach> -->	
 						</select>
-						<select name="check">
-							<option value="">审核</option>
+						<select name="check" class="search_bg">
+							<option value="">审核状态</option>
 							<option value="1">审核通过</option>
 							<option value="2">未审核</option>
 						</select>
-						关键字<input type="text" name="key">
+						关键字  <input type="text" name="key" class="search_bg">
 						<input type="submit" value="搜索" class="button_submit">
 <!-- <a href="{:U('Orderrenewal/apy_ren')}" class="button_submit">添加申请</a> -->						 
 			       </form> 
@@ -53,43 +45,43 @@ function apy(){
           <!-- 搜索，操作 -->
           <tr>
             <td class="menu_content">
-<!-- 订单列表开始 -->
-<table cellpadding="0" cellspacing="0" class="info_list">
-	<tr>
-		<th>产品</th>
-		<th>客户</th>
-		<th>续费金额</th>
-		<th>付款时间</th>
-		<th>原到期时间</th>
-		<th>现到期时间</th>
-		<th>提交人</th>
-		<th>审核</th>
-	</tr>
-<!-- <foreach name="or['order_list']" item="list"> -->
-	<tr class="list_tr">
-		<td>{$list.pname}</td>
-		<td>{$list.cname}</td>
-		<td>{$list.money}元</td>
-		<td>{$list.pay_time}</td>
-		<td>{$list.org_expired_time}</td>
-		<td>{$list.new_expired_time}</td>
-		<td>超管</td>
-		<!-- 显示审核状态 -->
-		<td>
-			<!-- <if condition="$list.check eq 1"> -->通过
-			<!-- <elseif condition="$list.check eq 0"/> -->
-			<a href="{:U('/?id='.$list['id'].'&& pid='.$list['pid'])}">待审</a>
-			<!-- <else/> -->拒绝<!-- </if> -->
-		</td>
-	</tr>
-<!-- </foreach> -->
-	<tr><td colspan="8" align="center">{$data[show]}</td></tr>
-</table>
-<!-- 订单列表结束-->
+				<!-- 订单列表开始 -->
+				<table cellpadding="0" cellspacing="0" class="info_list">
+					<tr>
+						<th>产品</th>
+						<th>客户</th>
+						<th>续费金额</th>
+						<th>付款时间</th>
+						<th>原到期时间</th>
+						<th>现到期时间</th>
+						<th>提交人</th>
+						<th>审核</th>
+					</tr>
+				<!-- <foreach name="data['order_list']" item="list"> -->
+					<tr class="list_tr">
+						<td>{$list.pname}</td>
+						<td>{$list.cname}</td>
+						<td>{$list.money}元</td>
+						<td>{$list.pay_time}</td>
+						<td>{$list.org_expired_time}</td>
+						<td>{$list.new_expired_time}</td>
+						<td>超管</td>
+						<!-- 显示审核状态 -->
+						<td>
+							<!-- <if condition="$list.check eq 1"> -->通过
+							<!-- <elseif condition="$list.check eq 0"/> -->
+							<a href="{:U('/?id='.$list['id'].'&& pid='.$list['pid'])}">待审</a>
+							<!-- <else/> -->拒绝<!-- </if> -->
+						</td>
+					</tr>
+				<!-- </foreach> -->
+					<tr><td colspan="8" align="center" height="40">{$data[show]}</td></tr>
+				</table>
+				<!-- 订单列表结束-->
 			</td>
           </tr>
           <tr>
-            <td class="notice"><img style="float:left; margin-left:10px;" src="__IMG__/notice_img.png" /><span>公司通知</span></td>
+            <td height="20"></td>
           </tr>
     </table> 
    </div>

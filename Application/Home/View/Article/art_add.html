@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>文章添加</title>
+<link href="__CSS__/home.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+<link rel="stylesheet" href="__PUBLIC__/kindeditor/themes/default/default.css" />
+<script charset="utf-8" src="__PUBLIC__/kindeditor/kindeditor-min.js"></script>
+<script charset="utf-8" src="__PUBLIC__/kindeditor/lang/zh_CN.js"></script>
+<script>
+//文本编辑器 
+KindEditor.ready(function(K) {
+	var myeditor = K.create('textarea[name="content"]', {
+		allowFileManager : true,
+		//autoHeightMode : true,
+		afterCreate : function() {
+			this.loadPlugin('autoheight');
+		},
+		afterUpload : function(url) {
+			var firstimageoption = '<option value="' + url + '">' + url + '</option>';
+			var selectoption = '<option value="' + url + '" selected="selected">' + url + '</option>';
+			$("#firstimage").append(firstimageoption);
+			$("#images").append(selectoption);
+		}
+	});
+	K('#form').bind('submit', function() {
+		myeditor.sync();
+	});
+});
+</script>
+</head>
+<body>
+<div style="width:100%; overflow:hidden; background: #f2f2f2;">
+<div class="b right_next">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>文章添加</font></span></td>
+      </tr>
+      <tr>
+        <td height="30"></td>
+      </tr>
+      <tr>
+        <td align="center">
+           <form action="{:U('Article/art_insert')}" method="post" id="form">           
+            <table width="700" border="0">
+                  <tr>
+                    <td width="100">文章标题：</td>
+                    <td width="600">                                      
+		                <input type="text" name="title" value="" style="width: 500px;"/>
+		                <font class="fontred" id="namets">*</font>		               		                              	                                                 
+                    </td>
+                  </tr>
+                  <tr>
+                    <td width="100">文章类型：</td>
+                    <td width="600">
+                      <select name="class">
+                        <option value="1">公司通知</option>
+                        <option value="2">文章杂谈</option>
+                      </select>
+                      <font class="fontred" id="namets"> *</font>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td> 添 加 人 ：</td>
+                    <td>
+                      <select name="user_id">
+                       <!-- <foreach name="user_list" item="user_list"> --> 
+                        <option value="{$user_list['id']}">{$user_list['realname']}</option>
+                       <!-- </foreach> -->
+                      </select>
+                      <font class="fontred" id="namets"> *</font>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>内 &nbsp;&nbsp;&nbsp; 容：</td>
+                    <td>
+                        <textarea name="content" style="height:400px;width:100%;"></textarea>
+                    </td>
+                  </tr>           
+                  <tr>
+                    <td>&nbsp;</td>
+                    <td align="center"><input type="submit" name="Submit" value=" 添加 " class="button_submit"></td>
+                  </tr>
+            </table>                              
+           </form>
+        </td>
+      </tr>      
+     </tbody>
+  </table>
+</div>
+</div>
+</body>
+</html>

@@ -22,7 +22,7 @@ class Develop_orderModel extends Model{
 		->where($where)
 		->count();
 		/*载入分页类，初始化数据*/
-		$page=new \Think\Page($count,7);
+		$page=new \Think\Page($count,10);
 		/*调用分页链接函数*/
 		$data['show']=$page->show();
 		/*控制数据查询条数*/
@@ -44,7 +44,7 @@ class Develop_orderModel extends Model{
 	/*查询指定订单的详细信息*/
 	public function depinfo($oid){
 		$data=$this->table('erp_develop_order as edo,erp_order as eo,erp_customer as ec,erp_user as eu')
-		->where("edo.order_id=eo.id AND eo.cust_id=ec.id AND eo.user_id=eu.id AND edo.status=1")
+		->where("edo.order_id=eo.id AND eo.cust_id=ec.id AND eo.user_id=eu.id AND edo.status=1 AND edo.order_id=$oid")
 		->field("eo.id as id,eo.total_fees as money,ec.name as cname,ec.contacts as contacts,eu.realname as rname,ec.phone as phone,edo.remark as remark,edo.check as checks,edo.start_time as start_time,edo.end_time as end_time,edo.status as status")
 		->find();
 		return $data;

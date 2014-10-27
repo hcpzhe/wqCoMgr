@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>客户详细信息</title>
+<link href="__CSS__/home.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+</head>
+<body>
+<div style="width:100%; overflow:hidden; background: #f2f2f2;">
+<div class="b right_next">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>客户详细信息</font></span></td>
+      </tr>
+      <tr>
+        <td height="30"></td>
+      </tr>
+      <tr>
+        <td align="center">  
+        <!-- 文章详细信息 -->       
+            <table width="700" border="0" cellpadding="0" cellspacing="0" >
+                <!-- <foreach name="list" item="list"> -->
+                  <tr style="height: 40px;">
+                    <th align="center">{$list['title']}</th>                    
+                  </tr>                  
+                  <tr>
+                    <td width="740" align="right" style="font-size: 12px;">
+                                                                        发布人：{$list['realname']}  &nbsp;&nbsp;&nbsp;&nbsp;  发布时间：{:date('Y/m/d H:i:s',$list['time'])}
+                    </td>
+                  </tr>                                  
+                  <tr>
+                    <td style="font-size: 12px;">
+                       <!-- <if condition="$list['status'] eq -1"> --><font color="red">此文已被删除！ </font>         
+                       <!-- <elseif condition="$list['status'] eq 0 " /> --><font color="red">此文禁止查看！ </font>  
+                       <!-- <else /> --> {$content}<!-- </if> -->                       
+                    </td>               
+                  </tr>   
+                <!-- </foreach> -->                   
+            </table>                           
+        </td>
+      </tr>
+      <tr>
+        <td height="30"></td>
+      </tr>
+      <tr>
+        <td height="30"  style="font-size: 12px; padding-left:10px;">
+                                      上一条：
+             <!-- <if condition="$prev gt 0 "> --><a href="{:U('Article/art_detailed?id='.$prev)}">{$prev_title}</a>          
+             <!-- <else /> --> 没有了！<!-- </if> -->                                     
+        </td>
+      </tr> 
+      <tr>
+        <td height="30"  style="font-size: 12px; padding-left:10px;">
+                                     下一条：
+             <!-- <if condition="$next lt $big "> --><a href="{:U('Article/art_detailed?id='.$next)}">{$next_title}</a>          
+             <!-- <else /> --> 没有了！<!-- </if> -->                        
+         </td>
+      </tr> 
+      <tr>
+        <td height="20"></td>
+      </tr>
+      <tr>
+         <td>
+            <!-- 我要评论    -->
+             <form action="{:U('Article/insert_comment')}" method="post">
+              <table width="650" border="0" cellpadding="0" cellspacing="0" >                
+                  <tr style="height: 40px;">
+                    <th align="left">我要评论</th>                    
+                  </tr>                  
+                  <tr>
+                    <td align="left" style="font-size: 12px;">                    
+                         <input type="hidden" name="id" value="{$id}">
+                         <textarea rows="10" cols="60" name="content"></textarea>                                                                
+                    </td>
+                  </tr>
+                  <tr>
+                     <td height="10"> </td>
+                  </tr>
+                  <tr>
+                     <td align="center"> <input type="submit" value="评论" class="button_submit"></td>
+                  </tr>  
+                  <tr>
+                     <td height="10"> </td>
+                  </tr>                                                                  
+              </table>   
+           </form>          
+         </td>
+      </tr>        
+      <tr>
+         <td>
+            <!-- 评论内容    -->
+              <table width="650" border="0" cellpadding="0" cellspacing="0" >    
+                   <!-- <if condition="$data eq '' "> -->             
+                   <!-- <else /> --> 
+                   <tr>
+                      <th height="40" align="left">评论内容</th>
+                   </tr>  
+                   <!-- </if> -->
+                                                             
+                 <!-- <foreach name="data" item="data"> -->
+                  <tr>
+                     <td height="20" style="font-size: 12px;">{$data['realname']} {:date('Y/m/d H:i:s',$data['add_time'])}</td>
+                  </tr>
+                  <tr>
+                     <td height="20" style="font-size: 12px;"> {$data['content']}</td>
+                  </tr> 
+                  <tr>
+                     <td height="10"> </td>
+                  </tr>
+                  <!-- </foreach> --> 
+                  <tr>
+                     <td height="10"> </td>
+                  </tr>                                                                  
+              </table>          
+         </td>
+      </tr>        
+     </tbody>
+  </table>
+</div>
+</div>
+</body>
+</html>

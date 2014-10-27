@@ -15,9 +15,9 @@ form{ line-height:30px; font-size:14px; letter-spacing: 1px;}
 .fontred{ color:red; padding-left:10px; padding-right: 10px;}
 
 /***右边部分样式**/
-.right_next{ min-height:600px; width:755px; margin:0 auto; background:#FFF !important;}
+.right_next{ min-height:600px; width:765px; margin:0 auto; background:#FFF !important;}
 .r_c1_title{  height: 38px; color:#FFF; border-bottom:1px solid #ccc; }
-.r_c1_title span{width: 753px; height: 38px; display: block; float: left; margin: 1px; background: #1C86CF; font-size:15px !important; line-height:38px;}
+.r_c1_title span{width: 763px; height: 38px; display: block; float: left; margin: 1px; background: #1C86CF; font-size:15px !important; line-height:38px;}
 .r_c1_title font{ float:left;}
 #form1 tr{ line-height:30px; font-size:14px; letter-spacing: 3px;}
 #form1 td{ text-align:left;}
@@ -26,21 +26,22 @@ form{ line-height:30px; font-size:14px; letter-spacing: 1px;}
 
 
 /**客户列表页*/
-#cust_search{ background: url(../images/liebiao_bg.jpg) repeat-x; width: 740px; height: 38px; line-height: 38px; border: 1px solid #CCC; margin: 0 auto; font-size: 12px; display:block;}
-#cust_search form{ display: inline; padding-left: 10px;}
+#cust_search{ background:url(../images/search_bg.png) no-repeat; width:765px; height:43px; line-height:40px; display: list-item; font-size: 12px; }
+#cust_search form{ display: inline; padding-left: 20px;}
 #cust_search span{ margin-left: 20px;}
 .search{ background: #E9E9E9; border: 1px solid #CCC; height: 25px; vertical-align: middle; line-height: 25px;}
 .cust_list{ font-size:12px; display: block; border: 1px solid #ccc;}
 .com_list{ display: block; border-right: 1px solid #ccc; border-left: 1px solid #ccc; font-size: 12px;}
 .com_list tr{ line-height:30px; display: block;}
 
-.liebiao_title{ background: url(../images/liebiao_bg.jpg) repeat-x; display: block; width: 740px; height: 38px; line-height: 38px;}
+.liebiao_title{ background: url(../images/liebiao_bg.jpg) repeat-x; display: block; width: 750px; height: 38px; line-height: 38px;}
 .liebiao_title th{ text-align:center;}
 
 /**客户详细信息页**/
 .com_table{border-right:1px solid #ccc; border-bottom:1px solid #ccc; margin-bottom: 10px;}
+.com_table th{ background: #F4F4F4;}
 .com_table th,.com_table td{ border-left:1px solid #ccc; border-top:1px solid #ccc; padding:5px; font-size: 12px; text-align: center;}
-.order_title{width: 728px; height: 30px; line-height: 30px; text-align:center; border: 1px solid #ccc; border-bottom:0; padding: 5px; font-size: 12px; font-weight: bold;}
+.order_title{width: 738px; height: 30px; line-height: 30px; text-align:center; border: 1px solid #ccc; border-bottom:0; padding: 5px; font-size: 12px; font-weight: bold; background: #F4F4F4;}
 
 /**公司名称模糊搜索**/
 .search_next{ width: 650px; margin: 0 auto;}
@@ -51,3 +52,4 @@ form{ line-height:30px; font-size:14px; letter-spacing: 1px;}
 .sea_liebiao_title th{ text-align:center;}
 
 
+.user_info{ font-size:14px; line-height:30px;}

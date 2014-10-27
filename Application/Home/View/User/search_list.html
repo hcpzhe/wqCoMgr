@@ -34,19 +34,22 @@ function del(){
           <tr>
             <td class="menu"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32" /><font>用户列表</font></span></td>
           </tr>
+          <tr>
+            <td height="10"></td>
+          </tr>
           <!-- 搜索，操作 -->
           <tr>
-            <td class="menu">
+            <td class="seach_td">
             <!-- 搜索开始 -->
 			   <div class="top_search">
-			       <form action="{:U('User/search_list')}" method="post" class="search_form" name="search">
-						<select name="depart">
+			       <form action="{:U('User/search_list')}" method="get" class="search_form" name="search">
+						<select name="depart" class="search_bg">
 							<option value="">所有部门</option>
 							<!-- <foreach  name="depa_list" item="dp_list"> -->
     						<option value="{$dp_list.id}">{$dp_list.name}</option>
     						<!-- </foreach> -->	
 						</select>
-						关键字<input type="text" name="key">
+						关键字  <input type="text" name="key" class="search_bg">
 						<input type="submit" value="搜索" class="button_submit">
 						<a href="javascript:void(0)" class="button_submit" onclick="info();">详情</a>	
 						<a href="javascript:void(0)" class="button_submit" onclick="del();">删除</a>	
@@ -59,43 +62,41 @@ function del(){
           <!-- 搜索，操作 -->
           <tr>
             <td class="menu_content">
-<!-- 订单列表开始 -->
-<table width="100%" border="0" cellspacing="0" cellpadding="0" class="info_list">
-	<tr>
-		<th>请选择</th>
-		<th>用户名</th>
-		<th>姓名</th>
-		<th>职位</th>
-		<th>所属部门</th>
-		<th>入职时间</th>
-		<th>状态</th>
-	</tr>
-<form method="post" name="ches">	
-<!-- <foreach name="data['order_list']" item="list"> -->   
-	<tr class="list_tr">
-		<td><input type="checkbox" name="che[]" value="{$list.id}"></td>
-		<td>{$list.account}</td>
-		<td>{$list.realname}</td>
-		<td>职员</td>
-		<td>{$list.dname}</td>
-		<td>时间不定</td>
-		<td>
-			<!-- <if condition="$list.status eq 1"> -->
-			<a href="{:U('User/stop?id='.$list['id'])}"><img src="__PUBLIC__/images/yes.gif"></a>
-			<!-- <else/> -->
-			<a href="{:U('User/star?id='.$list['id'])}"><img src="__PUBLIC__/images/no.gif"></a>
-			<!-- </if> -->
-		</td>
-	</tr>
-<!-- </foreach> -->  
-</form>
-	<tr><td colspan="8" align="center">{$data[show]}</td></tr>
-</table>
-<!-- 订单列表结束-->
+				<!-- 订单列表开始 -->
+				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="info_list">
+					<tr>
+						<th>请选择</th>
+						<th>用户名</th>
+						<th>姓名</th>
+						<th>职位</th>
+						<th>所属部门</th>
+						<th>入职时间</th>
+						<th>状态</th>
+					</tr>
+				<!-- <foreach name="data['order_list']" item="list"> -->   
+					<tr class="list_tr">
+						<td><input type="checkbox" name="che[]" value="{$list.id}"></td>
+						<td>{$list.account}</td>
+						<td>{$list.realname}</td>
+						<td>{$list.position}</td>
+						<td>{$list.dname}</td>
+						<td>{$list.startime}</td>
+						<td>
+							<!-- <if condition="$list.status eq 1"> -->
+							<a href="{:U('User/stop?id='.$list['id'])}"><img src="__PUBLIC__/images/yes.gif"></a>
+							<!-- <else/> -->
+							<a href="{:U('User/star?id='.$list['id'])}"><img src="__PUBLIC__/images/no.gif"></a>
+							<!-- </if> -->
+						</td>
+					</tr>
+				<!-- </foreach> -->  
+					<tr><td colspan="8" align="center" height="40">{$data[show]}</td></tr>
+				</table>
+				<!-- 订单列表结束-->
 			</td>
           </tr>
           <tr>
-            <td class="notice"><img style="float:left; margin-left:10px;" src="__IMG__/notice_img.png" /><span>公司通知</span></td>
+            <td height="20"></td>
           </tr>
     </table> 
    </div>

@@ -9,9 +9,8 @@ class Order_renewalModel extends  Model{
 		$count=$this->table('erp_order as oe,erp_customer as cr,erp_product as pt,erp_order_renewal as eor')
 		->where($where)
 		->count();
-// 		echo $this->_sql();exit();
 		/*载入分页类，初始化数据*/
-		$page=new \Think\Page($count,7);
+		$page=new \Think\Page($count,10);
 		/*调用分页链接函数*/
 		$data['show']=$page->show();
 		/*控制数据查询条数*/
@@ -19,10 +18,6 @@ class Order_renewalModel extends  Model{
 		->where($where)
 		->field("oe.id as id,cr.`name` as cname,pt.`name` as pname,pt.`id` as pid,eor.money as money,eor.check,eor.org_expired_time as org_expired_time,eor.new_expired_time as new_expired_time,eor.pay_time as pay_time")
 		->limit($page->firstRow.','.$page->listRows)->select();
-//  				echo $this->_sql();
-// 				echo "<pre>";
-// 				print_r($data['order_list']);
-// 				echo "</pre>";
 		return $data;
 	}
 	/** 订单续费列表 */

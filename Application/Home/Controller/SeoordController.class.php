@@ -11,13 +11,12 @@ class SeoordController extends HomeBaseController{
 	/*优化订单*/
 	public function seo_list(){
 		/*获取搜索条件*/
-		$check=$_POST['check'];
-		$key=$_POST['key'];
+		$check = (int)I('param.check');
+		$key = I('param.key');
 		/** 拼接where条件 */
-		if($check==1){
+		if(!empty($check) && $check==1){
 			$where=$where." AND eso.check=1";
-		}else if($check==2){ $where=$where." AND eso.check=0";}
-		
+		}else if(!empty($check) && $check==2){ $where=$where." AND eso.check=0";}		
 		if(!empty($key)){
 			$where=$where." AND ( ec.name like '%".$key."%' or ec.contacts like '%".$key."%' or eu.realname like '%".$key."%')";
 		}

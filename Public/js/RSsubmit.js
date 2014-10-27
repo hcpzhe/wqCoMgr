@@ -58,5 +58,10 @@
 })(jQuery);
 /** 信息列表隔行变色*/
 $(function(){
-	$(".list_tr:odd>td").css("background","#f4f4f4");
+	$(".list_tr:odd>td").css("background","#F0F0F0");
 })
+
+/***客户管理   列表隔行变色***/
+$(document).ready(function(){
+    $(".com_list tr:odd").css("background","#F0F0F0");
+});

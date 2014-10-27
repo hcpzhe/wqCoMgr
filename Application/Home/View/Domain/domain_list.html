@@ -15,20 +15,14 @@
     <tbody>
       <tr>
         <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>域名库</font></span></td>
-      </tr>
+      </tr>     
       <tr>
-        <td height="30"></td>
-      </tr>
-      <tr>
-        <td><font class="tishi">头部提示信息：下面所列的是告诉所有域名信息！</font></td>
-      </tr>
-      <tr>
-        <td height="30"></td>
+        <td height="10"></td>
       </tr>   
       <tr>
         <td height="40">
               <span id="cust_search">
-	           <form action="{:U('Domain/domain_list?p=1')}" method="get">
+	           <form action="{:U('Domain/domain_list')}" method="get">
 	               <!-- 域名搜索：<input type="text" name="domain" class="search" value="" />
 	                <input type=submit value="搜索" class="button_submit" /> -->
 	                                     搜索条件：<select name="check" class="search">	
@@ -98,7 +92,7 @@
       </tr> 
       <tr>
         <td align="center">                     
-            <table width="742" border="0" class="cust_list">           
+            <table width="752" border="0" class="cust_list">           
                   <tr class="liebiao_title">
                     <th width="80">请选择</th>
                     <th width="130">域名</th>
@@ -113,7 +107,7 @@
       <tr>
         <td align="center"> 
           <!-- <foreach name="domain_list" item="data"> -->        
-            <table width="742" border="0" cellspacing="0" cellpadding="0" class="com_list">                                                  
+            <table width="752" border="0" cellspacing="0" cellpadding="0" class="com_list">                                                  
                   <tr height="30">
                      <td width="80" align="center">
                         <input type="checkbox" name="domain_id" value="{$data.id}">
@@ -123,11 +117,10 @@
                      <td width="110" align="center">{$data.service|mb_substr=0,27}</td>
                      <td width="160" align="center">{:date('Y/m/d H:i:s',$data['reg_time'])}</td>
                      <td width="160" align="center">{:date('Y/m/d H:i:s',$data['expired_time'])}</td>
-                     <td width="100" align="center">
-                        <input type="hidden" name="check" value="{$data['check']}" id="check">
-                        <if condition="$data['check'] eq -1 ">拒绝
-                        <elseif condition="$data['check'] eq 0 " /><a href="{:U('Domain/check?id='.$data['id'])}">待审</a>
-                        <else /> 通过</if>  
+                     <td width="100" align="center">                        
+                        <!-- <if condition="$data['check'] eq -1 "> -->拒绝
+                        <!-- <elseif condition="$data['check'] eq 0 " /> --><a href="{:U('Domain/check?id='.$data['id'])}">待审</a>
+                        <!-- <else /> --> 通过<!-- </if> -->  
                      </td>
                   </tr>                         
               </table>
@@ -137,8 +130,8 @@
                             
       <tr>
         <td align="center">                     
-          <table width="742" border="0" style="display: block; border-bottom: 1px solid #ccc; border-right: 1px solid #ccc; border-left: 1px solid #ccc;">
-            <tr style="display: block; padding-top: 10px;">
+          <table width="752" border="0" style="display: block; border-bottom: 1px solid #ccc; border-right: 1px solid #ccc; border-left: 1px solid #ccc;">
+            <tr style="display: block;">
               <td height="40" style="display: block; text-align: center; line-height: 40px;">{$page}</td>
             </tr>
           </table>
@@ -150,10 +143,3 @@
 </div>
 </body>
 </html>
-
-<script>
-//列表页隔行背景 
-$(document).ready(function(){
-    $(".com_list tr:odd").css("background","#F0F0F0");
-});
-</script>

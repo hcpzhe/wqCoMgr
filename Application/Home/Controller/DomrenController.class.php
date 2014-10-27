@@ -38,6 +38,7 @@ class DomrenController extends HomeBaseController{
 		//续费申请的信息		
 		$apply_list = $model->table('erp_domain as dn,erp_domain_renewal as dr')
 		->where($where)
+		->limit($Page->firstRow.','.$Page->listRows)
 		->order('dr.id desc')
 		->getField("dr.id,dr.domain_id,dn.domain,dr.money,dr.org_expired_time,dr.new_expired_time,dr.pay_time,dr.`check`");
 		$this->assign('apply_list',$apply_list);

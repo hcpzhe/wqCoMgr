@@ -7,14 +7,12 @@ class  UserController extends HomeBaseController{
 	/*按条件查询系统用户*/
 	public  function search_list(){
 		/*获取搜索条件*/
-		$depart=$_POST['depart'];
-		$status=$_POST['status'];
-		$key=$_POST['key'];
+		$depart = (int)I('param.depart');
+		$key = I('param.key');
 		/** 拼接where条件 */
 		if(!empty($depart)){
 			$where=$where." AND user.depart_id=".$depart;
-		}
-	
+		}	
 		if(!empty($key)){
 			$where=$where." AND ( depart.name like '%".$key."%' or `user`.account like '%".$key."%' or `user`.realname like '%".$key."%')";
 		}
@@ -39,8 +37,8 @@ class  UserController extends HomeBaseController{
 		$data['realname']=$_POST['name'];
 		$data['sex']=$_POST['sex'];
 		$data['depart_id']=$_POST['dp'];
-// 		$data['']=$_POST['position'];
-// 		$data['']=$_POST['startime'];
+		$data['position']=$_POST['position'];  //职位
+		$data['startime']=$_POST['startime'];  //入职时间
 		$data['birthday']=$_POST['birthday'];
 		$user=new UserModel();
 		$flag=$user->add($data);

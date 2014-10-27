@@ -14,22 +14,21 @@ class OrderController extends HomeBaseController{
 /** 订单列表 */
 	public function order_list(){
 		/*获取搜索条件*/
-		$pro=$_POST['product'];
-		$check=$_POST['check'];
-		$key=$_POST['key'];
+		$pro = I('param.product');  
+		$check = I('param.check');  //按照审核状态搜索
+		$key = I('param.key');  //按照审核状态搜索
 		/** 拼接where条件 */
 		if(!empty($pro)){
 			$where=$where." AND pt.id=".$pro;
 		}
 		/*通过，待审核*/
-		if($check==1){
+		if(!empty($check) && $check==1){
 			$where=$where." AND oe.check=1";
-		}else if($check==2){
+		}else if(!empty($check) && $check==2){
 			$where=$where." AND oe.check=0";
-		}else{ $where=$where." AND oe.check>=0";}
-		
+		}		
 		if(!empty($key)){
-			$where=$where." AND ( pt.name like '%".$key."%' or cr.name like '%".$key."%' or ur.realname like '%".$key."%')";
+			$where=$where." AND ( cr.name like '%".$key."%' or ur.realname like '%".$key."%')";
 		}
 		$order=new OrderModel();
 		$this->data=$order->orderlist($where);
@@ -41,25 +40,24 @@ class OrderController extends HomeBaseController{
 /** 待续费订单列表 (距订单到期时间三个月进入带续费期)*/
 	public function renewal_order(){
 		/*获取搜索条件*/
-		$pro=$_POST['product'];
-		$check=$_POST['check'];
-		$key=$_POST['key'];
+		$pro = (int)I('param.product');
+		$check = (int)I('param.check');
+		$key = I('param.key');
 		/** 拼接where条件 */
 		if(!empty($pro)){
 			$where=$where." AND pt.id=".$pro;
 		}
 		/*通过，待审核*/
-		if($check==1){
+		if(!empty($check) && $check==1){
 			$where=$where." AND oe.check=1";
-		}else if($check==2){
+		}else if(!empty($check) && $check==2){
 			$where=$where." AND oe.check=0";
-		}else{ $where=$where." AND oe.check>=0";}
-		
+		}		
 		if(!empty($key)){
-			$where=$where." AND ( pt.name like '%".$key."%' or cr.name like '%".$key."%' or ur.realname like '%".$key."%')";
+			$where=$where." AND ( cr.name like '%".$key."%' or ur.realname like '%".$key."%')";
 		}
 		$order=new OrderModel();
-		$this->rene=$order->renelist($where);
+		$this->data=$order->renelist($where);
 		/*产品列表*/
 		$product=new ProductModel();
 		$this->pro_list=$product->p_list();
@@ -109,16 +107,14 @@ class OrderController extends HomeBaseController{
 /** 跳转到添加订单页面*/
 	public function add_order_form(){/** 判断是否传出客户id */
 		/** 接收客户id */
-		$id=$_GET['id'];
+		$id = (int)I('id');
 		if(!empty($id)){
-			$customer=new CustomerModel();
-			if(!empty($id)){
-				$check = $customer->where('id='.$id)->getField('check');
-				if ($check ==1){
-					$this->cus=$customer->one($id);
-				}else {
-					$this->redirect('Customer/lists',array('id'=>$cust_id),1,'公司信息还未经过审核,审核通过后才能添加订单，请审核！');
-				}
+			$customer=new CustomerModel();			
+			$check = $customer->where('id='.$id)->getField('check');
+			if ($check ==1){
+				$this->cus=$customer->one($id);
+			}else {
+				$this->redirect('Customer/lists',array('id'=>$cust_id),1,'公司信息还未经过审核,审核通过后才能添加订单，请审核！');
 			}			
 		}
 		/*查询产品分类*/
@@ -138,7 +134,8 @@ class OrderController extends HomeBaseController{
 		$map['total_fees']=$_POST['money'];
 		$map['prod_id']=$_POST['proid'];
 		$map['user_id']=$_POST['userid'];
- 		$map['time_limit']=$_POST['time_limit'];$day=$map['time_limit']*365;//获取服务年限
+ 		$map['time_limit']=$_POST['time_limit'];
+ 		$day=$map['time_limit']*365;//获取服务年限
 // 		$map['domain']=$_POST['domain'];
 		$map['signed_time']=date('Y-m-d',time());//获取当前日期
 		$map['expired_time']=date("Y-m-d",strtotime("$day day"));//获取订单到期日期
@@ -146,7 +143,10 @@ class OrderController extends HomeBaseController{
 		$order=new OrderModel();
 		$flag=$order->add($map);
 		if($flag==0){	$this->error('添加失败！');
-		}else{	$this->success('添加成功！');}
+		}else{	
+			//$this->success('添加成功！',U('Domain/add_domain'));
+			$this->redirect('Domain/add_domain',array('cust_id'=>$map['cust_id']),1,'添加成功！');
+		}
 	}	
 /*
  * 审核订单

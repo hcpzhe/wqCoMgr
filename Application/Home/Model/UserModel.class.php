@@ -100,27 +100,19 @@ class UserModel extends Model {
 		->where($where)
 		->count();
 		/*载入分页类，初始化数据*/
-		$page=new \Think\Page($count,7);
+		$page=new \Think\Page($count,10);
 		/*调用分页链接函数*/
 		$data['show']=$page->show();
 		/*控制数据查询条数*/
 		$data['order_list']=$this->table('erp_user as user,erp_depart as depart')
 		->where($where)
-		->field("user.id as id,user.account as account,user.realname as realname,depart.name as dname,user.status as status")
+		->field("user.id as id,user.account as account,user.realname as realname,user.position as position,user.startime as startime,depart.name as dname,user.status as status")
 		->limit($page->firstRow.','.$page->listRows)->select();
-// 				echo $this->_sql();exit();
-// 				echo "<pre>";
-// 				print_r($data['order_list']);
-// 				echo "</pre>";
 		return $data;
-		
-		
-		
-		
 	}
 	/** 查询某个用户的详细信息  */
 	public function userinfo($id){
-		return $this->table("erp_user as ur,erp_depart as dp")->where("ur.depart_id=dp.id AND ur.id=$id")->field("ur.account as uname,ur.realname as name,ur.sex as sex,ur.birthday as birthday,dp.name as dpname")->find();
+		return $this->table("erp_user as ur,erp_depart as dp")->where("ur.depart_id=dp.id AND ur.id=$id")->field("ur.account as uname,ur.realname as name,ur.sex as sex,ur.position as position,ur.startime as startime,ur.birthday as birthday,dp.name as dpname")->find();
 	}	
 	/** 所有用户      */
 	public function alluser(){
