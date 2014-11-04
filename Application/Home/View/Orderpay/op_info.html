@@ -22,7 +22,7 @@
 				<table cellpadding="0" cellspacing="0" class="xin_table" style="font-size: 14px;">
 					<tr><td width="100"> 客 户 名 称 ：</td><td>{$opinfo.cname}</td></tr>
 					<tr><td> 续 费 金 额：</td><td><input type="text" name="money" value="{$opinfo.money}"></td></tr>
-					<tr><td> 续 费 日 期：</td><td><input type="text" name="pay_time" value="{$opinfo.pay_time}"></td></tr>
+					<tr><td> 续 费 日 期：</td><td><input type="text" name="pay_time" value="{:date('Y/m/d H:i:s',$opinfo['pay_time'])}"></td></tr>
 					<tr><td> &nbsp;备&nbsp;&nbsp;　　注：</td><td>暂无</td></tr>
 					<tr><td> &nbsp;提 &nbsp;交 &nbsp;人 ：</td><td>{$opinfo.uname}</td></tr>
 					<tr><td align="center" colspan="2" height="50"><input type="submit" value="提交" class="button_submit">&nbsp;&nbsp;&nbsp;&nbsp;<input type="submit" value="取消" class="button_submit"></td></tr>
