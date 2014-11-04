@@ -12,7 +12,12 @@ use Home\Model\Order_payModel;
 use Home\Model\Order_renewalModel;
 class OrderController extends HomeBaseController{
 /** 订单列表 */
-	public function order_list(){
+	public function order_list(){		
+// 		$time=1419868800;
+// 		echo date('Y-m-d H:i:s',"1415066059");exit();
+		//$time=time();
+// 		$time=strtotime("2014-11-4 12:12:12");
+// 		echo $time;exit();
 		/*获取搜索条件*/
 		$pro = I('param.product');  
 		$check = I('param.check');  //按照审核状态搜索
@@ -128,7 +133,7 @@ class OrderController extends HomeBaseController{
 		$this->cus_list=$customer->cus_list();
 		$this->display();
 	}		
-/** 添加订单 */
+/** 添加订单   订单表添加一条记录，订单付款表添加一条预付款记录*/
 	public function add_order(){
 		$map['cust_id']=$_POST['cusid'];
 		$map['total_fees']=$_POST['money'];
@@ -137,15 +142,21 @@ class OrderController extends HomeBaseController{
  		$map['time_limit']=$_POST['time_limit'];
  		$day=$map['time_limit']*365;//获取服务年限
 // 		$map['domain']=$_POST['domain'];
-		$map['signed_time']=date('Y-m-d',time());//获取当前日期
-		$map['expired_time']=date("Y-m-d",strtotime("$day day"));//获取订单到期日期
+		$map['signed_time']=time();//获取当前日期
+		$map['expired_time']=60*60*24*$day+$map['signed_time'];//获取订单到期日期
 		$map['remark']=$_POST['remark'];
 		$order=new OrderModel();
 		$flag=$order->add($map);
 		if($flag==0){	$this->error('添加失败！');
 		}else{	
-			//$this->success('添加成功！',U('Domain/add_domain'));
-			$this->redirect('Domain/add_domain',array('cust_id'=>$map['cust_id']),1,'添加成功！');
+			$map1['money']=$_POST['yfk'];
+			$map1['order_id']=$flag;
+			$map1['pay_time']=time();
+			$map1['class']=1;
+			$order_pay=new Order_payModel();
+			$flag1=$order_pay->add($map1);
+			if($flag1==0){ $this->error('添加失败');}
+			else{ $this->redirect('Domain/add_domain',array('cust_id'=>$map['cust_id']),1,'添加成功！');}
 		}
 	}	
 /*

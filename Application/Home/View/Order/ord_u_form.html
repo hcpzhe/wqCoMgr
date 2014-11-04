@@ -70,9 +70,9 @@
 				  </tr>
 				  <tr>
 				  	<td align="right">签单日期：</td>
-				    <td><span class="fontqing">{$orderinfo.signed_time}</span></td>	
+				    <td><span class="fontqing">{:date('Y/m/d H:i:s',$orderinfo['signed_time'])}</span></td>	
 				    <td align="right">到期时间：</td>
-				    <td><span class="fontqing"><input type="text" name="time" value="{$orderinfo.extime}"></span></td>
+				    <td><span class="fontqing"><input type="text" name="time" value="{:date('Y/m/d H:i:s',$orderinfo['extime'])}"></span></td>
 				  </tr>
 				  <tr>
 				    <td align="right">备注信息：</td>

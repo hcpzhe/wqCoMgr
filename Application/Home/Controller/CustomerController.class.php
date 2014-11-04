@@ -15,7 +15,7 @@ class CustomerController extends HomeBaseController {
 	}
 	
 	/***新增的客户接口***/
-	public function insert(){		
+	public function insert(){
 		//$data['user_id']  = UID;		
 		$data['add_time'] = time();
 		$model = new CustomerModel();	

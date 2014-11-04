@@ -86,7 +86,7 @@ function push(){
 						<td>{$list.cname}</td>
 						<td>{$list.pname}</td>
 						<td>{$list.total_fees}元</td>
-						<td>{$list.signed_time}</td>
+						<td>{:date('Y/m/d H:i:s',$list['signed_time'])}</td>
 						<!-- 显示审核状态 -->
 						<td>
 							<!-- <if condition="$list.check eq 1"> -->通过

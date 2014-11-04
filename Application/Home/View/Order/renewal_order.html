@@ -85,7 +85,7 @@ function xufei(){
 						<td>{$list.contacts}</td>
 						<td>{$list.phone}</td>
 						<td>{$list.total_fees} 元</td>
-						<td>{$list.expired_time}</td>
+						<td>{:date('Y/m/d H:i:s',$list['expired_time'])}</td>
 						<td>
 							<!-- <if condition="$list.status eq 1"> -->
 							<a href="{:U('Order/stop?id='.$list['id'])}">停止</a>

@@ -57,9 +57,9 @@
 				  </tr>
 				  <tr>
 				  	<td align="right"> 签 单 日 期：</td>
-				    <td>{$orderinfo.signed_time}</td>
+				    <td>{:date('Y/m/d H:i:s',$orderinfo['signed_time'])}</td>
 				    <td align="right"> 到 期 时 间：</td>
-				    <td><span class="fontqing">{$orderinfo.extime}</span></td>
+				    <td><span class="fontqing">{:date('Y/m/d H:i:s',$orderinfo['extime'])}</span></td>
 				  </tr>
 				
 				  <tr>
