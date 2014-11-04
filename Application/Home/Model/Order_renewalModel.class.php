@@ -25,4 +25,14 @@ class Order_renewalModel extends  Model{
 		$olist=$this->where("order_id=$id AND status=1")->select();
 		return $olist;
 	}
+	/* 查询是否存在某个订单的续费申请记录*/
+	public function s_one($id){
+		$flag=$this->where("order_id=$id")->find();
+		return $flag;
+	}
+	/** 按条件查询一个订单的信息  */
+	public function info($id){
+		$data=$this->where("order_id=$id")->find();
+		return $data;
+	}
 }

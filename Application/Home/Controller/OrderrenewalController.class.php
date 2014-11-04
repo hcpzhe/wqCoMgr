@@ -4,6 +4,7 @@ use Common\Controller\HomeBaseController;
 use Home\Model\Order_renewalModel;
 use Home\Model\OrderModel;
 use Home\Model\ProductModel;
+use Home\Model\Order_payModel;
 class OrderrenewalController extends HomeBaseController{
 	/** 订单续费申请列表 */
 	public function or_list(){
@@ -35,6 +36,10 @@ class OrderrenewalController extends HomeBaseController{
 	public function apy_ren($id){
 		$order=new OrderModel();
 		$this->data=$order->orderinfo($id);
+		/*查询订单续费申请表中是否已经有记录*/
+		$orderren=new Order_renewalModel();
+		$flag=$orderren->s_one($id);
+		if($flag!=0){ $this->error("续费申请已提交！");}
 		$this->display();
 	}
 	/** 添加续费申请 */
@@ -44,7 +49,7 @@ class OrderrenewalController extends HomeBaseController{
 		$map['money']=$_POST['money'];
 		$map['remark']=$_POST['remark'];
 		/** 当前日期*/
-		$map['pay_time']=date('Y-m-d',time());//获取当前日期
+		$map['pay_time']=time();//获取当前日期
 		/** 原过期时间  */
 		$order=new OrderModel();
 		$data=$order->s_cname($id);
@@ -52,12 +57,33 @@ class OrderrenewalController extends HomeBaseController{
 		/** 现过期时间  */
 		$map['ren_time']=$_POST['time_limit'];
 		$day=$map['ren_time']*365;//获取服务年限
-		$map['new_expired_time']=date("Y-m-d",strtotime("$day day"));//获取订单新到期日期
+		$map['new_expired_time']=$map['org_expired_time']+$day*60*60*24;//获取订单新到期日期
 // 		echo "<pre>";
 // 		print_r($map);
 // 		echo "</pre>";exit();
+		/* 订单续费记录表添加续费记录**/
 		$flag=$Ordren->add($map);
-		if($flag==0){	$this->error('添加失败！');
-		}else{	$this->success('添加成功！');}
+		if($flag==0){	$this->error('申请失败！');
+		}else{	
+			$this->success('申请成功');
+		}
+	}
+	/** 申请订单续费申请 */
+	public function checked($id){
+		$orderren=new Order_renewalModel();
+		$map['check']=1;
+		$map['check_time']=time();
+		$flag=$orderren->where("order_id=$id")->save($map);
+		if($flag==0){$this->error('审核失败1');}
+		else{ 
+			$order=new Order_payModel();
+			/* 修改订单表订单过期时间**/
+			$info=$orderren->info($id);
+			$map1['expired_time']=$info['new_expired_time'];
+			$order=new OrderModel();
+			$flag1=$order->where("id=$id")->save($map1);
+			if($flag1==1){ $this->success('审核成功');}
+			else{$this->error('审核失败');}
+		}
 	}
 }

@@ -13,13 +13,13 @@
     <tbody>
       <tr>
         <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>添加订单</font></span></td>
-      </tr>
+      </tr>	      
       <tr>
         <td align="center">
 <!-- 添加续费申请 -->
            <form action="{:U('Orderrenewal/ap_re?id='.$data['id'])}" method="post" name="form1" id="form1" >  
            		<input type="hidden" name="expired_time" value="{$data.extime}">	         
-            <table width="500" border="0" style="margin-top:50px;">
+            <table width="500" border="0" style="margin-top:50px;">        
                   <tr>
                     <td width="100">客户名称：</td>
                     <td width="400">{$data.cname}</td>
@@ -46,7 +46,7 @@
                   </tr>
                   <tr>
                     <td>&nbsp;</td>
-                    <td><input type="submit" name="Submit" value=" 添加 " class="button_submit"></td>
+                    <td><input type="submit" name="Submit" value=" 申请 " class="button_submit"></td>
                   </tr>
             </table>                              
            </form>

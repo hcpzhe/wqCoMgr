@@ -89,7 +89,7 @@ function xufei(){
 						<td>
 							<!-- <if condition="$list.status eq 1"> -->
 							<a href="{:U('Order/stop?id='.$list['id'])}">停止</a>
-							<!-- <else/> -->
+							<!-- <elseif condition="$list.status eq 0"/> -->
 							<a href="{:U('Order/star?id='.$list['id'])}">开始</a>
 							<!-- </if> -->
 						</td>

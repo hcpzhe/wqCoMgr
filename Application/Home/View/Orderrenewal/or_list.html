@@ -62,15 +62,15 @@
 						<td>{$list.pname}</td>
 						<td>{$list.cname}</td>
 						<td>{$list.money}元</td>
-						<td>{$list.pay_time}</td>
-						<td>{$list.org_expired_time}</td>
-						<td>{$list.new_expired_time}</td>
+						<td>{:date('Y/m/d H:i:s',$list['pay_time'])}</td>
+						<td>{:date('Y/m/d',$list['org_expired_time'])}</td>
+						<td>{:date('Y/m/d',$list['new_expired_time'])}</td>
 						<td>超管</td>
 						<!-- 显示审核状态 -->
 						<td>
 							<!-- <if condition="$list.check eq 1"> -->通过
 							<!-- <elseif condition="$list.check eq 0"/> -->
-							<a href="{:U('/?id='.$list['id'].'&& pid='.$list['pid'])}">待审</a>
+							<a href="{:U('Orderrenewal/checked?id='.$list['id'])}">待审</a>
 							<!-- <else/> -->拒绝<!-- </if> -->
 						</td>
 					</tr>
