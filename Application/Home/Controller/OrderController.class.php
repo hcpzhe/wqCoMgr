@@ -14,7 +14,7 @@ class OrderController extends HomeBaseController{
 /** 订单列表 */
 	public function order_list(){		
 // 		$time=1419868800;
-// 		echo date('Y-m-d H:i:s',"1415066059");exit();
+// 		echo date('Y-m-d H:i:s',"1422847387");exit();
 		//$time=time();
 // 		$time=strtotime("2014-11-4 12:12:12");
 // 		echo $time;exit();
