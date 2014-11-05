@@ -86,4 +86,16 @@ class SeoordController extends HomeBaseController{
 	
 		}else{ $this->error('禁止向该部门推送');}
 	}	
+	/*增加一条开发沟通记录*/
+	public function ad_record(){
+		$map['order_id']=$_POST['o_id'];
+		$map['user_id']=11;
+		$map['post_time']=time();
+		$map['content']=$_POST['content'];
+		$seo_order_comment=new Seo_order_commentModel();
+		$flag=$seo_order_comment->add($map);
+		if($flag==0){
+			$this->error('添加失败');
+		}else{ $this->success('添加成功');}
+	}	
 }

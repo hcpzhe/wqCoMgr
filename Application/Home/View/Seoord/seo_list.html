@@ -80,7 +80,8 @@ function push(){
 						<td>{$list.money}元</td>
 						<td>{$list.rname}</td>
 						<td>
-							<!-- <if condition="$list.checks eq 1"> -->已分配
+							<!-- <if condition="$list.checks eq 1"> -->
+							<a href="{:U('Seoord/dist?id='.$list['id'])}" class="red">已分配</a>
 							<!-- <elseif condition="$list.checks eq 0"/> -->
 								<a href="{:U('Seoord/dist?id='.$list['id'])}" class="red">未分配</a>
 							<!-- <else/> -->失效<!-- </if> -->

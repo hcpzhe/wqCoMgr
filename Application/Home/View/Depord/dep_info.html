@@ -75,11 +75,22 @@
 		<p style="padding-left:50px;">{$list.realname}：{$list.content} [{$list.post_time}]</p>
   	<!-- </foreach> -->
   	</td>
-  </tr> 
+  </tr>   	
+  <tr><td colspan="4"><h2>添加沟通记录:</h2></td></tr>
+  <tr align='center'>
+  	<td colspan='4'>
+  	<form method="post"	action="{:U('Depord/ad_record')}">
+  		<textarea name="content" rows="3" cols="100"></textarea><br/>
+  		<input type="hidden" name="oid" value="{$data.id}">
+  		<input type="submit" value="添加">
+  	</form>
+  	</td>
+  </tr>     	
+
 </table>	
 <!-- 订单详情结束 -->    
 			</td>
-          </tr>
+          </tr>       
           <tr>
             <td height="20"></td>
           </tr>

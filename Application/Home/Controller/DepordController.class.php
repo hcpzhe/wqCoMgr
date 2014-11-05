@@ -24,9 +24,17 @@ class DepordController extends HomeBaseController{
 		$this->data=$dep->dor_list($where);
 		$this->display();
 	}
-	/*增加一条开发记录*/
-	public function add_od(){
-
+	/*增加一条开发沟通记录*/
+	public function ad_record(){
+		$map['order_id']=$_POST['oid'];
+ 		$map['user_id']=5;
+		$map['post_time']=time();
+		$map['content']=$_POST['content'];
+		$develop_order_comment=new Develop_order_commentModel();
+		$flag=$develop_order_comment->add($map);
+		if($flag==0){
+			$this->error('添加失败');
+		}else{ $this->success('添加成功');}
 	}
 	/**网站开发订单详细页面，订单详细信息，订单参与人员，订单沟通记录 */
 	public function dep_info(){
