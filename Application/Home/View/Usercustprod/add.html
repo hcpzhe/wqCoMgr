@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>权限添加</title>
+<link href="__CSS__/home.css" rel="stylesheet" type="text/css">
+<link href="__CSS__/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+<script type="text/javascript" src="__PUBLIC__/My97DatePicker/WdatePicker.js"></script>
+<link href="__PUBLIC__/My97DatePicker/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div style="width:100%; overflow:hidden; background: #f2f2f2;">
+<div class="b right_next">
+  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tbody>
+      <tr>
+        <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>权限添加</font></span></td>
+      </tr>
+      <tr>
+        <td height="30"></td>
+      </tr>      
+     
+      <tr>
+         <td>
+           <form action="{:U('Usercustprod/insert')}" method="post">
+	        <table class="user_info">
+		      <tr>
+		        <td>                     
+		           公司名称：
+		        </td>
+		        <td> 
+		          <select name="cust_id">
+		           <!-- <foreach name="cust_list" item="cust_list"> --> 
+		             <option value="{$cust_list.id}">{$cust_list.name}</option>
+		           <!-- </foreach> --> 
+		          </select>   
+		        </td>
+		      </tr>  		      
+		      <tr>
+		        <td>                     
+		           权限拥有者：
+		        </td>
+		        <td>                     
+		          {$realname}
+		        </td>
+		      </tr>
+		      <tr>
+		        <td>                     
+		           权限过期时间：
+		         </td>
+		         <td>
+		           <input name="expired_time" onclick="WdatePicker()" class="Wdate" value="" />                                                          
+                   <div lang="zh-cn" style="position: absolute; z-index: 100004; display: none; top: 28px; left: 10px;"><iframe hidefocus="true" width="9" height="7" frameborder="0" border="0" scrolling="no" src="about:blank" style="width: 186px; height: 198px;"></iframe></div>		                      
+		        </td>
+		      </tr>		     
+		      <tr>
+		        <td>                     
+		           权限：  		           
+		        </td>
+		        <td>                     
+		           <select name="prod_id"> 		                                      
+                           <option value="0">所有产品                             
+                           <!-- <foreach name="pro_name" item="list"> 所有产品-->    
+                            <option value="{$list.id}">{$list.name}   
+                           <!-- </foreach> -->                            
+                   </select>
+		        </td>
+		      </tr>		    		     		      
+		       <tr>
+		        <td colspan="2">                     
+		           <input type="submit" value="提交">
+		         </td>		         
+		      </tr>
+		     </table>     
+		   </form>       
+       </td>
+      </tr>
+                              
+     </tbody>
+  </table>
+</div>
+</div>
+</body>
+</html>
