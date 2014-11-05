@@ -4,6 +4,7 @@ use Common\Controller\HomeBaseController;
 use Home\Model\DomainModel;
 use Think\Page;
 
+header("Content-Type:text/html;charset=utf-8");
 class DomainController extends HomeBaseController{
 	/*域名庫*/
 	public function domain_list($domain=null, $tpl=null){
