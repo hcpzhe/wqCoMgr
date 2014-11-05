@@ -5,18 +5,20 @@ use Common\Controller\HomeBaseController;
 use Home\Model\CustomerModel;
 use Think\Model;
 
+header("Content-Type:text/html;charset=utf-8");
 class CustomerController extends HomeBaseController {
     /**客户添加***/
 	public function add(){
 		$User = M("User");
-		$user_list = $User->where('status=1')->select();
+		$id = UID;		
+		$user_list = $User->where('id='.$id)->select();
 		$this->assign('user_list',$user_list);  //录入人
 		$this->display();					
 	}
 	
 	/***新增的客户接口***/
 	public function insert(){
-		//$data['user_id']  = UID;		
+		$data['user_id']  = UID;		
 		$data['add_time'] = time();
 		$model = new CustomerModel();	
 		$data = $model->create();
