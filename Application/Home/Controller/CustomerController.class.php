@@ -4,6 +4,7 @@ use Think\Page;
 use Common\Controller\HomeBaseController;
 use Home\Model\CustomerModel;
 use Think\Model;
+use Home\Model\Order_domainModel;
 
 header("Content-Type:text/html;charset=utf-8");
 class CustomerController extends HomeBaseController {
@@ -106,6 +107,7 @@ class CustomerController extends HomeBaseController {
 		$domain = M('Domain');    //获取域名信息
 		$domain_list = $domain->where('cust_id='.$id)->select();
 		$this->assign('domain_list',$domain_list);
+		
 		
  		//判断是否有拜访记录
 		$cust_vi = M('Customer_visit');
