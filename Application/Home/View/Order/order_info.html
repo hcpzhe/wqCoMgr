@@ -61,7 +61,13 @@
 				    <td align="right"> 到 期 时 间：</td>
 				    <td><span class="fontqing">{:date('Y/m/d H:i:s',$orderinfo['extime'])}</span></td>
 				  </tr>
-				
+				  <tr>
+				  	<td colspan='4'>　　　　　域名:
+				  	<!-- <foreach name="doma" item="list"> -->
+				  	{$list.domain}	
+				  	<!-- </foreach> -->
+				  	</td>
+				  </tr>	
 				  <tr>
 				    <td align="right"> 备 注 信 息：</td>
 				    <td colspan="3">{$orderinfo.remark}</td>
@@ -69,16 +75,7 @@
 				</table>	
 				<!-- 订单详情结束 -->    
 			</td>
-          </tr>
-          <tr>
-             <td>
-                <!-- 订单备案信息 开始  -->
-				<table cellpadding="0" cellspacing="0" class="info_list">
-					<tr><th colspan="5"><h3>订单备案信息</h3></th></tr>
-				</table>
-				<!-- 订单备案信息  结束 -->
-	         </td>
-	      </tr>    
+          </tr>  
           <tr>
              <td>
 				<!-- 订单付款记录 --> 
@@ -129,31 +126,7 @@
 				<!-- 订单续费记录 -->         
              </td>
           </tr>   
-          <tr>
-             <td>
-				<!-- 订单回访记录 --> 
-				<table cellpadding="0" cellspacing="0" class="info_list">
-					<tr><th colspan="5"><h3>订单回访记录</h3></th></tr>
-					<tr>
-						<th>编号</th>
-						<th>金额</th>
-						<th>类型</th>
-						<th>付款日期</th>
-						<th>审核状态</th>
-					</tr>
-				<!-- <foreach name="pay_list" item="plist"> -->
-					<tr>
-						<td>{$plist.id}</td>
-						<td>{$plist.money}</td>
-						<td><!-- <if condition="$plist.class eq 1"> -->预付款<!-- <else/> -->余款<!-- </if> --></td>
-						<td>{$plist.pay_time}</td>
-						<td><!-- <if condition="$list.check eq 1"> -->通过<!-- <elseif condition="$list.check eq 0"/> -->待审<!-- <else/> -->拒绝<!-- </if> --></td>
-					</tr>
-				<!-- </foreach> -->
-				</table>
-				<!-- 订单回访 -->         
-             </td>
-          </tr>                 
+                          
           <tr>
             <td height="20"></td>
           </tr>

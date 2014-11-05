@@ -10,6 +10,7 @@ use Home\Model\DepartModel;
 use Home\Model\UserModel;
 use Home\Model\Order_payModel;
 use Home\Model\Order_renewalModel;
+use Home\Model\Order_domainModel;
 class OrderController extends HomeBaseController{
 /** 订单列表 */
 	public function order_list(){		
@@ -81,6 +82,10 @@ class OrderController extends HomeBaseController{
 		/** 订单付款记录*/
 		$order_pay=new Order_payModel();
 		$this->pay_list=$order_pay->o_list($id);
+		/** 订单所绑定域名 */
+		$order_domain=new Order_domainModel();
+		$this->doma=$order_domain->s_all($id);
+		
 		$this->display();
 	}
 /**  订单修改表单 */
