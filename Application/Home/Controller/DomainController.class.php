@@ -3,6 +3,7 @@ namespace Home\Controller;
 use Common\Controller\HomeBaseController;
 use Home\Model\DomainModel;
 use Think\Page;
+use Home\Model\Order_domainModel;
 
 header("Content-Type:text/html;charset=utf-8");
 class DomainController extends HomeBaseController{
@@ -42,6 +43,7 @@ class DomainController extends HomeBaseController{
 	/*添加域名*/
 	public function add_domain(){
 		$cust_id = (int)I('param.cust_id');
+		$order_id = I('param.order_id');
 		$domain = M('Customer');
 		//查询客户信息的审核状态
 		$check = $domain->where('id='.$cust_id)->getField('check');
@@ -49,6 +51,7 @@ class DomainController extends HomeBaseController{
 			$this->error('公司信息通过审核后才能添加域名！');
 		}else {		
 		$this->assign('cust_id',$cust_id);
+		$this->assign('order_id',$order_id);
 		$this->display();
 		}
 	}
@@ -84,6 +87,14 @@ class DomainController extends HomeBaseController{
 		$data['expired_time'] = $data['reg_time'] + $data['year_num']*60*60*24*365;  //域名到期时间计算
 		$model = new DomainModel();
 		$data = $model->data($data)->add();		
+		if($data==0){ $this->error('添加失败');}
+		else { 
+			/**订单域名关系表添加一条数据*/
+			$map['order_id']=I('order_id');
+			$map['domain_id']=$data;
+			$Order_domain=new Order_domainModel();
+			$Order_domain->ad($map);
+		}
 		$this->success('添加成功',U('Domain/domain_list'));
 	}
 	/**域名详细信息**/

@@ -120,8 +120,8 @@ class OrderController extends HomeBaseController{
 				$this->cus=$customer->one($id);
 			}else {
 				$this->redirect('Customer/lists',array('id'=>$cust_id),1,'公司信息还未经过审核,审核通过后才能添加订单，请审核！');
-			}			
-		}
+			}
+		}				
 		/*查询产品分类*/
 		$product=new ProductModel();
 		$this->p_list=$product->p_list();
@@ -141,7 +141,6 @@ class OrderController extends HomeBaseController{
 		$map['user_id']=$_POST['userid'];
  		$map['time_limit']=$_POST['time_limit'];
  		$day=$map['time_limit']*365;//获取服务年限
-// 		$map['domain']=$_POST['domain'];
 		$map['signed_time']=time();//获取当前日期
 		$map['expired_time']=60*60*24*$day+$map['signed_time'];//获取订单到期日期
 		$map['remark']=$_POST['remark'];
@@ -156,7 +155,7 @@ class OrderController extends HomeBaseController{
 			$order_pay=new Order_payModel();
 			$flag1=$order_pay->add($map1);
 			if($flag1==0){ $this->error('添加失败');}
-			else{ $this->redirect('Domain/add_domain',array('cust_id'=>$map['cust_id']),1,'添加成功！');}
+			else{ $this->redirect('Domain/add_domain',array('cust_id'=>$map['cust_id'],'order_id'=>$flag),1,'添加成功！');}
 		}
 	}	
 /*

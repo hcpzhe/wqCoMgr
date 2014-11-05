@@ -22,5 +22,9 @@ class DomainModel extends Model {
 	protected $_auto		=	array(
 			array('reg_time','time',self::MODEL_INSERT,'function'),
 	);
-		
+	/*查找指定客户名下所有的域名*/
+	public function all($id){
+		return $this->where("cust_id=$id")->select();
+	}	
+
 }

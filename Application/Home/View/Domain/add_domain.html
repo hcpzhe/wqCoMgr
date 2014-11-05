@@ -48,6 +48,7 @@ function checkdomain(){
       <tr>
         <td align="center">
            <form action="{:U('Domain/insert')}" method="post" name="domainform" id="domainform" onsubmit="return checkdomainfrm(this);">           
+            <input type="hidden" name="order_id" value="{$order_id}">
             <table width="500" border="0">
                   <tr>
                     <td width="100">&nbsp;&nbsp;域 &nbsp;&nbsp; 名 &nbsp;&nbsp;：</td>
