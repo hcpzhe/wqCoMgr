@@ -48,6 +48,16 @@
 								}
 							});
 					}
+					//权限分配列表   跳转 
+					function Authorization(){
+						$("input[name='s2[]']").each(function(){
+							if($(this).attr("checked")=="checked"){								
+								var id=$(this).val();								
+								var url="__MODULE__-Usercustprod-lists-cust_id-"+id;
+	                            location.href=url;
+								}
+							});
+					}
 	           </script>
 </head>
 <body>
@@ -81,7 +91,8 @@
                 <a href="javascript:void(0)" class="button_submit" onclick="Detailed();">查看详细</a>
                 <a href="javascript:void(0)" class="button_submit" onclick="Edit();">编辑</a> 
                 <a href="javascript:void(0)" class="button_submit" onclick="Add_order();">添加订单</a>
-                <a href="javascript:void(0)" class="button_submit" onclick="Addvisit();">添加拜访</a>                                             
+                <a href="javascript:void(0)" class="button_submit" onclick="Addvisit();">添加拜访</a>  
+                <a href="javascript:void(0)" class="button_submit" onclick="Authorization();">权限分配</a>                                           
            </span>   
         </td>
       </tr>
