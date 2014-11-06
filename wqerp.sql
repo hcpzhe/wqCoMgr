@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost
+Source Server         : localhost_3306
 Source Server Version : 50524
 Source Host           : localhost:3306
 Source Database       : wqerp
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50524
 File Encoding         : 65001
 
-Date: 2014-11-04 17:26:51
+Date: 2014-11-06 09:05:24
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -443,7 +443,7 @@ CREATE TABLE `erp_customer` (
 -- Records of erp_customer
 -- ----------------------------
 INSERT INTO `erp_customer` VALUES ('1', '洛阳万谦网络科技有限公司', '张三种', '0379-63233333', '0379-\r\n\r\n632600', '紫金城', '1411021523', '1', '1', '1413428532', '1', '1111111111');
-INSERT INTO `erp_customer` VALUES ('2', '智慧云', '李', '0379-63233333', null, '西工区', '1411022133', '1', '1', '1413428538', '2', '1111111111');
+INSERT INTO `erp_customer` VALUES ('2', '智慧云', '李', '0379-63233333', null, '西工区', '1411022133', '1', '1', '1413428538', '1', '1111111111');
 INSERT INTO `erp_customer` VALUES ('3', 'zhang', '张', '0379-63233333', '0379-63260014', '西工区', '1411092302', '0', '1', '0', '3', '1111111111');
 INSERT INTO `erp_customer` VALUES ('4', '网易', '网', '15867925589', '0379-63596521', '北京', '1411352953', '1', '1', '1413428545', '4', '1111111111');
 INSERT INTO `erp_customer` VALUES ('5', '邙山苗圃', '孙经理', '0379-63233333', null, '涧西区', '1411443090', '1', '1', '1413438283', '5', '1111111111');
@@ -458,7 +458,7 @@ INSERT INTO `erp_customer` VALUES ('14', '是是是', '刘经理', '17958964525'
 INSERT INTO `erp_customer` VALUES ('15', 'ewrqwerqwerq', '2435451345', '0379-63233333', '4', '洛阳市涧西\r\n\r\n区', '1411979027', '1', '1', '1413445691', '16', '1111111111');
 INSERT INTO `erp_customer` VALUES ('16', '洛阳炘源晶光伏科技有限公司', '小夏', '14589657845', '0345-\r\n\r\n698562', '王城大道', '1413335090', '0', '1', '0', '17', '1111111111');
 INSERT INTO `erp_customer` VALUES ('17', '三门峡鑫旺铝业有限公司', '贺总', '15739854652', '0379-\r\n\r\n698655', '紫金城', '1413336834', '0', '1', '1413423434', '15', '1111111111');
-INSERT INTO `erp_customer` VALUES ('18', '洛阳九旭办公家具', '张总', '14589657845', '0345-69856236', '涧\r\n\r\n西区', '1413344044', '0', '1', '1413351597', '13', '1111111111');
+INSERT INTO `erp_customer` VALUES ('18', '洛阳九旭办公家具', '张总', '14589657845', '0345-69856236', '涧\r\n\r\n西区', '1413344044', '0', '1', '1413351597', '1', '1111111111');
 INSERT INTO `erp_customer` VALUES ('19', '洛阳万谦网络科技有限公司三门峡分公司', '王总', '17958964525', '0345-69856236', '西工区', '1413356420', '1', '1', '1413423538', '1', '测试');
 
 -- ----------------------------
@@ -1000,9 +1000,12 @@ CREATE TABLE `erp_user_cust_prod` (
 -- ----------------------------
 -- Records of erp_user_cust_prod
 -- ----------------------------
-INSERT INTO `erp_user_cust_prod` VALUES ('1', '1', '0', '0');
-INSERT INTO `erp_user_cust_prod` VALUES ('1', '2', '0', '0');
-INSERT INTO `erp_user_cust_prod` VALUES ('1', '19', '0', '0');
+INSERT INTO `erp_user_cust_prod` VALUES ('1', '1', '0', '1417104000');
+INSERT INTO `erp_user_cust_prod` VALUES ('1', '2', '5', '1415173793');
+INSERT INTO `erp_user_cust_prod` VALUES ('1', '5', '0', '0');
+INSERT INTO `erp_user_cust_prod` VALUES ('1', '18', '1', '20134556888');
+INSERT INTO `erp_user_cust_prod` VALUES ('1', '19', '0', '');
+INSERT INTO `erp_user_cust_prod` VALUES ('1', '19', '1', '1416931200');
 
 -- ----------------------------
 -- Table structure for `erp_user_depart_mgr`
@@ -1017,6 +1020,15 @@ CREATE TABLE `erp_user_depart_mgr` (
 -- ----------------------------
 -- Records of erp_user_depart_mgr
 -- ----------------------------
+INSERT INTO `erp_user_depart_mgr` VALUES ('0', '4');
+INSERT INTO `erp_user_depart_mgr` VALUES ('0', '5');
+INSERT INTO `erp_user_depart_mgr` VALUES ('0', '6');
+INSERT INTO `erp_user_depart_mgr` VALUES ('0', '7');
+INSERT INTO `erp_user_depart_mgr` VALUES ('0', '8');
+INSERT INTO `erp_user_depart_mgr` VALUES ('0', '9');
+INSERT INTO `erp_user_depart_mgr` VALUES ('0', '10');
+INSERT INTO `erp_user_depart_mgr` VALUES ('1', '1');
+INSERT INTO `erp_user_depart_mgr` VALUES ('5', '2');
 
 -- ----------------------------
 -- Table structure for `erp_valadd_comment`
