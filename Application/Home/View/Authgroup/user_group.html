@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>订单列表</title>
+<link href="__CSS__/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+
+</head>
+<body>
+<div style="width:100%; overflow:hidden; background: #f2f2f2;">
+   <div class="center_content">
+      <table width="755" cellpadding="0" cellspacing="0">
+          <tr>
+            <td class="menu"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32" /><font>用户组列表</font></span></td>
+          </tr>
+
+          <tr>
+            <td class="menu_content">
+				<!-- 用户组列表开始 -->
+				<table cellpadding="0" cellspacing="0" class="info_list">
+					<tr>
+						<th>编号</th>
+						<th>名称</th>
+						<th>描述</th>
+						<th>操作</th>
+					</tr>	
+				<!-- <foreach name="list" item="list"> -->
+					<tr class="list_tr">
+						<td>{$list.id}</td>
+						<td>{$list.title}</td>
+						<td>{$list.description}</td>
+						<td><a href="{:U('Authgroup/info?id='.$list['id'])}">详情</a></td>
+					</tr>
+				<!-- </foreach> -->
+
+				</table>
+				<!-- 订单列表结束-->
+			</td>
+          </tr>  
+          <tr>
+            <td height="20"></td>
+          </tr>   
+    </table> 
+   </div>
+</div>   
+</body>
+</html>

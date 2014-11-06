@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>订单列表</title>
+<link href="__CSS__/style.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+</head>
+<body>
+<div style="width:100%; overflow:hidden; background: #f2f2f2;">
+   <div class="center_content">
+      <table width="755" cellpadding="0" cellspacing="0">
+          <tr>
+            <td class="menu"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32" /><font>用户组详情</font></span></td>
+          </tr>
+          <tr>
+            <td height="20"></td>
+          </tr>
+          <tr>
+            <td class="push_content">
+				<!-- 部门列表开始 -->
+				<form action="{:U('Depart/add_dp')}" method="post">
+					<p>用户组名称：<input type="text" name="name" class="search_bg" value="{$group_info.title}"></p>
+					<p>用户组描述：<input type="text" name="name" class="search_bg" value="{$group_info.description}"></p>
+					 权限列表：
+				    <p>
+				    	  <!-- <foreach  name="rules" item="list"> -->
+				    	  <span style="display:block; width:100px; float:left"><input type="checkbox" value="{list.id}">{$list.title}</span>
+				          <!-- </foreach> -->	
+				    </p>
+				    <input type="submit" value="添加" class="button_submit">      
+				</form>
+				<!-- 部门列表结束-->
+			</td>
+          </tr>
+          <tr>
+            <td height="20"></td>
+          </tr>
+    </table> 
+   </div>
+</div>   
+</body>
+</html>

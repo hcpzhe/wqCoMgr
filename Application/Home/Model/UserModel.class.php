@@ -94,9 +94,9 @@ class UserModel extends Model {
 	/** 按条件查询系统用户列表 * /
 	 */
 	public function sealist($where){
-		$where="user.depart_id=depart.id AND user.status>=0 ".$where;
+		$where="user.depart_id=depart.id AND aga.uid=user.id AND aga.group_id =eag.id AND user.status>=0 ".$where;
 		/*查询数据总条数*/
-		$count=$this->table('erp_user as user,erp_depart as depart')
+		$count=$this->table('erp_user as user,erp_depart as depart,erp_auth_group as eag,erp_auth_group_access as aga')
 		->where($where)
 		->count();
 		/*载入分页类，初始化数据*/
@@ -104,9 +104,9 @@ class UserModel extends Model {
 		/*调用分页链接函数*/
 		$data['show']=$page->show();
 		/*控制数据查询条数*/
-		$data['order_list']=$this->table('erp_user as user,erp_depart as depart')
+		$data['order_list']=$this->table('erp_user as user,erp_depart as depart,erp_auth_group as eag,erp_auth_group_access as aga')
 		->where($where)
-		->field("user.id as id,user.account as account,user.realname as realname,user.position as position,user.startime as startime,depart.name as dname,user.status as status")
+		->field("user.id as id,user.account as account,user.realname as realname,user.position as position,user.startime as startime,depart.name as dname,user.status as status,eag.title as title")
 		->limit($page->firstRow.','.$page->listRows)->select();
 		return $data;
 	}

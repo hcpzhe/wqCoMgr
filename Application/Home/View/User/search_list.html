@@ -71,6 +71,7 @@ function del(){
 						<th>职位</th>
 						<th>所属部门</th>
 						<th>入职时间</th>
+						<th>权限</th>
 						<th>状态</th>
 					</tr>
 				<!-- <foreach name="data['order_list']" item="list"> -->   
@@ -81,6 +82,7 @@ function del(){
 						<td>{$list.position}</td>
 						<td>{$list.dname}</td>
 						<td>{$list.startime}</td>
+						<td>{$list.title}</td>
 						<td>
 							<!-- <if condition="$list.status eq 1"> -->
 							<a href="{:U('User/stop?id='.$list['id'])}"><img src="__PUBLIC__/images/yes.gif"></a>
