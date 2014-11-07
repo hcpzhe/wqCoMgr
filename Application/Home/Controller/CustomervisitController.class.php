@@ -80,7 +80,7 @@ class CustomervisitController extends HomeBaseController {
 	public function addvisit_insert(){
 		$cust_id = (int)I('cust_id');
 		$data['cust_id'] = $cust_id;
-		$data['user_id']  = (int)I('user_id');
+		$data['user_id']  = UID;
 		$data['content'] =  I('param.content');
 		$data['visit_time'] = time();	
 		$model = new Customer_visitModel();			
