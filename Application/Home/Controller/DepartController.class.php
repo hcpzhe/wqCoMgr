@@ -45,6 +45,7 @@ class DepartController extends HomeBaseController{
 	/** 跳转到编辑页面 */
 	public function up_dp_form(){
 		$id=$_GET['id'];
+		$user_id=$_GET['user_id'];
 		/** 查询所有的部门 */
 		$depa=new DepartModel();
 		$this->depa_list=$depa->depalist();
@@ -54,8 +55,11 @@ class DepartController extends HomeBaseController{
 		$this->par=$depa->s_one($this->curr['parent_id']);
 		
 		$User = M("User");
-		$user_list = $User->where('status=1')->select();  ////所有用户
+		$realname = $User->where('id='.$user_id)->getField('realname'); //原来拥有权限的用户
+		$user_list = $User->where('status=1')->select();  //所有用户
 		$this->assign('user_list',$user_list);
+		$this->assign('realname',$realname);
+		$this->assign('user_id',$user_id);
 		$this->display();
 	}
 	/** 编辑部门操作 */

@@ -33,7 +33,7 @@ class DepartModel extends Model{
 		$dep=M('Depart');
 		$data = $dep->table('erp_depart as de,erp_user_depart_mgr as udm,erp_user as ur')
 		->where('de.id=udm.depart_id AND ur.id=udm.user_id')
-		->getField('ur.id as uid,de.id as id,de.`name` as `name`,de.`status` as `status`,udm.depart_id as depart_id,ur.realname');
+		->getField('ur.id as user_id,de.id as id,de.`name` as `name`,de.`status` as `status`,udm.depart_id as depart_id,ur.realname');
 		return $data;
 	}
 	/** 查询所有部门 */
