@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost_3306
+Source Server         : 192.168.1.7_3306
 Source Server Version : 50524
-Source Host           : localhost:3306
+Source Host           : 192.168.1.7:3306
 Source Database       : wqerp
 
 Target Server Type    : MYSQL
 Target Server Version : 50524
 File Encoding         : 65001
 
-Date: 2014-11-06 09:05:24
+Date: 2014-11-07 16:45:25
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -78,13 +78,13 @@ CREATE TABLE `erp_auth_group` (
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '用户组状态：为1正常，为0禁用,-1为删除',
   `rules` varchar(500) NOT NULL DEFAULT '' COMMENT '用户组拥有的规则id，多个规则 , 隔开',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of erp_auth_group
 -- ----------------------------
-INSERT INTO `erp_auth_group` VALUES ('1', 'admin', '1', '默认用户组', '', '1', '1,2,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,4\r\n\r\n1,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,79,8\r\n\r\n0,81,82,83,84,86,87,88,89,90,91,92,93,94,95,96,97,100,102,103,105,106');
-INSERT INTO `erp_auth_group` VALUES ('2', 'admin', '1', '测试用户', '测试用户', '1', '1,2,5,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,56,57,58,59,60,61,62,63,64,65,66,67,68\r\n\r\n,69,70,71,72,73,74,79,80,82,83,84,88,89,90,91,92,93,96,97,100,102,103,195');
+INSERT INTO `erp_auth_group` VALUES ('1', 'admin', '1', '默认用户组', '默认用户组111', '1', '1,2,5,7,8,9,10,3,4,11,12,13,14');
+INSERT INTO `erp_auth_group` VALUES ('2', 'admin', '1', '测试用户', '测试用户', '1', '1,2,5,7,8,9,10,11,12,13,14');
 
 -- ----------------------------
 -- Table structure for `erp_auth_group_access`
@@ -102,6 +102,21 @@ CREATE TABLE `erp_auth_group_access` (
 -- Records of erp_auth_group_access
 -- ----------------------------
 INSERT INTO `erp_auth_group_access` VALUES ('2', '1');
+INSERT INTO `erp_auth_group_access` VALUES ('4', '1');
+INSERT INTO `erp_auth_group_access` VALUES ('5', '1');
+INSERT INTO `erp_auth_group_access` VALUES ('6', '1');
+INSERT INTO `erp_auth_group_access` VALUES ('7', '1');
+INSERT INTO `erp_auth_group_access` VALUES ('8', '1');
+INSERT INTO `erp_auth_group_access` VALUES ('9', '1');
+INSERT INTO `erp_auth_group_access` VALUES ('10', '1');
+INSERT INTO `erp_auth_group_access` VALUES ('11', '1');
+INSERT INTO `erp_auth_group_access` VALUES ('12', '1');
+INSERT INTO `erp_auth_group_access` VALUES ('13', '1');
+INSERT INTO `erp_auth_group_access` VALUES ('14', '1');
+INSERT INTO `erp_auth_group_access` VALUES ('15', '1');
+INSERT INTO `erp_auth_group_access` VALUES ('16', '1');
+INSERT INTO `erp_auth_group_access` VALUES ('17', '1');
+INSERT INTO `erp_auth_group_access` VALUES ('18', '1');
 
 -- ----------------------------
 -- Table structure for `erp_auth_rule`
@@ -109,6 +124,7 @@ INSERT INTO `erp_auth_group_access` VALUES ('2', '1');
 DROP TABLE IF EXISTS `erp_auth_rule`;
 CREATE TABLE `erp_auth_rule` (
   `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT COMMENT '规则id,自增主键',
+  `parent_id` mediumint(8) NOT NULL DEFAULT '0' COMMENT '父级节点   0为顶级',
   `module` varchar(20) NOT NULL COMMENT '规则所属module',
   `type` tinyint(2) NOT NULL DEFAULT '1' COMMENT '1-url;2-主菜单',
   `name` char(80) NOT NULL DEFAULT '' COMMENT '规则唯一英文标识',
@@ -117,224 +133,24 @@ CREATE TABLE `erp_auth_rule` (
   `condition` varchar(300) NOT NULL DEFAULT '' COMMENT '规则附加条件',
   PRIMARY KEY (`id`),
   KEY `module` (`module`,`status`,`type`)
-) ENGINE=MyISAM AUTO_INCREMENT=217 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=219 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of erp_auth_rule
 -- ----------------------------
-INSERT INTO `erp_auth_rule` VALUES ('1', 'admin', '2', 'home/customer/lists', '客户管理', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('2', 'admin', '1', 'home/customer/lists', '客户列表', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('3', 'admin', '1', 'home/customer/add', '添加客户', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('4', 'admin', '1', 'home/customervisit/visitlists', '拜访记录', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('5', 'admin', '1', 'home/customer/lists', '客户搜索', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('7', 'admin', '1', 'home/customer/detailed', '查看详细', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('8', 'admin', '1', 'home/customer/edit', '编辑', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('9', 'admin', '1', 'home/customervisit/addvisit', '添加拜访', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('10', 'admin', '1', 'home/customer/check', '待审', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('11', 'admin', '1', 'home/customer/search', '模糊查询', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('12', 'admin', '1', 'home/customervisit/visitlists', '搜索', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('13', 'admin', '1', 'home/customervisit/visitdetailed', '查看详细', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('14', 'admin', '1', 'home/customervisit/addvisitprod', '添加沟通记录', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('15', 'admin', '2', 'home/order/orderlist', '订单管理', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('16', 'admin', '1', 'home/order/orderlist', '订单列表', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('17', 'admin', '1', 'home/order/orderlist', '搜索', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('18', 'admin', '1', 'home/order/orderinfo', '详情', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('19', 'admin', '1', 'home/order/addorderform', '添加订单', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('20', 'admin', '1', 'home/order/pushform', '推送', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('21', 'admin', '1', 'home/order/orduform', '修改', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('22', 'admin', '1', 'home/order/checkorder', '待审', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('23', 'admin', '1', 'home/order/push', '推送', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('24', 'admin', '1', 'home/orderpay/orderpayrecord', '订单付款记录', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('25', 'admin', '1', 'home/orderpay/opinfo', '编辑', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('26', 'admin', '1', 'home/orderpay/orderpayrecord', '搜索', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('27', 'admin', '2', 'home/depord/deplist', '开发管理', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('28', 'admin', '1', 'home/depord/deplist', '网站开发订单', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('29', 'admin', '1', 'home/depord/deplist', '搜索', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('30', 'admin', '1', 'home/depord/depinfo', '详情', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('31', 'admin', '1', 'home/depord/dist', '未分配', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('32', 'admin', '1', 'home/developuser/addpu', '分配', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('33', 'admin', '1', 'home/depord/pushform', '推送', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('34', 'admin', '1', 'home/order/push', '推送', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('35', 'admin', '1', 'home/seoord/seolist', '优化订单', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('36', 'admin', '1', 'home/seoord/seolist', '搜索', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('37', 'admin', '1', 'home/seoord/seoinfo', '详情', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('38', 'admin', '1', 'home/seoord/pushform', '推送', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('39', 'admin', '1', 'home/seoord/seolist', '推送', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('40', 'admin', '1', 'home/seoord/dist', '未分配', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('41', 'admin', '1', 'home/seouser/addpu', '分配', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('42', 'admin', '1', 'Admin/Addons/create', '创建', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('43', 'admin', '2', 'home/order/renewalorder', '续费管理', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('44', 'admin', '1', 'home/order/renewalorder', '待续费订单', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('45', 'admin', '1', 'home/order/renewalorder', '搜索', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('46', 'admin', '1', 'home/orderrenewal/apyren', '续费', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('47', 'admin', '1', 'home/orderrevewal/orlist', '订单续费申请', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('48', 'admin', '1', 'home/orderrevewal/orlist', '搜索', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('49', 'admin', '1', 'home/domren/domrenapp', '域名续费申请', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('50', 'admin', '1', 'home/domren/domrenapp', '搜索', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('51', 'admin', '1', 'home/domren/check', '待审', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('52', 'admin', '1', 'home/domren/domrenapplydetailed', '查看详细', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('53', 'admin', '1', 'home/domain/domainlist', '域名库', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('54', 'admin', '1', 'home/domain/domainlist', '搜索', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('55', 'admin', '1', 'home/domain/check', '待审', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('56', 'admin', '1', 'home/domain/domaindetailed', '查看详细', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('57', 'admin', '1', 'home/domain/domainedit', '编辑', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('58', 'admin', '1', 'home/domain/applyrenewal', '申请续费', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('59', 'admin', '1', 'home/domain/domaindel', '删除', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('60', 'admin', '1', 'home/domain/adddomain', '添加域名', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('61', 'admin', '2', 'home/depart/depalist', '综合管理', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('62', 'admin', '1', 'home/depart/depalist', '部门管理', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('63', 'admin', '1', 'home/depart/addpform', '添加部门', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('64', 'admin', '1', 'home/depart/updpform', '编辑', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('65', 'admin', '1', 'home/depart/deldp', '删除', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('66', 'admin', '1', 'home/user/searchlist', '用户管理', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('67', 'admin', '1', 'home/user/searchlist', '搜索', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('68', 'admin', '1', 'home/user/star', '状态', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('69', 'admin', '1', 'home/user/userinfo', '详情', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('70', 'admin', '1', 'home/user/deluser', '删除', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('71', 'admin', '1', 'home/user/aduserform', '添加用户', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('72', 'admin', '1', 'home/product/prolist', '产品管理', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('73', 'admin', '1', 'home/product/adproform', '添加产品', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('74', 'admin', '1', 'home/product/proinfo', '详情', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('75', 'admin', '1', 'home/product/delpro', '删除', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('76', 'admin', '1', 'home/product/upinfo', '修改', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('77', 'admin', '1', 'home/article/artlist', '文章管理', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('94', 'admin', '1', 'home/article/artlist?class=1', '公司通知', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('79', 'admin', '1', 'home/article/artlist?class=2', '文章杂谈', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('80', 'admin', '1', 'home/article/artadd', '文章添加', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('81', 'admin', '1', 'home/article/artdetailed', '文章内容', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('82', 'admin', '1', 'home/article/insertcomment', '评论', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('83', 'admin', '2', 'home/results/reslist', '业绩管理', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('84', 'admin', '1', 'home/results/reslist', '业绩清单', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('86', 'admin', '1', 'home/results/showres', '业绩排行', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('87', 'admin', '1', '', '业绩统计', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('88', 'admin', '2', 'home/config/index', '配置管理', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('89', 'admin', '1', 'home/config/index', '系统配置信息', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('90', 'admin', '1', 'Admin/Attribute/add', '新增', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('91', 'admin', '1', 'Admin/Attribute/edit', '编辑', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('92', 'admin', '1', 'Admin/Attribute/setStatus', '改变状态', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('93', 'admin', '1', 'Admin/Attribute/update', '保存数据', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('95', 'admin', '1', 'Admin/AuthManager/addToModel', '保存模型授权', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('96', 'admin', '1', 'Admin/Category/move', '移动', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('97', 'admin', '1', 'Admin/Category/merge', '合并', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('98', 'admin', '1', 'Admin/Config/menu', '后台菜单管理', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('99', 'admin', '1', 'Admin/Article/mydocument', '内容', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('100', 'admin', '1', 'Admin/Menu/index', '菜单管理', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('101', 'admin', '1', 'Admin/other', '其他', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('102', 'admin', '1', 'Admin/Menu/add', '新增', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('103', 'admin', '1', 'Admin/Menu/edit', '编辑', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('104', 'admin', '1', 'Admin/Think/lists?model=article', '文章管理', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('105', 'admin', '1', 'Admin/Think/lists?model=download', '下载管理', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('106', 'admin', '1', 'Admin/Think/lists?model=config', '配置管理', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('107', 'admin', '1', 'Admin/Action/actionlog', '行为日志', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('108', 'admin', '1', 'Admin/User/updatePassword', '修改密码', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('109', 'admin', '1', 'Admin/User/updateNickname', '修改昵称', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('110', 'admin', '1', 'Admin/action/edit', '查看行为日志', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('205', 'admin', '1', 'Admin/think/add', '新增数据', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('111', 'admin', '2', 'Admin/article/index', '文档列表', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('112', 'admin', '2', 'Admin/article/add', '新增', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('113', 'admin', '2', 'Admin/article/edit', '编辑', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('114', 'admin', '2', 'Admin/article/setStatus', '改变状态', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('115', 'admin', '2', 'Admin/article/update', '保存', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('116', 'admin', '2', 'Admin/article/autoSave', '保存草稿', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('117', 'admin', '2', 'Admin/article/move', '移动', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('118', 'admin', '2', 'Admin/article/copy', '复制', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('119', 'admin', '2', 'Admin/article/paste', '粘贴', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('120', 'admin', '2', 'Admin/article/batchOperate', '导入', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('121', 'admin', '2', 'Admin/article/recycle', '回收站', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('122', 'admin', '2', 'Admin/article/permit', '还原', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('123', 'admin', '2', 'Admin/article/clear', '清空', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('124', 'admin', '2', 'Admin/User/add', '新增用户', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('125', 'admin', '2', 'Admin/User/action', '用户行为', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('126', 'admin', '2', 'Admin/User/addAction', '新增用户行为', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('127', 'admin', '2', 'Admin/User/editAction', '编辑用户行为', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('128', 'admin', '2', 'Admin/User/saveAction', '保存用户行为', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('129', 'admin', '2', 'Admin/User/setStatus', '变更行为状态', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('130', 'admin', '2', 'Admin/User/changeStatus?method=forbidUser', '禁\r\n\r\n用会员', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('131', 'admin', '2', 'Admin/User/changeStatus?method=resumeUser', '启\r\n\r\n用会员', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('132', 'admin', '2', 'Admin/User/changeStatus?method=deleteUser', '删\r\n\r\n除会员', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('133', 'admin', '2', 'Admin/AuthManager/index', '权限管理', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('134', 'admin', '2', 'Admin/AuthManager/changeStatus?\r\n\r\nmethod=deleteGroup', '删除', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('135', 'admin', '2', 'Admin/AuthManager/changeStatus?\r\n\r\nmethod=forbidGroup', '禁用', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('136', 'admin', '2', 'Admin/AuthManager/changeStatus?\r\n\r\nmethod=resumeGroup', '恢复', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('137', 'admin', '2', 'Admin/AuthManager/createGroup', '新增', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('138', 'admin', '2', 'Admin/AuthManager/editGroup', '编辑', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('139', 'admin', '2', 'Admin/AuthManager/writeGroup', '保存用户组', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('140', 'admin', '2', 'Admin/AuthManager/group', '授权', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('141', 'admin', '2', 'Admin/AuthManager/access', '访问授权', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('142', 'admin', '2', 'Admin/AuthManager/user', '成员授权', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('143', 'admin', '2', 'Admin/AuthManager/removeFromGroup', '解除授权', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('144', 'admin', '2', 'Admin/AuthManager/addToGroup', '保存成员授权', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('145', 'admin', '2', 'Admin/AuthManager/category', '分类授权', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('146', 'admin', '2', 'Admin/AuthManager/addToCategory', '保存分类授权\r\n\r\n', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('147', 'admin', '2', 'Admin/AuthManager/modelauth', '模型授权', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('148', 'admin', '2', 'Admin/AuthManager/addToModel', '保存模型授权', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('149', 'admin', '2', 'Admin/Addons/create', '创建', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('150', 'admin', '2', 'Admin/Addons/checkForm', '检测创建', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('151', 'admin', '2', 'Admin/Addons/preview', '预览', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('152', 'admin', '2', 'Admin/Addons/build', '快速生成插件', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('153', 'admin', '2', 'Admin/Addons/config', '设置', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('154', 'admin', '2', 'Admin/Addons/disable', '禁用', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('155', 'admin', '2', 'Admin/Addons/enable', '启用', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('156', 'admin', '2', 'Admin/Addons/install', '安装', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('157', 'admin', '2', 'Admin/Addons/uninstall', '卸载', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('158', 'admin', '2', 'Admin/Addons/saveconfig', '更新配置', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('159', 'admin', '2', 'Admin/Addons/adminList', '插件后台列表', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('160', 'admin', '2', 'Admin/Addons/execute', 'URL方式访问插件', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('161', 'admin', '2', 'Admin/Addons/hooks', '钩子管理', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('162', 'admin', '2', 'Admin/Model/index', '模型管理', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('163', 'admin', '2', 'Admin/model/add', '新增', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('164', 'admin', '2', 'Admin/model/edit', '编辑', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('165', 'admin', '2', 'Admin/model/setStatus', '改变状态', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('166', 'admin', '2', 'Admin/model/update', '保存数据', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('167', 'admin', '2', 'Admin/Attribute/index', '属性管理', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('168', 'admin', '2', 'Admin/Attribute/add', '新增', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('169', 'admin', '2', 'Admin/Attribute/edit', '编辑', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('170', 'admin', '2', 'Admin/Attribute/setStatus', '改变状态', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('171', 'admin', '2', 'Admin/Attribute/update', '保存数据', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('172', 'admin', '2', 'Admin/Config/index', '配置管理', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('173', 'admin', '2', 'Admin/Config/edit', '编辑', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('174', 'admin', '2', 'Admin/Config/del', '删除', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('175', 'admin', '2', 'Admin/Config/add', '新增', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('176', 'admin', '2', 'Admin/Config/save', '保存', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('177', 'admin', '2', 'Admin/Menu/index', '菜单管理', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('178', 'admin', '2', 'Admin/Channel/index', '导航管理', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('179', 'admin', '2', 'Admin/Channel/add', '新增', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('180', 'admin', '2', 'Admin/Channel/edit', '编辑', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('181', 'admin', '2', 'Admin/Channel/del', '删除', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('182', 'admin', '2', 'Admin/Category/index', '分类管理', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('183', 'admin', '2', 'Admin/Category/edit', '编辑', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('184', 'admin', '2', 'Admin/Category/add', '新增', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('185', 'admin', '2', 'Admin/Category/remove', '删除', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('186', 'admin', '2', 'Admin/Category/move', '移动', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('187', 'admin', '2', 'Admin/Category/merge', '合并', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('188', 'admin', '2', 'Admin/Database/index?type=export', '备份数据\r\n\r\n库', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('189', 'admin', '2', 'Admin/Database/export', '备份', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('190', 'admin', '2', 'Admin/Database/optimize', '优化表', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('191', 'admin', '2', 'Admin/Database/repair', '修复表', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('192', 'admin', '2', 'Admin/Database/index?type=import', '还原数据\r\n\r\n库', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('193', 'admin', '2', 'Admin/Database/import', '恢复', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('194', 'admin', '2', 'Admin/Database/del', '删除', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('195', 'admin', '2', 'Admin/other', '其他', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('196', 'admin', '2', 'Admin/Menu/add', '新增', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('197', 'admin', '2', 'Admin/Menu/edit', '编辑', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('198', 'admin', '2', 'Admin/Think/lists?model=article', '应用', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('199', 'admin', '2', 'Admin/Think/lists?model=download', '下载管理', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('200', 'admin', '2', 'Admin/Think/lists?model=config', '应用', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('201', 'admin', '2', 'Admin/Action/actionlog', '行为日志', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('202', 'admin', '2', 'Admin/User/updatePassword', '修改密码', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('203', 'admin', '2', 'Admin/User/updateNickname', '修改昵称', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('204', 'admin', '2', 'Admin/action/edit', '查看行为日志', '-1', '');
-INSERT INTO `erp_auth_rule` VALUES ('206', 'admin', '1', 'Admin/think/edit', '编辑数据', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('207', 'admin', '1', 'Admin/Menu/import', '导入', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('208', 'admin', '1', 'Admin/Model/generate', '生成', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('209', 'admin', '1', 'Admin/Addons/addHook', '新增钩子', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('210', 'admin', '1', 'Admin/Addons/edithook', '编辑钩子', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('211', 'admin', '1', 'Admin/Article/sort', '文档排序', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('212', 'admin', '1', 'Admin/Config/sort', '排序', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('213', 'admin', '1', 'Admin/Menu/sort', '排序', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('214', 'admin', '1', 'Admin/Channel/sort', '排序', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('215', 'admin', '1', 'Admin/Category/operate/type/move', '移动', '1', '');
-INSERT INTO `erp_auth_rule` VALUES ('216', 'admin', '1', 'Admin/Category/operate/type/merge', '合并', '1', '');
+INSERT INTO `erp_auth_rule` VALUES ('1', '0', 'home', '2', 'home/customer/lists', '客户管理', '1', '');
+INSERT INTO `erp_auth_rule` VALUES ('2', '1', 'home', '1', 'home/customer/lists', '客户列表', '1', '');
+INSERT INTO `erp_auth_rule` VALUES ('3', '1', 'home', '1', 'home/customer/add', '添加客户', '1', '');
+INSERT INTO `erp_auth_rule` VALUES ('4', '1', 'home', '1', 'home/customervisit/visitlists', '拜访记录', '1', '');
+INSERT INTO `erp_auth_rule` VALUES ('5', '2', 'home', '1', 'home/customer/lists', '客户搜索', '1', '');
+INSERT INTO `erp_auth_rule` VALUES ('7', '2', 'home', '1', 'home/customer/detailed', '查看详细', '1', '');
+INSERT INTO `erp_auth_rule` VALUES ('8', '2', 'home', '1', 'home/customer/edit', '编辑客户', '1', '');
+INSERT INTO `erp_auth_rule` VALUES ('9', '2', 'home', '1', 'home/customervisit/addvisit', '添加拜访', '1', '');
+INSERT INTO `erp_auth_rule` VALUES ('10', '2', 'home', '1', 'home/order/add_order_form', '添加订单', '1', '');
+INSERT INTO `erp_auth_rule` VALUES ('11', '4', 'home', '1', 'home/customer/search', '记录搜索', '1', '');
+INSERT INTO `erp_auth_rule` VALUES ('12', '4', 'home', '1', 'home/customervisit/visitlists', '查看详细', '1', '');
+INSERT INTO `erp_auth_rule` VALUES ('13', '4', 'home', '1', 'home/customervisit/visitdetailed', '添加沟通记录', '1', '');
+INSERT INTO `erp_auth_rule` VALUES ('14', '4', 'home', '1', 'home/customervisit/addvisit', '添加拜访', '1', '');
 
 -- ----------------------------
 -- Table structure for `erp_comment`
@@ -512,22 +328,24 @@ CREATE TABLE `erp_depart` (
   `sort` tinyint(4) DEFAULT '100' COMMENT '排序',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '-1:删除 0:禁用 1:正常',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8 COMMENT='部门; 通过class来区别不同类型的部门, 不同\r\n\r\n类型的部门, 管理的数据表不同';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='部门; 通过class来区别不同类型的部门, 不同\r\n\r\n类型的部门, 管理的数据表不同';
 
 -- ----------------------------
 -- Records of erp_depart
 -- ----------------------------
 INSERT INTO `erp_depart` VALUES ('1', '1', '4', '技术部', '100', '1');
-INSERT INTO `erp_depart` VALUES ('2', '1', '3', '优化', '100', '1');
-INSERT INTO `erp_depart` VALUES ('3', '1', '4', '程序', '100', '1');
-INSERT INTO `erp_depart` VALUES ('5', '1', '4', '网页设计', '100', '0');
+INSERT INTO `erp_depart` VALUES ('2', '1', '3', '优化组', '100', '1');
+INSERT INTO `erp_depart` VALUES ('3', '1', '4', '程序组', '100', '1');
+INSERT INTO `erp_depart` VALUES ('5', '1', '4', '网页设计', '100', '1');
 INSERT INTO `erp_depart` VALUES ('6', '6', '5', '综合部', '100', '1');
-INSERT INTO `erp_depart` VALUES ('7', '6', '5', '行政部', '100', '1');
-INSERT INTO `erp_depart` VALUES ('8', '6', '5', '后勤部', '100', '0');
+INSERT INTO `erp_depart` VALUES ('7', '12', '1', '销售一部', '100', '1');
+INSERT INTO `erp_depart` VALUES ('8', '12', '1', '销售二部', '100', '1');
 INSERT INTO `erp_depart` VALUES ('9', '1', '4', '美工组', '100', '1');
 INSERT INTO `erp_depart` VALUES ('10', '3', '3', '产品客服部', '100', '1');
 INSERT INTO `erp_depart` VALUES ('11', '11', '2', '客服部', '100', '1');
-INSERT INTO `erp_depart` VALUES ('12', '10', '0', '优化编辑', '100', '1');
+INSERT INTO `erp_depart` VALUES ('12', '12', '1', '销售部', '100', '1');
+INSERT INTO `erp_depart` VALUES ('13', '12', '1', '销售三部', '100', '1');
+INSERT INTO `erp_depart` VALUES ('14', '12', '0', '销售四部', '100', '-1');
 
 -- ----------------------------
 -- Table structure for `erp_develop_order`
@@ -942,21 +760,21 @@ CREATE TABLE `erp_user` (
 -- ----------------------------
 -- Records of erp_user
 -- ----------------------------
-INSERT INTO `erp_user` VALUES ('1', 'admin', '6fa0446fa9335c25c3cf97b241210b35', '0', '超管', '1', '', '2012.10.12', '0', '0', '0', '0', '1');
-INSERT INTO `erp_user` VALUES ('2', 'administrator', '6fa0446fa9335c25c3cf97b241210b35', '0', '超管', '1', '', '2013.11.15', '0', '0', '0', '0', '1');
-INSERT INTO `erp_user` VALUES ('4', 'test', '6fa0446fa9335c25c3cf97b241210b35', '1', '测试人员', '0', '', '2012.10.13', '1990.4.5', '3', '20149.18', '192.168.1.48', '-1');
+INSERT INTO `erp_user` VALUES ('1', 'admin', '6fa0446fa9335c25c3cf97b241210b35', '1', '超管', '1', '经理', '2012.10.12', '0', '0', '0', '0', '1');
+INSERT INTO `erp_user` VALUES ('2', 'administrator', '6fa0446fa9335c25c3cf97b241210b35', '13', '超级管理员', '1', '', '2013.11.15', '0', '0', '0', '0', '1');
+INSERT INTO `erp_user` VALUES ('4', 'test', '6fa0446fa9335c25c3cf97b241210b35', '4', '测试人员', '0', '', '2012.10.13', '1990.4.5', '3', '20149.18', '192.168.1.48', '1');
 INSERT INTO `erp_user` VALUES ('5', 'zhao', '', '2', '赵', '1', '优化', '2013.10.14', '1990.2.9', '0', '0', '0', '1');
 INSERT INTO `erp_user` VALUES ('6', 'qian', '', '3', '钱', '1', '程序', '2012.2.9', '1991.10.15', '0', '0', '0', '0');
 INSERT INTO `erp_user` VALUES ('7', 'sun', '', '5', '孙', '1', '网页设计', '2014.5.9', '1993.1.8', '0', '0', '0', '1');
-INSERT INTO `erp_user` VALUES ('8', 'li', '', '5', '李', '1', '网页设计', '2013.5.8', '1992.12.12', '0', '0', '0', '1');
+INSERT INTO `erp_user` VALUES ('8', 'li', '', '12', '李', '1', '网页设计', '2013.5.8', '1992.12.12', '0', '0', '0', '1');
 INSERT INTO `erp_user` VALUES ('9', 'zhou', '', '6', '周', '1', '部门经理', '2014.3.9', '1990.1.8', '0', '0', '0', '1');
 INSERT INTO `erp_user` VALUES ('10', 'wu', '', '7', '吴', '1', '前台', '2011.10.12', '1992.10.12', '0', '0', '0', '1');
 INSERT INTO `erp_user` VALUES ('11', 'zheng', '', '8', '郑', '1', '后勤', '2012.8.6', '1990.1.14', '0', '0', '0', '1');
-INSERT INTO `erp_user` VALUES ('12', 'wang', '', '1', '王', '1', '技术主管', '2012.6.4', '1989.4.9', '0', '0', '0', '1');
+INSERT INTO `erp_user` VALUES ('12', 'wang', '', '9', '王', '1', '技术主管', '2012.6.4', '1989.4.9', '0', '0', '0', '1');
 INSERT INTO `erp_user` VALUES ('13', 'baidu', '', '2', '百度', '1', '优化', '2013.10.13', '1993.12.4', '0', '0', '0', '1');
 INSERT INTO `erp_user` VALUES ('14', 'wcd', 'aerwe', '3', 'wcd', '1', '程序', '2013.11.18', '1995.12.1', '0', '0', '0', '0');
 INSERT INTO `erp_user` VALUES ('15', 'ccd', 'dada', '5', '愁肠断', '1', '网页设计', '2013.8.6', '1991.1.5', '0', '0', '0', '1');
-INSERT INTO `erp_user` VALUES ('16', 'asdas', '123456', '11', '张三', '1', '客服', '2013.10.14', '1991.12.12', '0', '0', '0', '1');
+INSERT INTO `erp_user` VALUES ('16', 'asdas', '123456', '14', '张三', '1', '客服', '2013.10.14', '1991.12.12', '0', '0', '0', '1');
 INSERT INTO `erp_user` VALUES ('17', 'lisi', 'lisi', '11', '李四', '1', '客服', '2014.2.2', '1991.12.12', '0', '0', '0', '1');
 INSERT INTO `erp_user` VALUES ('18', 'wangwu', 'wangwu', '10', '王五', '1', '优化编辑', '2014.10.10', '1991.12.12', '0', '0', '0', '1');
 
@@ -1001,11 +819,12 @@ CREATE TABLE `erp_user_cust_prod` (
 -- Records of erp_user_cust_prod
 -- ----------------------------
 INSERT INTO `erp_user_cust_prod` VALUES ('1', '1', '0', '1417104000');
-INSERT INTO `erp_user_cust_prod` VALUES ('1', '2', '5', '1415173793');
+INSERT INTO `erp_user_cust_prod` VALUES ('1', '2', '0', '1415173793');
 INSERT INTO `erp_user_cust_prod` VALUES ('1', '5', '0', '0');
-INSERT INTO `erp_user_cust_prod` VALUES ('1', '18', '1', '20134556888');
-INSERT INTO `erp_user_cust_prod` VALUES ('1', '19', '0', '');
-INSERT INTO `erp_user_cust_prod` VALUES ('1', '19', '1', '1416931200');
+INSERT INTO `erp_user_cust_prod` VALUES ('1', '8', '0', '0');
+INSERT INTO `erp_user_cust_prod` VALUES ('1', '16', '0', '');
+INSERT INTO `erp_user_cust_prod` VALUES ('2', '15', '0', '1416931200');
+INSERT INTO `erp_user_cust_prod` VALUES ('8', '19', '0', '');
 
 -- ----------------------------
 -- Table structure for `erp_user_depart_mgr`
@@ -1020,15 +839,19 @@ CREATE TABLE `erp_user_depart_mgr` (
 -- ----------------------------
 -- Records of erp_user_depart_mgr
 -- ----------------------------
-INSERT INTO `erp_user_depart_mgr` VALUES ('0', '4');
-INSERT INTO `erp_user_depart_mgr` VALUES ('0', '5');
-INSERT INTO `erp_user_depart_mgr` VALUES ('0', '6');
-INSERT INTO `erp_user_depart_mgr` VALUES ('0', '7');
-INSERT INTO `erp_user_depart_mgr` VALUES ('0', '8');
-INSERT INTO `erp_user_depart_mgr` VALUES ('0', '9');
-INSERT INTO `erp_user_depart_mgr` VALUES ('0', '10');
 INSERT INTO `erp_user_depart_mgr` VALUES ('1', '1');
-INSERT INTO `erp_user_depart_mgr` VALUES ('5', '2');
+INSERT INTO `erp_user_depart_mgr` VALUES ('2', '13');
+INSERT INTO `erp_user_depart_mgr` VALUES ('4', '4');
+INSERT INTO `erp_user_depart_mgr` VALUES ('6', '3');
+INSERT INTO `erp_user_depart_mgr` VALUES ('7', '2');
+INSERT INTO `erp_user_depart_mgr` VALUES ('7', '5');
+INSERT INTO `erp_user_depart_mgr` VALUES ('8', '12');
+INSERT INTO `erp_user_depart_mgr` VALUES ('9', '6');
+INSERT INTO `erp_user_depart_mgr` VALUES ('10', '7');
+INSERT INTO `erp_user_depart_mgr` VALUES ('11', '8');
+INSERT INTO `erp_user_depart_mgr` VALUES ('12', '9');
+INSERT INTO `erp_user_depart_mgr` VALUES ('17', '11');
+INSERT INTO `erp_user_depart_mgr` VALUES ('18', '10');
 
 -- ----------------------------
 -- Table structure for `erp_valadd_comment`
