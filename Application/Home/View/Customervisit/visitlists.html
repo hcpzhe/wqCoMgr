@@ -20,7 +20,7 @@
         <td height="30"></td>
       </tr>
       <tr>
-        <td><font class="tishi">头部提示信息：下面所列的是所有客户的拜访记录！</font></td>
+        <td><font class="tishi">头部提示信息：下面所列的是所有客户的拜访记录！搜索时间范围格式 如：20141010</font></td>
       </tr>
       <tr>
         <td height="30"></td>
@@ -28,12 +28,27 @@
       <tr>
         <td height="40">
               <span id="cust_search">
-	           <form action="{:U('Customervisit/visitlists?p=1')}" method="get">
-	                                          搜索：<select name="key" class="search">
-	                  <option value="1">公司名称</option>   
-	                  <option value="2">拜访人员</option>                      
+	           <form action="{:U('Customervisit/visitlists')}" method="get">
+	               搜索：
+	                 <!-- 按用户名搜索 -->
+	                 <select name="user_id" class="search_bg">
+	                  <option value="">用户不限</option>
+	                <!-- <foreach name="user_list" item="user_list"> -->     
+	                  <option value="{$user_list.id}">{$user_list.realname}</option> 
+	                 <!-- </foreach> -->                     
 	                </select>
-	                <input type="text" name="name" class="search" value="" />                       
+	                <!-- 按时间范围搜索 -->
+	                时间范围：
+	                <input type="text" name="kstime" value="" class="search" style="width: 80px;"> -
+	                <input type="text" name="jztime" value="" class="search" style="width: 80px;">
+	                 <!-- 按公司信息搜索 -->
+	                 <select name="key" class="search_bg">
+	                  <option value="1">公司名称</option>   
+	                  <option value="2">联系人</option> 
+	                  <option value="3">联系电话</option>                     
+	                </select>
+	                <!-- 按公司关键字搜索 -->
+	                <input type="text" name="name" class="search" value="" style="width: 100px;" />                       
 	                <input type=submit value="搜索" class="button_submit" />
 	           </form> 
               <a href="{:U('Customervisit/addvisit')}" class="button_submit">添加拜访</a>                                             
@@ -47,10 +62,12 @@
         <td align="center">                     
             <table width="752" border="0" class="cust_list">           
                   <tr class="liebiao_title">
-                    <th width="100">编号</th>
-                    <th width="230">公司名称</th>
-                    <th width="120">拜访员工</th>
-                     <th width="150">拜访时间</th>
+                    <th width="40">编号</th>
+                    <th width="80">拜访员工</th>
+                    <th width="200">公司名称</th>
+                    <th width="50">联系人</th>
+                    <th width="100">联系电话</th>
+                     <th width="130">拜访时间</th>
                     <th width="150">操作</th>
                   </tr>
                </table>
@@ -61,10 +78,12 @@
           <!-- <foreach name="visit_lisit" item="data"> -->        
             <table width="752" border="0" cellspacing="0" cellpadding="0" class="com_list">                                                  
                   <tr height="30">
-                     <td width="100" align="center">{$data.id}</td>
-                     <td width="230" align="center">{$data.cname|mb_substr=0,54}</td>
-                     <td width="120" align="center">{$data.uname}</td>
-                     <td width="150" align="center">{:date('Y/m/d H:i:s',$data['visit_time'])}</td>
+                     <td width="40" align="center">{$data.id}</td>
+                     <td width="80" align="center">{$data.uname}</td>
+                     <td width="200" align="center">{$data.cname|mb_substr=0,45}</td>
+                     <td width="50" align="center">{$data.contacts}</td>
+                     <td width="100" align="center">{$data.phone}</td>
+                     <td width="130" align="center">{:date('Y/m/d H:i:s',$data['visit_time'])}</td>
                      <td width="150" align="center">
                        <a href="{:U('Customervisit/visit_detailed?id='.$data['id'])}">查看详细</a> | 
                        <a href="{:U('Customervisit/add_visit_prod?visit_id='.$data['id'])}">添加沟通记录 </a>
