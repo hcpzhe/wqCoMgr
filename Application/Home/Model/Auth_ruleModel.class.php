@@ -11,4 +11,59 @@ class Auth_ruleModel extends Model{
 	public function all(){
 		return $this->where("status=1")->select();
 	}
+	
+	/**
+	 * 
+	 * @param number $pid
+	 * @return
+	 * 		array(
+	 * 			id=>int,
+	 * 			name=>string,
+	 * 			title=>string,
+	 * 			son=> array(
+	 * 				id=>int,
+	 * 				name=>string,
+	 * 				title=>string,
+	 * 				son=> array...
+	 * 			)
+	 * 		)
+	 */
+	/*回调函数*/
+	public function allrule($pid=0) {
+		$return = array();
+		$map = array('parent_id'=>$pid,'status'=>'1');
+		$idarr = $this->where($map)->getField('id',true);
+		if (empty($idarr)) return $return;
+	
+		$return = $idarr;
+		foreach ($idarr as $rowid) {
+			$tmparr = $this->allrule($rowid);
+			$return = array_merge($return,$tmparr);
+		}
+		return $return;
+	}
+/**查询所有权限信息  */
+	public function ztreeArr($map) {
+// 		/*当前用户组所拥有的权限*/
+// 		$auth_group=new Auth_groupModel();
+// 		$group=$auth_group->g_rule(1);		
+		/*所有权限节点*/
+		$cate_tree = array();
+		$list = $this->where($map)->select();
+		foreach ($list as $row) {
+			/*查看该用户组是否拥有该权限*/
+// 			$flag=in_array($row['id'], $group);
+			$tmp = array(
+					'id' => $row['id'],
+					'pId' => $row['parent_id'],
+					'name' => $row['title'],
+					'open' => true,
+// 					'checked' => $flag
+			);
+// 			$tmp['pname'] = $tmp['pId'] > 0? $this->where('id='.$tmp['pId'])->getField('cate_name') : '顶级分类';			
+			$cate_tree[] = $tmp;
+		}
+		return $cate_tree;
+	}	
+	
 }

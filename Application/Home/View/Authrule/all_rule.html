@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<HTML>
+<HEAD>
+	<TITLE>万谦erp</TITLE>
+	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<link href="__CSS__/style.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="__JS__/jquery.js"></script>
+	<script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+	
+	<link rel="stylesheet" href="__CSS__/demo.css" type="text/css">
+	<link rel="stylesheet" href="__CSS__/zTreeStyle/zTreeStyle.css" type="text/css">
+	<script type="text/javascript" src="__JS__/jquery.ztree.core-3.5.js"></script>
+	<script type="text/javascript" src="__JS__/jquery.ztree.excheck-3.5.js"></script>
+	<!--
+	<script type="text/javascript" src="js/jquery.ztree.exedit-3.5.js"></script>
+	-->
+	<SCRIPT type="text/javascript">
+		<!--
+		var setting = {
+			check: {
+				enable: false
+			},
+			data: {
+				simpleData: {
+					enable: true
+				}
+			}
+		};
+
+		var zNodes ={$data};
+		
+		var code;
+		
+		function setCheck() {
+			var zTree = $.fn.zTree.getZTreeObj("treeDemo"),
+			py = $("#py").attr("checked")? "p":"",
+			sy = $("#sy").attr("checked")? "s":"",
+			pn = $("#pn").attr("checked")? "p":"",
+			sn = $("#sn").attr("checked")? "s":"",
+			type = { "Y":py + sy, "N":pn + sn};
+			zTree.setting.check.chkboxType = type;
+			showCode('setting.check.chkboxType = { "Y" : "' + type.Y + '", "N" : "' + type.N + '" };');
+		}
+		function showCode(str) {
+			if (!code) code = $("#code");
+			code.empty();
+			code.append("<li>"+str+"</li>");
+		}
+		
+		$(document).ready(function(){
+			$.fn.zTree.init($("#treeDemo"), setting, zNodes);
+			setCheck();
+			$("#py").bind("change", setCheck);
+			$("#sy").bind("change", setCheck);
+			$("#pn").bind("change", setCheck);
+			$("#sn").bind("change", setCheck);
+		});
+		//-->
+	</SCRIPT>
+</HEAD>
+
+<BODY>
+<table width="755" cellpadding="0" cellspacing="0">
+    <tr>
+      <td class="menu"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32" /><font>权限展示</font></span></td>
+    </tr>
+</table> 
+<div class="content_wrap">
+	<div class="zTreeDemoBackground left">
+		<ul id="treeDemo" class="ztree"></ul>
+	</div>
+</div>
+</BODY>
+</HTML>

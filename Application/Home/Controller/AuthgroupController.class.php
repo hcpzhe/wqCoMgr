@@ -12,21 +12,28 @@ class AuthgroupController extends HomeBaseController{
 	}
 	/**用户组详情  */
 	public function info($id){
+		/*用户组权限信息*/
+		$auth_group=new Auth_groupModel();
+		$map=" status=1";
+		$ztree=$auth_group->ztreeArr($map,$id);
+		$this->data=json_encode($ztree);
+		
 		/*用户组信息*/
 		$auth_group=new Auth_groupModel();
 		$ginfo=$auth_group->where("id=$id")->find();
 		$this->group_info=$ginfo;
-		/*用户组权限信息*/
-		$rule=new Auth_ruleModel();
-		$rules=array();
-		$arr=explode(',',$ginfo['rules']);
-		foreach ($arr as $list){
-			$rules[]=$rule->info($list);
-		}
-		/** 权限表所有信息*/
-		$this->all_rule=$rule->all();
-		
-		$this->rules=$rules;
 		$this->display();
+	}
+	/*修改用户组信息*/
+	public function up(){
+		$id=$_POST['id'];
+		$map['title']=$_POST['gp_tit'];
+		$map['description']=$_POST['gp_des'];
+		$map['rules']=implode(',', $_POST['rules']);
+		$authgroup=new Auth_groupModel();
+		$flag=$authgroup->where("id=$id")->save($map);
+		if($flag==0){ $this->error('更新失败'); }
+		else{$this->success('更新成功');}
+
 	}
 }
