@@ -28,7 +28,9 @@ class CustomerController extends HomeBaseController {
 	}
 		
 	/**客户列表     公司名称搜索**/
-	public function lists() {				
+	public function lists() {
+// 		$arr = session('user_auth');
+// 		dump($arr);exit();
 		$key = (int)I('param.key'); //选择搜索条件
 		$name = I('param.name');    //输入的搜索信息
 		$visit = new CustomerModel();

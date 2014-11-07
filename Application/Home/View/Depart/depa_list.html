@@ -20,23 +20,25 @@
 				<table width="100%" border="0" cellspacing="0" cellpadding="0" class="info_list">
 				            <tr>
 				              <th width="8%">编号</th>
-				              <th width="29%">部门名称</th>
-				              <th width="30%">状态</th>
-				              <th width="27%">操作 ( <a href="{:U('Depart/ad_dp_form')}">添加部门</a> )</th>
+				              <th width="20%">部门名称</th>
+				              <th width="20%">管理者</th>
+				              <th width="20%">状态</th>
+				              <th width="26%">操作 ( <a href="{:U('Depart/ad_dp_form')}">添加部门</a> )</th>
 				            </tr>
 				<!-- <foreach name="depa_list" item="list"> -->            
 				            <tr class="list_tr">
 				              <td width="8%">{$list.id}</td>
-				              <td width="29%" >{$list.name}</td>
-				              <td width="30%">
+				              <td width="20%" >{$list.name}</td>
+				              <td width="20%" >{$list.realname}</td>
+				              <td width="20%">
 					            <!-- <if condition="$list.status eq 1"> -->
 								<a href="{:U('Depart/stop?id='.$list['id'])}"><img src="__PUBLIC__/images/yes.gif"></a>
 								<!-- <else/> -->
 								<a href="{:U('Depart/star?id='.$list['id'])}"><img src="__PUBLIC__/images/no.gif"></a>
 								<!-- </if> -->
 							  </td>
-				              <td width="27%" >
-				              	<a href="{:U('Depart/up_dp_form?id='.$list['id'])}" class="lanxlink">编辑</a>｜
+				              <td width="26%" >
+				              	<a href="{:U('Depart/up_dp_form?id='.$list['id'].'&user_id='.$list['user_id'])}" class="lanxlink">编辑</a>｜
 				              	<a href="{:U('Depart/del_dp?id='.$list['id'])}" class="lanxlink">删除</a>
 				              </td>
 				            </tr>   

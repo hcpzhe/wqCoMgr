@@ -9,27 +9,47 @@ class CustomervisitController extends HomeBaseController {
 
 	/**拜访记录列表**/
 	public function visitlists(){
-		$key = (int)I('param.key'); //选择搜索条件
- 		$name = I('param.name');    //输入的搜索信息
+		//用户名
+		$user=M('User');
+		$user_list=$user->where('status=1')->select();
+		$this->assign('user_list',$user_list);
+		
+		$user_id = (int)I('param.user_id');  //用户名
+		$kstime = strtotime(I('param.kstime'));  //开始时间
+		$jztime = strtotime(I('param.jztime'));  //截止时间
+		$key = (int)I('param.key'); //公司信息
+		$name = I('param.name');    //输入的搜索信息
 		$visit=new Customer_visitModel();
 		$where = "cu.user_id=ur.id AND cu.cust_id=cr.id";  //多表查询条件
-		if($key == 1){
-			$where=$where." AND ( cr.name like '%".$name."%')"; //公司名称模糊检索
-		}else{
-			$where=$where." AND ( ur.realname like '%".$name."%')"; //按照拜访人员进行模糊检索
+		if (!empty($user_id)){
+			$where=$where." AND ( ur.id = $user_id)";
 		}
-        $count=$visit->table('erp_customer_visit as cu,erp_user as ur,erp_customer as cr')
-		->where($where)		
-		->count();       // 查询满足要求的总记录数        
-		$Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(10)
-		$show       = $Page->show();// 分页显示输出
-		$visit_list = $visit->table('erp_customer_visit as cu,erp_user as ur,erp_customer as cr')
+		if (!empty($kstime)){
+			$where=$where." AND ( cu.visit_time >= $kstime)";
+		}
+		if (!empty($jztime)){
+		$where=$where." AND ( cu.visit_time <= $jztime)";
+		}
+		if($key == 1){
+		$where=$where." AND ( cr.name like '%".$name."%')"; //公司名称模糊检索
+		}elseif ($key == 2){
+		$where=$where." AND ( cr.contacts like '%".$name."%')"; //按照联系人进行模糊检索
+		}else {
+		$where=$where." AND ( cr.phone like '%".$name."%')";  //按照联系电话查询
+		}
+				$count=$visit->table('erp_customer_visit as cu,erp_user as ur,erp_customer as cr')
 		->where($where)
-		->field("cu.id as id,ur.realname as uname,cr.`name` as cname,cu.visit_time,cu.`content`")
-		->limit($Page->firstRow.','.$Page->listRows)->order('visit_time desc')->select();       
- 		$this->assign('visit_lisit',$visit_list);
-        $this->assign('page',$show);   //分页显示
-		$this->display();		
+		->count();       // 查询满足要求的总记录数
+				$Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(10)
+				$show       = $Page->show();// 分页显示输出
+				$visit_list = $visit->table('erp_customer_visit as cu,erp_user as ur,erp_customer as cr')
+		->where($where)
+		->field("cu.id as id,ur.realname as uname,cr.`name` as cname,cr.contacts as contacts,cr.phone as phone,cu.visit_time,cu.`content`")
+		->limit($Page->firstRow.','.$Page->listRows)->order('visit_time desc')->select();
+		
+				$this->assign('visit_lisit',$visit_list);
+				$this->assign('page',$show);   //分页显示
+				$this->display();		
 	}	
 	/**拜访记录添加**/
 	public function addvisit(){
@@ -60,7 +80,7 @@ class CustomervisitController extends HomeBaseController {
 	public function addvisit_insert(){
 		$cust_id = (int)I('cust_id');
 		$data['cust_id'] = $cust_id;
-		$data['user_id']  = (int)I('user_id');
+		$data['user_id']  = UID;
 		$data['content'] =  I('param.content');
 		$data['visit_time'] = time();	
 		$model = new Customer_visitModel();			

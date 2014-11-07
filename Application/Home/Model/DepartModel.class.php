@@ -23,7 +23,17 @@ class DepartModel extends Model{
 	}
 	/**  获取部门列表 */
 	public function depalist(){
-		$data=$this->where('status>=0')->select();
+		$dep=M('Depart');
+		$data=$dep->where('status=1')->select();
+		return $data;
+	}
+	/**  获取部门列表 */
+	public function depalists(){
+		//erp_user_depart_mgr 查询部门负责人
+		$dep=M('Depart');
+		$data = $dep->table('erp_depart as de,erp_user_depart_mgr as udm,erp_user as ur')
+		->where('de.id=udm.depart_id AND ur.id=udm.user_id')
+		->getField('ur.id as user_id,de.id as id,de.`name` as `name`,de.`status` as `status`,udm.depart_id as depart_id,ur.realname');
 		return $data;
 	}
 	/** 查询所有部门 */

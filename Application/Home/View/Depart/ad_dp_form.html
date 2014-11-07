@@ -2,8 +2,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>订单列表</title>
+<title>添加部门</title>
 <link href="__CSS__/style.css" rel="stylesheet" type="text/css">
+<link href="__CSS__/home.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="__JS__/jquery.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
 </head>
@@ -21,14 +22,37 @@
             <td class="push_content">
 				<!-- 部门列表开始 -->
 				<form action="{:U('Depart/add_dp')}" method="post">
-					部门名称：<input type="text" name="name" class="search_bg">
-					所属部门：<select name='parent_id' class="search_bg">
+				   <table class="user_info">
+				     <tr>
+				       <td>部 门 名 称：</td>
+				       <td><input type="text" name="name" class="search_bg"></td>
+				     </tr>
+					 <tr>
+				       <td>所 属 部 门：</td>
+				       <td>
+				           <select name='parent_id' class="search_bg">
 							   <option value="0">无</option>
 				    	  <!-- <foreach  name="depa_list" item="dp_list"> -->
 				    	       <option value="{$dp_list.id}">{$dp_list.name}</option>
 				          <!-- </foreach> -->	
 				          </select>
-				    <input type="submit" value="添加" class="button_submit">      
+				       </td>
+				     </tr>
+					  <tr>
+				       <td>部门管理者：</td>
+				       <td>
+                           <select name="user_id" class="search_bg">
+                                 <!-- <foreach  name="user_list" item="user_list"> -->
+				                   <option value="{$user_list.id}">{$user_list.realname}</option>
+				                 <!-- </foreach> -->
+				           </select>
+                       </td>
+				     </tr>
+				     <tr>
+				       <td colspan="4" align="center"><input type="submit" value="添加" class="button_submit"> </td>
+				     </tr>				   
+				      
+				   </table>   
 				</form>
 				<!-- 部门列表结束-->
 			</td>
