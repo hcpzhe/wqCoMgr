@@ -20,71 +20,47 @@
       </tr>
       <tr>
         <td height="30"></td>
-      </tr>      
-      <!-- <foreach name="list" item="list"> --> 
+      </tr>            
       <tr>
          <td>
            <form action="{:U('Usercustprod/update')}" method="post">
 	        <table class="user_info">
+	         <!-- <foreach name="list" item="list"> --> 
 		      <tr>
-		        <td>                     
-		           公司名称：
-		        </td>
-		        <td>                     
-		          {$list.cname}
+		        <td>公 司 名 称： </td>
+		        <td>{$list.cname}
 		          <input type="hidden" value="{$list['cust_id']}" name="cust_id" />
 		        </td>
 		      </tr>  
 		       <tr>
-		        <td>                     
-		           联系人：
-		        </td>
-		        <td>                     
-		          {$list.contacts}
-		        </td>
+		        <td>联&nbsp;&nbsp;系&nbsp;&nbsp;人：</td>
+		        <td>{$list.contacts}</td>
 		      </tr>  
 		       <tr>
-		        <td>                     
-		           联系电话：
-		        </td>
-		        <td>                     
-		          {$list.phone}
-		        </td>
+		        <td>联 系 电 话：   </td>
+		        <td>{$list.phone}</td>
 		      </tr>  
 		      <tr>
-		        <td>                     
-		           传真：
-		        </td>
-		        <td>                     
-		          {$list.fax}
-		        </td>
+		        <td>&nbsp;&nbsp;传&nbsp;&nbsp;&nbsp;&nbsp;真&nbsp;&nbsp;：</td>
+		        <td>{$list.fax} </td>
 		      </tr> 
 		       <tr>
-		        <td>                     
-		           地址：
-		        </td>
-		        <td>                     
-		          {$list.address}
-		        </td>
-		      </tr> 
+		        <td>&nbsp;&nbsp;地&nbsp;&nbsp;&nbsp;&nbsp;址&nbsp;&nbsp;：</td>
+		        <td>{$list.address}</td>
+		      </tr> 		     
 		      <tr>
+		        <td>权限 拥有者：</td>
 		        <td>                     
-		           备注：
-		        </td>
-		        <td>                     
-		         {$list.remark} 
+		          <select name="user_id">
+		             <option value="{$list.uid}">{$list.realname}</option>
+		             <!-- <foreach name="user_list" item="user_list"> --> 
+		             <option value="{$user_list.id}">{$user_list.realname}</option>
+		             <!-- </foreach> -->      
+		          </select>
 		        </td>
 		      </tr>
 		      <tr>
-		        <td>                     
-		           权限拥有者：
-		        </td>
-		        <td>                     
-		          {$list.realname}
-		        </td>
-		      </tr>
-		      <tr>
-		        <td>                     
+		        <td align="right">                     
 		           权限过期时间：
 		         </td>
 		         <td>
@@ -92,39 +68,17 @@
 		            <!-- <else /> --><input name="expired_time" onclick="WdatePicker()" class="Wdate" value="{:date('Y-m-d',$list['expired_time'])}" />	 <!-- </if> -->                                                               
                    <div lang="zh-cn" style="position: absolute; z-index: 100004; display: none; top: 28px; left: 10px;"><iframe hidefocus="true" width="9" height="7" frameborder="0" border="0" scrolling="no" src="about:blank" style="width: 186px; height: 198px;"></iframe></div>		                      
 		        </td>
-		      </tr>
-		      <script>
-                 //从数据库中取得产品权限，并默认选中 
-                  $(document).ready(function(){
-                	  //审核状态选中
-                	 var prod_id = {$list['prod_id']};
-                	 $("#pro_check option[value='"+prod_id+"']").attr("selected",true)
-                	 
-                	});                                  
-                  </script>  
-		      <tr>
-		        <td>                     
-		           权限：  		           
-		        </td>
-		        <td>                     
-		           <select  id="pro_check" name="prod_id"> 		                                      
-                           <option value="0">所有产品                             
-                           <!-- <foreach name="pro_list" item="list"> 所有产品-->    
-                            <option value="{$list.id}">{$list.name}   
-                           <!-- </foreach> -->                            
-                   </select>
-		        </td>
-		      </tr>		    		     		      
+		      </tr>		      		      	    		     		      
 		       <tr>
-		        <td colspan="2">                     
-		           <input type="submit" value="提交">
+		        <td colspan="2" align="center">                     
+		           <input type="submit" value="提交" class="button_submit">
 		         </td>		         
 		      </tr>
+		      <!-- </foreach> -->      
 		     </table>     
-		   </form>       
-       </td>
-      </tr>
-     <!-- </foreach> -->                          
+		  </form>
+		 </td>
+	   </tr>                  
      </tbody>
   </table>
 </div>

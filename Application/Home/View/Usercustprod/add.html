@@ -19,7 +19,7 @@
         <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>权限添加</font></span></td>
       </tr>
       <tr>
-        <td height="30"></td>
+        <td height="60"></td>
       </tr>      
      
       <tr>
@@ -28,7 +28,7 @@
 	        <table class="user_info">
 		      <tr>
 		        <td>                     
-		           公司名称：
+		            &nbsp;&nbsp;&nbsp;公 司 名 称 ：
 		        </td>
 		        <td> 
 		          <select name="cust_id">
@@ -40,10 +40,14 @@
 		      </tr>  		      
 		      <tr>
 		        <td>                     
-		           权限拥有者：
+		           权 限 拥 有 者：
 		        </td>
 		        <td>                     
-		          {$realname}
+		           <select name="user_id">
+			           <!-- <foreach name="user_list" item="user_list"> --> 
+			             <option value="{$user_list.id}">{$user_list.realname}</option>
+			           <!-- </foreach> --> 
+		           </select>
 		        </td>
 		      </tr>
 		      <tr>
@@ -54,23 +58,10 @@
 		           <input name="expired_time" onclick="WdatePicker()" class="Wdate" value="" />                                                          
                    <div lang="zh-cn" style="position: absolute; z-index: 100004; display: none; top: 28px; left: 10px;"><iframe hidefocus="true" width="9" height="7" frameborder="0" border="0" scrolling="no" src="about:blank" style="width: 186px; height: 198px;"></iframe></div>		                      
 		        </td>
-		      </tr>		     
-		      <tr>
-		        <td>                     
-		           权限：  		           
-		        </td>
-		        <td>                     
-		           <select name="prod_id"> 		                                      
-                           <option value="0">所有产品                             
-                           <!-- <foreach name="pro_name" item="list"> 所有产品-->    
-                            <option value="{$list.id}">{$list.name}   
-                           <!-- </foreach> -->                            
-                   </select>
-		        </td>
-		      </tr>		    		     		      
+		      </tr>		     		      		     		      
 		       <tr>
-		        <td colspan="2">                     
-		           <input type="submit" value="提交">
+		        <td colspan="2" align="center">                     
+		           <input type="submit" value="提交" class="button_submit">
 		         </td>		         
 		      </tr>
 		     </table>     
