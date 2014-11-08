@@ -30,10 +30,14 @@ class  UserController extends HomeBaseController{
 		/** 查询所有部门  */
 		$depart=new DepartModel();
 		$this->depa_list=$depart->depalist();
+		/* 查询所有用户组*/
+		$auth_group=new Auth_groupModel();
+		$this->groups=$auth_group->lists();
 		$this->display();
 	} 
 	/** 添加系统用户 */
 	public function ad_user(){
+		
 		$data['account']=$_POST['uname'];
 		$data['password']=$_POST['upwd'];
 		$data['realname']=$_POST['name'];
@@ -45,7 +49,15 @@ class  UserController extends HomeBaseController{
 		$user=new UserModel();
 		$flag=$user->add($data);
 		if($flag==0){	$this->error('添加失败！');
-		}else{	$this->success('添加成功！');}
+		}else{	
+			$map["group_id"]=$_POST['auth_group'];
+			$map["uid"]=$flag;
+			$auth_group_access=new Auth_group_accessModel();
+			$flag1=$auth_group_access->add($map);
+			if($flag1==0){
+				$this->error('添加失败');
+			}
+			$this->success('添加成功！');}
 	}
 	/** 查询某个用户的详细信息  */
 	public function user_info(){

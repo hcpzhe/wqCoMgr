@@ -68,6 +68,15 @@
                     <td><input type="text" name="birthday"></td>
                   </tr>
                   <tr>
+                    <td>用户组：</td>
+                    <td><select name="auth_group">
+                    <!-- <foreach name="groups" item="gp_list"> --> 
+                    		<option value="{$gp_list.id}">{$gp_list.title}</option>
+                    <!-- </foreach> --> 		
+                    	</select>
+					</td>
+                  </tr>
+                  <tr>
                     <td>&nbsp;</td>
                     <td><input type="submit" name="Submit" value=" 添加 " class="button_submit"></td>
                   </tr>
