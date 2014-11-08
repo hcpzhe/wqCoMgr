@@ -81,7 +81,7 @@ function del(){
 						<td>{$list.realname}</td>
 						<td>{$list.position}</td>
 						<td>{$list.dname}</td>
-						<td>{$list.startime}</td>
+						<td>{:date('Y/m/d H:i:s',$list['startime'])}</td>
 						<td>{$list.title}</td>
 						<td>
 							<!-- <if condition="$list.status eq 1"> -->

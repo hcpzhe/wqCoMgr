@@ -15,41 +15,65 @@
         <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>用户详情</font></span></td>
       </tr>
       <tr>
+        <td height="30"></td>
+      </tr>
+      <tr>
+        <td><font class="tishi">头部提示信息：时间格式：2000/01/01 00:00:00</font></td>
+      </tr>      
+      <tr>
         <td align="center">
-        <!-- 用户详情开始 -->                 
+        <!-- 用户详情开始 -->          
+        <form method="post" action="{:U('User/up')}">       
             <table border="0" style="margin-top:50px;" class="user_info">
                   <tr>
                     <td>用 户 名 ：</td>
-                    <td>{$info.uname}</td>
+                    <td><input type="text" value="{$info.uname}" name="uname"></td>
                   </tr>
                   <tr>
                     <td>真实姓名：</td>
-                    <td>{$info.name}</td>
+                    <td><input type="text" value="{$info.name}" name="name"></td>
                   </tr>
                   <tr>
                     <td>性 &nbsp;&nbsp;&nbsp; 别：</td>
                     <td>
-                       <!-- <if condition="$info.sex eq 1"> -->男	
-					   <!-- <else/> -->女<!-- </if> -->
+                       <!-- <if condition="$info.sex eq 1"> -->
+	                       <input name="sex" type="radio" value="1" checked/>男
+	                       <input name="sex" type="radio" value="2"/>女
+					   <!-- <else/> -->
+						   <input name="sex" type="radio" value="1" />男
+	                       <input name="sex" type="radio" value="2" checked/>女
+					   <!-- </if> -->
                     </td>
                   </tr>
                   <tr>
                     <td>所属部门：</td>
-                    <td>{$info.dpname} </td>
+                    <td><select name="dp">
+                    	 <option value="{$info.dpid}">{$info.dpname}</option>
+                    <!-- <foreach name="departs" item="dp_list"> --> 
+                    		<option value="{$dp_list.id}">{$dp_list.name}</option>
+                    <!-- </foreach> --> 		
+                    	</select>
                   </tr>
                   <tr>
                     <td>职 &nbsp;&nbsp;&nbsp; 位：</td>
-                    <td>{$info.position}</td>
+                    <td><input type="text" value="{$info.position} " name="position"></td>
                   </tr>
                   <tr>
                     <td>入职时间：</td>
-                    <td>{$info.startime}</td>
+                    <td><input type="text" value="{:date('Y/m/d H:i:s',$info['startime'])}" name="startime"></td>
                   </tr>
                   <tr>
                     <td>出生日期：</td>
-                    <td>{$info.birthday}</td>
+                    <td><input type="text" value="{:date('Y/m/d H:i:s',$info['birthday'])}" name="birthday"></td>
                   </tr>
-            </table>                              
+                  <tr>
+                    <td>出生日期：</td>
+                    <td><input type="text" value="{$info.eag_title}" name="birthday"></td>
+                  </tr>
+            </table>  
+            <input type="hidden" value="{$info.id}" name="id">
+            <input type="submit" value="修改" class="button_submit">　　<a href="{:U('User/search_list')}" class="button_submit">返回</a>
+       </form>                                 
     <!-- 用户详情结束 -->            
         </td>
       </tr>

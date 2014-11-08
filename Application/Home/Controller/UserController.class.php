@@ -38,8 +38,8 @@ class  UserController extends HomeBaseController{
 		$data['sex']=$_POST['sex'];
 		$data['depart_id']=$_POST['dp'];
 		$data['position']=$_POST['position'];  //职位
-		$data['startime']=$_POST['startime'];  //入职时间
-		$data['birthday']=$_POST['birthday'];
+		$data['startime']=strtotime($_POST['startime']);  //入职时间
+		$data['birthday']=strtotime($_POST['birthday']);
 		$user=new UserModel();
 		$flag=$user->add($data);
 		if($flag==0){	$this->error('添加失败！');
@@ -51,6 +51,11 @@ class  UserController extends HomeBaseController{
 		$id=$_GET['id'];
 		$user=new UserModel();
 		$this->info=$user->userinfo($id);
+		/*获取所有部门*/
+		$dp=new DepartModel();
+		$this->departs=$dp->alldepart();
+		/*查询用户所属的用户组*/
+
 		$this->display();
 	}
 	/** 删除某个用户*/
@@ -74,4 +79,20 @@ class  UserController extends HomeBaseController{
 		if($flag==1){ $this->success('成功');}
 		else{ $this->error('失败');}
 	}	
+	/** 修改系统用户信息 */
+	public function up(){
+		$id=$_POST['id'];
+		$data['account']=$_POST['uname'];
+// 		$data['password']=$_POST['upwd'];
+		$data['realname']=$_POST['name'];
+		$data['sex']=$_POST['sex'];
+		$data['depart_id']=$_POST['dp'];
+		$data['position']=$_POST['position'];  //职位
+		$data['startime']=strtotime($_POST['startime']);  //入职时间
+		$data['birthday']=strtotime($_POST['birthday']);
+		$user=new UserModel();
+		$flag=$user->where("id=$id")->save($data);
+		if($flag==0){	$this->error('修改失败！');
+		}else{	$this->success('修改成功！');}
+	}
 }
