@@ -29,7 +29,7 @@ class Develop_orderModel extends Model{
 		$data['dep_list']=$this->table('erp_develop_order as edo,erp_order as eo,erp_customer as ec,erp_user as eu')
 		->where($where)
 		->field("eo.id as id,eo.total_fees as money,ec.name as cname,ec.contacts as contacts,eu.realname as rname,ec.phone as phone,edo.remark as remark,edo.check as checks")
-		->limit($page->firstRow.','.$page->listRows)->select();
+		->limit($page->firstRow.','.$page->listRows)->order('eo.id desc')->select();
 // 				echo $this->_sql();
 // 				echo "<pre>";
 // 				print_r($data['order_list']);

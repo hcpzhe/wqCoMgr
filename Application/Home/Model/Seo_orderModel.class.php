@@ -29,7 +29,7 @@ class Seo_orderModel extends Model{
 		$data['dep_list']=$this->table('erp_seo_order as eso,erp_order as eo,erp_customer as ec,erp_user as eu')
 		->where($where)
 		->field("eo.id as id,eo.total_fees as money,ec.name as cname,ec.contacts as contacts,eu.realname as rname,ec.phone as phone,eso.remark as remark,eso.check as checks")
-		->limit($page->firstRow.','.$page->listRows)->select();
+		->limit($page->firstRow.','.$page->listRows)->order('eo.id desc')->select();
 		return $data;
 	}	
 	/*查询指定订单的详细信息*/

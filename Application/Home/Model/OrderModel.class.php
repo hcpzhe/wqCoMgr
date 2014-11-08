@@ -18,7 +18,7 @@ class OrderModel extends Model{
 		$data['order_list']=$this->table('erp_order as oe,erp_user as ur,erp_customer as cr,erp_product as pt')
 					->where($where)
 					->field("oe.id as id,ur.realname as uname,cr.`name` as cname,pt.`name` as pname,pt.`id` as pid,oe.total_fees,oe.signed_time as signed_time,oe.`check`")
-					->limit($page->firstRow.','.$page->listRows)->select();//	echo $this->_sql();exit();
+					->limit($page->firstRow.','.$page->listRows)->order('oe.id desc')->select();//	echo $this->_sql();exit();
 		return $data;
 	}
 	/*c查询指定订单的详细内容*/	
