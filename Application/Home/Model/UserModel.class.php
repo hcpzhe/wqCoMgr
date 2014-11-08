@@ -1,6 +1,8 @@
 <?php
 namespace Home\Model;
 use Think\Model;
+use Home\Model\DepartModel;
+
 class UserModel extends Model {
 	
 	/**
@@ -63,9 +65,8 @@ class UserModel extends Model {
 				'uid'             => $user['id'],
 				'realname'        => $user['realname'],
 				'last_login_time' => $user['last_login_time'],
-				'last_login_ip'   => $user['last_login_ip']
+				'last_login_ip'   => $user['last_login_ip'],		
 		);
-	
 		session('user_auth', $auth);
 		session('user_auth_sign', data_auth_sign($auth));
 	
@@ -118,4 +119,43 @@ class UserModel extends Model {
 	public function alluser(){
 		return $this->where("status=1")->select();
 	}
+	/**登录人拥有的权限 id**/
+	public function user_auto(){
+// 		$arr = session('user_auth');
+ 		$uid = UID; 		
+ 		$map = array('user_id'=>$uid);
+ 		$model = M('User_depart_mgr');
+ 		$depidarr = $model->where($map)->getField('depart_id',true);   //取出当前用户所管理的部门
+ 		 
+ 		//取出当前用户所管理所有部门 （递归取所有子部门）
+ 		$alldepart = $depidarr;
+ 		foreach ($depidarr as $rowdepid) {
+ 			$dep = new DepartModel();
+ 			$deptids = $dep->allDept($rowdepid);
+ 			$alldepart = array_merge($alldepart,$deptids); 			
+ 		}
+ 		 		
+ 		//获取部门下所有的员工
+ 		$user_M = new Model('User');
+ 		$where = array();
+ 		$where['depart_id'] = array('in',$alldepart);
+ 		$alluser=$user_M->where($where)->getField('id',true);
+ 				
+ 		// 获取客户权限未过期的所有客户
+ 		$Ucp=M('User_cust_prod');
+ 		$alluser[] = UID;
+ 		$ucpwhere['user_id'] = array('in',$alluser);
+ 		$time=time();  		
+ 		$cust_id=$Ucp->where($ucpwhere)->getField("cust_id",true);
+ 		
+ 		$here['expired_time'] =array('eq',0);
+ 		$here['_logic']='OR';
+ 		$here['expired_time'] =array('gt',$time);
+ 		$custid=$Ucp->where($here)->getField("cust_id",true);
+ 		return $cust_id;
+ 		//print_r($custid);exit();
+ 		
+				
+		
+	}	
 }

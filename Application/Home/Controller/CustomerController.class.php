@@ -5,6 +5,8 @@ use Common\Controller\HomeBaseController;
 use Home\Model\CustomerModel;
 use Think\Model;
 use Home\Model\Order_domainModel;
+use Home\Model\UserModel;
+use Home\Model\DepartModel;
 
 header("Content-Type:text/html;charset=utf-8");
 class CustomerController extends HomeBaseController {
@@ -31,6 +33,11 @@ class CustomerController extends HomeBaseController {
 	public function lists() {
 // 		$arr = session('user_auth');
 // 		dump($arr);exit();
+		//用户拥有的客户权限
+// 		$user = new UserModel();  
+// 		$arr=$user->user_auto();
+// 		print_r($arr);exit();
+		
 		$key = (int)I('param.key'); //选择搜索条件
 		$name = I('param.name');    //输入的搜索信息
 		$visit = new CustomerModel();
