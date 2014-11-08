@@ -37,7 +37,7 @@ class  UserController extends HomeBaseController{
 	} 
 	/** 添加系统用户 */
 	public function ad_user(){
-		
+		/*用户表添加一条数据*/
 		$data['account']=$_POST['uname'];
 		$data['password']=$_POST['upwd'];
 		$data['realname']=$_POST['name'];
@@ -50,6 +50,7 @@ class  UserController extends HomeBaseController{
 		$flag=$user->add($data);
 		if($flag==0){	$this->error('添加失败！');
 		}else{	
+			/**用户 用户组关系表添加一条数据*/
 			$map["group_id"]=$_POST['auth_group'];
 			$map["uid"]=$flag;
 			$auth_group_access=new Auth_group_accessModel();
