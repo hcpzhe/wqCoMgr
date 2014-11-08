@@ -67,8 +67,13 @@
                     <td><input type="text" value="{:date('Y/m/d H:i:s',$info['birthday'])}" name="birthday"></td>
                   </tr>
                   <tr>
-                    <td>出生日期：</td>
-                    <td><input type="text" value="{$info.eag_title}" name="birthday"></td>
+                    <td>所属用户组：</td>
+                    <td><select name="auth_group">
+                    	 <option value="{$info.group_id}">{$info.group_title}</option>
+                    <!-- <foreach name="groups" item="gp_list"> --> 
+                    		<option value="{$gp_list.id}">{$gp_list.title}</option>
+                    <!-- </foreach> --> 		
+                    	</select>
                   </tr>
             </table>  
             <input type="hidden" value="{$info.id}" name="id">

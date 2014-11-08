@@ -17,7 +17,7 @@ class Order_payModel extends Model{
 		$data['op_list'] =$this->table('erp_order_pay as op,erp_order as oe,erp_customer as cr,erp_user as ur')
 		->where($where)
 		->field("op.id as id,cr.name as cname,op.money as money,op.class as class,op.`check` as `check`,op.pay_time as pay_time,op.check_time as check_time,ur.realname as uname")
-		->limit($page->firstRow.','.$page->listRows)->select();
+		->limit($page->firstRow.','.$page->listRows)->order('op.id desc')->select();
 		return $data;
 	}
 	/*订单付款详情*/

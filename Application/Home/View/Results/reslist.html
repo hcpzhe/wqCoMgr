@@ -55,7 +55,7 @@
 						<td>{$list.uname}</td>
 						<td>{$list.pname}</td>
 						<td>{$list.total_fees}元</td>
-						<td>{$list.signed_time}</td>
+						<td>{:date('Y/m/d H:i:s',$list['signed_time'])}</td>
 					</tr>
 				<!-- </foreach> -->
 					<tr><td colspan="5" align="center" height="40">{$data[show]}</td></tr>

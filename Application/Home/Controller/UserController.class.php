@@ -3,6 +3,8 @@ namespace Home\Controller;
 use Common\Controller\HomeBaseController;
 use Home\Model\UserModel;
 use Home\Model\DepartModel;
+use Home\Model\Auth_groupModel;
+use Home\Model\Auth_group_accessModel;
 class  UserController extends HomeBaseController{
 	/*按条件查询系统用户*/
 	public  function search_list(){
@@ -54,8 +56,9 @@ class  UserController extends HomeBaseController{
 		/*获取所有部门*/
 		$dp=new DepartModel();
 		$this->departs=$dp->alldepart();
-		/*查询用户所属的用户组*/
-
+		/*查询所有用户组*/
+		$auth_group=new Auth_groupModel();
+		$this->groups=$auth_group->lists();
 		$this->display();
 	}
 	/** 删除某个用户*/
@@ -82,6 +85,7 @@ class  UserController extends HomeBaseController{
 	/** 修改系统用户信息 */
 	public function up(){
 		$id=$_POST['id'];
+		$group_id=$_POST['auth_group'];
 		$data['account']=$_POST['uname'];
 // 		$data['password']=$_POST['upwd'];
 		$data['realname']=$_POST['name'];
@@ -93,6 +97,14 @@ class  UserController extends HomeBaseController{
 		$user=new UserModel();
 		$flag=$user->where("id=$id")->save($data);
 		if($flag==0){	$this->error('修改失败！');
-		}else{	$this->success('修改成功！');}
+		}else{	
+			$auth_group_access=new Auth_group_accessModel();
+			$flag1=$auth_group_access->up($id,$group_id);
+			if($flag1==0){
+				$this->error('修改失败');
+			}else{
+				$this->success('修改成功！');
+			}
+		}
 	}
 }
