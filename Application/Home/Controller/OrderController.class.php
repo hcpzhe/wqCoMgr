@@ -120,12 +120,12 @@ class OrderController extends HomeBaseController{
 		$id = (int)I('id');
 		if(!empty($id)){
 			$customer=new CustomerModel();			
-			$check = $customer->where('id='.$id)->getField('check');
-			if ($check ==1){
+			//$check = $customer->where('id='.$id)->getField('check');
+			//if ($check ==1){
 				$this->cus=$customer->one($id);
-			}else {
-				$this->redirect('Customer/lists',array('id'=>$cust_id),1,'公司信息还未经过审核,审核通过后才能添加订单，请审核！');
-			}
+			//}else {
+				//$this->redirect('Customer/lists',array('id'=>$cust_id),1,'公司信息还未经过审核,审核通过后才能添加订单，请审核！');
+			//}
 		}				
 		/*查询产品分类*/
 		$product=new ProductModel();

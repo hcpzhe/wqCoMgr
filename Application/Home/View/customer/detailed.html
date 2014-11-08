@@ -67,19 +67,6 @@
                     <td>添加时间 </td>
                     <td>{:date('Y/m/d H:i:s',$list['add_time'])}</td>
                   </tr>
-                   <tr>
-                    <td> 状 &nbsp;&nbsp;&nbsp;态 </td>
-                    <td>
-                        <!-- <if condition="$list['check'] eq -1 "> -->拒绝
-                        <!-- <elseif condition="$list['check'] eq 0 " /> --><a href="{:U('Customer/check?id='.$list['id'])}">待审</a>
-                        <!-- <else /> -->通过<!-- </if> -->
-                    </td>
-                    <td>审核时间</td>
-                    <td>
-                      <!-- <if condition="$list['check'] eq 0 "> --><font color="red">该信息还未审核</font>
-                      <!-- <else /> -->{:date('Y/m/d H:i:s',$list['check_time'])}<!-- </if> -->
-                    </td>
-                  </tr> 
                   <tr>
                     <td>备 &nbsp;&nbsp;&nbsp;注</td>
                     <td colspan="3">{$list['remark']}</td>

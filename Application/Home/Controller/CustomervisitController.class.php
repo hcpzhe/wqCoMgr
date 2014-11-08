@@ -62,13 +62,13 @@ class CustomervisitController extends HomeBaseController {
 		}else {		
 		    $check = $cust->where('id='.$cust_id)->getField('check');
 		    //公司信息审核通过后 才能添加拜访记录
-			if ($check == 0 || $check == -1){
-				$this->redirect('Customer/lists',array('id'=>$cust_id),1,'公司信息还未经过审核,审核通过后才能添加拜访记录，请审核！');
-			}else {
+// 			if ($check == 0 || $check == -1){
+// 				$this->redirect('Customer/lists',array('id'=>$cust_id),1,'公司信息还未经过审核,审核通过后才能添加拜访记录，请审核！');
+// 			}else {
 			$cust_name = $cust->where('id='.$cust_id)->getField('name');
 			$this->assign('cust_id',$cust_id);
 			$this->assign('cust_name',$cust_name);		
-		    }
+		   // }
 		}
 		$User = M("User");
 		$user_list = $User->where('status=1')->select();
