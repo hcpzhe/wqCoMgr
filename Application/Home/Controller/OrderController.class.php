@@ -72,21 +72,28 @@ class OrderController extends HomeBaseController{
 	
 /**   订单详情   */
 	public function order_info(){
-		$id=$_GET['id'];
-		/** 订单信息 */
-		$order=new OrderModel();
-		$this->orderinfo=$order->orderinfo($id);
-		/** 订单续费记录 */
-		$order_ren=new Order_renewalModel();
-		$this->ren_list=$order_ren->o_list($id);
-		/** 订单付款记录*/
-		$order_pay=new Order_payModel();
-		$this->pay_list=$order_pay->o_list($id);
-		/** 订单所绑定域名 */
-		$order_domain=new Order_domainModel();
-		$this->doma=$order_domain->s_all($id);
+		$id = (int)I('cust_id');   //被选中要进行操作的id
+		if (!IS_ROOT){ //非超管
+			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			if(!in_array($id,$cust_id)){
+				$this->error('您没有该公司的权限，不能进行相关操作！');
+		    }
+		}
+			$id=$_GET['id'];
+			/** 订单信息 */
+			$order=new OrderModel();
+			$this->orderinfo=$order->orderinfo($id);
+			/** 订单续费记录 */
+			$order_ren=new Order_renewalModel();
+			$this->ren_list=$order_ren->o_list($id);
+			/** 订单付款记录*/
+			$order_pay=new Order_payModel();
+			$this->pay_list=$order_pay->o_list($id);
+			/** 订单所绑定域名 */
+			$order_domain=new Order_domainModel();
+			$this->doma=$order_domain->s_all($id);		
+		    $this->display();
 		
-		$this->display();
 	}
 /**  订单修改表单 */
 	public function ord_u_form(){
@@ -117,14 +124,17 @@ class OrderController extends HomeBaseController{
 /** 跳转到添加订单页面*/
 	public function add_order_form(){/** 判断是否传出客户id */
 		/** 接收客户id */
-		$id = (int)I('id');   //被选中要进行操作的id
-		$cust_id = session('cust_id');   //登录人拥有的客户权限id
-		if(!in_array($id,$cust_id)){
-			$this->error('您没有该公司的权限，不能进行相关操作！');
-		}else{
+		$id = (int)I('id');	//被选中要进行操作的id
+		if (!IS_ROOT){ //非超管
 			if(!empty($id)){
+				$cust_id = session('cust_id');   //登录人拥有的客户权限id
+				if(!in_array($id,$cust_id)){
+					$this->error('您没有该公司的权限，不能进行相关操作！');
+				}
+			}
 				$customer=new CustomerModel();			
-					$this->cus=$customer->one($id);
+				$this->cus=$customer->one($id);
+				
 			}				
 			/*查询产品分类*/
 			$product=new ProductModel();
@@ -136,7 +146,6 @@ class OrderController extends HomeBaseController{
 			$customer=new CustomerModel();
 			$this->cus_list=$customer->cus_list();
 			$this->display();
-		}
 	}		
 /** 添加订单   订单表添加一条记录，订单付款表添加一条预付款记录*/
 	public function add_order(){
@@ -169,6 +178,13 @@ class OrderController extends HomeBaseController{
  * 如果为优化订单，erp_seo_order增加一条记录
  * 如果两者都不是不进行其他操作*/
 	public function check_order(){
+		$cid = (int)I('cust_id');   //被选中要进行操作的cust_id
+		if (!IS_ROOT){ //非超管
+			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			if(!in_array($cid,$cust_id)){
+				$this->error('您没有该公司的权限，不能进行相关操作！');
+			}
+		}
 		/*改变订单审核状态*/
 		$id=$_GET['id'];
 		/*改变审核状态操作*/
@@ -177,50 +193,24 @@ class OrderController extends HomeBaseController{
 		/*判断操作结果*/
 		if($flag11==0){ $this->error('审核失败');}
 		else { $this->success('审核成功');}
-		
-		
-// 		$pid=$_GET['pid'];
-		
-// 		/*判断是否为网站开发订单*/
-// 		if($pid==1 || $pid==2 || $pid==3){
-// 			/*网站开发模型*/
-// 			$dor=new Develop_orderModel();
-// 			$flag1=$dor->add_do($id);
-// 			/*如果是否重复审核审核失败*/
-// 			if($flag1==0){ $this->error('审核重复');}
-// 			else {/*否则审核继续*/ 
-				
-// 			}
-// 		}elseif ($pid==6){/*判断是否为优化开发*/
-// 			/*优化模型*/
-// 			$sor=new Seo_orderModel();
-// 			$flag2=$sor->add_so($id);
-// 			/*如果审核重复则审核失败*/
-// 			if($flag2==0){ $this->error('审核重复');}
-// 			else {/*审核继续*/
-// 				/*之心审核操作*/
-// 				$flag22=$order->where("id=$id")->setField("check","1");
-// 				/*判断审核结果*/
-// 				if($flag22==0){ $this->error('审核失败');}
-// 				else { $this->success('审核成功');}
-// 			}
-// 		}else{/*其他类型产品*/
-// 			$flag3=$order->where("id=$id")->setField("check","1");
-// 			if($flag3==0){ $this->error('审核失败');}
-// 			else { $this->success('审核成功');}
-// 		}
 	}	
 	/** 推送订单至下一个部门      表单 */
 	public function push_form($id){
-		/** 查询订单信息  判断该订单是否通过审核 */
-		$order=new OrderModel();
-		$flag=$order->field('check')->where("id=$id")->find();
-		if($flag['check']==0){ $this->error('订单未审核');}
-		/** 查询所有部门 */
-		$depart=new DepartModel();
-		$this->id=$id;
-		$this->dp=$depart->alldepart();
-		$this->display();
+		$id = (int)I('cust_id');   //被选中要进行操作的cust_id
+		$cust_id = session('cust_id');   //登录人拥有的客户权限id
+		if(!in_array($id,$cust_id)){
+			$this->error('您没有该公司的权限，不能进行相关操作！');
+		}else{
+			/** 查询订单信息  判断该订单是否通过审核 */
+			$order=new OrderModel();
+			$flag=$order->field('check')->where("id=$id")->find();
+			if($flag['check']==0){ $this->error('订单未审核');}
+			/** 查询所有部门 */
+			$depart=new DepartModel();
+			$this->id=$id;
+			$this->dp=$depart->alldepart();
+			$this->display();
+		}
 	}
 	/** 推送至下一个部门 */
 	public function push($id){

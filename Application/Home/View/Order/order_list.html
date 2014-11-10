@@ -9,19 +9,23 @@
 <script type="text/javascript">
 function info(){
 	$("input[name='che[]']").each(function(){
-		if($(this).attr("checked")=="checked"){								
-			var id=$(this).val();		
-            var url="__URL__-order_info-id-"+id;
-            location.href=url;
+		if($(this).attr("checked")=="checked"){	
+			location.href=$(this).next(".cust_id").attr('data-url');
+			}
+		});
+}
+//添加订单   跳转 
+function Add_order(){
+	$("input[name='che[]']").each(function(){
+		if($(this).attr("checked")=="checked"){	
+			location.href=$(this).nextAll(".adds").attr('data-url');
 			}
 		});
 }
 function push(){
 	$("input[name='che[]']").each(function(){
-		if($(this).attr("checked")=="checked"){								
-			var id=$(this).val();		
-            var url="__URL__-push_form-id-"+id;
-            location.href=url;
+		if($(this).attr("checked")=="checked"){	
+			location.href=$(this).nextAll(".push").attr('data-url');
 			}
 		});
 }
@@ -57,7 +61,7 @@ function push(){
 						关键字  <input type="text" name="key" class="search_bg">
 						<input type="submit" value="搜索" class="button_submit">
 						<a href="javascript:void(0)" class="button_submit" onclick="info();">详情</a>	
-						<a href="{:U('Order/add_order_form')}" class="button_submit">添加订单</a>
+						<a href="javascript:void(0)" class="button_submit" onclick="Add_order();">添加订单</a>
 						<a href="javascript:void(0)" class="button_submit" onclick="push();">推送</a> 
 			       </form> 
 			   </div>            
@@ -81,6 +85,9 @@ function push(){
 					<tr class="list_tr">
 						<td>
 						   <input type="checkbox" name="che[]" value="{$list.id}">
+						   <input type="hidden" name="cust_id" class="cust_id" value="{$list.cust_id}" data-url="{:U('Order/order_info?id='.$list['id'].'&cust_id='.$list['cust_id'])}">
+						   <input type="hidden" name="cust_id" class="adds" value="{$list.cust_id}" data-url="{:U('Order/add_order_form?id='.$list['cust_id'])}">
+						   <input type="hidden" name="cust_id" class="push" value="{$list.cust_id}" data-url="{:U('Order/push_form?id='.$list['id'].'&cust_id='.$list['cust_id'])}">
 						</td>
 						<td>{$list.uname}</td>
 						<td>{$list.cname}</td>
@@ -91,7 +98,7 @@ function push(){
 						<td>
 							<!-- <if condition="$list.check eq 1"> -->通过
 							<!-- <elseif condition="$list.check eq 0"/> -->
-							<a href="{:U('Order/check_order?id='.$list['id'].'&& pid='.$list['pid'])}">待审</a>
+							<a href="{:U('Order/check_order?id='.$list['id'].'&& pid='.$list['pid'].'&& cust_id='.$list['cust_id'])}">待审</a>
 							<!-- <else/> -->拒绝<!-- </if> -->
 						</td>
 					</tr>

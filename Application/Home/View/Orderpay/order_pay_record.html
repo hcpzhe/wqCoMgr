@@ -69,7 +69,8 @@ function ad(){
 					<tr><th>请选择</th><th>客户</th><th>续费金额</th><th>类型</th><th>付款时间</th><th>审核时间</th><th>审核</th><th>提交人</th></tr>		
 				<!-- <foreach name="data['op_list']" item="list"> -->
 					<tr class="list_tr">
-						<td><input type="checkbox" name="che[]" value="{$list.id}"></td>
+						<td><input type="checkbox" name="che[]" value="{$list.id}">					
+						</td>
 						<td>{$list.cname}</td>
 						<td>{$list.money}元</td>
 						<td><!-- <if condition="$list.class eq 1"> -->预付款<!-- <else/> -->余款<!-- </if> --></td>
