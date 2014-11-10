@@ -117,26 +117,26 @@ class OrderController extends HomeBaseController{
 /** 跳转到添加订单页面*/
 	public function add_order_form(){/** 判断是否传出客户id */
 		/** 接收客户id */
-		$id = (int)I('id');
-		if(!empty($id)){
-			$customer=new CustomerModel();			
-			//$check = $customer->where('id='.$id)->getField('check');
-			//if ($check ==1){
-				$this->cus=$customer->one($id);
-			//}else {
-				//$this->redirect('Customer/lists',array('id'=>$cust_id),1,'公司信息还未经过审核,审核通过后才能添加订单，请审核！');
-			//}
-		}				
-		/*查询产品分类*/
-		$product=new ProductModel();
-		$this->p_list=$product->p_list();
-		/** 查询系统 用户 */
-		$user=new UserModel();
-		$this->user_list=$user->alluser();
-		/*查询所有客户*/
-		$customer=new CustomerModel();
-		$this->cus_list=$customer->cus_list();
-		$this->display();
+		$id = (int)I('id');   //被选中要进行操作的id
+		$cust_id = session('cust_id');   //登录人拥有的客户权限id
+		if(!in_array($id,$cust_id)){
+			$this->error('您没有该公司的权限，不能进行相关操作！');
+		}else{
+			if(!empty($id)){
+				$customer=new CustomerModel();			
+					$this->cus=$customer->one($id);
+			}				
+			/*查询产品分类*/
+			$product=new ProductModel();
+			$this->p_list=$product->p_list();
+			/** 查询系统 用户 */
+			$user=new UserModel();
+			$this->user_list=$user->alluser();
+			/*查询所有客户*/
+			$customer=new CustomerModel();
+			$this->cus_list=$customer->cus_list();
+			$this->display();
+		}
 	}		
 /** 添加订单   订单表添加一条记录，订单付款表添加一条预付款记录*/
 	public function add_order(){

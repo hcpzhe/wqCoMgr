@@ -31,13 +31,8 @@ class CustomerController extends HomeBaseController {
 		
 	/**客户列表     公司名称搜索**/
 	public function lists() {
-// 		$arr = session('user_auth');
+// 		$arr = session('cust_id');
 // 		dump($arr);exit();
-		//用户拥有的客户权限
-// 		$user = new UserModel();  
-// 		$arr=$user->user_auto();
-// 		print_r($arr);exit();
-		
 		$key = (int)I('param.key'); //选择搜索条件
 		$name = I('param.name');    //输入的搜索信息
 		$visit = new CustomerModel();
@@ -76,11 +71,16 @@ class CustomerController extends HomeBaseController {
 	}
 	/**公司信息修改**/
 	public function edit(){
+		$cust_id = session('cust_id');   //登录人拥有的客户权限id
+		$id = (int)I('id');   //被选中要进行操作的id		
+		if(!in_array($id,$cust_id)){
+		     $this->error('您没有该公司的权限，不能进行相关操作！');
+		}else{
 		$cust = M('Customer');
-		$id = (int)I('id');
 		$list = $cust->where('id='.$id)->find();
 		$this->assign('list',$list);
         $this->display();
+		}
 	}
 	/**公司信息修改提交  接口**/
 	public function update(){
@@ -99,32 +99,35 @@ class CustomerController extends HomeBaseController {
 		$this->success('更新成功',U('Customer/lists'));
 	}
 	/*查看公司详情*/
-	public function detailed(){		
-		$id = (int)I('id');     
-        $cust = M('Customer'); //获取客户详细信息
-		$list = $cust->table('erp_customer as cr,erp_user as ur')
-		->where('cr.user_id=ur.id AND cr.id='.$id)
-		->getField("cr.id as id,cr.`name` as `name`,cr.contacts as contacts,cr.phone as phone,cr.fax as fax,cr.address as address,cr.add_time as add_time,cr.`check` as `check`,cr.check_time as check_time,cr.remark as remark,ur.realname as realname");
-		$this->assign('list',$list);
-
-		$order = M('Order');    //获取订单信息		
-		$order_list = $order->table('erp_customer as cr,erp_order as ord,erp_product as pt,erp_user as ur')
-		->where("cr.id=ord.cust_id AND pt.id=ord.prod_id AND ord.user_id=ur.id AND cr.id=$id")
-		->getField("ord.id as id,ur.realname as uname,pt.name as pname,ord.total_fees as total_fees,ord.expired_time as expired_time,ord.status as status,ord.remark as remark");
-		$this->assign('order_list',$order_list);
-					
-		$domain = M('Domain');    //获取域名信息
-		$domain_list = $domain->where('cust_id='.$id)->select();
-		$this->assign('domain_list',$domain_list);
+	public function detailed(){	
+			$id = (int)I('id');   //被选中要进行操作的id
+			$cust = M('Customer'); //获取客户详细信息
+			$cust_id = session('cust_id');   //登录人拥有的客户权限id			
+			if(!in_array($id,$cust_id)){
+				$this->error('您没有该公司的权限，不能进行相关操作！');
+			}else{					       
+				$list = $cust->table('erp_customer as cr,erp_user as ur')
+				->where('cr.user_id=ur.id AND cr.id='.$id)
+				->getField("cr.id as id,cr.`name` as `name`,cr.contacts as contacts,cr.phone as phone,cr.fax as fax,cr.address as address,cr.add_time as add_time,cr.`check` as `check`,cr.check_time as check_time,cr.remark as remark,ur.realname as realname");
+				$this->assign('list',$list);
 		
-		
- 		//判断是否有拜访记录
-		$cust_vi = M('Customer_visit');
-		$res = $cust_vi->table('erp_customer as cr,erp_customer_visit as cv')
-		->where("cr.id=cv.cust_id AND cr.id=$id")
-		->count();
-		$this->assign('res',$res);
-
+				$order = M('Order');    //获取订单信息		
+				$order_list = $order->table('erp_customer as cr,erp_order as ord,erp_product as pt,erp_user as ur')
+				->where("cr.id=ord.cust_id AND pt.id=ord.prod_id AND ord.user_id=ur.id AND cr.id=$id")
+				->getField("ord.id as id,ur.realname as uname,pt.name as pname,ord.total_fees as total_fees,ord.expired_time as expired_time,ord.status as status,ord.remark as remark");
+				$this->assign('order_list',$order_list);
+							
+				$domain = M('Domain');    //获取域名信息
+				$domain_list = $domain->where('cust_id='.$id)->select();
+				$this->assign('domain_list',$domain_list);
+						
+		 		//判断是否有拜访记录
+				$cust_vi = M('Customer_visit');
+				$res = $cust_vi->table('erp_customer as cr,erp_customer_visit as cv')
+				->where("cr.id=cv.cust_id AND cr.id=$id")
+				->count();
+				$this->assign('res',$res);
+			}		
 		$this->display();
 	}
 	

@@ -37,14 +37,14 @@ class CustomervisitController extends HomeBaseController {
 		}else {
 		$where=$where." AND ( cr.phone like '%".$name."%')";  //按照联系电话查询
 		}
-				$count=$visit->table('erp_customer_visit as cu,erp_user as ur,erp_customer as cr')
+		$count=$visit->table('erp_customer_visit as cu,erp_user as ur,erp_customer as cr')
 		->where($where)
 		->count();       // 查询满足要求的总记录数
-				$Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(10)
-				$show       = $Page->show();// 分页显示输出
-				$visit_list = $visit->table('erp_customer_visit as cu,erp_user as ur,erp_customer as cr')
+		$Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(10)
+		$show       = $Page->show();// 分页显示输出
+		$visit_list = $visit->table('erp_customer_visit as cu,erp_user as ur,erp_customer as cr')
 		->where($where)
-		->field("cu.id as id,ur.realname as uname,cr.`name` as cname,cr.contacts as contacts,cr.phone as phone,cu.visit_time,cu.`content`")
+		->field("cu.id as id,ur.realname as uname,cr.id as cust_id,cr.`name` as cname,cr.contacts as contacts,cr.phone as phone,cu.visit_time,cu.`content`")
 		->limit($Page->firstRow.','.$Page->listRows)->order('visit_time desc')->select();
 		
 				$this->assign('visit_lisit',$visit_list);
@@ -53,27 +53,28 @@ class CustomervisitController extends HomeBaseController {
 	}	
 	/**拜访记录添加**/
 	public function addvisit(){
-		$cust_id = (int)I('cust_id');
+		$id = (int)I('cust_id');   //被选中要进行操作的id
 		$cust = M('customer');
-		if(empty($cust_id)){   //未被选中指定公司  添加拜访记录
+		if(empty($id)){   //未被选中指定公司  添加拜访记录
 			$newdata['check'] = 1; //公司信息审核通过后 才能添加拜访记录
 			$cust_list=$cust->where($newdata)->select();
 			$this->assign('cust_list',$cust_list);
-		}else {		
-		    $check = $cust->where('id='.$cust_id)->getField('check');
-		    //公司信息审核通过后 才能添加拜访记录
-// 			if ($check == 0 || $check == -1){
-// 				$this->redirect('Customer/lists',array('id'=>$cust_id),1,'公司信息还未经过审核,审核通过后才能添加拜访记录，请审核！');
-// 			}else {
-			$cust_name = $cust->where('id='.$cust_id)->getField('name');
-			$this->assign('cust_id',$cust_id);
-			$this->assign('cust_name',$cust_name);		
-		   // }
+		}else {	
+			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			if(!in_array($id,$cust_id)){
+				$this->error('您没有该公司的权限，不能进行相关操作！');
+			}else{	
+		    $check = $cust->where('id='.$id)->getField('check');
+			$cust_name = $cust->where('id='.$id)->getField('name');
+			$this->assign('cust_id',$id);
+			$this->assign('cust_name',$cust_name);	
+			}		
 		}
 		$User = M("User");
 		$user_list = $User->where('status=1')->select();
 		$this->assign('user_list',$user_list);  //拜访员工
-		$this->display();		
+		$this->display();
+			
 	}
 	
 	/**拜访记录添加  提交接口**/
@@ -90,6 +91,11 @@ class CustomervisitController extends HomeBaseController {
 	
 	/**查看拜访记录的详细信息**/
 	public function visit_detailed(){
+		$cust_id = session('cust_id');   //登录人拥有的客户权限id
+		$id = (int)I('cust_id');   //被选中要进行操作的id
+		if(!in_array($id,$cust_id)){
+			$this->error('您没有该公司的权限，不能进行相关操作！');
+		}else{
 		$visit_id = (int)I('id');
 		$model = new Customer_visitModel();  //拜访的详细信息
 		$data = $model->table('erp_customer_visit as cu,erp_user as ur,erp_customer as cr')
@@ -108,22 +114,27 @@ class CustomervisitController extends HomeBaseController {
 		->select();
 		$this->assign('visit_prod_list',$visit_prod_list);
 		$this->display();
-
+		}
 	}
 	/**添加沟通记录**/
 	public function add_visit_prod(){
-		$product = M('product');
-		$product_list = $product->select();
-		$this->assign('product_list',$product_list);
-
-		$model = M('customer_visit');
-		$visit_id = (int)I('visit_id');
-		$visit_list = $model->table('erp_customer_visit as cv,erp_customer as cu,erp_user as us')
-		->where("cv.cust_id=cu.id AND us.id=cv.user_id AND cv.id=$visit_id")
-		->getField("cv.id as visit_id,us.realname as uname,cu.name as cname,cv.visit_time as visit_time");
-		$this->assign('newdata',$visit_list);   //客户信息
-				
-		$this->display();
+		$cust_id = session('cust_id');   //登录人拥有的客户权限id
+		$id = (int)I('cust_id');   //被选中要进行操作的id
+		if(!in_array($id,$cust_id)){
+			$this->error('您没有该公司的权限，不能进行相关操作！');
+		}else{
+			$product = M('product');
+			$product_list = $product->select();
+			$this->assign('product_list',$product_list);
+	
+			$model = M('customer_visit');
+			$visit_id = (int)I('visit_id');
+			$visit_list = $model->table('erp_customer_visit as cv,erp_customer as cu,erp_user as us')
+			->where("cv.cust_id=cu.id AND us.id=cv.user_id AND cv.id=$visit_id")
+			->getField("cv.id as visit_id,us.realname as uname,cu.name as cname,cv.visit_time as visit_time");
+			$this->assign('newdata',$visit_list);   //客户信息				
+			$this->display();
+		}
 	}
 	/**沟通记录添加   提交接口**/
 	public function visit_prod_insert(){		 

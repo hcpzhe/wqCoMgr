@@ -67,6 +67,9 @@ class UserModel extends Model {
 				'last_login_time' => $user['last_login_time'],
 				'last_login_ip'   => $user['last_login_ip'],		
 		);
+		$user = new UserModel();  
+		$arr=$user->user_auto();
+		session('cust_id', $arr);   //登录人拥有的未过期的客户权限id
 		session('user_auth', $auth);
 		session('user_auth_sign', data_auth_sign($auth));
 	
@@ -121,7 +124,7 @@ class UserModel extends Model {
 	public function alluser(){
 		return $this->where("status=1")->select();
 	}
-	/**登录人拥有的权限 id**/
+	/**登录人拥有的客户未过期权限 id**/
 	public function user_auto(){
 // 		$arr = session('user_auth');
  		$uid = UID; 		
@@ -146,18 +149,13 @@ class UserModel extends Model {
  		// 获取客户权限未过期的所有客户
  		$Ucp=M('User_cust_prod');
  		$alluser[] = UID;
- 		$ucpwhere['user_id'] = array('in',$alluser);
+ 		$ucpwhere['user_id'] = array('in',$alluser);		
  		$time=time();  		
+ 		$ucpwhere['expired_time'] = array(array('gt',$time),array('eq',0), 'or');
  		$cust_id=$Ucp->where($ucpwhere)->getField("cust_id",true);
- 		
- 		$here['expired_time'] =array('eq',0);
- 		$here['_logic']='OR';
- 		$here['expired_time'] =array('gt',$time);
- 		$custid=$Ucp->where($here)->getField("cust_id",true);
+ 		session('[start]');
+ 		session('cust_id', $cust_id);
  		return $cust_id;
- 		//print_r($custid);exit();
- 		
-				
-		
+					
 	}	
 }

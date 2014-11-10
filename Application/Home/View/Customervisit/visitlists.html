@@ -85,8 +85,8 @@
                      <td width="100" align="center">{$data.phone}</td>
                      <td width="130" align="center">{:date('Y/m/d H:i:s',$data['visit_time'])}</td>
                      <td width="150" align="center">
-                       <a href="{:U('Customervisit/visit_detailed?id='.$data['id'])}">查看详细</a> | 
-                       <a href="{:U('Customervisit/add_visit_prod?visit_id='.$data['id'])}">添加沟通记录 </a>
+                       <a href="{:U('Customervisit/visit_detailed?id='.$data['id'].'&cust_id='.$data['cust_id'])}">查看详细</a> | 
+                       <a href="{:U('Customervisit/add_visit_prod?visit_id='.$data['id'].'&cust_id='.$data['cust_id'])}">添加沟通记录 </a>
                      </td>
                   </tr>                         
               </table>
