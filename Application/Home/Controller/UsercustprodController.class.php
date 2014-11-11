@@ -8,8 +8,15 @@ use Think\Model;
 header("Content-Type:text/html;charset=utf-8");
 class UsercustprodController extends HomeBaseController {
     /**权限的添加***/
-	public function add(){
-		$cust_id =	(int)I('param.cust_id'); 	
+	public function add(){		
+		$id =	(int)I('param.cust_id'); 
+		if (!IS_ROOT){ //非超管
+			$User = new UserModel();
+			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
+			if(!in_array($id,$cust_id)){
+				$this->error('您没有该公司的权限，不能进行相关操作！');
+			}
+		}
 		$cust = M('Customer');   
 		$cust_list = $cust->where('status=1')->select(); //客户
 		$this->assign('cust_list',$cust_list);
@@ -40,7 +47,11 @@ class UsercustprodController extends HomeBaseController {
 				$this->error('您没有该公司的权限，不能进行相关操作！');
 			}
 		}
-			$ucp = M('User_cust_prod');
+		    $customer = M('Customer');   //客户信息
+		    $custlist = $customer->where('id='.$id)->select();
+		    $this->assign('custlist',$custlist);
+		    
+			$ucp = M('User_cust_prod');  //权限信息
 			$user_id = UID;
 			$list = $ucp->table('erp_customer as cr,erp_user as ur,erp_user_cust_prod as ucp')
 			->where("cr.id=ucp.cust_id AND ur.id=ucp.user_id AND ucp.cust_id=$id")
@@ -58,11 +69,17 @@ class UsercustprodController extends HomeBaseController {
 	
 	/**权限信息修改**/
 	public function edit(){
-		$cust_id =	(int)I('param.cust_id');	
-		//$user_id = UID;
+		$id =	(int)I('param.cust_id');	//要进行操作的客户id
+	    if (!IS_ROOT){ //非超管
+			$User = new UserModel();
+			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
+			if(!in_array($id,$cust_id)){
+				$this->error('您没有该公司的权限，不能进行相关操作！');
+			}
+		}
 		$ucp = M('User_cust_prod'); //查询登录人拥有的客户权限
 		$list = $ucp->table('erp_customer as cr,erp_user as ur,erp_user_cust_prod as ucp')
-		->where("cr.id=ucp.cust_id AND ur.id=ucp.user_id AND ucp.cust_id=$cust_id")
+		->where("cr.id=ucp.cust_id AND ur.id=ucp.user_id AND ucp.cust_id=$id")
 		->getField("ucp.cust_id as cust_id,cr.`name` as `cname`,cr.contacts as contacts,cr.phone as phone,cr.fax as fax,cr.address as address,cr.remark as remark,ur.realname as realname,ucp.expired_time as expired_time,ucp.prod_id as prod_id");
 		$this->assign('list',$list);	
 		//print_r($list);exit();
@@ -84,9 +101,16 @@ class UsercustprodController extends HomeBaseController {
 	}
 	/**权限删除**/
 	public function del(){
-		$cust_id = (int)I('param.cust_id');
+		$id = (int)I('param.cust_id');
+		if (!IS_ROOT){ //非超管
+			$User = new UserModel();
+			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
+			if(!in_array($id,$cust_id)){
+				$this->error('您没有该公司的权限，不能进行相关操作！');
+			}
+		}
 		$ucp = M("User_cust_prod"); 
-        $ucp->where('cust_id='.$cust_id)->delete();
+        $ucp->where('cust_id='.$id)->delete();
 		$this->success('删除成功',U('Customer/lists'));
 	}
 			

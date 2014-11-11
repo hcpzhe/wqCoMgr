@@ -36,7 +36,7 @@
       <tr>
          <td>
 	        <table width="750" border="0" class="com_table" cellpadding="0" cellspacing="0">
-	          <!-- <foreach name="list" item="list"> -->
+	         <!-- <foreach name="custlist" item="custlist"> -->
 	          <tr>
 		        <th colspan="4">                     
 		           公司基本信息
@@ -44,47 +44,35 @@
 		      </tr>  
 		      <tr>
 		        <td width="150">公司名称</td>
-		        <td width="220">{$list.cname}</td>
+		        <td width="220">{$custlist.name}</td>
 		        <td width="150">联系人</td>
-		        <td width="220">{$list.contacts}</td>
+		        <td width="220">{$custlist.contacts}</td>
 		      </tr>  
 		      <tr>
 		        <td>联系电话</td>
-		        <td>{$list.phone}</td>
+		        <td>{$custlist.phone}</td>
 		        <td>传真</td>
-		        <td>{$list.fax}</td>
+		        <td>{$custlist.fax}</td>
 		      </tr>       
 		      <tr>
 		        <td>地址</td>
-		        <td>{$list.address}</td>
+		        <td>{$custlist.address}</td>
 		         <td> 添加时间</td>
-		        <td>{:date('Y/m/d H:i:s',$list['add_time'])}</td>
+		        <td>{:date('Y/m/d H:i:s',$custlist['add_time'])}</td>
 		      </tr>
 		       <tr>
 		        <td>备注</td>
-		        <td colspan="3">{$list.remark}</td>		        
+		        <td colspan="3">{$custlist.remark}</td>		        
 		      </tr> 
-		      <tr>
-		      	<th colspan="4"> 权限信息</th>
-		      </tr>	   		     
-		      <tr>
-		        <td> 权限拥有者</td>
-		        <td> {$list.realname}</td>
-		         <td>  权限过期时间 </td>
-		        <td>                     
-		            <!-- <if condition="$list['expired_time'] eq 0 "> -->永不过期                        
-		            <!-- <else /> --> {:date('Y/m/d H:i:s',$list['expired_time'])}<!-- </if> --> 
-		        </td>
-		      </tr> 
-		      <!-- </foreach> -->  	
-		      	
-		       <!-- <foreach name="user_list" item="user_list"> -->   
+		     <!-- </foreach> -->  	
+		       
+		     <!-- <foreach name="user_list" item="user_list"> -->   
 		       <tr><th colspan="4">权限拥有者信息</th></tr>
 		       <tr>
-		        <td>用户名</td>
-		        <td>{$user_list.account}</td>
-		        <td>性 别</td>
-		        <td>
+		        <td width="150">用户名</td>
+		        <td width="220">{$user_list.account}</td>
+		        <td width="150">性 别</td>
+		        <td width="220">
 		           <!-- <if condition="$user_list['sex'] eq 1 "> -->男                    
 		            <!-- <else /> --> 女<!-- </if> -->
 		        </td>
@@ -100,9 +88,28 @@
 		        <td>{:date('Y/m/d H:i:s',$user_list['startime'])}</td>
 		        <td>生 日</td>
 		        <td>{:date('Y/m/d H:i:s',$user_list['birthday'])}</td>
-		        
 		      </tr>  
-		       <!-- </foreach> -->   
+		    <!-- </foreach> --> 
+		    
+		    <!-- <empty name="list"> -->
+             <tr>
+		      	<td colspan="4" style="color: red;">该公司权限还未添加</td>
+		     </tr>	
+            <!-- </empty> -->
+		    <!-- <foreach name="list" item="list"> -->
+		      <tr>
+		      	<th colspan="4"> 权限信息</th>
+		      </tr>	   		     
+		      <tr>
+		        <td> 权限拥有者</td>
+		        <td> {$list.realname}</td>
+		         <td>  权限过期时间 </td>
+		        <td>                     
+		            <!-- <if condition="$list['expired_time'] eq 0 "> -->永不过期                        
+		            <!-- <else /> --> {:date('Y/m/d H:i:s',$list['expired_time'])}<!-- </if> --> 
+		        </td>
+		      </tr> 
+		      <!-- </foreach> -->       
 		     </table>
 		   </td>
 		 </tr>                     

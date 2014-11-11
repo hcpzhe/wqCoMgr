@@ -97,7 +97,7 @@ class DomainController extends HomeBaseController{
 			$map['domain_id']=$data;
 			$Order_domain=new Order_domainModel();
 			$Order_domain->add($map);
-		}
+		}		
 		$this->success('添加成功',U('Domain/domain_list'));
 	}
 	/**域名详细信息**/

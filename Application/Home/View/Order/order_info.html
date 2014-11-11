@@ -62,7 +62,8 @@
 				    <td><span class="fontqing">{:date('Y/m/d H:i:s',$orderinfo['extime'])}</span></td>
 				  </tr>
 				  <tr>
-				  	<td colspan='4'>　　　　　域名:
+				  	<td align="right">域 名：</td>
+				  	<td colspan="3">
 				  	<!-- <foreach name="doma" item="list"> -->
 				  	{$list.domain}	
 				  	<!-- </foreach> -->
@@ -93,7 +94,7 @@
 						<td>{$plist.id}</td>
 						<td>{$plist.money}</td>
 						<td><!-- <if condition="$plist.class eq 1"> -->预付款<!-- <else/> -->余款<!-- </if> --></td>
-						<td>{$plist.pay_time}</td>
+						<td>{:date('Y/m/d H:i:s',$plist['pay_time'])}</td>
 						<td><!-- <if condition="$list.check eq 1"> -->通过<!-- <elseif condition="$list.check eq 0"/> -->待审<!-- <else/> -->拒绝<!-- </if> --></td>
 					</tr>
 				<!-- </foreach> -->

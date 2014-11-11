@@ -6,6 +6,7 @@ use Home\Model\Customer_visitModel;
 use Home\Model\Visit_prodModel;
 use Home\Model\UserModel;
 
+header("Content-Type:text/html;charset=utf-8");
 class CustomervisitController extends HomeBaseController {
 
 	/**拜访记录列表**/
@@ -55,24 +56,24 @@ class CustomervisitController extends HomeBaseController {
 	/**拜访记录添加**/
 	public function addvisit(){
 		$id = (int)I('cust_id');   //被选中要进行操作的id
-		$cust = M('customer');		
+		$cust = M('customer');
+		if (!IS_ROOT){ //非超管
+			$User = new UserModel();
+			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
+			if(!in_array($id,$cust_id)){
+				$this->error('您没有该公司的权限，不能进行相关操作！');
+			}
+		}		
 		if(empty($id)){   //未被选中指定公司  添加拜访记录
 			$newdata['check'] = 1; //公司信息审核通过后 才能添加拜访记录
 			$cust_list=$cust->where($newdata)->select();
 			$this->assign('cust_list',$cust_list);
-		}else {	
-			if (!IS_ROOT){ //非超管
-				$User = new UserModel();
-	        	$cust_id=$User->user_auto();  //登录人拥有的客户权限id
-				if(!in_array($id,$cust_id)){
-					$this->error('您没有该公司的权限，不能进行相关操作！');
-				}
-			}
-			    $check = $cust->where('id='.$id)->getField('check');
-				$cust_name = $cust->where('id='.$id)->getField('name');
-				$this->assign('cust_id',$id);
-				$this->assign('cust_name',$cust_name);							
 		}
+	    $check = $cust->where('id='.$id)->getField('check');
+		$cust_name = $cust->where('id='.$id)->getField('name');
+		$this->assign('cust_id',$id);
+		$this->assign('cust_name',$cust_name);							
+		
 		$User = M("User");
 		$user_list = $User->where('status=1')->select();
 		$this->assign('user_list',$user_list);  //拜访员工

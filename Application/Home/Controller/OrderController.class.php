@@ -126,18 +126,17 @@ class OrderController extends HomeBaseController{
 	public function add_order_form(){/** 判断是否传出客户id */
 		/** 接收客户id */
 		$id = (int)I('id');	//被选中要进行操作的id
-		if (!IS_ROOT){ //非超管
-			if(!empty($id)){
-				$User = new UserModel();
-			    $cust_id=$User->user_auto();  //登录人拥有的客户权限id
-				if(!in_array($id,$cust_id)){
-					$this->error('您没有该公司的权限，不能进行相关操作！');
-				}
+	    if (!IS_ROOT){ //非超管	
+			$User = new UserModel();
+		    $cust_id=$User->user_auto();  //登录人拥有的客户权限id
+			if(!in_array($id,$cust_id)){
+				$this->error('您没有该公司的权限，不能进行相关操作！');
 			}
-				$customer=new CustomerModel();			
-				$this->cus=$customer->one($id);
-				
-			}				
+	    }
+		if(!empty($id)){
+			$customer=new CustomerModel();
+			$this->cus=$customer->one($id);
+		}		
 			/*查询产品分类*/
 			$product=new ProductModel();
 			$this->p_list=$product->p_list();
