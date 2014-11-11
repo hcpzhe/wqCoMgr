@@ -32,11 +32,14 @@ class UsercustprodController extends HomeBaseController {
 		
 	/**客户权限列表     **/
 	public function lists() {	
-		$cust_id = session('cust_id');   //登录人拥有的客户权限id
 		$id = (int)I('cust_id');   //被选中要进行操作的id		
-		if(!in_array($id,$cust_id)){
-			$this->error('您没有该公司的权限，不能进行相关操作！');
-		}else{
+		if (!IS_ROOT){ //非超管
+			$User = new UserModel();
+			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
+			if(!in_array($id,$cust_id)){
+				$this->error('您没有该公司的权限，不能进行相关操作！');
+			}
+		}
 			$ucp = M('User_cust_prod');
 			$user_id = UID;
 			$list = $ucp->table('erp_customer as cr,erp_user as ur,erp_user_cust_prod as ucp')
@@ -50,15 +53,12 @@ class UsercustprodController extends HomeBaseController {
 			->select();
 			$this->assign('user_list',$user_list);
 			$this->assign('cust_id',$id);
-			$this->display();
-		}
-		
+			$this->display();		
 	}
 	
 	/**权限信息修改**/
 	public function edit(){
-		$cust_id =	(int)I('param.cust_id');
-		
+		$cust_id =	(int)I('param.cust_id');	
 		//$user_id = UID;
 		$ucp = M('User_cust_prod'); //查询登录人拥有的客户权限
 		$list = $ucp->table('erp_customer as cr,erp_user as ur,erp_user_cust_prod as ucp')

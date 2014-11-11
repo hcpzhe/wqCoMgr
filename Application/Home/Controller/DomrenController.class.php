@@ -3,6 +3,7 @@ namespace Home\Controller;
 use Common\Controller\HomeBaseController;
 use Home\Model\DomrenModel;
 use Think\Page;
+use Home\Model\UserModel;
 
 class DomrenController extends HomeBaseController{
 	/*域名续费申请  列表*/
@@ -49,7 +50,8 @@ class DomrenController extends HomeBaseController{
 	public function apply_renewal(){
 		if (!IS_ROOT){ //非超管
 			$ids = (int)I('cust_id');   //被选中要进行操作的id
-			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			$User = new UserModel();
+			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
 			if(!in_array($ids,$cust_id)){
 				$this->error('您没有该公司的权限，不能进行相关操作！');
 			}
@@ -98,7 +100,8 @@ class DomrenController extends HomeBaseController{
 	public function check(){
 		if (!IS_ROOT){ //非超管
 			$ids = (int)I('param.cust_id');	   //被选中要进行操作的客户id
-			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			$User = new UserModel();
+			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
 			if(!in_array($ids,$cust_id)){
 				$this->error('您没有该公司的权限，不能进行相关操作！');
 			}
@@ -133,7 +136,8 @@ class DomrenController extends HomeBaseController{
 	public function domren_apply_detailed(){		
 		if (!IS_ROOT){ //非超管
 			$ids = (int)I('param.cust_id');	   //被选中要进行操作的客户id
-			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			$User = new UserModel();
+			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
 			if(!in_array($ids,$cust_id)){
 				$this->error('您没有该公司的权限，不能进行相关操作！');
 			}

@@ -3,6 +3,8 @@ namespace Home\Controller;
 use Common\Controller\HomeBaseController;
 use Home\Model\Order_payModel;
 use Home\Model\OrderModel;
+use Home\Model\UserModel;
+
 class OrderpayController extends HomeBaseController{
 	/*订单付款记录*/
 	public function order_pay_record(){
@@ -32,7 +34,8 @@ class OrderpayController extends HomeBaseController{
 		$id=$_GET['id'];		
 		if (!IS_ROOT){ //非超管
 			$ids=$_GET['cust_id'];   //选择的客户id
-			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			$User = new UserModel();
+			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
 			if(!in_array($ids,$cust_id)){
 				$this->error('您没有该公司的权限，不能进行相关操作！');
 			}
@@ -56,7 +59,8 @@ class OrderpayController extends HomeBaseController{
 		$id=$_GET['id'];
 		if (!IS_ROOT){ //非超管
 			$ids=$_GET['cust_id'];   //选择的客户id
-			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			$User = new UserModel();
+			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
 			if(!in_array($ids,$cust_id)){				
 				$this->error('您没有该公司的权限，不能进行相关操作！');
 			}

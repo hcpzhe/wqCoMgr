@@ -3,6 +3,7 @@ namespace Home\Controller;
 use Common\Controller\HomeBaseController;
 use Home\Model\Order_renewalModel;
 use Home\Model\OrderModel;
+use Home\Model\UserModel;
 use Home\Model\ProductModel;
 use Home\Model\Order_payModel;
 class OrderrenewalController extends HomeBaseController{
@@ -35,8 +36,10 @@ class OrderrenewalController extends HomeBaseController{
 	/** 续费申请表单rene */
 	public function apy_ren($id){
 		if (!IS_ROOT){ //非超管
-			$cust_id = session('cust_id');   //登录人拥有的客户权限id
-			if(!in_array($id,$cust_id)){
+			$ids = (int)I('cust_id');   //被选中要进行操作的id
+			$User = new UserModel();
+			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
+			if(!in_array($ids,$cust_id)){
 				$this->error('您没有该公司的权限，不能进行相关操作！');
 			}
 		}
@@ -78,7 +81,8 @@ class OrderrenewalController extends HomeBaseController{
 	public function checked($id){
 		if (!IS_ROOT){ //非超管
 			$ids = (int)I('cust_id');   //被选中要进行操作的id
-			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			$User = new UserModel();
+			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
 			if(!in_array($ids,$cust_id)){
 				$this->error('您没有该公司的权限，不能进行相关操作！');
 			}

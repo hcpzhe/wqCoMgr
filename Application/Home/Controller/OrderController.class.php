@@ -74,7 +74,8 @@ class OrderController extends HomeBaseController{
 	public function order_info(){
 		$id = (int)I('cust_id');   //被选中要进行操作的id
 		if (!IS_ROOT){ //非超管
-			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			$User = new UserModel();
+			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
 			if(!in_array($id,$cust_id)){
 				$this->error('您没有该公司的权限，不能进行相关操作！');
 		    }
@@ -127,7 +128,8 @@ class OrderController extends HomeBaseController{
 		$id = (int)I('id');	//被选中要进行操作的id
 		if (!IS_ROOT){ //非超管
 			if(!empty($id)){
-				$cust_id = session('cust_id');   //登录人拥有的客户权限id
+				$User = new UserModel();
+			    $cust_id=$User->user_auto();  //登录人拥有的客户权限id
 				if(!in_array($id,$cust_id)){
 					$this->error('您没有该公司的权限，不能进行相关操作！');
 				}
@@ -180,7 +182,8 @@ class OrderController extends HomeBaseController{
 	public function check_order(){
 		$cid = (int)I('cust_id');   //被选中要进行操作的cust_id
 		if (!IS_ROOT){ //非超管
-			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			$User = new UserModel();
+			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
 			if(!in_array($cid,$cust_id)){
 				$this->error('您没有该公司的权限，不能进行相关操作！');
 			}
@@ -196,11 +199,14 @@ class OrderController extends HomeBaseController{
 	}	
 	/** 推送订单至下一个部门      表单 */
 	public function push_form($id){
-		$id = (int)I('cust_id');   //被选中要进行操作的cust_id
-		$cust_id = session('cust_id');   //登录人拥有的客户权限id
-		if(!in_array($id,$cust_id)){
-			$this->error('您没有该公司的权限，不能进行相关操作！');
-		}else{
+		if (!IS_ROOT){ //非超管
+			$ids = (int)I('cust_id');   //被选中要进行操作的cust_id
+			$User = new UserModel();
+			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
+			if(!in_array($ids,$cust_id)){
+				$this->error('您没有该公司的权限，不能进行相关操作！');
+			}
+	     }
 			/** 查询订单信息  判断该订单是否通过审核 */
 			$order=new OrderModel();
 			$flag=$order->field('check')->where("id=$id")->find();
@@ -210,7 +216,7 @@ class OrderController extends HomeBaseController{
 			$this->id=$id;
 			$this->dp=$depart->alldepart();
 			$this->display();
-		}
+		
 	}
 	/** 推送至下一个部门 */
 	public function push($id){
@@ -235,6 +241,14 @@ class OrderController extends HomeBaseController{
 	}
 	/** 停止订单 */
 	public function stop($id){
+		if (!IS_ROOT){ //非超管
+			$ids = (int)I('cust_id');   //被选中要进行操作的id
+			$User = new UserModel();
+			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
+			if(!in_array($ids,$cust_id)){
+				$this->error('您没有该公司的权限，不能进行相关操作！');
+			}
+		}
 		$order=new OrderModel();
 		$flag=$order->where("id=$id")->setField("status","0");
 		if($flag==1){ $this->success('成功');}
@@ -242,6 +256,14 @@ class OrderController extends HomeBaseController{
 	}
 	/** 开始订单 */
 	public function star($id){
+		if (!IS_ROOT){ //非超管
+			$ids = (int)I('cust_id');   //被选中要进行操作的id
+			$User = new UserModel();
+			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
+			if(!in_array($ids,$cust_id)){
+				$this->error('您没有该公司的权限，不能进行相关操作！');
+			}
+		}
 		$order=new OrderModel();
 		$flag=$order->where("id=$id")->setField("status","1");
 		if($flag==1){ $this->success('成功');}

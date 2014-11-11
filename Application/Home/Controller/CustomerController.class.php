@@ -71,7 +71,8 @@ class CustomerController extends HomeBaseController {
 	public function edit(){
 		$id = (int)I('id');   //被选中要进行操作的id
 		if (!IS_ROOT){ //非超管
-			$cust_id = session('cust_id');   //登录人拥有的客户权限id			
+			$User = new UserModel();
+			$cust_id=$User->user_auto();  //登录人拥有的客户权限id			
 			if(!in_array($id,$cust_id)){
 			     $this->error('您没有该公司的权限，不能进行相关操作！');
 			}
@@ -98,16 +99,16 @@ class CustomerController extends HomeBaseController {
 		$this->success('更新成功',U('Customer/lists'));
 	}
 	/*查看公司详情*/
-	public function detailed(){
+	public function detailed(){		
 		$id = (int)I('id');   //被选中要进行操作的id
 		$cust = M('Customer'); //获取客户详细信息
-		if (!IS_ROOT){ //非超管			
-			$cust_id = session('cust_id');   //登录人拥有的客户权限id			
+		if (!IS_ROOT){ //非超管
+			$User = new UserModel();
+			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
 			if(!in_array($id,$cust_id)){
 				$this->error('您没有该公司的权限，不能进行相关操作！');
 			}
-		}
-		
+		}		
 		$list = $cust->table('erp_customer as cr,erp_user as ur')
 		->where('cr.user_id=ur.id AND cr.id='.$id)
 		->getField("cr.id as id,cr.`name` as `name`,cr.contacts as contacts,cr.phone as phone,cr.fax as fax,cr.address as address,cr.add_time as add_time,cr.`check` as `check`,cr.check_time as check_time,cr.remark as remark,ur.realname as realname");

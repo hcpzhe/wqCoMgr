@@ -67,9 +67,6 @@ class UserModel extends Model {
 				'last_login_time' => $user['last_login_time'],
 				'last_login_ip'   => $user['last_login_ip'],		
 		);
-		$user = new UserModel();  
-		$arr=$user->user_auto();
-		session('cust_id', $arr);   //登录人拥有的未过期的客户权限id
 		session('user_auth', $auth);
 		session('user_auth_sign', data_auth_sign($auth));
 	
@@ -126,7 +123,6 @@ class UserModel extends Model {
 	}
 	/**登录人拥有的客户未过期权限 id**/
 	public function user_auto(){
-// 		$arr = session('user_auth');
  		$uid = UID; 		
  		$map = array('user_id'=>$uid);
  		$model = M('User_depart_mgr');
@@ -153,8 +149,6 @@ class UserModel extends Model {
  		$time=time();  		
  		$ucpwhere['expired_time'] = array(array('gt',$time),array('eq',0), 'or');
  		$cust_id=$Ucp->where($ucpwhere)->getField("cust_id",true);
- 		session('[start]');
- 		session('cust_id', $cust_id);
  		return $cust_id;
 					
 	}	

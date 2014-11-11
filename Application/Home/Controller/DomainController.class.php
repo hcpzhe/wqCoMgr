@@ -4,6 +4,7 @@ use Common\Controller\HomeBaseController;
 use Home\Model\DomainModel;
 use Think\Page;
 use Home\Model\Order_domainModel;
+use Home\Model\UserModel;
 
 header("Content-Type:text/html;charset=utf-8");
 class DomainController extends HomeBaseController{
@@ -46,7 +47,8 @@ class DomainController extends HomeBaseController{
 		$order_id = I('param.order_id');
 		$domain = M('Customer');		
 		if (!IS_ROOT){ //非超管
-			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			$User = new UserModel();
+			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
 			if(!in_array($id,$cust_id)){
 				$this->error('您没有该公司的权限，不能进行相关操作！');
 			}
@@ -55,10 +57,8 @@ class DomainController extends HomeBaseController{
 			$check = $domain->where('id='.$id)->getField('check');	
 			$this->assign('cust_id',$id);
 			$this->assign('order_id',$order_id);
-			$this->display();
-			
-	}
-	
+			$this->display();			
+	}	
 	/***添加域名时 域名的模糊检索***/
 	public function search($domain=null){
 		$domain = I('domain');
@@ -96,7 +96,7 @@ class DomainController extends HomeBaseController{
 			$map['order_id']=I('order_id');
 			$map['domain_id']=$data;
 			$Order_domain=new Order_domainModel();
-			$Order_domain->ad($map);
+			$Order_domain->add($map);
 		}
 		$this->success('添加成功',U('Domain/domain_list'));
 	}
@@ -104,7 +104,8 @@ class DomainController extends HomeBaseController{
 	public function domain_detailed(){
 		if (!IS_ROOT){ //非超管
 			$ids = (int)I('cust_id');   //被选中要进行操作的id
-			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			$User = new UserModel();
+			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
 			if(!in_array($ids,$cust_id)){
 				$this->error('您没有该公司的权限，不能进行相关操作！');
 			}
@@ -117,8 +118,7 @@ class DomainController extends HomeBaseController{
 			$domain->where('id='.$id)->setField('status','0');     // 过期域名的状态为 禁用
 		}else {
 			$domain->where('id='.$id)->setField('status','1');
-		}
-		
+		}		
 		 //获取域名详细信息
 		$domain_list = $domain->table('erp_customer as cr,erp_domain as dom')
 		->where("cr.id=dom.cust_id AND dom.id=$id")
@@ -134,7 +134,8 @@ class DomainController extends HomeBaseController{
 	public function domain_edit(){
 		if (!IS_ROOT){ //非超管
 			$ids = (int)I('cust_id');   //被选中要进行操作的id
-			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			$User = new UserModel();
+			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
 			if(!in_array($ids,$cust_id)){
 				$this->error('您没有该公司的权限，不能进行相关操作！');
 			}
@@ -168,7 +169,8 @@ class DomainController extends HomeBaseController{
 	public function check(){
 		if (!IS_ROOT){ //非超管
 			$ids = (int)I('cust_id');   //被选中要进行操作的id
-			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			$User = new UserModel();
+			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
 			if(!in_array($ids,$cust_id)){
 				$this->error('您没有该公司的权限，不能进行相关操作！');
 			}
@@ -188,7 +190,8 @@ class DomainController extends HomeBaseController{
 	public function domain_del(){		
 		if (!IS_ROOT){ //非超管
 			$ids = (int)I('cust_id');   //被选中要进行操作的id
-			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			$User = new UserModel();
+			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
 			if(!in_array($ids,$cust_id)){
 				$this->error('您没有该公司的权限，不能进行相关操作！');
 			}
