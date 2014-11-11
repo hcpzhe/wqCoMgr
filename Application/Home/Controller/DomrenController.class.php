@@ -40,13 +40,20 @@ class DomrenController extends HomeBaseController{
 		->where($where)
 		->limit($Page->firstRow.','.$Page->listRows)
 		->order('dr.id desc')
-		->getField("dr.id,dr.domain_id,dn.domain,dr.money,dr.org_expired_time,dr.new_expired_time,dr.pay_time,dr.`check`");
+		->getField("dr.id,dr.domain_id,dn.cust_id,dn.domain,dr.money,dr.org_expired_time,dr.new_expired_time,dr.pay_time,dr.`check`");
 		$this->assign('apply_list',$apply_list);
         $this->assign('page',$show);   //分页显示
 		$this->display();
 	}
 	/**域名申请续费 **/
 	public function apply_renewal(){
+		if (!IS_ROOT){ //非超管
+			$ids = (int)I('cust_id');   //被选中要进行操作的id
+			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			if(!in_array($ids,$cust_id)){
+				$this->error('您没有该公司的权限，不能进行相关操作！');
+			}
+		}
 		$domain_id = (int)I('id');		
 		$domain = M('Domain');
 		$check = $domain->where('id='.$domain_id)->getField('check');
@@ -89,6 +96,13 @@ class DomrenController extends HomeBaseController{
 	
 	/**提交 待审申请**/
 	public function check(){
+		if (!IS_ROOT){ //非超管
+			$ids = (int)I('param.cust_id');	   //被选中要进行操作的客户id
+			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			if(!in_array($ids,$cust_id)){
+				$this->error('您没有该公司的权限，不能进行相关操作！');
+			}
+		}
 		$id = (int)I('param.id');
 		if ($id <= 0) $this->error('参数非法');
 		
@@ -116,10 +130,16 @@ class DomrenController extends HomeBaseController{
 	}
 	
 	/**查看域名申请的详细信息***/
-	public function domren_apply_detailed(){
+	public function domren_apply_detailed(){		
+		if (!IS_ROOT){ //非超管
+			$ids = (int)I('param.cust_id');	   //被选中要进行操作的客户id
+			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			if(!in_array($ids,$cust_id)){
+				$this->error('您没有该公司的权限，不能进行相关操作！');
+			}
+		}
 		$id = (int)I('param.id');		
-		$model = M('Domain_renewal');
-		
+		$model = M('Domain_renewal');	
 		$apply_list = $model->table('erp_domain as dn,erp_domain_renewal as dr,erp_customer as cu,erp_user as ur')
 		->where("dn.id=dr.domain_id AND cu.id=dn.cust_id AND ur.id=dr.user_id AND dr.id=$id")
 		->getField("dr.id,dr.domain_id,dn.domain,dn.service,dn.reg_time,dr.money,dr.org_expired_time,dr.new_expired_time,dr.pay_time,dr.`check`,dr.check_time,cu.`name`,cu.contacts,cu.phone,ur.realname");

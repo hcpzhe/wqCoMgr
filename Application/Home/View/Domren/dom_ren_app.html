@@ -7,6 +7,16 @@
 <link href="__CSS__/style.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="__JS__/jquery.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+<script type="text/javascript">	 
+	                //查看域名详细信息    跳转 
+					function Detailed(){
+						$("input[name='che[]']").each(function(){
+							if($(this).attr("checked")=="checked"){							
+								location.href=$(this).next(".cust_id").attr('data-url');
+								}
+							});
+					}										
+	           </script> 
 </head>
 <body>
 <div style="width:100%; overflow:hidden; background: #f2f2f2;">
@@ -36,18 +46,7 @@
 	                <input type="text" name="domain" class="search" value="" />	                                        
 	                <input type=submit value="搜索" class="button_submit" />
 	           </form> 	     
-	           <script type="text/javascript">	 
-	                //查看域名详细信息    跳转 
-					function Detailed(){
-						$("input[name='domain_id']").each(function(){
-							if($(this).attr("checked")=="checked"){								
-								var id=$(this).val();								
-								var url="__URL__-domren_apply_detailed-id-"+id;
-	                            location.href=url;
-								}
-							});
-					}										
-	           </script>                              
+	                                        
                 <a href="javascript:void(0)" class="button_submit" onclick="Detailed();">查看详细</a>                                             
            </span>   
         </td>
@@ -76,8 +75,8 @@
             <table width="752" border="0" cellspacing="0" cellpadding="0" class="com_list">                                                  
                   <tr height="30">
                      <td width="80" align="center">
-                        <input type="checkbox" name="domain_id" value="{$data.id}">
-                        <input type="hidden" name="cust_id" value="{$data.domain_id}">
+                        <input type="checkbox" name="che[]" value="{$data.id}">                       
+                        <input type="hidden" class="cust_id" value="{$data.cust_id}" data-url="{:U('Domren/domren_apply_detailed?id='.$data['id'].'&cust_id='.$data['cust_id'])}">
                      </td>
                      <td width="120" align="center">{$data.domain}</td>
                      <td width="100" align="center">{$data.money} 元</td>
@@ -86,7 +85,7 @@
                      <td width="130" align="center">{:date('Y/m/d H:i:s',$data['new_expired_time'])}</td>
                      <td width="90" align="center">
                         <!-- <if condition="$data['check'] eq -1 "> -->拒绝
-                        <!-- <elseif condition="$data['check'] eq 0 " /> --><a href="{:U('Domren/check?id='.$data['id'])}">待审</a>
+                        <!-- <elseif condition="$data['check'] eq 0 " /> --><a href="{:U('Domren/check?id='.$data['id'].'&cust_id='.$data['cust_id'])}">待审</a>
                         <!-- <else /> --> 通过<!-- </if> -->  
                      </td>
                   </tr>                         

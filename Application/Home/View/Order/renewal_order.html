@@ -10,18 +10,14 @@
 function info(){
 	$("input[name='che[]']").each(function(){
 		if($(this).attr("checked")=="checked"){								
-			var id=$(this).val();		
-            var url="__URL__-order_info-id-"+id;
-            location.href=url;
+			location.href=$(this).next(".cust_id").attr('data-url');
 			}
 		});
 }
 function xufei(){
 	$("input[name='che[]']").each(function(){
 		if($(this).attr("checked")=="checked"){								
-			var id=$(this).val();		
-            var url="Home-Orderrenewal-apy_ren-id-"+id;
-            location.href=url;
+			location.href=$(this).nextAll(".push").attr('data-url');
 			}
 		});
 }
@@ -79,7 +75,10 @@ function xufei(){
 					</tr>
 				<!-- <foreach name="data['order_list']" item="list"> -->
 					<tr class="list_tr">
-						<td><input type="checkbox" name="che[]" value="{$list.id}"></td>
+						<td><input type="checkbox" name="che[]" value="{$list.id}">
+						    <input type="hidden" name="cust_id" class="cust_id" value="{$list.cust_id}" data-url="{:U('Order/order_info?id='.$list['id'].'&cust_id='.$list['cust_id'])}">
+						    <input type="hidden" name="cust_id" class="push" value="{$list.cust_id}" data-url="{:U('Orderrenewal/apy_ren?id='.$list['id'].'&cust_id='.$list['cust_id'])}">
+						</td>
 						<td>{$list.pname}</td>
 						<td>{$list.cname|mb_substr=0,54}</td>
 						<td>{$list.contacts}</td>
@@ -88,9 +87,9 @@ function xufei(){
 						<td>{:date('Y/m/d H:i:s',$list['expired_time'])}</td>
 						<td>
 							<!-- <if condition="$list.status eq 1"> -->
-							<a href="{:U('Order/stop?id='.$list['id'])}">停止</a>
+							<a href="{:U('Order/stop?id='.$list['id'].'&cust_id='.$list['cust_id'])}">停止</a>
 							<!-- <elseif condition="$list.status eq 0"/> -->
-							<a href="{:U('Order/star?id='.$list['id'])}">开始</a>
+							<a href="{:U('Order/star?id='.$list['id'].'&cust_id='.$list['cust_id'])}">开始</a>
 							<!-- </if> -->
 						</td>
 					</tr>

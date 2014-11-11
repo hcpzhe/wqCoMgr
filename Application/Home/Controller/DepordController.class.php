@@ -39,6 +39,13 @@ class DepordController extends HomeBaseController{
 	/**网站开发订单详细页面，订单详细信息，订单参与人员，订单沟通记录 */
 	public function dep_info(){
 		$oid=$_GET['id'];
+		if (!IS_ROOT){ //非超管
+			$id=$_GET['cust_id'];  //选中的客户id
+			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			if(!in_array($id,$cust_id)){
+				$this->error('您没有该公司的权限，不能进行相关操作！');
+			}
+		}
 		/** 详细信息 */
 		$dep=new Develop_orderModel();
 		$this->data=$dep->depinfo($oid);	
@@ -53,6 +60,13 @@ class DepordController extends HomeBaseController{
 	/*跳转到分单页面*/
 	public function dist(){
 		$oid=$_GET['id'];
+		if (!IS_ROOT){ //非超管
+			$id=$_GET['cust_id'];  //选中的客户id
+			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			if(!in_array($id,$cust_id)){
+				$this->error('您没有该公司的权限，不能进行相关操作！');
+			}
+		}
 		/*查询技术部所有人员*/
 		$user=new UserModel();
 		$this->users=$user->tech_list(4);
@@ -72,6 +86,14 @@ class DepordController extends HomeBaseController{
 // 		$order=new OrderModel();
 // 		$flag=$order->field('check')->where("id=$id")->find();
 // 		if($flag['check']==0){ $this->error('订单未审核');}
+	
+		if (!IS_ROOT){ //非超管
+			$id=$_GET['cust_id'];  //选中的客户id
+			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			if(!in_array($id,$cust_id)){
+				$this->error('您没有该公司的权限，不能进行相关操作！');
+			}
+		}
 		/** 查询所有部门 */
 		$depart=new DepartModel();
 		$this->id=$id;

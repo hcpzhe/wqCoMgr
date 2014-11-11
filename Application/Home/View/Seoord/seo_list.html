@@ -10,18 +10,14 @@
 function info(){
 	$("input[name='che[]']").each(function(){
 		if($(this).attr("checked")=="checked"){								
-			var id=$(this).val();		
-            var url="__URL__-seo_info-id-"+id;
-            location.href=url;
+			location.href=$(this).next(".cust_id").attr('data-url');
 			}
 		});
 }
 function push(){
 	$("input[name='che[]']").each(function(){
 		if($(this).attr("checked")=="checked"){								
-			var id=$(this).val();		
-            var url="__URL__-push_form-id-"+id;
-            location.href=url;
+			location.href=$(this).nextAll(".push").attr('data-url');
 			}
 		});
 }
@@ -73,7 +69,10 @@ function push(){
 					</tr>
 				<!-- <foreach name="data['dep_list']" item="list"> -->
 					<tr class="list_tr">
-						<td><input type="checkbox" name="che[]" value="{$list.id}"></td>
+						<td><input type="checkbox" name="che[]" value="{$list.id}">
+						     <input type="hidden" name="cust_id" class="cust_id" value="{$list.cust_id}" data-url="{:U('Seoord/seo_info?id='.$list['id'].'&cust_id='.$list['cust_id'])}">
+						     <input type="hidden" name="cust_id" class="push" value="{$list.cust_id}" data-url="{:U('Seoord/push_form?id='.$list['id'].'&cust_id='.$list['cust_id'])}">
+						</td>
 						<td>{$list.cname|mb_substr=0,45}</td>
 						<td>{$list.contacts}</td>
 						<td>{$list.phone}</td>
@@ -81,9 +80,9 @@ function push(){
 						<td>{$list.rname}</td>
 						<td>
 							<!-- <if condition="$list.checks eq 1"> -->
-							<a href="{:U('Seoord/dist?id='.$list['id'])}" class="red">已分配</a>
+							<a href="{:U('Seoord/dist?id='.$list['id'].'&cust_id='.$list['cust_id'])}" class="red">已分配</a>
 							<!-- <elseif condition="$list.checks eq 0"/> -->
-								<a href="{:U('Seoord/dist?id='.$list['id'])}" class="red">未分配</a>
+								<a href="{:U('Seoord/dist?id='.$list['id'].'&cust_id='.$list['cust_id'])}" class="red">未分配</a>
 							<!-- <else/> -->失效<!-- </if> -->
 						</td>
 					</tr>

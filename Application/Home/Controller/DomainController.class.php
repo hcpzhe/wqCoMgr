@@ -42,19 +42,21 @@ class DomainController extends HomeBaseController{
 	}
 	/*添加域名*/
 	public function add_domain(){
-		$id = (int)I('param.cust_id');
+		$id = (int)I('param.cust_id');  //被选中要进行操作的id
 		$order_id = I('param.order_id');
-		$domain = M('Customer');
-		$cust_id = session('cust_id');   //登录人拥有的客户权限id
-		if(!in_array($id,$cust_id)){
-			$this->error('您没有该公司的权限，不能进行相关操作！');
-		}else{
+		$domain = M('Customer');		
+		if (!IS_ROOT){ //非超管
+			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			if(!in_array($id,$cust_id)){
+				$this->error('您没有该公司的权限，不能进行相关操作！');
+			}
+		}
 			//查询客户信息的审核状态
 			$check = $domain->where('id='.$id)->getField('check');	
 			$this->assign('cust_id',$id);
 			$this->assign('order_id',$order_id);
 			$this->display();
-		}	
+			
 	}
 	
 	/***添加域名时 域名的模糊检索***/
@@ -100,6 +102,13 @@ class DomainController extends HomeBaseController{
 	}
 	/**域名详细信息**/
 	public function domain_detailed(){
+		if (!IS_ROOT){ //非超管
+			$ids = (int)I('cust_id');   //被选中要进行操作的id
+			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			if(!in_array($ids,$cust_id)){
+				$this->error('您没有该公司的权限，不能进行相关操作！');
+			}
+		}
 		$id = (int)I('id');
 		$domain = M('Domain');
 		//查询域名过期时间		
@@ -123,6 +132,13 @@ class DomainController extends HomeBaseController{
 	
 	/**域名信息修改**/
 	public function domain_edit(){
+		if (!IS_ROOT){ //非超管
+			$ids = (int)I('cust_id');   //被选中要进行操作的id
+			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			if(!in_array($ids,$cust_id)){
+				$this->error('您没有该公司的权限，不能进行相关操作！');
+			}
+		}
 		$domain = M('Domain');
 		$id = (int)I('id');
 		$list = $domain->where('id='.$id)->find();
@@ -150,6 +166,13 @@ class DomainController extends HomeBaseController{
 	
 	/**提交 待审申请**/
 	public function check(){
+		if (!IS_ROOT){ //非超管
+			$ids = (int)I('cust_id');   //被选中要进行操作的id
+			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			if(!in_array($ids,$cust_id)){
+				$this->error('您没有该公司的权限，不能进行相关操作！');
+			}
+		}
 		$id = (int)I('param.id');
 		if ($id <= 0) $this->error('参数非法');
 		$newdata = array();
@@ -162,7 +185,14 @@ class DomainController extends HomeBaseController{
 		$this->success('审核成功',U('Domain/domain_list'));
 	}
 	/***域名删除**/
-	public function domain_del(){
+	public function domain_del(){		
+		if (!IS_ROOT){ //非超管
+			$ids = (int)I('cust_id');   //被选中要进行操作的id
+			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			if(!in_array($ids,$cust_id)){
+				$this->error('您没有该公司的权限，不能进行相关操作！');
+			}
+		}
 		$id = (int)I('param.id');
 		$model = M('Domain');
 		$model-> where('id='.$id)->setField('status','-1');

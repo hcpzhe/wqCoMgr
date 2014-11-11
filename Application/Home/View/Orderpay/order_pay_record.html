@@ -10,18 +10,14 @@
 function up(){
 	$("input[name='che[]']").each(function(){
 		if($(this).attr("checked")=="checked"){								
-			var id=$(this).val();		
-            var url="__URL__-op_info-id-"+id;
-            location.href=url;
+			location.href=$(this).next(".cust_id").attr('data-url');
 			}
 		});
 }
 function ad(){
 	$("input[name='che[]']").each(function(){
 		if($(this).attr("checked")=="checked"){								
-			var id=$(this).val();		
-            var url="__URL__-ad_form-id-"+id;
-            location.href=url;
+			location.href=$(this).nextAll(".adds").attr('data-url');
 			}
 		});
 }
@@ -69,7 +65,9 @@ function ad(){
 					<tr><th>请选择</th><th>客户</th><th>续费金额</th><th>类型</th><th>付款时间</th><th>审核时间</th><th>审核</th><th>提交人</th></tr>		
 				<!-- <foreach name="data['op_list']" item="list"> -->
 					<tr class="list_tr">
-						<td><input type="checkbox" name="che[]" value="{$list.id}">					
+						<td><input type="checkbox" name="che[]" value="{$list.id}">	
+						 <input type="hidden" name="cust_id" class="cust_id" value="{$list.cust_id}" data-url="{:U('Orderpay/op_info?id='.$list['id'].'&cust_id='.$list['cust_id'])}">				
+						 <input type="hidden" name="cust_id" class="adds" value="{$list.cust_id}" data-url="{:U('Orderpay/ad_form?id='.$list['id'].'&cust_id='.$list['cust_id'])}">
 						</td>
 						<td>{$list.cname}</td>
 						<td>{$list.money}元</td>

@@ -51,7 +51,7 @@ class OrderModel extends Model{
 		/*控制数据查询条数*/
 		$data['order_list']=$this->table('erp_order as oe,erp_user as ur,erp_customer as cr,erp_product as pt')
 					->where($where)
-					->field("oe.id as id,ur.realname as uname,cr.`name` as cname,cr.contacts as contacts,cr.phone as phone,pt.`name` as pname,pt.`id` as pid,oe.total_fees,oe.expired_time as expired_time,oe.`check`,oe.status as status")
+					->field("oe.id as id,ur.realname as uname,cr.id as cust_id,cr.`name` as cname,cr.contacts as contacts,cr.phone as phone,pt.`name` as pname,pt.`id` as pid,oe.total_fees,oe.expired_time as expired_time,oe.`check`,oe.status as status")
 					->limit($page->firstRow.','.$page->listRows)->select();	
 		return $data;
 	}	

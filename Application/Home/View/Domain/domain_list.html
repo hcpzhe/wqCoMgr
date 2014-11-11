@@ -43,9 +43,7 @@
 					function Detailed(){
 						$("input[name='domain_id']").each(function(){
 							if($(this).attr("checked")=="checked"){								
-								var id=$(this).val();								
-								var url="__URL__-domain_detailed-id-"+id;
-	                            location.href=url;
+								location.href=$(this).next(".cust_id").attr('data-url');
 								}
 							});
 					}
@@ -53,9 +51,7 @@
 					function Edit(){
 						$("input[name='domain_id']").each(function(){
 							if($(this).attr("checked")=="checked"){								
-								var id=$(this).val();								
-								var url="__URL__-domain_edit-id-"+id;
-	                            location.href=url;
+								location.href=$(this).nextAll(".edit").attr('data-url');
 								}
 							});
 					}
@@ -63,9 +59,7 @@
 					function Dom_ren_app(){
 						$("input[name='domain_id']").each(function(){
 							if($(this).attr("checked")=="checked"){									
-								var id=$(this).val();
-								var url="__MODULE__-Domren-apply_renewal-id-"+id;
-	                            location.href=url;
+								location.href=$(this).nextAll(".renewal").attr('data-url');			
 								}
 							});
 					}
@@ -73,9 +67,7 @@
 					function Domain_del(){
 						$("input[name='domain_id']").each(function(){
 							if($(this).attr("checked")=="checked"){									
-								var id=$(this).val();
-								var url="__MODULE__-Domain-domain_del-id-"+id;
-	                            location.href=url;
+								location.href=$(this).nextAll(".del").attr('data-url');	
 								}
 							});
 					}
@@ -111,7 +103,10 @@
                   <tr height="30">
                      <td width="80" align="center">
                         <input type="checkbox" name="domain_id" value="{$data.id}">
-                        <input type="hidden" name="cust_id" value="{$data.cust_id}">
+                        <input type="hidden" name="cust_id" class="cust_id" value="{$data.cust_id}" data-url="{:U('Domain/domain_detailed?id='.$data['id'].'&cust_id='.$data['cust_id'])}">
+                        <input type="hidden" class="edit" value="{$data.cust_id}" data-url="{:U('Domain/domain_edit?id='.$data['id'].'&cust_id='.$data['cust_id'])}">
+                        <input type="hidden" class="renewal" value="{$data.cust_id}" data-url="{:U('Domren/apply_renewal?id='.$data['id'].'&cust_id='.$data['cust_id'])}">
+                        <input type="hidden" class="del" value="{$data.cust_id}" data-url="{:U('Domain/domain_del?id='.$data['id'].'&cust_id='.$data['cust_id'])}">
                      </td>
                      <td width="130" align="center">{$data.domain|mb_substr=0,30}</td>
                      <td width="110" align="center">{$data.service|mb_substr=0,27}</td>
@@ -119,7 +114,7 @@
                      <td width="160" align="center">{:date('Y/m/d H:i:s',$data['expired_time'])}</td>
                      <td width="100" align="center">                        
                         <!-- <if condition="$data['check'] eq -1 "> -->拒绝
-                        <!-- <elseif condition="$data['check'] eq 0 " /> --><a href="{:U('Domain/check?id='.$data['id'])}">待审</a>
+                        <!-- <elseif condition="$data['check'] eq 0 " /> --><a href="{:U('Domain/check?id='.$data['id'].'& cust_id='.$data['cust_id'])}">待审</a>
                         <!-- <else /> --> 通过<!-- </if> -->  
                      </td>
                   </tr>                         

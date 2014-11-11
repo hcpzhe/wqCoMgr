@@ -34,6 +34,12 @@ class OrderrenewalController extends HomeBaseController{
 	}
 	/** 续费申请表单rene */
 	public function apy_ren($id){
+		if (!IS_ROOT){ //非超管
+			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			if(!in_array($id,$cust_id)){
+				$this->error('您没有该公司的权限，不能进行相关操作！');
+			}
+		}
 		$order=new OrderModel();
 		$this->data=$order->orderinfo($id);
 		/*查询订单续费申请表中是否已经有记录*/
@@ -70,6 +76,13 @@ class OrderrenewalController extends HomeBaseController{
 	}
 	/** 申请订单续费申请 */
 	public function checked($id){
+		if (!IS_ROOT){ //非超管
+			$ids = (int)I('cust_id');   //被选中要进行操作的id
+			$cust_id = session('cust_id');   //登录人拥有的客户权限id
+			if(!in_array($ids,$cust_id)){
+				$this->error('您没有该公司的权限，不能进行相关操作！');
+			}
+		}
 		$orderren=new Order_renewalModel();
 		$map['check']=1;
 		$map['check_time']=time();
