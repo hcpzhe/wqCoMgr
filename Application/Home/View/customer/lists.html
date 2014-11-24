@@ -1,147 +1,115 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en"><head>
+<meta charset="utf-8">
 <title>客户列表</title>
-<link href="__CSS__/home.css" rel="stylesheet" type="text/css">
-<link href="__CSS__/style.css" rel="stylesheet" type="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="__CSS__/index.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css" media="screen">
 <script type="text/javascript" src="__JS__/jquery.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
 <script type="text/javascript">	 
-	                //查看详细   跳转 
-					function Detailed(){
-						$("input[name='s2[]']").each(function(){
-							if($(this).attr("checked")=="checked"){								
-								var id=$(this).val();								
-								var url="__URL__-detailed-id-"+id;
-	                            location.href=url;
-								}
-							});
+		//查看详细   跳转 
+		function Detailed(){
+			$("input[name='s2[]']").each(function(){
+				if($(this).attr("checked")=="checked"){								
+					var id=$(this).val();							
+					var url="__URL__-detailed-id-"+id;
+					location.href=url;
 					}
-					//编辑客户信息   跳转 
-					function Edit(){
-						$("input[name='s2[]']").each(function(){
-							if($(this).attr("checked")=="checked"){								
-								var id=$(this).val();								
-								var url="__URL__-edit-id-"+id;
-	                            location.href=url;
-								}
-							});
+				});
+		}
+		//编辑客户信息   跳转 
+		function Edit(){
+			$("input[name='s2[]']").each(function(){
+				if($(this).attr("checked")=="checked"){								
+					var id=$(this).val();								
+					var url="__URL__-edit-id-"+id;
+					location.href=url;
 					}
-					//添加订单   跳转 
-					function Add_order(){
-						$("input[name='s2[]']").each(function(){
-							if($(this).attr("checked")=="checked"){								
-								var id=$(this).val();								
-								var url="__MODULE__-Order-add_order_form-id-"+id;
-	                            location.href=url;
-								}
-							});
+				});
+		}
+		//添加订单   跳转 
+		function Add_order(){
+			$("input[name='s2[]']").each(function(){
+				if($(this).attr("checked")=="checked"){								
+					var id=$(this).val();								
+					var url="__MODULE__-Order-add_order_form-id-"+id;
+					location.href=url;
 					}
-					//添加拜访记录   跳转 
-					function Addvisit(){
-						$("input[name='s2[]']").each(function(){
-							if($(this).attr("checked")=="checked"){								
-								var id=$(this).val();								
-								var url="__MODULE__-Customervisit-addvisit-cust_id-"+id;
-	                            location.href=url;
-								}
-							});
+				});
+		}
+		//添加拜访记录   跳转 
+		function Addvisit(){
+			$("input[name='s2[]']").each(function(){
+				if($(this).attr("checked")=="checked"){								
+					var id=$(this).val();								
+					var url="__MODULE__-Customervisit-addvisit-cust_id-"+id;
+					location.href=url;
 					}
-					//权限分配列表   跳转 
-					function Authorization(){
-						$("input[name='s2[]']").each(function(){
-							if($(this).attr("checked")=="checked"){								
-								var id=$(this).val();								
-								var url="__MODULE__-Usercustprod-lists-cust_id-"+id;
-	                            location.href=url;
-								}
-							});
+				});
+		}
+		//权限分配列表   跳转 
+		function Authorization(){
+			$("input[name='s2[]']").each(function(){
+				if($(this).attr("checked")=="checked"){								
+					var id=$(this).val();								
+					var url="__MODULE__-Usercustprod-lists-cust_id-"+id;
+					location.href=url;
 					}
-	           </script>
+				});
+		}
+</script>
 </head>
 <body>
-<div style="width:100%; overflow:hidden; background: #f2f2f2;">
-<div class="b right_next">
-  <table width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tbody>
-      <tr>
-        <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>客户列表</font></span></td>
-      </tr>
-      <tr>
-        <td height="30"></td>
-      </tr>
-      <tr>
-        <td><font class="tishi">头部提示信息：公司名称只能选择一个，若多选以最后一个为准！</font></td>
-      </tr>
-      <tr>
-        <td height="30"></td>
-      </tr>
-       <tr>
-        <td height="40">
-              <span id="cust_search">
-	           <form action="{:U('Customer/lists?p=1')}" method="get">
-	                                        搜索：<select name="key" class="search">                                       
-	                  <option value="1">公司名称</option>   
-	                  <option value="2">录入人</option>                      
-	                </select>
-	                <input type="text" name="name" class="search" value="" />	                                        
-	                <input type=submit value="搜索" class="button_submit" />
-	           </form> 	                                         
-                <a href="javascript:void(0)" class="button_submit" onclick="Detailed();">查看详细</a>
-                <a href="javascript:void(0)" class="button_submit" onclick="Edit();">编辑</a> 
-                <a href="javascript:void(0)" class="button_submit" onclick="Add_order();">添加订单</a>
-                <a href="javascript:void(0)" class="button_submit" onclick="Addvisit();">添加拜访</a>  
-                <a href="javascript:void(0)" class="button_submit" onclick="Authorization();">权限分配</a>                                           
-           </span>   
-        </td>
-      </tr>
-      <tr>
-        <td height="10"></td>
-      </tr>
-      <tr>
-        <td align="center">                     
-            <table width="752" border="0" class="cust_list">           
-                  <tr class="liebiao_title">
-                    <th width="115">请选择</th>
-                    <th width="235">公司名称</th>
-                    <th width="125">联系人</th>
-                    <th width="150">联系电话</th>
-                    <th width="125">录入人</th>
-                  </tr>
-               </table>
-           </td>
-      </tr>     
-      <tr>
-        <td align="center"> 
-          <!-- <foreach name="data['list']" item="data1"> -->          
-            <table width="752" border="0" cellspacing="0" cellpadding="0" class="com_list">                                                 
-                  <tr height="30">
-                     <td width="115" align="center">
-                       <input type="checkbox" name="s2[]" value="{$data1.id}" id="check">
-                     </td>
-                     <td width="235">{$data1.cname|mb_substr=0,54}</td>
-                     <td width="125" align="center">{$data1.contacts}</td>
-                     <td width="150" align="center">{$data1.phone}</td>
-                     <td width="125" align="center">{$data1.uname}</td>
-                  </tr>                         
-              </table>
-             <!-- </foreach> -->
-           </td>
-      </tr> 
-                            
-      <tr>
-        <td align="center">                     
-          <table width="752" border="0" style="display: block; border-bottom: 1px solid #ccc; border-right: 1px solid #ccc; border-left: 1px solid #ccc;">
-            <tr style="display: block;">
-              <td height="40" style="display: block; text-align: center;line-height: 40px;">{$data[show]}</td>
+<div style="width:100%; overflow:hidden;">
+  <div class="b right_next">
+    <h1 class="page-header">客户列表</h1>
+    <div class="top_search">
+         <form action="{:U('Customer/lists?p=1')}" method="get">
+                  搜索：
+                  <select name="key" class="form-control">                                       
+                  <option value="1">公司名称</option>   
+                  <option value="2">录入人</option>                      
+                </select>
+                <input type="text" name="name" class="form-control" placeholder="输入您想要查询的内容">
+                <input type="submit" value="搜索" class="btn btn-primary" />               
+        </form> 	                                         
+        <a href="javascript:void(0)" class="btn btn-primary" onClick="Detailed();">查看详细</a>
+        <a href="javascript:void(0)" class="btn btn-primary" onClick="Edit();">编辑</a> 
+        <a href="javascript:void(0)" class="btn btn-primary" onClick="Add_order();">添加订单</a>
+        <a href="javascript:void(0)" class="btn btn-primary" onClick="Addvisit();">添加拜访</a>  
+        <a href="javascript:void(0)" class="btn btn-primary" onClick="Authorization();">权限分配</a>
+     </div>
+     <div class="table-responsive">
+        <table class="table table-striped table-bordered table-hover table_center">
+          <thead>
+            <tr>
+               <th>请选择</th>
+               <th>公司名称</th>
+               <th>联系人</th>
+               <th>联系电话</th>
+               <th>录入人</th>
             </tr>
-          </table>
-        </td>
-      </tr>        
-     </tbody>
-  </table>
-</div>
+          </thead>
+          <tbody>
+           <!-- <foreach name="data['list']" item="data1"> -->  
+             <tr>
+              <td><input type="checkbox" name="s2[]" value="{$data1.id}" id="check"></td>
+              <td class="text_left">{$data1.cname|mb_substr=0,54}</td>
+              <td>{$data1.contacts}</td>
+              <td>{$data1.phone}</td>
+              <td>{$data1.uname}</td>
+             </tr>                         
+         <!-- </foreach> -->
+          </tbody>
+          <tfoot>
+             <tr>
+               <td colspan="5" align="center" class="page">{$data[show]}</td>
+             </tr>
+          </tfoot>
+        </table>
+      </div>
+   </div>
 </div>
 </body>
 </html>

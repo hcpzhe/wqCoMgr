@@ -9,13 +9,13 @@ img{ border:0; }
 table{ margin:0 auto;}
 tbody{ display: block;}
 form{ line-height:30px; font-size:14px; letter-spacing: 1px;}
-.b{ border:1px solid #CCCCCC; }
+.b{ border:1px solid #FFF !important; }
 .pad10{ padding:10px; }
 .padTop10{ padding-top:10px; }
 .fontred{ color:red; padding-left:10px; padding-right: 10px;}
 
 /***右边部分样式**/
-.right_next{ min-height:600px; width:765px; margin:0 auto; background:#FFF !important;}
+.right_next{ min-height:600px; width:98% !important; margin:0 auto; background:#FFF !important;}
 .r_c1_title{  height: 38px; color:#FFF; border-bottom:1px solid #ccc; }
 .r_c1_title span{width: 763px; height: 38px; display: block; float: left; margin: 1px; background: #1C86CF; font-size:15px !important; line-height:38px;}
 .r_c1_title font{ float:left;}

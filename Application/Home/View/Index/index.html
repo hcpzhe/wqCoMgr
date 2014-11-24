@@ -1,122 +1,152 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en"><head>
+<meta charset="utf-8">
 <title>洛阳万谦网络科技有限公司</title>
-<link href="__CSS__/style.css" rel="stylesheet" type="text/css">
-<script type="text/javascript" src="__JS__/jquery.js"></script>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" language="javascript" src="__JS__/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css" media="screen">
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<script type="text/javascript" language="javascript" src="__JS__/bootstrap.min.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
 </head>
-<body bgcolor="f2f2f2">
-<div style="height:83px;  background:url(__IMG__/topBg.jpg);"></div>
-<div class="wrapper">
-    <!-- content -->
-    <div class="content">
-        <!-- menu -->
-        <div class="Menu">            
-            <div style="background:url(__IMG__/top_img.jpg) no-repeat; width:217px; height:8px;">
-            </div>            
-            <dl id="_menuteam">
-                <dt class="slides"><span>客户管理</span></dt>
-                <dd><a href="{:U('Customer/lists')}" target="main"><span></span>客户列表</a></dd>
-                <dd><a href="{:U('Customer/add')}" target="main"><span></span>添加客户</a></dd>
-                <dd><a href="{:U('Customervisit/visitlists')}" target="main"><span></span>拜访记录</a></dd>
-            </dl>
-            <dl id="_menubusiness">
-                <dt class="slides"><span>订单管理</span></dt>
-                <dd><a href="{:U('Order/order_list')}" target="main"><span></span>订单列表</a></dd>
-                <dd><a href="{:U('Order/add_order_form')}" target="main"><span></span>添加订单</a></dd>
-                <dd><a href="{:U('Orderpay/order_pay_record')}" target="main"><span></span>订单付款记录</a></dd>
-	        </dl>
-            <dl id="_menufinance">
-                <dt class="slides"><span>开发管理</span></dt>
-                <dd><a href="{:U('Depord/dep_list')}" target="main"><span></span>网站开发订单</a></dd>
-                <dd><a href="{:U('Seoord/seo_list')}" target="main"><span></span>优化订单</a></dd>
-	        </dl>
-            <dl id="_menulog">
-                <dt class="slides"><span>续费管理</span></dt>
-                <dd><a href="{:U('Order/renewal_order')}" target="main"><span></span>待续费订单</a></dd>
-                <dd><a href="{:U('Orderrenewal/or_list')}" target="main"><span></span>订单续费申请</a></dd>
-                <dd><a href="{:U('Domren/dom_ren_app')}" target="main"><span></span>域名续费申请</a></dd>
-                <dd><a href="{:U('Domain/domain_list')}" target="main"><span></span>域名库</a></dd>
-	        </dl>
-	        <dl id="_peoples">
-                <dt class="slides"><span>综合管理</span></dt>
-                <dd><a href="{:U('Depart/depa_list')}" target="main"><span></span>部门管理</a></dd>
-                <dd><a href="{:U('Product/pro_list')}" target="main"><span></span>产品管理</a></dd>
-                <dd><a href="{:U('Article/art_list')}" target="main"><span></span>文章管理</a></dd>
-            </dl>
-            <dl id="_results">
-                <dt class="slides"><span>业绩管理</span></dt>
-                <dd><a href="{:U('Results/reslist')}" target="main"><span></span>业绩清单</a></dd>
-                <dd><a href="{:U('Results/show_res')}" target="main"><span></span>业绩排行</a></dd>
-                <dd><a href="{:U('/')}" target="main"><span></span>业绩统计</a></dd>
-            </dl>            
-            <dl id="_menuconfig">
-                <dt class="slides"><span>系统管理</span></dt>
-                <dd><a href="{:U('User/search_list')}" target="main"><span></span>用户管理</a></dd>
-                <dd><a href="{:U('Authgroup/user_group')}" target="main"><span></span>用户组管理</a></dd>
-                <dd><a href="{:U('Authrule/all_rule')}" target="main"><span></span>权限列表</a></dd>
-                <dd><a href="{:U('Userdepartmgr/lis')}" target="main"><span></span>管理者列表</a></dd>
-            </dl> 
-            <div style="background:url(__IMG__/bottom_img.jpg) no-repeat; width:217px; height:11px;">
-            </div>
-        </div>
-        <!-- end menu -->
-        <div class="right">
-        <iframe id="main" onload="Javascript:SetCwinHeight()" name="main" src="{:U('Index/welcome')}" border="0" scrolling="no" width="100%" frameborder="no" height="auto"></iframe>
-
-
-        </div>
-        <div style="clear:both;"></div>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand z_navbar_brand" href="#"></a>
     </div>
-    <!-- end content -->
-    <!-- foot -->
-	<div class="foot">
-          <div class="footer">Copyright&copy;2010 &nbsp;&nbsp; 万谦网络科技&nbsp;&nbsp;  All Rights Reserved  &nbsp;&nbsp;版权所有 </div> 
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">密码修改</a></li>
+        <li><a href="{:U('Common/logout')}">退出</a></li>
+        <li><a href="#"></a></li>
+      </ul>          
     </div>
-    <!-- end foot -->
+  </div>
 </div>
-<script type="text/javascript">
-function SetCwinHeight() {
-    var iframeid = document.getElementById("main"); //iframe id
-    if (document.getElementById) {
-        if (iframeid && !window.opera) {
-            if (iframeid.contentDocument && iframeid.contentDocument.body.scrollHeight) {
-                iframeid.height = iframeid.contentDocument.body.scrollHeight;
-            } else if (iframeid.Document && iframeid.Document.body.offsetHeight) {
-                iframeid.height = iframeid.Document.body.offsetHeight;
-            }
-        }
-    }
-}
-$(function ($) {
-	$(".bat_a_handle").click(function(){
-		$(this).RSsubmit({success_alert:true,reload:true});
-		return false;
-	});
-	$("#main").resize(function(){
-		SetCwinHeight();
-	})
-	
-    /*MenuShow("_menuindex");
-    $("#righttitle").css("display", "none");*/
-    
-    $(".Menu dl dt").click(function () {
-        MenuShow($(this).parent().attr("id"));
-    });
-    $(".table tbody tr").mouseover(function () { $(this).css("backgroundColor", ""); });
-    $(".table tbody tr").mouseout(function () { $(this).css("backgroundColor", ""); });
-});
-function MenuShow(id) {
-    $(".Menu dl").find("dd").slideUp(500);
-    $(".Menu dl dt").attr("class", "slides");
-    $("#" + id + " dt").attr("class", "slides2");
-    $("#" + id).find("dd").slideDown(300);
-	$(".Menu dl").find("dd:last").css("padding-bottom","10px");
-}
-</script>
+<!--中间部分-->
+<div class="container-fluid">
+  <div class="grid-c2 clearfix"> 
+   <div class="col-main">
+      <div class="col-main-warp">
+        <div class="test-box">
+           <div class="embed-responsive embed-responsive-16by9">
+              <iframe id="main" name="main" class="embed-responsive-item" src="{:U('Index/welcome')}"></iframe>
+           </div>
+        </div>
+      </div>
+   </div>
+   <div class="col-side">
+      <div class="test-box-big sidebar">         
+          <div class="panel-group zhedie" id="accordion">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title z_panel_title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">客户管理</a>
+                  </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in">
+                  <div class="panel-body">
+                      <a href="{:U('Customer/lists')}" target="main" class="list-group-item z_list-group-item">客户列表</a>
+                      <a href="{:U('Customer/add')}" target="main" class="list-group-item z_list-group-item">添加客户</a>
+                      <a href="{:U('Customervisit/visitlists')}" target="main" class="list-group-item z_list-group-item">拜访记录</a>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title z_panel_title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">订单管理</a>
+                  </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      <a href="{:U('Order/order_list')}" target="main" class="list-group-item z_list-group-item">订单列表</a>
+                      <a href="{:U('Order/add_order_form')}" target="main" class="list-group-item z_list-group-item">添加订单</a>
+                      <a href="{:U('Orderpay/order_pay_record')}" target="main" class="list-group-item z_list-group-item">订单付款记录</a>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title z_panel_title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">开发管理</a>
+                  </h4>
+                </div>
+                <div id="collapseFour" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      <a href="{:U('Depord/dep_list')}" target="main" class="list-group-item z_list-group-item">网站开发订单</a>
+                      <a href="{:U('Seoord/seo_list')}" target="main" class="list-group-item z_list-group-item">优化订单</a>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title z_panel_title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">续费管理</a>
+                  </h4>
+                </div>
+                <div id="collapseFive" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      <a href="{:U('Order/renewal_order')}" target="main" class="list-group-item z_list-group-item">待续费订单</a>
+                      <a href="{:U('Orderrenewal/or_list')}" target="main" class="list-group-item z_list-group-item">订单续费申请</a>
+                      <a href="{:U('Domren/dom_ren_app')}" target="main" class="list-group-item z_list-group-item">域名续费申请</a>
+                      <a href="{:U('Domain/domain_list')}" target="main" class="list-group-item z_list-group-item">域名库</a>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title z_panel_title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">综合管理</a>
+                  </h4>
+                </div>
+                <div id="collapseSix" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      <a href="{:U('Depart/depa_list')}" target="main" class="list-group-item z_list-group-item">部门管理</a>
+                      <a href="{:U('Product/pro_list')}" target="main" class="list-group-item z_list-group-item">产品管理</a>
+                      <a href="{:U('Article/art_list')}" target="main" class="list-group-item z_list-group-item">文章管理</a>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title z_panel_title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">业绩管理</a>
+                  </h4>
+                </div>
+                <div id="collapseSeven" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      <a href="{:U('Results/reslist')}" target="main" class="list-group-item z_list-group-item">业绩清单</a>
+                      <a href="{:U('Results/show_res')}" target="main" class="list-group-item z_list-group-item">业绩排行</a>
+                      <a href="{:U('/')}" target="main" class="list-group-item z_list-group-item">业绩统计</a>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title z_panel_title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseEight">系统管理</a>
+                  </h4>
+                </div>
+                <div id="collapseEight" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      <a href="{:U('User/search_list')}" target="main" class="list-group-item z_list-group-item">用户管理</a>
+                      <a href="{:U('Authgroup/user_group')}" target="main" class="list-group-item z_list-group-item">用户组管理</a>
+                      <a href="{:U('Authrule/all_rule')}" target="main" class="list-group-item z_list-group-item">权限列表</a>
+                      <a href="{:U('Userdepartmgr/lis')}" target="main" class="list-group-item z_list-group-item">管理者列表</a>
+                  </div>
+                </div>
+              </div>
+          </div>
+       </div>  
+    </div>
+  </div>
+</div>
+<!--中间部分结束-->
 
-
+<!--<div class="foot">
+          <div class="footer">Copyright&copy;2010 &nbsp;&nbsp; 万谦网络科技&nbsp;&nbsp;  All Rights Reserved  &nbsp;&nbsp;版权所有 </div> 
+</div>-->
 </body>
 </html>

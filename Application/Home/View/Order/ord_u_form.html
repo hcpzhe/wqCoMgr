@@ -1,98 +1,85 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>订单列表</title>
-<link href="__CSS__/style.css" rel="stylesheet" type="text/css">
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>订单信息修改</title>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="__CSS__/index.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css" media="screen">
 <script type="text/javascript" src="__JS__/jquery.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
 </head>
 <body>
-<div style="width:100%; overflow:hidden; background: #f2f2f2;">
-   <div class="center_content">
-      <table width="755" bgcolor="#fff" cellpadding="0" cellspacing="0">
+<div style="width:100%; overflow:hidden;">
+   <div class="b right_next">
+     <h1 class="page-header">订单信息修改</h1>
+      <div class="table-responsive">
+        <!-- 订单详情开始 -->            
+        <form method="post" action="{:U('Order/up?id='.$orderinfo['id'])}">
+        <table class="table table-bordered table-hover">
           <tr>
-            <td class="menu"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32" /><font>订单详情</font></span></td>
+            <th colspan="4">基本信息<a href="{:U('Order/order_info?id='.$orderinfo['id'])}" style="float:right;margin-right: 20px;">返回</a></th>
+          </tr>	
+          <tr>
+            <td width="20%">销售专员</td>
+            <td width="30%">{$orderinfo.uname}</td>
+            <td width="20%">审核结果</td>
+            <td width="30%">
+               <!-- <if condition="$orderinfo.check eq 1"> -->通过
+               <!-- <elseif condition="$orderinfo.check eq 0"/> -->待审
+               <!-- <else/> -->拒绝<!-- </if> -->
+            </td>   
           </tr>
           <tr>
-            <td height="10"></td>
+            <td>合同编号</td>
+            <td>{$orderinfo.id}</td>
+            <td>公司名称</td>
+            <td>{$orderinfo.cname}</td>
           </tr>
           <tr>
-            <td class="menu_content">
-				<!-- 订单详情开始 -->            
-				<form method="post" action="{:U('Order/up?id='.$orderinfo['id'])}">
-				<table width="755"  cellpadding="0" cellspacing="0" class="order_info">
-				  <tr><th colspan="4">基本信息<a href="{:U('Order/order_info?id='.$orderinfo['id'])}" style="float:right;margin-right: 20px;">返回</a></th></tr>	
-				  <tr>
-				    <td align="right">销售专员：</td>
-				    <td>{$orderinfo.uname}</td>
-				    <td align="right">审核结果：</td>
-				    <td>
-				       <!-- <if condition="$orderinfo.check eq 1"> -->通过
-				       <!-- <elseif condition="$orderinfo.check eq 0"/> -->待审
-				       <!-- <else/> -->拒绝<!-- </if> -->
-				    </td>   
-				  </tr>
-				  <tr>
-				    <td align="right">合同编号：</td>
-				    <td>{$orderinfo.id}</td>
-				    <td align="right">公司名称：</td>
-				    <td>{$orderinfo.cname}</td>
-				  </tr>
-				  <tr>
-				    <td align="right">购买产品：</td>
-				    <td>
-				    <select name='pid'>
-				    	<option value="{$p_list.id}">{$orderinfo.pname}</option>
-				    <!-- <foreach  name="p_list" item="p_list"> -->
-				    	<option value="{$p_list.id}">{$p_list.name}</option>
-				    <!-- </foreach> -->	
-				    </select>
-				    </td>
-				    <td align="right">订单金额：</td>
-				    <td><input type="text" name="money" value="{$orderinfo.money}" size="10"> 元</td>
-				  </tr>
-				  <tr>
-				    <td align="right">联系电话：</td>
-				    <td>{$orderinfo.phone}</td>
-				    <td align="right">传　　真：</td>
-				    <td>{$orderinfo.fx}</td>
-				  </tr>
-				  <tr>
-				    <td align="right">联 系 人：</td>
-				    <td>{$orderinfo.contacts}</td>
-				    <td align="right">订单状态：</td>
-				    <td><span class="fontlv">
-				    	<!-- <if condition="$orderinfo.status eq 1"> -->正常
-				    	<!-- <elseif condition="$orderinfo.status eq 0"/> -->禁用
-				    	<!-- </if> -->
-				    </span></td>
-				  </tr>
-				  <tr>
-				  	<td align="right">签单日期：</td>
-				    <td><span class="fontqing">{:date('Y/m/d H:i:s',$orderinfo['signed_time'])}</span></td>	
-				    <td align="right">到期时间：</td>
-				    <td><span class="fontqing"><input type="text" name="time" value="{:date('Y/m/d H:i:s',$orderinfo['extime'])}"></span></td>
-				  </tr>
-				  <tr>
-				    <td align="right">备注信息：</td>
-				    <td colspan="3">{$orderinfo.remark}</td>
-				  </tr>
-				  <tr>
-				    <td colspan="4" align="center"><input type="submit" value="保存" class="button_submit"></td>
-				  </tr>
-				  <tr>
-				    <td colspan="4" height="20"></td>
-				  </tr>
-				</table>	
-				</form>
-				<!-- 订单详情结束 -->    
-			</td>
+            <td>购买产品</td>
+            <td>
+            <select name='pid' class="form-control">
+                <option value="{$p_list.id}">{$orderinfo.pname}</option>
+            <!-- <foreach  name="p_list" item="p_list"> -->
+                <option value="{$p_list.id}">{$p_list.name}</option>
+            <!-- </foreach> -->	
+            </select>
+            </td>
+            <td>订单金额</td>
+            <td><input type="text" name="money" value="{$orderinfo.money}" size="10" class="form-control"> 元</td>
           </tr>
           <tr>
-            <td height="20"></td>
+            <td>联系电话</td>
+            <td>{$orderinfo.phone}</td>
+            <td>传　　真</td>
+            <td>{$orderinfo.fx}</td>
           </tr>
-    </table> 
+          <tr>
+            <td>联 系 人</td>
+            <td>{$orderinfo.contacts}</td>
+            <td>订单状态</td>
+            <td>
+                <!-- <if condition="$orderinfo.status eq 1"> -->正常
+                <!-- <elseif condition="$orderinfo.status eq 0"/> -->禁用
+                <!-- </if> -->
+            </td>
+          </tr>
+          <tr>
+            <td>签单日期</td>
+            <td>{:date('Y/m/d H:i:s',$orderinfo['signed_time'])}</td>	
+            <td>到期时间</td>
+            <td><input type="text" name="time" value="{:date('Y/m/d H:i:s',$orderinfo['extime'])}" class="form-control"></td>
+          </tr>
+          <tr>
+            <td>备注信息</td>
+            <td colspan="3">{$orderinfo.remark}</td>
+          </tr>
+          <tr>
+            <td colspan="4" align="center"><input type="submit" value="保存" class="btn btn-primary"></td>
+          </tr>
+        </table>	
+        </form>
+        <!-- 订单详情结束 -->    
    </div>
 </div>   
 </body>

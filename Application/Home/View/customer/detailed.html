@@ -1,25 +1,174 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en"><head>
+<meta charset="utf-8">
 <title>客户详细信息</title>
-<link href="__CSS__/home.css" rel="stylesheet" type="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="__CSS__/index.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css" media="screen">
 <script type="text/javascript" src="__JS__/jquery.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
 </head>
 <body>
-<div style="width:100%; overflow:hidden; background: #f2f2f2;">
-<div class="b right_next">
-  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+<div style="width:100%; overflow:hidden;">
+  <div class="b right_next">
+     <h1 class="page-header">客户详细信息</h1>
+     <!-- <foreach name="list" item="list"> -->
+     <div class="top_search">
+         <font style="padding-left: 20px;"> 操作： </font>                                      
+        <a href="{:U('Customer/edit?id='.$list['id'])}" class="btn btn-primary">信息修改</a>
+        <a href="{:U('Customervisit/addvisit?cust_id='.$list['id'])}" class="btn btn-primary">添加拜访</a>
+        <a href="{:U('Order/add_order_form?id='.$list['id'])}" class="btn btn-primary" >添加订单</a> 
+        <a href="{:U('Domain/add_domain?cust_id='.$list['id'])}" class="btn btn-primary">添加域名</a>   
+     </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+         <tbody>
+          <tr>
+             <th colspan="4" align="left">公司信息</th>                    
+          </tr>
+         </tbody>                  
+          <tr>
+            <td width="20%"> 编&nbsp;&nbsp;&nbsp;&nbsp;号 </td>
+            <td width="30%">{$list['id']}</td>
+            <td width="20%">公司名称</td>
+            <td width="30%">{$list['name']}</td>
+          </tr>                 
+          <tr>
+            <td>联 系  人</td>
+            <td>{$list['contacts']}</td>
+            <td>联系电话</td>
+            <td>{$list['phone']}</td>
+          </tr>
+          <tr>
+            <td>传 &nbsp;&nbsp;&nbsp; 真</td>
+            <td>{$list['fax']}</td>
+            <td>地  &nbsp;&nbsp;&nbsp; 址</td>
+            <td>{$list['address']}</td>
+          </tr>
+          <tr>
+            <td> 添  加  人 </td>
+            <td>{$list['realname']}</td>
+            <td>添加时间 </td>
+            <td>{:date('Y/m/d H:i:s',$list['add_time'])}</td>
+          </tr>
+          <tr>
+            <td>备 &nbsp;&nbsp;&nbsp;注</td>
+            <td colspan="3">{$list['remark']}</td>
+          </tr>   
+          <!-- </foreach> -->  
+          
+          <!-- 订单信息 -->
+             <!-- <if condition="$order_list eq '' "> -->
+             <tbody>
+              <tr>
+                 <th colspan="4" align="left" class="red">该公司还未有订单记录！</th>                    
+              </tr>
+             </tbody>
+             <!-- <else /> -->
+             
+            <tbody>
+              <tr>
+                 <th colspan="4" align="left">订单信息</th>                    
+              </tr>
+             </tbody>
+             <!-- <foreach name="order_list" item="order_list"> -->                                            
+              <tr>
+                <td>订单编号</td>
+                <td>{$order_list['id']}</td>
+                <td>签单人员</td>
+                <td>{$order_list['uname']} </td>
+              </tr>                 
+              <tr>
+                <td>签单产品</td>
+                <td>{$order_list['pname']}</td>
+                <td>订单金额</td>
+                <td>{$order_list['total_fees']}</td>
+              </tr>
+              <tr>
+                <td>到期时间</td>
+                <td>{:date('Y/m/d H:i:s',$order_list['expired_time'])}</td>
+                <td>订单状态</td>
+                <td>
+                    <!-- <if condition="$order_list['status'] eq -1 "> -->删除
+                    <!-- <elseif condition="$order_list['status'] eq 0 " /> -->禁用
+                    <!-- <else /> -->正常<!-- </if> -->
+                </td>
+              </tr>
+              <tr>
+                <td>备 &nbsp;&nbsp;&nbsp; 注</td>
+                <td colspan="3">{$order_list['remark']}</td>
+              </tr>                                          
+             <!-- </foreach> -->
+            <!-- </if> -->
+             
+            <!-- 域名信息 -->
+            <!-- <if condition="$domain_list eq '' "> -->
+            <tbody>
+              <tr>
+                 <th colspan="4" align="left" class="red">该公司还未有域名！</th>                    
+              </tr>
+            </tbody>
+            <!-- <else /> -->             
+            <tbody>
+              <tr>
+                 <th colspan="4" align="left">域名信息</th>                    
+              </tr>
+            </tbody> 
+            <!-- <foreach name="domain_list" item="domain_list"> -->               
+              <tr>
+                <td width="149"> 域  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 名 </td>
+                <td width="222">{$domain_list['domain']}</td>
+                <td width="149">域名运营商</td>
+                <td width="222">{$domain_list['service']}</td>
+              </tr>                 
+              <tr>
+                <td>注 册 时 间</td>
+                <td>{:date('Y/m/d H:i:s',$domain_list['reg_time'])}</td>
+                <td>过 期 时 间</td>
+                <td>{:date('Y/m/d H:i:s',$domain_list['expired_time'])}</td>
+              </tr>
+              <tr>
+                <td>域 名 状 态</td>
+                <td>
+                   <!-- <if condition="$domain_list['status'] eq -1 "> --><!--删除-->
+                   <!-- <elseif condition="$domain_list['status'] eq 0 " /> -->禁用  <font color="red"> 该域名已过期，请抓紧时间续费！</font>
+                   <!-- <else /> -->正常<!-- </if> -->
+                </td>
+                <td>审 核 状 态</td>
+                <td>
+                   <!-- <if condition="$domain_list['check'] eq -1 "> -->拒绝
+                   <!-- <elseif condition="$domain_list['check'] eq 0 " /> --><a href="{:U('Domain/check?id='.$domain_list['id'])}">待审</a>
+                   <!-- <else /> -->通过<!-- </if> -->
+               </td>
+              </tr> 
+               <tr>
+                <td>审 核 时 间</td>
+                <td>
+                  <!-- <if condition="$domain_list['check'] egt 1 "> -->{:date('Y/m/d H:i:s',$domain_list['check_time'])}
+                  <!-- <else /> --><font color="red">域名还未通过审核</font><!-- </if> -->
+                </td>  
+                <td>域 名 归 属</td>
+                <td>
+                   <!-- <if condition="$domain_list['doamin_user'] eq 0 "> -->公司
+                   <!-- <else /> -->客户<!-- </if> -->
+                </td>                 
+              </tr>                                  
+
+            <!-- </foreach> -->  
+           <!-- </if> -->     
+          
+           
+        </table>
+ <!-- <table width="100%" border="0" cellspacing="0" cellpadding="0">
     <tbody>
       <tr>
         <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>客户详细信息</font></span></td>
       </tr>
       <tr>
         <td height="10"></td>
-      </tr>
+      </tr> -->
        <!-- <foreach name="list" item="list"> -->
-       <tr>
+      <!-- <tr>
         <td height="40">
               <span id="cust_search">
 	           	<font style="padding-left: 20px;"> 操作： </font>                                      
@@ -34,9 +183,9 @@
         <td height="10"></td>
       </tr>
       <tr>
-        <td align="center">  
+        <td align="center"> --> 
         <!-- 客户详细信息 -->       
-            <table width="750" border="0" class="com_table" cellpadding="0" cellspacing="0">
+           <!-- <table width="750" border="0" class="com_table" cellpadding="0" cellspacing="0">
                   <tr style="height: 40px;">
                     <th colspan="4" align="left">公司信息</th>                    
                   </tr>                  
@@ -70,20 +219,20 @@
                   <tr>
                     <td>备 &nbsp;&nbsp;&nbsp;注</td>
                     <td colspan="3">{$list['remark']}</td>
-                  </tr>   
+                  </tr>   -->
                   <!-- </foreach> -->                 
-            </table>
+            <!--</table>-->
             
-            <!-- <if condition="$res eq 0 "> --><font color="red">该公司还未添加拜访记录</font> <br/>
+            <!-- <if condition="$res eq 0 "> --><!--<font color="red">该公司还未添加拜访记录</font> <br/>-->
             <!-- <else /> --><!-- </if> -->
             
             <!-- 订单信息 -->
-             <!-- <if condition="$order_list eq '' "> --><font color="red">该公司还未有订单</font> <br/>
+             <!-- <if condition="$order_list eq '' "> --><!--<font color="red">该公司还未有订单</font> <br/>-->
              <!-- <else /> -->
              
-             <div class="order_title">订单信息</div> 
+             <!--<div class="order_title">订单信息</div> -->
              <!-- <foreach name="order_list" item="order_list"> -->                                                                    
-               <table width="750" border="0" class="com_table" cellpadding="0" cellspacing="0">                                                   
+              <!-- <table width="750" border="0" class="com_table" cellpadding="0" cellspacing="0">                                                   
                   <tr>
                     <td width="150">订单编号</td>
                     <td width="220">{$order_list['id']}</td>
@@ -100,26 +249,26 @@
                     <td>到期时间</td>
                     <td>{:date('Y/m/d H:i:s',$order_list['expired_time'])}</td>
                     <td>订单状态</td>
-                    <td>
-                        <!-- <if condition="$order_list['status'] eq -1 "> -->删除
-                        <!-- <elseif condition="$order_list['status'] eq 0 " /> -->禁用
-                        <!-- <else /> -->正常<!-- </if> -->
-                    </td>
+                    <td>-->
+                        <!-- <if condition="$order_list['status'] eq -1 "> --><!--删除-->
+                        <!-- <elseif condition="$order_list['status'] eq 0 " /> --><!--禁用-->
+                        <!-- <else /> --><!--正常--><!-- </if> -->
+                  <!--  </td>
                   </tr>
                   <tr>
                     <td>备 &nbsp;&nbsp;&nbsp; 注</td>
                     <td colspan="3">{$order_list['remark']}</td>
                   </tr>                                   
-               </table>            
+               </table>  -->          
              <!-- </foreach> -->
             <!-- </if> -->
             
             <!-- 域名信息 -->
-             <!-- <if condition="$domain_list eq '' "> --><font color="red">该公司还未有域名</font> <br/>
+             <!-- <if condition="$domain_list eq '' "> --><!--<font color="red">该公司还未有域名</font> <br/>-->
              <!-- <else /> -->             
-               <div class="order_title">域名信息</div>            
+               <!--<div class="order_title">域名信息</div>        -->    
             <!-- <foreach name="domain_list" item="domain_list"> -->
-             <table width="750" border="0" class="com_table" cellpadding="0" cellspacing="0">                  
+           <!--  <table width="750" border="0" class="com_table" cellpadding="0" cellspacing="0">                  
                   <tr>
                     <td width="149"> 域  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 名 </td>
                     <td width="222">{$domain_list['domain']}</td>
@@ -134,38 +283,38 @@
                   </tr>
                   <tr>
                     <td>域 名 状 态</td>
-                    <td>
-                       <!-- <if condition="$domain_list['status'] eq -1 "> -->删除
-                       <!-- <elseif condition="$domain_list['status'] eq 0 " /> -->禁用  <font color="red"> 该域名已过期，请抓紧时间续费！</font>
-                       <!-- <else /> -->正常<!-- </if> -->
-                    </td>
+                    <td>-->
+                       <!-- <if condition="$domain_list['status'] eq -1 "> --><!--删除-->
+                       <!-- <elseif condition="$domain_list['status'] eq 0 " /> --><!--禁用  <font color="red"> 该域名已过期，请抓紧时间续费！</font>-->
+                       <!-- <else /> --><!--正常--><!-- </if> -->
+                   <!-- </td>
                     <td>审 核 状 态</td>
-                    <td>
-                       <!-- <if condition="$domain_list['check'] eq -1 "> -->拒绝
-                       <!-- <elseif condition="$domain_list['check'] eq 0 " /> --><a href="{:U('Domain/check?id='.$domain_list['id'])}">待审</a>
-                       <!-- <else /> -->通过<!-- </if> -->
-                    </td>
+                    <td>-->
+                       <!-- <if condition="$domain_list['check'] eq -1 "> --><!--拒绝-->
+                       <!-- <elseif condition="$domain_list['check'] eq 0 " /> --><!--<a href="{:U('Domain/check?id='.$domain_list['id'])}">待审</a>-->
+                       <!-- <else /> --><!--通过--><!-- </if> -->
+                   <!-- </td>
                   </tr> 
                    <tr>
                     <td>审 核 时 间</td>
-                    <td>
-                      <!-- <if condition="$domain_list['check'] egt 1 "> -->{:date('Y/m/d H:i:s',$domain_list['check_time'])}
-                      <!-- <else /> --><font color="red">域名还未通过审核</font><!-- </if> -->
-                    </td>  
+                    <td>-->
+                      <!-- <if condition="$domain_list['check'] egt 1 "> --><!--{:date('Y/m/d H:i:s',$domain_list['check_time'])}-->
+                      <!-- <else /> --><!--<font color="red">域名还未通过审核</font>--><!-- </if> -->
+                   <!-- </td>  
                     <td>域 名 归 属</td>
-                    <td>
-                       <!-- <if condition="$domain_list['doamin_user'] eq 0 "> -->公司
-                       <!-- <else /> -->客户<!-- </if> -->
-                    </td>                 
+                    <td>-->
+                       <!-- <if condition="$domain_list['doamin_user'] eq 0 "> --><!--公司-->
+                       <!-- <else /> --><!--客户--><!-- </if> -->
+                    <!--</td>                 
                   </tr>                                  
-            </table> 
+            </table>--> 
             <!-- </foreach> -->  
            <!-- </if> -->                           
-        </td>
+        <!--</td>
       </tr>      
      </tbody>
-  </table>
-</div>
+  </table>-->
+  </div>
 </div>
 </body>
 </html>

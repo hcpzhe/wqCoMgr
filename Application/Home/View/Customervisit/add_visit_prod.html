@@ -1,67 +1,55 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en"><head>
+<meta charset="utf-8">
 <title>沟通记录添加</title>
-<link href="__CSS__/home.css" rel="stylesheet" type="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="__CSS__/index.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css" media="screen">
 <script type="text/javascript" src="__JS__/jquery.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
 </head>
 <body>
-<div style="width:100%; overflow:hidden; background: #f2f2f2;">
-<div class="b right_next">
-  <table width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tbody>
-      <tr>
-        <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>沟通记录添加</font></span></td>
-      </tr>
-      <tr>
-        <td height="30"></td>
-      </tr>
-      <tr>
-        <td align="center">
-           <form action="{:U('Customervisit/visit_prod_insert')}" method="post" onsubmit="$(this).RSsubmit({success_alert:true});return false;">                      
-            <table width="500" border="0">
+<div style="width:100%; overflow:hidden;">
+  <div class="b right_next">
+  <h1 class="page-header">沟通记录添加</h1>
+     <form action="{:U('Customervisit/visit_prod_insert')}" method="post" onSubmit="$(this).RSsubmit({success_alert:true});return false;">                      
+        <table class="table_form">
             <!-- <foreach name="newdata" item="newdata"> -->        
-                  <tr>
-                    <td width="20%">客户名称：</td>
-                    <td width="80%" align="left">{$newdata['cname']}<input type="hidden" name="visit_id" value="{$newdata['visit_id']}"></td>
-                  </tr> 
-                  <tr>
-                  <tr>
-                    <td width="20%">拜访人员：</td>
-                    <td width="80%" align="left">{$newdata['uname']}</td>
-                  </tr> 
-                  <tr>
-                    <td width="20%">拜访时间：</td>
-                    <td width="80%" align="left">{:date('Y/m/d H:i:s',$newdata['visit_time'])}</td>
-                  </tr> 
-                   <tr>
-                    <td width="20%">沟通产品：</td>
-                    <td width="80%" align="left"> 
-                         <select  name="prod_id">
-                           <!-- <foreach name="product_list" item="product"> --> 
-                             <option value="{$product[id]}">{$product[name]}
-                           <!-- </foreach> -->
-                         </select>
-                    </td>
-                  </tr>                 
-                  <tr>
-                    <td>沟通情况：</td>
-                    <td align="left"><textarea name="content" cols="45" rows="8"></textarea></td>
-                  </tr>
-                 <!-- </foreach> -->
-                  <tr>
-                    <td>&nbsp;</td>
-                    <td align="left"><input type="submit" name="Submit" value=" 添加 " class="button_submit"></td>
-                  </tr>
-            </table>                              
-           </form>
-        </td>
-      </tr>
-     </tbody>
-  </table>
-</div>
+              <tr>
+                <td width="30%" align="right">客户名称：</td>
+                <td width="70%">{$newdata['cname']}<input type="hidden" name="visit_id" value="{$newdata['visit_id']}"></td>
+              </tr> 
+              <tr>
+              <tr>
+                <td align="right">拜访人员：</td>
+                <td>{$newdata['uname']}</td>
+              </tr> 
+              <tr>
+                <td align="right">拜访时间：</td>
+                <td>{:date('Y/m/d H:i:s',$newdata['visit_time'])}</td>
+              </tr> 
+               <tr>
+                <td align="right">沟通产品：</td>
+                <td> 
+                     <select name="prod_id" class="form-control">
+                       <!-- <foreach name="product_list" item="product"> --> 
+                         <option value="{$product[id]}">{$product[name]}
+                       <!-- </foreach> -->
+                     </select>
+                </td>
+              </tr>                 
+              <tr>
+                <td align="right">沟通情况：</td>
+                <td><textarea name="content" cols="45" rows="8" class="form-control"></textarea></td>
+              </tr>
+             <!-- </foreach> -->
+              <tr>
+                <td>&nbsp;</td>
+                <td><input type="submit" name="Submit" value=" 添加 " class="btn btn-primary"></td>
+              </tr>
+           </table>                              
+       </form>
+  </div>
 </div>
 </body>
 </html>

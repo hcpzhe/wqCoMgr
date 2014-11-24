@@ -1,86 +1,77 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en"><head>
+<meta charset="utf-8">
 <title>客户拜访详细信息</title>
-<link href="__CSS__/home.css" rel="stylesheet" type="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="__CSS__/index.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css" media="screen">
 <script type="text/javascript" src="__JS__/jquery.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
 </head>
 <body>
-<div style="width:100%; overflow:hidden; background: #f2f2f2;">
-<div class="b right_next">
-  <table width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tbody>
-      <tr>
-        <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>客户拜访详细信息</font></span></td>
-      </tr>
-      <tr>
-        <td height="10"></td>
-      </tr>
-       <tr>
-        <td height="40">
-              <span id="cust_search">
-	           	<font style="padding-left: 20px;"> 操作： </font>                                                      
-                <a href="{:U('Customervisit/add_visit_prod?visit_id='.$visit_id)}" class="button_submit">添加沟通</a>                            
-           </span>   
-        </td>
-      </tr>
-      <tr>
-        <td height="10"></td>
-      </tr>
-      <tr>
-        <td align="center">  
-        <!-- 客户详细信息 -->       
-            <table width="750" border="0" style="font-size: 12px;" class="com_table" cellspacing="0" cellpadding="0">
-                  <tr style="height: 40px;">
-                    <th colspan="4" align="left">拜访记录</th>                    
-                  </tr>
-                 <!-- <foreach name="data" item="data"> --> 
-                  <tr>
-                    <td width="120">拜访编号</td>
-                    <td width="250"> 
-                      <input type="hidden" value="{$data['id']}" name="id">                                     
-		                	{$data['id']}      		                               	                                                 
-                    </td>
-                    <td width="120">公司名称</td>
-                    <td width="250">{$data.cname}</td>
-                  </tr>                 
-                  <tr>
-                    <td>拜访员工</td>
-                    <td>{$data.uname}</td>
-                    <td>拜访时间</td>
-                    <td>{:date('Y/m/d H:i:s',$data['visit_time'])}</td>
-                  </tr>
-                  <tr>
-                    <td>拜访内容</td>
-                    <td colspan="3">{$data['content']}</td>                    
-                  </tr> 
-                  <!-- </foreach> -->                                 
-            </table>
+<div style="width:100%; overflow:hidden;">
+  <div class="b right_next">
+     <h1 class="page-header">客户拜访详细信息</h1>
+     <div class="top_search">
+     	<font style="padding-left: 20px;"> 操作： </font>                                                      
+        <a href="{:U('Customervisit/add_visit_prod?visit_id='.$visit_id)}" class="btn btn-primary">添加沟通</a>
+      </div>
+     <div class="table-responsive">
+       <table class="table table-bordered table-hover">
+        <tbody>
+          <tr>
+            <!-- 客户详细信息 -->       
+            <th colspan="4" align="left">拜访记录</th>                    
+          </tr>
+         </tbody>
+         <!-- <foreach name="data" item="data"> --> 
+          <tr>
+            <td width="20%">拜访编号</td>
+            <td width="30%"> 
+              <input type="hidden" value="{$data['id']}" name="id">                                     
+                    {$data['id']}      		                               	                                                 
+            </td>
+            <td width="20%">公司名称</td>
+            <td width="30%">{$data.cname}</td>
+          </tr>                 
+          <tr>
+            <td>拜访员工</td>
+            <td>{$data.uname}</td>
+            <td>拜访时间</td>
+            <td>{:date('Y/m/d H:i:s',$data['visit_time'])}</td>
+          </tr>
+          <tr>
+            <td>拜访内容</td>
+            <td colspan="3">{$data['content']}</td>                    
+          </tr> 
+          <!-- </foreach> -->                                 
             
-            <!-- 沟通记录 -->
-             <if condition="$visit_prod_list eq '' "><font color="red">未添加沟通记录</font> <br/>
-             <else />             
-             <div class="order_title">沟通记录</div> 
-                <!-- <foreach name="visit_prod_list" item="visit_prod_list"> -->                                                           
-	            <table width="750" border="0" class="com_table" cellpadding="0" cellspacing="0">                                  
-	                  <tr>
-	                    <td width="140"> 所 谈 产 品 </td>
-	                    <td width="600">{$visit_prod_list['name']} </td>
-	                  </tr>                 
-	                  <tr>
-	                    <td> 沟 通 内 容 </td>
-	                    <td>{$visit_prod_list['content']}</td>                   
-	                  </tr>                                                   
-	            </table>            
+          <!-- 沟通记录 -->
+          <!-- <if condition="$visit_prod_list eq '' "> -->
+           <tbody>
+              <tr>
+                 <th colspan="4" align="left" class="red">该公司还未添加沟通记录！</th>                    
+              </tr>
+           </tbody>  
+           <!-- <else / >--> 
+           <tbody>
+              <tr>
+                 <th colspan="4" align="left">沟通记录</th>                    
+              </tr>
+           </tbody>           
+           <!-- <foreach name="visit_prod_list" item="visit_prod_list"> -->                                                           
+              <tr>
+                <td> 所 谈 产 品 </td>
+                <td colspan="3">{$visit_prod_list['name']} </td>
+              </tr>                 
+              <tr>
+                <td> 沟 通 内 容 </td>
+                <td colspan="3">{$visit_prod_list['content']}</td>                   
+              </tr>                                                            
            <!-- </foreach> -->
-            </if>                         
-        </td>
-      </tr>      
-     </tbody>
-  </table>
-</div>
+           <!-- </if> -->                             
+     </table>
+  </div>
 </div>
 </body>
 </html>
