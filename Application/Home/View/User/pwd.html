@@ -1,0 +1,65 @@
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>密码修改</title>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="__CSS__/index.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css" media="screen">
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+</head>
+<body>
+<div style="width:100%; overflow:hidden;">
+  <div class="b right_next">
+    <h1 class="page-header">密码修改</h1>       
+         <form action="{:U('User/pwdupdate')}"  method="post" name="form1" id="form1" onSubmit="return checkfrm1(this);">           
+            <table class="table_form">
+                  <tr>
+                    <td width="30%" align="right">原 密 码 ：</td>
+                    <td width="70%"><input name="opwd1" type="password" id="opwd1" class="form-control"><font class="red"> * </font></td>
+                  </tr>
+                  <tr>
+                    <td align="right">新 密 码 ：</td>
+                    <td><input name="pwd1" type="password" id="pwd1" class="form-control"><font class="red"> * </font></td>
+                  </tr>
+                  <tr>
+                    <td align="right">确认密码：</td>
+                    <td> <input name="pwd1c" type="password" id="pwd1c" class="form-control"><font class="red"> * </font></td>
+                  </tr>
+                  <tr>
+                    <td>&nbsp;</td>
+                    <td><input type="submit" name="Submit" value=" 修改 " class="btn btn-primary"></td>
+                  </tr>
+            </table>                              
+           </form>
+   <!-- 添加用户结束 -->            
+  </div>
+</div>
+<script language="JavaScript" type="text/javascript">
+function checkfrm1(afrm)
+{
+	if(!/^\w{4,}$/i.test(afrm.opwd1.value))
+	{
+		alert("原登录密码无效");
+		afrm.opwd1.focus();
+		return false;
+	}
+	
+	if( (afrm.pwd1.value != "") && (!/^\w{4,}$/i.test(afrm.pwd1.value)) )
+	{
+		alert("登录密码无效");
+		afrm.pwd1.focus();
+		return false;
+	}
+	if( (afrm.pwd1.value != "") &&  (afrm.pwd1c.value != afrm.pwd1.value) )
+	{
+		alert("登录密码确认有误！");
+		afrm.pwd1c.focus();
+		return false;
+	}
+	/*$(afrm).RSsubmit({success_alert:true, reload:true});
+	return false;*/
+}
+</script>
+</body>
+</html>
