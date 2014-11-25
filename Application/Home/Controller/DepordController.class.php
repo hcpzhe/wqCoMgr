@@ -70,8 +70,10 @@ class DepordController extends HomeBaseController{
 			}
 		}
 		/*查询技术部所有人员*/
+		$depart = M('Depart');
+		$dep_id = $depart->where("name='技术部'")->getField('id'); //技术部所在id
 		$user=new UserModel();
-		$this->users=$user->tech_list(4);
+		$this->users=$user->tech_list($dep_id);
 		/*查询该订单已经分配的人员*/
 		$de_user=new Develop_userModel();
 		$this->data=$de_user->s_dist($oid);

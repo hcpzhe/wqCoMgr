@@ -27,6 +27,9 @@ class  UserController extends HomeBaseController{
 	}
 	/** 跳转到添加系统用户页面 */
 	public function ad_user_form(){
+		if (!IS_ROOT){ //非超管
+		   $this->error('您没有权限，不能进行此操作！');
+		}
 		/** 查询所有部门  */
 		$depart=new DepartModel();
 		$this->depa_list=$depart->depalist();
@@ -62,6 +65,9 @@ class  UserController extends HomeBaseController{
 	}
 	/** 查询某个用户的详细信息  */
 	public function user_info(){
+		if (!IS_ROOT){ //非超管
+		   $this->error('您没有权限，不能进行此操作！');
+		}
 		/** 获取用户id	 */
 		$id=$_GET['id'];
 		$user=new UserModel();
@@ -76,6 +82,9 @@ class  UserController extends HomeBaseController{
 	}
 	/** 删除某个用户*/
 	public function del_user($id){
+		if (!IS_ROOT){ //非超管
+		   $this->error('您没有权限，不能进行此操作！');
+		}
 		$user=new UserModel();
 		$flag=$user->where("id=$id")->setField('status','-1');
 		if($flag==1){	$this->success('删除成功！');
@@ -83,6 +92,9 @@ class  UserController extends HomeBaseController{
 	}
 	/** 禁用 */
 	public function stop($id){
+		if (!IS_ROOT){ //非超管
+		   $this->error('您没有权限，不能进行此操作！');
+		}
 		$user=new UserModel();
 		$flag=$user->where("id=$id")->setField("status","0");
 		if($flag==1){ $this->success('成功');}
@@ -90,6 +102,9 @@ class  UserController extends HomeBaseController{
 	}
 	/** 启用 */
 	public function star($id){
+		if (!IS_ROOT){ //非超管
+		   $this->error('您没有权限，不能进行此操作！');
+		}
 		$user=new UserModel();
 		$flag=$user->where("id=$id")->setField("status","1");
 		if($flag==1){ $this->success('成功');}
@@ -120,4 +135,23 @@ class  UserController extends HomeBaseController{
 			}
 		}
 	}
+	public function pwd(){
+		   $this->display();
+		}
+	/***密码修改***/
+	public function pwdupdate(){
+		$User = M("User"); 
+		$password = md5($_POST['pwd1c']);
+	    $id=UID;
+		//print_r(md5(ksdd378admin));
+		//exit();
+		$flag = $User->where('id='.$id)->setField('password',$password); // 根据条件更新记录
+		
+		if($flag == 0){
+				$this->error('修改失败');
+			}else{
+				$this->success('修改成功！');
+			}
+	}
+		
 }

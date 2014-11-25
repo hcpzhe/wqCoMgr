@@ -13,6 +13,9 @@ class UserdepartmgrController extends HomeBaseController{
 	}
 	/*跳转到添加部门管理人员页面*/
 	public function ad_form(){
+		if (!IS_ROOT){ //非超管
+		   $this->error('您没有权限，不能进行此操作！');
+		}
 		/**查询所有系统用户*/
 		$user=new UserModel();
 		$this->users=$user->alluser();
@@ -24,6 +27,9 @@ class UserdepartmgrController extends HomeBaseController{
 	}
 	/*取消指定管理人员管理权*/
 	public function del($uid,$did){
+		if (!IS_ROOT){ //非超管
+		   $this->error('您没有权限，不能进行此操作！');
+		}
 		$map['user_id']=$uid;
 		$map['depart_id']=$did;
 		$mgr=new User_depart_mgrModel();

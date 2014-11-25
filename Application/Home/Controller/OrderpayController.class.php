@@ -57,6 +57,8 @@ class OrderpayController extends HomeBaseController{
 	/** 添加订单付款记录 */
 	public function ad_form(){
 		$id=$_GET['id'];
+		//print_r($id);
+		//exit();
 		if (!IS_ROOT){ //非超管
 			$ids=$_GET['cust_id'];   //选择的客户id
 			$User = new UserModel();
@@ -65,8 +67,8 @@ class OrderpayController extends HomeBaseController{
 				$this->error('您没有该公司的权限，不能进行相关操作！');
 			}
 		}
-		$order=new OrderModel();
-		$this->orderlinfo=$order->orderinfo($id);
+		$order=new Order_payModel();
+		$this->orderlinfo=$order->opinfo($id);
 		$this->display();
 	}
 	/** 添加记录  */

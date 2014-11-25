@@ -11,6 +11,9 @@ class ProductController extends HomeBaseController{
 	}
 	/** 删除产品 */
 	public function del_pro($id){
+		if (!IS_ROOT){ //非超管
+		   $this->error('您没有权限，不能进行此操作！');
+		}
 		$product=new ProductModel();
 		$flag=$product->where("id=$id")->setField('status','-1');
 		if($flag==1){	$this->success('删除成功！');
@@ -18,10 +21,17 @@ class ProductController extends HomeBaseController{
 	}
 	/** 跳转到添加产品页面 */
 	public function ad_pro_from(){
+		if (!IS_ROOT){ //非超管
+		   $this->error('您没有权限，不能进行此操作！',U('Product/pro_list'));
+		}else{
 		$this->display();
+		}
 	}
 	/** 添加产品 */
 	public function ad_pro(){
+		if (!IS_ROOT){ //非超管
+		   $this->error('您没有权限，不能进行此操作！');
+		}
 		$data['name']=$_POST['name'];
 		$product=new ProductModel();
 		$flag=$product->add($data);
@@ -38,6 +48,9 @@ class ProductController extends HomeBaseController{
 	}
 	/** 指定产品的详情信息  */
 	public function pro_info($id){
+		if (!IS_ROOT){ //非超管
+		   $this->error('您没有权限，不能进行此操作！');
+		}
 		$product=new ProductModel();
 		$this->proinfo=$product->where("status=1 AND id=$id")->find();
 		$this->display();

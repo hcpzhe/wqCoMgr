@@ -35,15 +35,15 @@
 				  </tr>
 				  <tr>
 				    <td> 购 买 产 品 ：</td>
-				    <td>{$orderlinfo.pname}( {$orderlinfo.limitime} 年)</td>
+				    <td>{$orderlinfo.pname}( {$orderlinfo.time_limit} 年)</td>
 				    <td> 订 单 金 额 ：</td>
-				    <td>{$orderinfo.money}元</td>
+				    <td>{$orderlinfo.money}元</td>
 				  </tr>
 				  <tr>
 				    <td> 联 系 电 话 ：</td>
 				    <td>{$orderlinfo.phone}</td>
 				    <td> 传　　　真：</td>
-				    <td>{$orderlinfo.fx}</td>
+				    <td>{$orderlinfo.fax}</td>
 				  </tr>
 				  <tr>
 				    <td> 联&nbsp;&nbsp;系&nbsp;&nbsp;人：</td>
@@ -61,7 +61,7 @@
 				  	<td> 签 单 日 期：</td>
 				    <td>{:date('Y/m/d H:i:s',$orderlinfo['signed_time'])}</td>
 				    <td> 到 期 时 间：</td>
-				    <td>{:date('Y/m/d H:i:s',$orderlinfo['extime'])}</td>
+				    <td>{:date('Y/m/d H:i:s',$orderlinfo['expired_time'])}</td>
 				  </tr>
 				</table>	
 				<!-- 订单详情结束 -->    

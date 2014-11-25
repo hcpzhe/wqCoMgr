@@ -2,6 +2,7 @@
 namespace Home\Controller;
 use Common\Controller\HomeBaseController;
 use Home\Model\DepartModel;
+use Home\Model\UserModel;
 class DepartController extends HomeBaseController{
 	/**  部门列表 */
 	public function depa_list(){
@@ -11,6 +12,9 @@ class DepartController extends HomeBaseController{
 	}	
 	/** 跳转到添加部门页面 */
 	public function ad_dp_form(){
+		if (!IS_ROOT){ //非超管
+		   $this->error('您没有权限，不能进行此操作！');
+		}
 		/** 查询所有部门  */
 		$depa=new DepartModel();
 		$this->depa_list=$depa->depalist();
@@ -44,6 +48,9 @@ class DepartController extends HomeBaseController{
 	}
 	/** 跳转到编辑页面 */
 	public function up_dp_form(){
+		if (!IS_ROOT){ //非超管
+		   $this->error('您没有权限，不能进行此操作！');
+		}
 		$id=$_GET['id'];
 		$user_id=$_GET['user_id'];
 		/** 查询所有的部门 */
@@ -79,6 +86,9 @@ class DepartController extends HomeBaseController{
 	}
 	/** 部门删除 */
 	public function del_dp(){
+		if (!IS_ROOT){ //非超管
+		   $this->error('您没有权限，不能进行此操作！');
+		}
 		$id=$_GET['id'];
 		$depart=new DepartModel();
 		$flag=$depart->where("id=$id")->setField('status','-1');

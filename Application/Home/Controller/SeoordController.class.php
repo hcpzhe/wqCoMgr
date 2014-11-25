@@ -58,8 +58,10 @@ class SeoordController extends HomeBaseController{
 			}
 		}
 		/*查询所有优化人员*/
+		$depart = M('Depart');
+		$dep_id = $depart->where("name='产品客服部'")->getField('id'); //产品客服部所在id
 		$user=new UserModel();
-		$this->users=$user->tech_list(3);
+		$this->users=$user->tech_list($dep_id);
 		/*查询该订单已经分配的人员*/
 		$se_user=new Seo_userModel();
 		$this->data=$se_user->s_dist($oid);

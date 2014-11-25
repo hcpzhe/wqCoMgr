@@ -12,6 +12,9 @@ class AuthgroupController extends HomeBaseController{
 	}
 	/**用户组详情  */
 	public function info($id){
+		if (!IS_ROOT){ //非超管
+		   $this->error('您没有权限，不能进行此操作！');
+		}
 		/*用户组权限信息*/
 		$auth_group=new Auth_groupModel();
 		$map=" status=1";
