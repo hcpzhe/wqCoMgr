@@ -1,77 +1,65 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en"><head>
+<meta charset="utf-8">
 <title>权限信息</title>
-<link href="__CSS__/home.css" rel="stylesheet" type="text/css">
-<link href="__CSS__/style.css" rel="stylesheet" type="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="__CSS__/index.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css" media="screen">
 <script type="text/javascript" src="__JS__/jquery.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
 </head>
 <body>
-<div style="width:100%; overflow:hidden; background: #f2f2f2;">
-<div class="b right_next">
-  <table width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tbody>
-      <tr>
-        <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>权限信息</font></span></td>
-      </tr>
-      <tr>
-        <td height="10"></td>
-      </tr>
-        
-       <tr>
-        <td height="40">
-              <span id="cust_search">
-                <font style="margin-left: 20px;">操作：	</font>          	                                         
-                <a href="{:U('Usercustprod/edit?cust_id='.$cust_id)}" class="button_submit">编辑</a> 
-                <a href="{:U('Usercustprod/del?cust_id='.$cust_id)}" class="button_submit">删除</a>
-                <a href="{:U('Usercustprod/add')}" class="button_submit">添加</a>                                             
-           </span>   
-        </td>
-      </tr>
-      <tr>
-        <td height="20"></td>
-      </tr>
-      <tr>
-         <td>
-	        <table width="750" border="0" class="com_table" cellpadding="0" cellspacing="0">
-	         <!-- <foreach name="custlist" item="custlist"> -->
-	          <tr>
+<div style="width:100%; overflow:hidden;">
+  <div class="b right_next">
+    <h1 class="page-header">权限信息</h1>
+    <div class="top_search">
+        <font style="margin-left: 20px;">操作：	</font>          	                                         
+        <a href="{:U('Usercustprod/edit?cust_id='.$cust_id)}" class="btn btn-primary">编辑</a> 
+        <a href="{:U('Usercustprod/del?cust_id='.$cust_id)}" class="btn btn-primary">删除</a>
+        <a href="{:U('Usercustprod/add')}" class="btn btn-primary">添加</a>                                             
+    </div>
+      <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+	       <!-- <foreach name="custlist" item="custlist"> -->
+	        <tbody>
+              <tr>
 		        <th colspan="4">                     
 		           公司基本信息
 		        </th>		       
-		      </tr>  
+		      </tr>
+            </tbody>  
 		      <tr>
 		        <td width="150">公司名称</td>
 		        <td width="220">{$custlist.name}</td>
-		        <td width="150">联系人</td>
+		        <td width="150">联&nbsp;系&nbsp;人</td>
 		        <td width="220">{$custlist.contacts}</td>
 		      </tr>  
 		      <tr>
 		        <td>联系电话</td>
 		        <td>{$custlist.phone}</td>
-		        <td>传真</td>
+		        <td>传&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;真</td>
 		        <td>{$custlist.fax}</td>
 		      </tr>       
 		      <tr>
-		        <td>地址</td>
+		        <td>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址</td>
 		        <td>{$custlist.address}</td>
 		         <td> 添加时间</td>
 		        <td>{:date('Y/m/d H:i:s',$custlist['add_time'])}</td>
 		      </tr>
 		       <tr>
-		        <td>备注</td>
+		        <td>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注</td>
 		        <td colspan="3">{$custlist.remark}</td>		        
 		      </tr> 
 		     <!-- </foreach> -->  	
 		       
 		     <!-- <foreach name="user_list" item="user_list"> -->   
-		       <tr><th colspan="4">权限拥有者信息</th></tr>
+		     <tbody>
+               <tr><th colspan="4">权限拥有者信息</th></tr>
+             </tbody>
 		       <tr>
-		        <td width="150">用户名</td>
+		        <td width="150">用&nbsp;户&nbsp;名</td>
 		        <td width="220">{$user_list.account}</td>
-		        <td width="150">性 别</td>
+		        <td width="150">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 别</td>
 		        <td width="220">
 		           <!-- <if condition="$user_list['sex'] eq 1 "> -->男                    
 		            <!-- <else /> --> 女<!-- </if> -->
@@ -80,20 +68,20 @@
 		      <tr>
 		        <td>所在部门</td>
 		        <td>{$user_list.name}</td>
-		        <td>职 位</td>     
+		        <td>职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 位</td>     
 		        <td>{$user_list.position}</td>
 		      </tr> 
 		      <tr>		        
 		        <td>入职时间</td>
 		        <td>{:date('Y/m/d H:i:s',$user_list['startime'])}</td>
-		        <td>生 日</td>
+		        <td>生&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 日</td>
 		        <td>{:date('Y/m/d H:i:s',$user_list['birthday'])}</td>
 		      </tr>  
 		    <!-- </foreach> --> 
 		    
 		    <!-- <empty name="list"> -->
              <tr>
-		      	<td colspan="4" style="color: red;">该公司权限还未添加</td>
+		      	<th colspan="4" style="color: red;">该公司权限还未添加</th>
 		     </tr>	
             <!-- </empty> -->
 		    <!-- <foreach name="list" item="list"> -->
@@ -111,11 +99,8 @@
 		      </tr> 
 		      <!-- </foreach> -->       
 		     </table>
-		   </td>
-		 </tr>                     
-     </tbody>
-  </table>
-</div>
+           </div>
+  </div>
 </div>
 </body>
 </html>

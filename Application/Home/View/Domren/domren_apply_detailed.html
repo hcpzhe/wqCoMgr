@@ -1,90 +1,82 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en"><head>
+<meta charset="utf-8">
 <title>查看域名详细信息</title>
-<link href="__CSS__/home.css" rel="stylesheet" type="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="__CSS__/index.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css" media="screen">
 <script type="text/javascript" src="__JS__/jquery.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
 </head>
 <body>
-<div style="width:100%; overflow:hidden; background: #f2f2f2;">
-<div class="b right_next">
-  <table width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tbody>
-      <tr>
-        <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>查看域名详细信息</font></span></td>
-      </tr>      
-      <tr>
-        <td height="10"></td>
-      </tr>
-      <tr>
-        <td align="center">  
-        <!-- 域名详细信息 -->       
-            <table width="750" class="com_table"  cellpadding="0" cellspacing="0">
-                  <tr>
-                    <th colspan="4" align="left" height="30">域名续费信息</th>                    
-                  </tr>
-                 <!-- <foreach name="apply_list" item="apply_list"> -->
-                  <tr>
-                    <td width="150">域名申请编号</td>
-                    <td width="220"> 
-                      <input type="hidden" value="{$apply_list['id']}" name="id">                                     
-		                	{$apply_list['id']}	                		                               	                                                 
-                    </td>
-                    <td width="150"> 公 司 名 称 </td>
-                    <td width="220">{$apply_list['name']}</td>
-                  </tr>                 
-                  <tr>
-                    <td> 联  系   人 </td>
-                    <td>{$apply_list['contacts']}</td>
-                    <td> 联 系 电 话 </td>
-                    <td>{$apply_list['phone']}</td>
-                  </tr>
-                  <tr>
-                    <td> 域 &nbsp;&nbsp;&nbsp; 名 </td>
-                    <td>{$apply_list['domain']}</td>
-                    <td> 域名运营商</td>
-                    <td>{$apply_list['service']}</td>
-                  </tr>
-                  <tr>
-                    <td> 注 册 时 间 </td>
-                    <td>{:date('Y/m/d H:i:s',$apply_list['reg_time'])}</td>
-                    <td> 续 费 金 额 </td>
-                    <td>{$apply_list['money']} 元</td>
-                  </tr>
-                  <tr>
-                    <td>原过期时间</td>
-                    <td> {:date('Y/m/d H:i:s',$apply_list['org_expired_time'])} </td>
-                    <td>新过期时间</td>
-                    <td>{:date('Y/m/d H:i:s',$apply_list['new_expired_time'])}</td>
-                  </tr> 
-                   <tr>
-                    <td> 付 款 时 间 </td>
-                    <td> {$apply_list['pay_time']} </td>
-                    <td> 申 &nbsp; 请  &nbsp; 人 </td>
-                    <td> {$apply_list['realname']}   </td>
-                  </tr> 
-                  <tr>
-                    <td> 审 核 状 态 </td>
-                    <td>
-                         <!-- <if condition="$apply_list['check'] eq -1 "> -->拒绝
-                        <!-- <elseif condition="$apply_list['check'] eq 0 " /> --><a href="{:U('Domren/check?id='.$data['id'])}">待审</a>
-                        <!-- <else /> --> 通过<!-- </if> -->
-                    </td>
-                    <td> 审 核 时 间 </td>
-                    <td>
-                       <!-- <if condition="$apply_list['check'] eq 0 "> --><font color="red">该信息还未审核</font>
-                      <!-- <else /> -->{:date('Y/m/d H:i:s',$apply_list['check_time'])}<!-- </if> -->
-                    </td>
-                  </tr>    
-                  <!-- </foreach> -->                
+<div style="width:100%; overflow:hidden;">
+  <div class="b right_next">
+    <h1 class="page-header">查看域名详细信息</h1>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+         <tbody>
+         <!-- 域名详细信息 -->       
+              <tr>
+                <th colspan="4" align="left">域名续费信息</th>                    
+              </tr>
+           </tbody>
+             <!-- <foreach name="apply_list" item="apply_list"> -->
+              <tr>
+                <td width="20%">域名申请编号</td>
+                <td width="30%"> 
+                  <input type="hidden" value="{$apply_list['id']}" name="id">                                     
+                        {$apply_list['id']}	                		                               	                           
+                </td>
+                <td width="20%"> 公 司 名 称 </td>
+                <td width="30%">{$apply_list['name']}</td>
+              </tr>                 
+              <tr>
+                <td> 联  系   人 </td>
+                <td>{$apply_list['contacts']}</td>
+                <td> 联 系 电 话 </td>
+                <td>{$apply_list['phone']}</td>
+              </tr>
+              <tr>
+                <td> 域 &nbsp;&nbsp;&nbsp; 名 </td>
+                <td>{$apply_list['domain']}</td>
+                <td> 域名运营商</td>
+                <td>{$apply_list['service']}</td>
+              </tr>
+              <tr>
+                <td> 注 册 时 间 </td>
+                <td>{:date('Y/m/d H:i:s',$apply_list['reg_time'])}</td>
+                <td> 续 费 金 额 </td>
+                <td>{$apply_list['money']} 元</td>
+              </tr>
+              <tr>
+                <td>原过期时间</td>
+                <td> {:date('Y/m/d H:i:s',$apply_list['org_expired_time'])} </td>
+                <td>新过期时间</td>
+                <td>{:date('Y/m/d H:i:s',$apply_list['new_expired_time'])}</td>
+              </tr> 
+               <tr>
+                <td> 付 款 时 间 </td>
+                <td> {$apply_list['pay_time']} </td>
+                <td> 申 &nbsp; 请  &nbsp; 人 </td>
+                <td> {$apply_list['realname']}   </td>
+              </tr> 
+              <tr>
+                <td> 审 核 状 态 </td>
+                <td>
+                    <!-- <if condition="$apply_list['check'] eq -1 "> -->拒绝
+                    <!-- <elseif condition="$apply_list['check'] eq 0 " /> --><a href="{:U('Domren/check?id='.$data['id'])}">待审</a>
+                    <!-- <else /> --> 通过<!-- </if> -->
+                </td>
+                <td> 审 核 时 间 </td>
+                <td>
+                   <!-- <if condition="$apply_list['check'] eq 0 "> --><font color="red">该信息还未审核</font>
+                  <!-- <else /> -->{:date('Y/m/d H:i:s',$apply_list['check_time'])}<!-- </if> -->
+                </td>
+              </tr>    
+              <!-- </foreach> -->                
             </table>                                     
-        </td>
-      </tr>      
-     </tbody>
-  </table>
-</div>
+       </div>
+  </div>
 </div>
 </body>
 </html>

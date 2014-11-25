@@ -1,9 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en"><head>
+<meta charset="utf-8">
 <title>域名添加</title>
-<link href="__CSS__/home.css" rel="stylesheet" type="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="__CSS__/index.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css" media="screen">
 <script type="text/javascript" src="__JS__/jquery.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
 <script type="text/javascript">	
@@ -29,72 +30,54 @@ function checkdomain(){
 </script>
 </head>
 <body>
-<div style="width:100%; overflow:hidden; background: #f2f2f2;">
-<div class="b right_next">
-  <table width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tbody>
-      <tr>
-        <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>域名添加</font></span></td>
-      </tr>
-      <tr>
-        <td height="30"></td>
-      </tr>
-      <tr>
-        <td><font class="tishi">模糊查询：因数据较多，存在域名注册重复的现象，建议在录入前输入域名简写点击模糊查询，以杜绝重复录入情况。（例如wanqian.com，可输入wanqian进行模糊查询）</font></td>
-      </tr>
-      <tr>
-        <td height="30"></td>
-      </tr>
-      <tr>
-        <td align="center">
-           <form action="{:U('Domain/insert')}" method="post" name="domainform" id="domainform" onsubmit="return checkdomainfrm(this);">           
+<div style="width:100%; overflow:hidden;">
+  <div class="b right_next">
+    <h1 class="page-header">域名添加</h1>
+    <font class="red tishi">模糊查询：因数据较多，存在域名注册重复的现象，建议在录入前输入域名简写点击模糊查询，以杜绝重复录入情况。（例如wanqian.com，可输入wanqian进行模糊查询）</font>
+        <form action="{:U('Domain/insert')}" method="post" name="domainform" id="domainform" onsubmit="return checkdomainfrm(this);"> 
             <input type="hidden" name="order_id" value="{$order_id}">
-            <table width="500" border="0">
+            <table class="table_form">
                   <tr>
-                    <td width="100">&nbsp;&nbsp;域 &nbsp;&nbsp; 名 &nbsp;&nbsp;：</td>
-                    <td width="400" align="left">                                      
-		                <input type="text" name="domain" id="domain" />
+                    <td width="30%" align="right">&nbsp;&nbsp;域 &nbsp;&nbsp; 名 &nbsp;&nbsp;：</td>
+                    <td width="70%">                                      
+		                <input type="text" name="domain" id="domain" class="form-control" />
 		                <input type="hidden" name="cust_id" value="{$cust_id}">
-		                <font class="fontred" id="namets">*</font>
-		                <a href="javascript:void(0)" id="btnsearch" onclick="checkdomain();">模糊查询 </a>		                           	                                                 
+		                <font class="red" id="namets"> * </font>
+		                <a href="javascript:void(0)" id="btnsearch" onclick="checkdomain();">模糊查询</a>	            
                     </td>
                   </tr>
                   <tr>
-                    <td>使 用 年 限：</td>
-                    <td align="left">
-                       <select name="year">
+                    <td align="right">使 用 年 限：</td>
+                    <td>
+                       <select name="year" class="form-control">
                           <option value="1"> 一 年 </option>
                           <option value="2"> 二 年 </option>
                           <option value="3"> 三 年 </option>
                           <option value="4"> 四 年 </option>
                           <option value="5"> 五 年 </option>
                        </select>                   
-                    <font class="fontred" id="namets"> *</font></td>
+                    <font class="red" id="namets"> * </font></td>
                   </tr> 
                   <tr>
-                    <td>域 名 权 限：</td>
-                    <td align="left">
-                       <select name="doamin_user">
+                    <td align="right">域 名 权 限：</td>
+                    <td>
+                       <select name="doamin_user" class="form-control">
                           <option value="0"> 公司所有</option>
                           <option value="1"> 客户自有 </option>                         
                        </select>                    
-                    <font class="fontred" id="namets"> *</font></td>
+                    <font class="red" id="namets"> * </font></td>
                   </tr> 
                   <tr>
-                    <td>域名运营商：</td>
-                    <td align="left"><input type="text" name="service"></td>
+                    <td align="right">域名运营商：</td>
+                    <td><input type="text" name="service" class="form-control"></td>
                   </tr>                                  
                   <tr>
                     <td>&nbsp;</td>
-                    <td align="left"><input type="submit" name="Submit" value=" 添加 " class="button_submit"></td>
+                    <td align="left"><input type="submit" name="Submit" value=" 添加 " class="btn btn-primary"></td>
                   </tr>
             </table>                              
-           </form>
-        </td>
-      </tr>
-     </tbody>
-  </table>
-</div>
+         </form>
+  </div>
 </div>
 <script type="text/javascript">
 function checkdomainfrm(afrm) {

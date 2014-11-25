@@ -1,57 +1,48 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en"><head>
+<meta charset="utf-8">
 <title>权限修改</title>
-<link href="__CSS__/home.css" rel="stylesheet" type="text/css">
-<link href="__CSS__/style.css" rel="stylesheet" type="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="__CSS__/index.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css" media="screen">
 <script type="text/javascript" src="__JS__/jquery.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
 <script type="text/javascript" src="__PUBLIC__/My97DatePicker/WdatePicker.js"></script>
 <link href="__PUBLIC__/My97DatePicker/skin/WdatePicker.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-<div style="width:100%; overflow:hidden; background: #f2f2f2;">
-<div class="b right_next">
-  <table width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tbody>
-      <tr>
-        <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>权限修改</font></span></td>
-      </tr>
-      <tr>
-        <td height="30"></td>
-      </tr>            
-      <tr>
-         <td>
+<div style="width:100%; overflow:hidden;">
+  <div class="b right_next">
+    <h1 class="page-header">权限修改</h1>
            <form action="{:U('Usercustprod/update')}" method="post">
-	        <table class="user_info">
+	        <table class="table_form">
 	         <!-- <foreach name="list" item="list"> --> 
 		      <tr>
-		        <td>公 司 名 称： </td>
+		        <td width="30%" align="right">公 司 名 称： </td>
 		        <td>{$list.cname}
 		          <input type="hidden" value="{$list['cust_id']}" name="cust_id" />
 		        </td>
 		      </tr>  
 		       <tr>
-		        <td>联&nbsp;&nbsp;系&nbsp;&nbsp;人：</td>
+		        <td align="right">联&nbsp;&nbsp;系&nbsp;&nbsp;人：</td>
 		        <td>{$list.contacts}</td>
 		      </tr>  
 		       <tr>
-		        <td>联 系 电 话：   </td>
+		        <td align="right">联 系 电 话：   </td>
 		        <td>{$list.phone}</td>
 		      </tr>  
 		      <tr>
-		        <td>&nbsp;&nbsp;传&nbsp;&nbsp;&nbsp;&nbsp;真&nbsp;&nbsp;：</td>
+		        <td align="right">&nbsp;&nbsp;传&nbsp;&nbsp;&nbsp;&nbsp;真&nbsp;&nbsp;：</td>
 		        <td>{$list.fax} </td>
 		      </tr> 
 		       <tr>
-		        <td>&nbsp;&nbsp;地&nbsp;&nbsp;&nbsp;&nbsp;址&nbsp;&nbsp;：</td>
+		        <td align="right">&nbsp;&nbsp;地&nbsp;&nbsp;&nbsp;&nbsp;址&nbsp;&nbsp;：</td>
 		        <td>{$list.address}</td>
 		      </tr> 		     
 		      <tr>
-		        <td>权限 拥有者：</td>
+		        <td align="right">权限 拥有者：</td>
 		        <td>                     
-		          <select name="user_id">
+		          <select name="user_id" class="form-control">
 		             <option value="{$list.uid}">{$list.realname}</option>
 		             <!-- <foreach name="user_list" item="user_list"> --> 
 		             <option value="{$user_list.id}">{$user_list.realname}</option>
@@ -64,24 +55,23 @@
 		           权限过期时间：
 		         </td>
 		         <td>
-		            <!-- <if condition="$list['expired_time'] eq 0 "> --><input name="expired_time" type="text" value="永不过期 " onclick="WdatePicker()" class="Wdate">  
-		            <!-- <else /> --><input name="expired_time" onclick="WdatePicker()" class="Wdate" value="{:date('Y-m-d',$list['expired_time'])}" />	 <!-- </if> -->                                                               
+		            <!-- <if condition="$list['expired_time'] eq 0 "> -->
+                    <input name="expired_time" type="text" value="永不过期 " onclick="WdatePicker()" class="Wdate form-control">  
+		            <!-- <else /> -->
+                    <input name="expired_time" onclick="WdatePicker()" class="Wdate form-control" value="{:date('Y-m-d',$list['expired_time'])}" />	 <!-- </if> -->                                                               
                    <div lang="zh-cn" style="position: absolute; z-index: 100004; display: none; top: 28px; left: 10px;"><iframe hidefocus="true" width="9" height="7" frameborder="0" border="0" scrolling="no" src="about:blank" style="width: 186px; height: 198px;"></iframe></div>		                      
 		        </td>
 		      </tr>		      		      	    		     		      
 		       <tr>
-		        <td colspan="2" align="center">                     
-		           <input type="submit" value="提交" class="button_submit">
+                <td></td>
+		        <td>                     
+		           <input type="submit" value="提交" class="btn btn-primary">
 		         </td>		         
 		      </tr>
 		      <!-- </foreach> -->      
 		     </table>     
 		  </form>
-		 </td>
-	   </tr>                  
-     </tbody>
-  </table>
-</div>
+   </div>
 </div>
 </body>
 </html>

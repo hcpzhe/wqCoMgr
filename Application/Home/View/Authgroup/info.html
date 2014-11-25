@@ -1,20 +1,21 @@
-<!DOCTYPE html>
-<HTML>
-<HEAD>
-	<TITLE>万谦erp</TITLE>
-	<meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<link href="__CSS__/style.css" rel="stylesheet" type="text/css">
-	<script type="text/javascript" src="__JS__/jquery.js"></script>
-	<script type="text/javascript" src="__JS__/RSsubmit.js"></script>
-	
-	<link rel="stylesheet" href="__CSS__/demo.css" type="text/css">
-	<link rel="stylesheet" href="__CSS__/zTreeStyle/zTreeStyle.css" type="text/css">
-	<script type="text/javascript" src="__JS__/jquery.ztree.core-3.5.js"></script>
-	<script type="text/javascript" src="__JS__/jquery.ztree.excheck-3.5.js"></script>
-	<!--
-	<script type="text/javascript" src="js/jquery.ztree.exedit-3.5.js"></script>
-	-->
-	<SCRIPT type="text/javascript">
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>用户组详情</title>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="__CSS__/index.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+
+<link rel="stylesheet" href="__CSS__/demo.css" type="text/css">
+<link rel="stylesheet" href="__CSS__/zTreeStyle/zTreeStyle.css" type="text/css">
+<script type="text/javascript" src="__JS__/jquery.ztree.core-3.5.js"></script>
+<script type="text/javascript" src="__JS__/jquery.ztree.excheck-3.5.js"></script>
+<!--
+<script type="text/javascript" src="js/jquery.ztree.exedit-3.5.js"></script>
+-->
+<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css" media="screen">
+    	<SCRIPT type="text/javascript">
 		var setting = {
 			check: {
 				enable: true,
@@ -48,23 +49,24 @@
 </HEAD>
 
 <BODY>
-<form id="authgroupform" method="post" action="{:U('Authgroup/up')}">
-<table width="755" cellpadding="0" cellspacing="0">
-    <tr>
-      <td class="menu"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32" /><font>订单列表</font></span></td>
-    </tr>
-</table> 
-<div class="content_wrap">
-	<div class="zTreeDemoBackground left">
-		<ul id="treeDemo" class="ztree"></ul>
-	</div>
-	<div id="right">
-		<p>用户组名称：<input id="gp_tit" type="text" name="name" class="search_bg" value="{$group_info.title}"></p>
-		<p>用户组描述：<input id="gp_des" type="text" name="description" class="search_bg" value="{$group_info.description}"></p>
-		<p><input type="submit" value="修改"></p>
-	</div>
+<div style="width:100%; overflow:hidden;">
+   <div class="b right_next">
+      <h1 class="page-header" style="text-align:left;">用户组详情</h1>
+        <form id="authgroupform" method="post" action="{:U('Authgroup/up')}">
+        <div class="content_wrap">
+            <div class="zTreeDemoBackground left">
+                <ul id="treeDemo" class="ztree"></ul>
+            </div>
+            <div id="right">
+                <p>用户组名称：<input id="gp_tit" type="text" name="name" class="form-control" value="{$group_info.title}"></p>
+                <p>&nbsp;</p>
+                <p>用户组描述：<input id="gp_des" type="text" name="description" class="form-control" value="{$group_info.description}"></p>
+                <p>&nbsp;</p>
+                <p align="center"><input type="submit" value="修改" class="btn btn-primary"></p>
+            </div>
+        </div>
+        </form>
+    </div>
 </div>
-
-</form>
 </BODY>
 </HTML>

@@ -1,92 +1,81 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en"><head>
+<meta charset="utf-8">
 <title>添加用户</title>
-<link href="__CSS__/home.css" rel="stylesheet" type="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="__CSS__/index.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css" media="screen">
 <script type="text/javascript" src="__JS__/jquery.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
 </head>
 <body>
-<div class="b right_next">
-  <table width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tbody>   
-      <tr>
-        <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>添加用户</font></span></td>
-      </tr>
-      <tr>
-        <td height="30"></td>
-      </tr>
-      <tr>
-        <td><font class="tishi">头部提示信息：时间格式：2000/01/01 00:00:00</font></td>
-      </tr>
-      <tr>
-        <td align="center">
-<!-- 添加用户开始 -->        
-           <form action="{:U('User/ad_user')}" method="post" name="form1" id="form1" >           
-            <table width="500" border="0" style="margin-top:50px;">
+<div style="width:100%; overflow:hidden;">
+  <div class="b right_next">
+    <h1 class="page-header">添加用户</h1>
+    <font class="red tishi">头部提示信息：时间格式：2000/01/01 00:00:00</font>
+     <!-- 添加用户开始 -->        
+         <form action="{:U('User/ad_user')}" method="post" name="form1" id="form1" >           
+            <table class="table_form">
                   <tr>
-                    <td width="100">用 户 名 ：</td>
-                    <td width="400"><input type="text" name="uname"></td>
+                    <td width="30%" align="right">用 户 名 ：</td>
+                    <td width="70%"><input type="text" name="uname" class="form-control"></td>
                   </tr>
                   <tr>
-                    <td width="100">密 &nbsp;&nbsp;&nbsp; 码：</td>
-                    <td width="400"><input type="password" name="upwd"><font class="fontred" id="money">*</font></td>
+                    <td align="right">密 &nbsp;&nbsp;&nbsp; 码：</td>
+                    <td><input type="password" name="upwd" class="form-control"><font class="red" id="money"> * </font></td>
                   </tr>
                   <tr>
-                    <td width="100">真实姓名：</td>
-                    <td width="400"><input type="text" name="name"><font class="fontred" id="money">*</font></td>
+                    <td align="right">真实姓名：</td>
+                    <td><input type="text" name="name" class="form-control"><font class="red" id="money"> * </font></td>
                   </tr>
                   <tr>
-                    <td width="100">性 &nbsp;&nbsp;&nbsp; 别：</td>
-                    <td width="400">
+                    <td align="right">性 &nbsp;&nbsp;&nbsp; 别：</td>
+                    <td>
                     	<input type="radio" name="sex" value="1" checked="checked"> 男
                     	<input type="radio" name="sex" value="0"> 女
-                    	</td>
+                    </td>
                   </tr>
                   <tr>
-                    <td>所属部门：</td>
+                    <td align="right">所属部门：</td>
                     <td>
-                    	<select name='dp'>
+                    	<select name='dp' class="form-control">
     					<!-- <foreach  name="depa_list" item="dp_list"> -->
     					<option value="{$dp_list.id}">{$dp_list.name}</option>
     					<!-- </foreach> -->	
     					</select>
-                    	<font class="fontred" id="namets">*</font>
+                    	<font class="red" id="namets"> * </font>
                     </td>
                   </tr>
                   <tr>
-                    <td>职 &nbsp;&nbsp;&nbsp; 位：</td>
-                    <td><input type="text" name="position"></td>
+                    <td align="right">职 &nbsp;&nbsp;&nbsp; 位：</td>
+                    <td><input type="text" name="position" class="form-control"></td>
                   </tr>
                   <tr>
-                    <td>入职时间：</td>
-                    <td><input type="text" name="startime"></td>
+                    <td align="right">入职时间：</td>
+                    <td><input type="text" name="startime" class="form-control"></td>
                   </tr>
                   <tr>
-                    <td>出生日期：</td>
-                    <td><input type="text" name="birthday"></td>
+                    <td align="right">出生日期：</td>
+                    <td><input type="text" name="birthday" class="form-control"></td>
                   </tr>
                   <tr>
-                    <td>用户组：</td>
-                    <td><select name="auth_group">
+                    <td align="right">用户组：</td>
+                    <td>
+                    <select name="auth_group" class="form-control">
                     <!-- <foreach name="groups" item="gp_list"> --> 
                     		<option value="{$gp_list.id}">{$gp_list.title}</option>
                     <!-- </foreach> --> 		
-                    	</select>
+                    </select>
 					</td>
                   </tr>
                   <tr>
                     <td>&nbsp;</td>
-                    <td><input type="submit" name="Submit" value=" 添加 " class="button_submit"></td>
+                    <td><input type="submit" name="Submit" value=" 添加 " class="btn btn-primary"></td>
                   </tr>
             </table>                              
            </form>
- <!-- 添加用户结束 -->            
-        </td>
-      </tr>
-     </tbody>
-  </table>
+   <!-- 添加用户结束 -->            
+  </div>
 </div>
 </body>
 </html>

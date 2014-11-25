@@ -1,65 +1,45 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>订单列表</title>
-<link href="__CSS__/style.css" rel="stylesheet" type="text/css">
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>管理者添加</title>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="__CSS__/index.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css" media="screen">
 <script type="text/javascript" src="__JS__/jquery.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
-<script type="text/javascript">
-function info(){
-	$("input[name='che[]']").each(function(){
-		if($(this).attr("checked")=="checked"){								
-			var id=$(this).val();		
-            var url="__URL__-order_info-id-"+id;
-            location.href=url;
-			}
-		});
-}
-function push(){
-	$("input[name='che[]']").each(function(){
-		if($(this).attr("checked")=="checked"){								
-			var id=$(this).val();		
-            var url="__URL__-push_form-id-"+id;
-            location.href=url;
-			}
-		});
-}
-</script>
 </head>
 <body>
-<div style="width:100%; overflow:hidden; background: #f2f2f2;">
-   <div class="center_content">
-      <table width="755" cellpadding="0" cellspacing="0">
-          <tr>
-            <td class="menu"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32" /><font>订单列表</font></span></td>
-          </tr>
-          <tr>
-        	<td height="150" style="border-bottom:0px;"></td>
-      	  </tr>
- 		  <tr>
-            <td class="menu_content">
-            <form method="post" action="{:U('Userdepartmgr/ad')}">                           
- 　　　　　　　　　　用户：
-				<select name="uid"> 
-				<!-- <foreach name="users" item="ulist"> -->
-				<option value="{$ulist.id}">{$ulist.realname}</option>
-				<!-- </foreach> -->
-				</select>
-			部门：	
-				<select name="did">
-				<!-- <foreach name="dps" item="dlist"> -->
-					<option value="{$dlist.id}">{$dlist.name}</option>
-				<!-- </foreach> -->	
-				</select>
-				<input type="submit" value="添加" class="button_submit">
+<div style="width:100%; overflow:hidden;">
+   <div class="b right_next">
+     <h1 class="page-header">管理者添加</h1>
+            <form method="post" action="{:U('Userdepartmgr/ad')}">     
+               <table class="table_form"> 
+                  <tr>
+                     <td width="30%" align="right">用户：</td>
+                     <td>
+                        <select name="uid" class="form-control"> 
+                        <!-- <foreach name="users" item="ulist"> -->
+                        <option value="{$ulist.id}">{$ulist.realname}</option>
+                        <!-- </foreach> -->
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+			          <td width="30%" align="right">部门：</td>
+                      <td>	
+                        <select name="did" class="form-control">
+                        <!-- <foreach name="dps" item="dlist"> -->
+                            <option value="{$dlist.id}">{$dlist.name}</option>
+                        <!-- </foreach> -->	
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td></td>
+                      <td><input type="submit" value="添加" class="btn btn-primary"></td>
+				    </tr>
+                  </table>
 			</form> 	
-			</td>	
-          </tr>  
-          <tr>
-            <td height="20"></td>
-          </tr>   
-    </table> 
    </div>
 </div>   
 </body>

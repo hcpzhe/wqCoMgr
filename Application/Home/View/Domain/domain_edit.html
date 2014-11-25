@@ -1,57 +1,43 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<html lang="en"><head>
+<meta charset="utf-8">
 <title>域名信息修改</title>
-<link href="__CSS__/home.css" rel="stylesheet" type="text/css">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="__CSS__/index.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css" media="screen">
 <script type="text/javascript" src="__JS__/jquery.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
 </head>
 <body>
-<div style="width:100%; overflow:hidden; background: #f2f2f2;">
-<div class="b right_next">
-  <table width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tbody>
-      <tr>
-        <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>域名信息修改</font></span></td>
-      </tr>
-      <tr>
-        <td height="30"></td>
-      </tr>
-      <tr>
-        <td><font class="tishi">域名信息不得随意更改，请确认信息正确后再修改。</font></td>
-      </tr>
-      <tr>
-        <td height="30"></td>
-      </tr>
-      <tr>
-        <td align="center">
-           <form action="{:U('Domain/update')}" method="post" onsubmit="$(this).RSsubmit({success_alert:true});return false;" >           
-            <table border="0">
+<div style="width:100%; overflow:hidden;">
+  <div class="b right_next">
+    <h1 class="page-header">域名信息修改</h1>
+     <form action="{:U('Domain/update')}" method="post" onsubmit="$(this).RSsubmit({success_alert:true});return false;" >           
+            <table class="table_form">
                   <tr>
-                    <td>&nbsp;&nbsp; 域&nbsp;&nbsp; 名 &nbsp;&nbsp;：</td>
-                    <td align="left"> 
+                    <td width="30%" align="right">&nbsp;&nbsp; 域&nbsp;&nbsp; 名 &nbsp;&nbsp;：</td>
+                    <td width="70%"> 
                       <input type="hidden" value="{$list['id']}" name="id">
                       <input type="hidden" value="{$list['domain']}" name="domain">                                   
-		                {$list['domain']}		                		                               	                                                 
+		                {$list['domain']}		                		                               	                     
                     </td>
                   </tr>
                   <tr>
-                    <td>域名运营商：</td>
-                    <td align="left"><input type="text" name="service" value="{$list['service']}"></td>
+                    <td align="right">域名运营商：</td>
+                    <td><input type="text" name="service" value="{$list['service']}" class="form-control"></td>
                   </tr>
                   <tr>
-                    <td>注 册 时 间：</td>
-                    <td align="left"><input type="hidden" name="reg_time" value="{$list['reg_time']}">{:date('Y/m/d H:i:s',$list['reg_time'])}</td>
+                    <td align="right">注 册 时 间：</td>
+                    <td><input type="hidden" name="reg_time" value="{$list['reg_time']}">{:date('Y/m/d H:i:s',$list['reg_time'])}</td>
                   </tr>
                   <tr>
-                    <td>过 期 时 间：</td>
-                    <td align="left"><input type="hidden" name="expired_time" value="{$list['expired_time']}">{:date('Y/m/d H:i:s',$list['expired_time'])}</td>
+                    <td align="right">过 期 时 间：</td>
+                    <td><input type="hidden" name="expired_time" value="{$list['expired_time']}">{:date('Y/m/d H:i:s',$list['expired_time'])}</td>
                   </tr>
                   <tr>
-                    <td>审 核 状 态：</td>
-                    <td align="left">
-                        <select  id="domain_check" name="check">                          
+                    <td align="right">审 核 状 态：</td>
+                    <td>
+                        <select  id="domain_check" name="check" class="form-control">                          
                              <option value="-1">拒绝
                              <option value="0">待审
                              <option value="1">通过                          
@@ -59,9 +45,9 @@
                     </td>
                   </tr>
                   <tr>
-                    <td>域 名 状 态：</td>
-                    <td align="left">
-                        <select id="domain_status" name="status">
+                    <td align="right">域 名 状 态：</td>
+                    <td>
+                        <select id="domain_status" name="status" class="form-control">
                              <option value="-1">删除
                              <option value="0">禁用
                              <option value="1">正常                         
@@ -80,15 +66,12 @@
                 	});                                  
                   </script>
                   <tr>
-                    <td colspan="2" align="center"><input type="submit" name="Submit" value=" 修改 " class="button_submit"></td>
+                    <td></td>
+                    <td align="left"><input type="submit" name="Submit" value=" 修改 " class="btn btn-primary"></td>
                   </tr>
             </table>                              
            </form>
-        </td>
-      </tr>
-     </tbody>
-  </table>
-</div>
+  </div>
 </div>
 </body>
 </html>

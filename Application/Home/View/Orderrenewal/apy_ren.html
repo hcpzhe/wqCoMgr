@@ -1,37 +1,33 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>添加订单</title>
-<link href="__CSS__/home.css" rel="stylesheet" type="text/css">
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>添加续费申请</title>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="__CSS__/index.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css" media="screen">
 <script type="text/javascript" src="__JS__/jquery.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
 </head>
 <body>
-<div class="b right_next">
-  <table width="100%" border="0" cellspacing="0" cellpadding="0">
-    <tbody>
-      <tr>
-        <td class="r_c1_title"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32"><font>添加订单</font></span></td>
-      </tr>	      
-      <tr>
-        <td align="center">
-<!-- 添加续费申请 -->
-           <form action="{:U('Orderrenewal/ap_re?id='.$data['id'])}" method="post" name="form1" id="form1" >  
-           		<input type="hidden" name="expired_time" value="{$data.extime}">	         
-            <table width="500" border="0" style="margin-top:50px;">        
+<div style="width:100%; overflow:hidden;">
+  <div class="b right_next">
+    <h1 class="page-header">添加续费申请</h1>
+    <!-- 添加续费申请 -->
+         <form action="{:U('Orderrenewal/ap_re?id='.$data['id'])}" method="post" name="form1" id="form1" >  
+           	<input type="hidden" name="expired_time" value="{$data.extime}">	         
+            <table class="table_form">        
                   <tr>
-                    <td width="100">客户名称：</td>
-                    <td width="400">{$data.cname}</td>
+                    <td width="30%" align="right">客户名称：</td>
+                    <td width="70%">{$data.cname}</td>
                   </tr>
                   <tr>
-                    <td width="100">金 &nbsp;&nbsp;&nbsp; 额：</td>
-                    <td width="400"><input type="text" name="money"><font class="fontred" id="money"></font></td>
+                    <td align="right">金 &nbsp;&nbsp;&nbsp; 额：</td>
+                    <td><input type="text" name="money" class="form-control"></td>
                   </tr>
                   <tr>
-                    <td>年 &nbsp;&nbsp;&nbsp; 限：</td>
+                    <td align="right">年 &nbsp;&nbsp;&nbsp; 限：</td>
                     <td>
-						<select name='time_limit'>
+						<select name='time_limit' class="form-control">
     					<option value="1">服务一年</option>
     					<option value="2">服务二年</option>
     					<option value="3">服务三年</option>
@@ -41,20 +37,17 @@
 					</td>
                   </tr>
                   <tr>
-                    <td>备  &nbsp;&nbsp;&nbsp; 注：</td>
-                    <td><textarea name="remark" cols="40" rows="9"></textarea></td>
+                    <td align="right">备  &nbsp;&nbsp;&nbsp; 注：</td>
+                    <td><textarea name="remark" cols="40" rows="9" class="form-control"></textarea></td>
                   </tr>
                   <tr>
                     <td>&nbsp;</td>
-                    <td><input type="submit" name="Submit" value=" 申请 " class="button_submit"></td>
+                    <td><input type="submit" name="Submit" value=" 申请 " class="btn btn-primary"></td>
                   </tr>
             </table>                              
            </form>
-<!-- 添加续费申请 -->           
-        </td>
-      </tr>
-     </tbody>
-  </table>
+     <!-- 添加续费申请 -->   
+     </div>         
 </div>
 </body>
 </html>

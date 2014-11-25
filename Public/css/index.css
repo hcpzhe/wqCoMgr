@@ -108,16 +108,22 @@ body {
   display: inline-block;
   border-radius: 50%;
 }
-
+.panel-heading{
+	padding: 0px 15px !important;
+	}
+.panel-heading a{
+	height: 37px;
+    line-height: 37px;
+	}
 .panel-heading:hover{
-	background:#1c86cf;
+	background:#428bca;
 	color:#FFF;
 }
 .panel-title{
 		background:url(../images/dayuhei.png) no-repeat left;
 }
 .panel-title:hover{
-	background:url(../images/dayubg.png) no-repeat;
+	background:url(../images/dayubg.png) no-repeat left;
 }
 .panel-title a{
 	text-decoration:none;

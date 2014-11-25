@@ -1,34 +1,27 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>订单列表</title>
-<link href="__CSS__/style.css" rel="stylesheet" type="text/css">
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>添加产品</title>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="__CSS__/index.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css" media="screen">
 <script type="text/javascript" src="__JS__/jquery.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
 </head>
 <body>
-<div style="width:100%; overflow:hidden; background: #f2f2f2;">
-   <div class="center_content">
-      <table width="755" bgcolor="#fff" cellpadding="0" cellspacing="0">
+<div style="width:100%; overflow:hidden;">
+   <div class="b right_next">
+     <h1 class="page-header">产品列表</h1>
+      <table class="table_form">
           <tr>
-            <td class="menu"><span><img style="float:left; margin-left:10px;" src="__IMG__/dayu.png" height="32" /><font>添加产品</font></span></td>
-          </tr>
-          <tr>
-             <td height="20"></td>
-          </tr>
-          <tr>
-            <td class="push_content">
+            <td>
 				<!-- 添加产品开始 -->
 				<form action="{:U('Product/ad_pro')}" method="post">
-					产品名称：<input type="text" name="name" class="search_bg">
-				    <input type="submit" value="添加" class="button_submit">      
+					产品名称：<input type="text" name="name" class="form-control">
+				    <input type="submit" value="添加" class="btn btn-primary">      
 				</form>
 				<!-- 添加产品结束-->
 			</td>
-          </tr>
-          <tr>
-            <td height="20"></td>
           </tr>
     </table> 
    </div>
