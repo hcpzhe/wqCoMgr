@@ -22,7 +22,7 @@
            </tbody>
              <!-- <foreach name="apply_list" item="apply_list"> -->
               <tr>
-                <td width="20%">域名申请编号</td>
+                <td width="20%">申请编号</td>
                 <td width="30%"> 
                   <input type="hidden" value="{$apply_list['id']}" name="id">                                     
                         {$apply_list['id']}	                		                               	                           
@@ -56,7 +56,7 @@
               </tr> 
                <tr>
                 <td> 付 款 时 间 </td>
-                <td> {$apply_list['pay_time']} </td>
+                <td> {:date('Y/m/d H:i:s',$apply_list['pay_time'])} </td>
                 <td> 申 &nbsp; 请  &nbsp; 人 </td>
                 <td> {$apply_list['realname']}   </td>
               </tr> 

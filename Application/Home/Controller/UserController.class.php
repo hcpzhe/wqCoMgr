@@ -42,7 +42,7 @@ class  UserController extends HomeBaseController{
 	public function ad_user(){
 		/*用户表添加一条数据*/
 		$data['account']=$_POST['uname'];
-		$data['password']=$_POST['upwd'];
+		$data['password']=pwd_hash($_POST['upwd']);
 		$data['realname']=$_POST['name'];
 		$data['sex']=$_POST['sex'];
 		$data['depart_id']=$_POST['dp'];
@@ -141,12 +141,10 @@ class  UserController extends HomeBaseController{
 	/***密码修改***/
 	public function pwdupdate(){
 		$User = M("User"); 
-		$password = md5($_POST['pwd1c']);
-	    $id=UID;
-		//print_r(md5(ksdd378admin));
-		//exit();
-		$flag = $User->where('id='.$id)->setField('password',$password); // 根据条件更新记录
-		
+		$password = $_POST['pwd1c'];
+	    $id = UID;
+        $userpassword=pwd_hash($password);
+		$flag = $User->where('id='.$id)->setField('password',$userpassword); // 根据条件更新记录
 		if($flag == 0){
 				$this->error('修改失败');
 			}else{

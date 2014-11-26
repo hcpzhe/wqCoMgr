@@ -123,10 +123,15 @@ class UserModel extends Model {
 	}
 	/**登录人拥有的客户未过期权限 id**/
 	public function user_auto(){
+		$cust_id=array();
  		$uid = UID; 		
  		$map = array('user_id'=>$uid);
  		$model = M('User_depart_mgr');
  		$depidarr = $model->where($map)->getField('depart_id',true);   //取出当前用户所管理的部门
+		//如果是普通员工，没有部门管理权限
+		if(empty($depidarr)){
+			return $cust_id==0;
+			}
  		 
  		//取出当前用户所管理所有部门 （递归取所有子部门）
  		$alldepart = $depidarr;

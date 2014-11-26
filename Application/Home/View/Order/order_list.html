@@ -52,9 +52,9 @@ function push(){
             </select>
             关键字  <input type="text" name="key" class="form-control">
             <input type="submit" value="搜索" class="btn btn-primary">
-            <a href="javascript:void(0)" class="btn btn-primary" onclick="info();">详情</a>	
-            <a href="javascript:void(0)" class="btn btn-primary" onclick="Add_order();">添加订单</a>
-            <a href="javascript:void(0)" class="btn btn-primary" onclick="push();">推送</a> 
+            <a href="javascript:void(0)" class="btn btn-primary" onClick="info();">详情</a>	
+            <a href="javascript:void(0)" class="btn btn-primary" onClick="Add_order();">添加订单</a>
+            <a href="javascript:void(0)" class="btn btn-primary" onClick="push();">推送</a> 
        </form>
      </div>
      <div class="table-responsive">
@@ -81,7 +81,7 @@ function push(){
                    <input type="hidden" name="cust_id" class="push" value="{$list.cust_id}" data-url="{:U('Order/push_form?id='.$list['id'].'&cust_id='.$list['cust_id'])}">
                 </td>
                 <td>{$list.uname}</td>
-                <td>{$list.cname}</td>
+                <td class="text_left">{$list.cname}</td>
                 <td>{$list.pname}</td>
                 <td>{$list.total_fees}元</td>
                 <td>{:date('Y/m/d H:i:s',$list['signed_time'])}</td>

@@ -11,15 +11,15 @@
 <body>
 <div style="width:100%; overflow:hidden;">
    <div class="b right_next">
-      <h1 class="page-header">订单列表</h1>
+      <h1 class="page-header">订单详情</h1>
       <div class="table-responsive">
         <table class="table table-bordered table-hover">
           <tbody>
              <tr>
-              <td align="left" colspan="4">
+              <th align="left" colspan="4">
 			   <!-- 订单详情开始 -->            
 			    基 本 信 息 <a href="{:U('Order/ord_u_form?id='.$orderinfo['id'])}" style="float:right;margin-right: 20px;">修改</a>	
-			   </td>
+			   </th>
               </tr>
             </tbody>
               <tr>
@@ -80,10 +80,10 @@
             </table>
             </div>  
          <div class="table-responsive">
-          <table class="table table-bordered table-hover"> 
+          <table class="table table-bordered table-hover table_center"> 
            <!-- 订单付款记录 --> 
            <tbody>
-             <tr><th colspan="5">订单付款记录</th></tr>
+             <tr><th colspan="5" style="text-align: left;">订单付款记录</th></tr>
            </tbody>
             <tr>
                 <th>编号</th>
@@ -109,7 +109,7 @@
         <!-- 订单续费记录 --> 
         <tbody>
             <tr>
-            <th colspan="5">订单续费记录</th>
+            <th colspan="5" style="text-align: left;">订单续费记录</th>
             </tr>
          </tbody>
             <tr>

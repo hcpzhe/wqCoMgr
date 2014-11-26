@@ -208,7 +208,7 @@ body {
 .page div > a:focus,
 .page div > span:focus {
   color: #23527c;
-  background-color: #eee;
+  background-color: #337ab7;
   border-color: #ddd;
 }
 .page div > .active > a,

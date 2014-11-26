@@ -87,7 +87,7 @@ class DomrenController extends HomeBaseController{
 		$data['org_expired_time'] =  I('param.expired_time');  //原过期时间
 		$data['year_num'] = I('param.year');   //域名续费年限
 		$data['new_expired_time'] = $data['org_expired_time'] + $data['year_num']*60*60*24*365;  //域名到期时间计算      新过期时间
-		$data['pay_time'] = I('param.pay_time');
+		$data['pay_time'] = strtotime(I('param.pay_time'));
 		$data['user_id'] =  (int)I('user_id');
 		if ($data['org_expired_time'] < time())
 		$data['status'] = 0;

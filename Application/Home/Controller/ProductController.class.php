@@ -6,7 +6,7 @@ class ProductController extends HomeBaseController{
 	/*查询产品分类列表*/
 	public function pro_list(){
 		$product=new ProductModel();
-		$this->pro_list=$product->p_list();
+		$this->pro_list=$product->p_lists();
 		$this->display();
 	}
 	/** 删除产品 */

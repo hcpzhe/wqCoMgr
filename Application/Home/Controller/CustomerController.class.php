@@ -101,10 +101,11 @@ class CustomerController extends HomeBaseController {
 	/*查看公司详情*/
 	public function detailed(){		
 		$id = (int)I('id');   //被选中要进行操作的id
+		
 		$cust = M('Customer'); //获取客户详细信息
 		if (!IS_ROOT){ //非超管
 			$User = new UserModel();
-			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
+			$cust_id = $User->user_auto();  //登录人拥有的客户权限id
 			if(!in_array($id,$cust_id)){
 				$this->error('您没有该公司的权限，不能进行相关操作！');
 			}

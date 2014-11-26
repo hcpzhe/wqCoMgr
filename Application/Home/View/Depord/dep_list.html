@@ -38,8 +38,8 @@ function push(){
             </select>
             关键字  <input type="text" name="key" class="form-control">
             <input type="submit" value="搜索" class="btn btn-primary">
-            <a href="javascript:void(0)" class="btn btn-primary" onclick="info();">详情</a>	
-            <a href="javascript:void(0)" class="btn btn-primary" onclick="push();">推送</a>	
+            <a href="javascript:void(0)" class="btn btn-primary" onClick="info();">详情</a>	
+            <a href="javascript:void(0)" class="btn btn-primary" onClick="push();">推送</a>	
         </form> 
      </div>            
      <!-- 搜索结束 -->
@@ -70,9 +70,9 @@ function push(){
                 <td>{$list.rname}</td>
                 <td>
                     <!-- <if condition="$list.checks eq 1"> -->
-                    <a href="{:U('Depord/dist?id='.$list['id'].'&cust_id='.$list['cust_id'])}" class="red">已分配</a>
+                    <a href="{:U('Depord/dist?id='.$list['id'].'&cust_id='.$list['cust_id'])}">已分配</a>
                     <!-- <elseif condition="$list.checks eq 0"/> -->	
-                        <a href="{:U('Depord/dist?id='.$list['id'].'&cust_id='.$list['cust_id'])}" class="red">未分配</a>
+                        <a href="{:U('Depord/dist?id='.$list['id'].'&cust_id='.$list['cust_id'])}">未分配</a>
                     <!-- <else/> -->失效<!-- </if> -->
                 </td>
             </tr>
