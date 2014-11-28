@@ -124,7 +124,7 @@
                 <td>{$rlist.id}</td>
                 <td>{$rlist.money}</td>
                 <td><!-- <if condition="$rlist.class eq 1"> -->预付款<!-- <else/> -->余款<!-- </if> --></td>
-                <td>{$rlist.pay_time}</td>
+                <td>{:date('Y/m/d H:i:s',$rlist['pay_time'])}</td>
                 <td><!-- <if condition="$rlist.check eq 1"> -->通过<!-- <elseif condition="$rlist.check eq 0"/> -->待审<!-- <else/> -->拒绝<!-- </if> --></td>
             </tr>
         <!-- </foreach> -->

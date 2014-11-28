@@ -9,7 +9,7 @@ header("Content-Type:text/html;charset=utf-8");
 class UsercustprodController extends HomeBaseController {
     /**权限的添加***/
 	public function add(){		
-		$id =	(int)I('param.cust_id'); 
+		$id =	(int)I('param.cust_id'); 		
 		if (!IS_ROOT){ //非超管
 			$User = new UserModel();
 			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
@@ -18,12 +18,20 @@ class UsercustprodController extends HomeBaseController {
 			}
 		}
 		$cust = M('Customer');   
-		$cust_list = $cust->where('status=1')->select(); //客户
-		$this->assign('cust_list',$cust_list);
+		$cust_list = $cust->where("status=1 AND id=$id")->find(); //客户
+		$user_id = $cust_list['user_id']; //客户信息录入者id
+		$this->assign('user_id',$cust_list['user_id']);  
 		
+		$this->assign('cust_list',$cust_list);		
 		$user = M('User');
+		$realname = $user->where("status=1 AND id=$user_id")->getField('realname');   //权限人优先选择 客户信息录入者
+		$this->assign('realname',$realname);
 		$user_list=$user->where('status=1')->select();  //权限人
-		$this->assign('user_list',$user_list);		
+		$this->assign('user_list',$user_list);
+		
+// 		print_r($realname);
+// 		exit();
+			
 		$this->display();			
 	}	
 	/***新增的客户接口***/
@@ -32,6 +40,9 @@ class UsercustprodController extends HomeBaseController {
 		$data['cust_id'] = (int)I('param.cust_id');		
 		//$data['prod_id'] = (int)I('param.prod_id');
 		$data['expired_time'] = strtotime(I('param.expired_time'));
+		if (empty($data['expired_time'])){
+			$data['expired_time'] = 0;			
+		}
 		$model = M('User_cust_prod');			
 		$model->add($data);
 		$this->success('添加成功',U('Customer/lists'));
@@ -57,12 +68,7 @@ class UsercustprodController extends HomeBaseController {
 			->where("cr.id=ucp.cust_id AND ur.id=ucp.user_id AND ucp.cust_id=$id")
 			->getField("ucp.cust_id as id,cr.`name` as `cname`,cr.contacts as contacts,cr.phone as phone,cr.fax as fax,cr.address as address,cr.remark as remark,ur.realname as realname,ucp.expired_time as expired_time,ucp.prod_id as prod_id");
 			$this->assign('list',$list);
-
-			$user = M('User');
-			$user_list = $user->table('erp_depart as de,erp_user as ur')
-			->where("de.id=ur.depart_id AND ur.id=$user_id")
-			->select();
-			$this->assign('user_list',$user_list);
+	
 			$this->assign('cust_id',$id);
 			$this->display();		
 	}

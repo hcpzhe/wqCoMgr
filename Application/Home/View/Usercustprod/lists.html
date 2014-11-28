@@ -13,10 +13,13 @@
   <div class="b right_next">
     <h1 class="page-header">权限信息</h1>
     <div class="top_search">
-        <font style="margin-left: 20px;">操作：	</font>          	                                         
-        <a href="{:U('Usercustprod/edit?cust_id='.$cust_id)}" class="btn btn-primary">编辑</a> 
-        <a href="{:U('Usercustprod/del?cust_id='.$cust_id)}" class="btn btn-primary">删除</a>
-        <a href="{:U('Usercustprod/add')}" class="btn btn-primary">添加</a>                                             
+        <font style="margin-left: 20px;">操作：	</font> 
+        <!-- <empty name="list"> -->
+          <a href="{:U('Usercustprod/add?cust_id='.$cust_id)}" class="btn btn-primary">添加</a>
+        <!-- <else />  -->  
+           <a href="{:U('Usercustprod/edit?cust_id='.$cust_id)}" class="btn btn-primary">编辑</a>
+           <a href="{:U('Usercustprod/del?cust_id='.$cust_id)}" class="btn btn-primary">删除</a> 	
+        <!-- </empty> -->         	                                                                                                                     
     </div>
       <div class="table-responsive">
         <table class="table table-bordered table-hover">
@@ -51,34 +54,7 @@
 		        <td colspan="3">{$custlist.remark}</td>		        
 		      </tr> 
 		     <!-- </foreach> -->  	
-		       
-		     <!-- <foreach name="user_list" item="user_list"> -->   
-		     <tbody>
-               <tr><th colspan="4">权限拥有者信息</th></tr>
-             </tbody>
-		       <tr>
-		        <td width="150">用&nbsp;户&nbsp;名</td>
-		        <td width="220">{$user_list.account}</td>
-		        <td width="150">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 别</td>
-		        <td width="220">
-		           <!-- <if condition="$user_list['sex'] eq 1 "> -->男                    
-		            <!-- <else /> --> 女<!-- </if> -->
-		        </td>
-		      </tr> 
-		      <tr>
-		        <td>所在部门</td>
-		        <td>{$user_list.name}</td>
-		        <td>职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 位</td>     
-		        <td>{$user_list.position}</td>
-		      </tr> 
-		      <tr>		        
-		        <td>入职时间</td>
-		        <td>{:date('Y/m/d H:i:s',$user_list['startime'])}</td>
-		        <td>生&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 日</td>
-		        <td>{:date('Y/m/d H:i:s',$user_list['birthday'])}</td>
-		      </tr>  
-		    <!-- </foreach> --> 
-		    
+		       		    
 		    <!-- <empty name="list"> -->
              <tr>
 		      	<th colspan="4" style="color: red;">该公司权限还未添加</th>

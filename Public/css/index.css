@@ -169,12 +169,10 @@ body {
 
 
 /**分页样式**/
-.page div{}
-
 .page div {
   display: inline-block;
   padding-left: 0;
-  margin: 20px 0;
+  margin: 10px 0;
   border-radius: 4px;
 }
 .page div > a {
