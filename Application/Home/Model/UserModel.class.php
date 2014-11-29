@@ -71,7 +71,7 @@ class UserModel extends Model {
 		session('user_auth_sign', data_auth_sign($auth));
 	
 	}
-	/** 查询技术部人员*/
+	/** 查询订单分配人员*/
 	public function tech_list($id){
 		$model = new DepartModel();
 		$deptids = $model->allDept($id);
@@ -79,8 +79,8 @@ class UserModel extends Model {
 		
 		$user_M = new Model('User');
 		$user_map = array('depart_id'=>array('in',$deptids));
-		$user_M->where($user_map)->select();
-		$t_list=$this->where("status=1 AND depart_id=$id")->select();
+		$user_map['status']=1;
+		$t_list=$user_M->where($user_map)->select();
 		return $t_list;
 	}		
 // 	/** 查询系统用户列表 * /
@@ -128,17 +128,23 @@ class UserModel extends Model {
  		$map = array('user_id'=>$uid);
  		$model = M('User_depart_mgr');
  		$depidarr = $model->where($map)->getField('depart_id',true);   //取出当前用户所管理的部门
-		//如果是普通员工，没有部门管理权限
-		if(empty($depidarr)){
-			return $cust_id==0;
-			}
+ 		//如果是普通员工，没有部门管理权限
+ 		if(empty($depidarr)){
+ 			// 获取登陆用户的客户权限
+ 			$Ucp=M('User_cust_prod');
+ 			$ucpwhere['user_id'] = UID;
+ 			$time=time();
+ 			$ucpwhere['expired_time'] = array(array('gt',$time),array('eq',0), 'or');
+ 			$cust_id=$Ucp->where($ucpwhere)->getField("cust_id",true);
+ 			return $cust_id;
+ 		}
  		 
  		//取出当前用户所管理所有部门 （递归取所有子部门）
  		$alldepart = $depidarr;
  		foreach ($depidarr as $rowdepid) {
  			$dep = new DepartModel();
  			$deptids = $dep->allDept($rowdepid);
- 			$alldepart = array_merge($alldepart,$deptids); 			
+ 			$alldepart = array_merge($alldepart,$deptids); 						
  		}
  		 		
  		//获取部门下所有的员工

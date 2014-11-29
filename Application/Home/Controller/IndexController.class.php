@@ -13,7 +13,8 @@ class IndexController extends HomeBaseController {
 		$uid=$arr['uid'];
 		$User = M("User");
 		$users = $User->table('erp_user as ur,erp_depart as de')
-		->where('ur.depart_id=de.id AND ur.id='.$uid)->select();
+		->where('ur.depart_id=de.id AND ur.id='.$uid)
+		->getField("ur.id as id,ur.account as account,ur.realname as realname,de.name as name,ur.sex as sex,ur.position as position,ur.startime as startime,ur.birthday as birthday,ur.status as status,ur.last_login_ip as last_login_ip");
 	    $this->assign('users',$users);
 		$this->display();
 	}

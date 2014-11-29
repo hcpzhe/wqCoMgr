@@ -111,13 +111,9 @@ class OrderController extends HomeBaseController{
 /**  修改订单 */
 	public function up(){
 		$id=$_GET['id'];
-		$p=$_POST['pid'];
+		$data['prod_id']=$_POST['pid'];
 		$data['total_fees']=$_POST['money'];
-		$data['expired_time']=$_POST['time'];
-		if(!empty($p)){
-			/*产品改变*/
-			$data['prod_id']=$p;
-		}
+		$data['expired_time']=strtotime($_POST['time']);
 		$order=new OrderModel();
 		$flag=$order->where("id=$id")->save($data);
 		if($flag==1){ $this->success('保存成功！');}
@@ -131,12 +127,14 @@ class OrderController extends HomeBaseController{
 			$User = new UserModel();
 		    $cust_id=$User->user_auto();  //登录人拥有的客户权限id
 			if(!in_array($id,$cust_id)){
-				$this->error('您没有权限，不能此操作！');
+				$this->error('您没有权限，不能进行此操作！');
 			}
 	    }
 		if(!empty($id)){
 			$customer=new CustomerModel();
 			$this->cus=$customer->one($id);
+		}else{
+			
 		}
 			/*查询产品分类*/
 			$product=new ProductModel();
@@ -229,7 +227,7 @@ class OrderController extends HomeBaseController{
 			$flag1=$dor->add_do($id);
 			if($flag1==1){ 	$this->success('推送成功');}
 			else{ $this->error('推送失败');}
-		}else if($dp_id==2){/** 优化 */
+		}else if($dp_id==10){/** 优化 产品客服部*/
 			/*优化模型*/
 			$sor=new Seo_orderModel();
 			$flag2=$sor->add_so($id);

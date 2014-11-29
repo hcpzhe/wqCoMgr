@@ -27,14 +27,14 @@ class SeoordController extends HomeBaseController{
 	/**网站开发订单详细页面，订单详细信息，订单参与人员，订单沟通记录 */
 	public function seo_info(){
 		$oid=$_GET['id'];
-		if (!IS_ROOT){ //非超管
-			$id=$_GET['cust_id'];  //选中的公司id
-			$User = new UserModel();
-			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
-			if(!in_array($id,$cust_id)){
-				$this->error('您没有该公司的权限，不能进行相关操作！');
-			}
-		}
+// 		if (!IS_ROOT){ //非超管
+// 			$id=$_GET['cust_id'];  //选中的公司id
+// 			$User = new UserModel();
+// 			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
+// 			if(!in_array($id,$cust_id)){
+// 				$this->error('您没有该公司的权限，不能进行相关操作！');
+// 			}
+// 		}
 		/** 详细信息 */
 		$seo=new Seo_orderModel();
 		$this->data=$seo->seoinfo($oid);
@@ -115,7 +115,7 @@ class SeoordController extends HomeBaseController{
 	/*增加一条开发沟通记录*/
 	public function ad_record(){
 		$map['order_id']=$_POST['o_id'];
-		$map['user_id']=11;
+		$map['user_id']=UID;
 		$map['post_time']=time();
 		$map['content']=$_POST['content'];
 		$seo_order_comment=new Seo_order_commentModel();

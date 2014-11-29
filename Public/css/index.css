@@ -197,7 +197,7 @@ body {
   border-bottom-left-radius: 4px;
 }
 .page div > a:last-child,
-.page div > a:last-child {
+.page div > span:last-child {
   border-top-right-radius: 4px;
   border-bottom-right-radius: 4px;
 }

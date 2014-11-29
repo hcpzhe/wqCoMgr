@@ -14,7 +14,7 @@
      <h1 class="page-header">订单信息修改</h1>
       <div class="table-responsive">
         <!-- 订单详情开始 -->            
-        <form method="post" action="{:U('Order/up?id='.$orderinfo['id'])}">
+        <form method="post" action="{:U('Order/up?id='.$orderinfo['id'])}" onSubmit="$(this).RSsubmit({success_alert:true});return false;">
         <table class="table table-bordered table-hover">
           <tr>
             <th colspan="4">基本信息<a href="{:U('Order/order_info?id='.$orderinfo['id'])}" style="float:right;margin-right: 20px;">返回</a></th>
@@ -39,7 +39,7 @@
             <td>购买产品</td>
             <td>
             <select name='pid' class="form-control">
-                <option value="{$p_list.id}">{$orderinfo.pname}</option>
+                <option value="{$orderinfo.pid}">{$orderinfo.pname}</option>
             <!-- <foreach  name="p_list" item="p_list"> -->
                 <option value="{$p_list.id}">{$p_list.name}</option>
             <!-- </foreach> -->	

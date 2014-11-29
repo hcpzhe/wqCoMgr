@@ -27,7 +27,7 @@ class DepordController extends HomeBaseController{
 	/*增加一条开发沟通记录*/
 	public function ad_record(){
 		$map['order_id']=$_POST['oid'];
- 		$map['user_id']=5;
+ 		$map['user_id']=UID;
 		$map['post_time']=time();
 		$map['content']=$_POST['content'];
 		$develop_order_comment=new Develop_order_commentModel();
@@ -39,14 +39,14 @@ class DepordController extends HomeBaseController{
 	/**网站开发订单详细页面，订单详细信息，订单参与人员，订单沟通记录 */
 	public function dep_info(){
 		$oid=$_GET['id'];
-		if (!IS_ROOT){ //非超管
-			$id=$_GET['cust_id'];  //选中的客户id
-			$User = new UserModel();
-			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
-			if(!in_array($id,$cust_id)){
-				$this->error('您没有该公司的权限，不能进行相关操作！');
-			}
-		}
+// 		if (!IS_ROOT){ //非超管
+// 			$id=$_GET['cust_id'];  //选中的客户id
+// 			$User = new UserModel();
+// 			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
+// 			if(!in_array($id,$cust_id)){
+// 				$this->error('您没有该公司的权限，不能进行相关操作！');
+// 			}
+// 		}
 		/** 详细信息 */
 		$dep=new Develop_orderModel();
 		$this->data=$dep->depinfo($oid);	
@@ -71,7 +71,7 @@ class DepordController extends HomeBaseController{
 		}
 		/*查询技术部所有人员*/
 		$depart = M('Depart');
-		$dep_id = $depart->where("name='技术部'")->getField('id'); //技术部所在id
+		$dep_id = $depart->where("name='技术部'")->getField('id'); //技术部所在id	
 		$user=new UserModel();
 		$this->users=$user->tech_list($dep_id);
 		/*查询该订单已经分配的人员*/
@@ -115,7 +115,7 @@ class DepordController extends HomeBaseController{
 			$flag1=$dor->add_do($id);
 			if($flag1==1){ 	$this->success('推送成功');}
 			else{ $this->error('推送失败');}
-		}else if($dp_id==2){/** 优化 */
+		}else if($dp_id==10){/** 优化 */
 			/*优化模型*/
 			$sor=new Seo_orderModel();
 			$flag2=$sor->add_so($id);

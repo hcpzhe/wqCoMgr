@@ -73,7 +73,7 @@
               <tr><td colspan="4">
                 开发沟通记录：
                 <!-- <foreach name="conments" item="list"> -->
-                    <p style="padding-left:50px;">{$list.realname}：{$list.content} [{$list.post_time}]</p>
+                    <p style="padding-left:50px;">{$list.realname}：{$list.content} [{:date('Y/m/d H:i:s',$list['post_time'])}]</p>
                 <!-- </foreach> -->
                 </td>
               </tr> 
