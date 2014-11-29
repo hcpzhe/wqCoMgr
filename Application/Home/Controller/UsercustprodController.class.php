@@ -27,10 +27,7 @@ class UsercustprodController extends HomeBaseController {
 		$realname = $user->where("status=1 AND id=$user_id")->getField('realname');   //权限人优先选择 客户信息录入者
 		$this->assign('realname',$realname);
 		$user_list=$user->where('status=1')->select();  //权限人
-		$this->assign('user_list',$user_list);
-		
-// 		print_r($realname);
-// 		exit();
+		$this->assign('user_list',$user_list);		
 			
 		$this->display();			
 	}	
@@ -86,9 +83,8 @@ class UsercustprodController extends HomeBaseController {
 		$ucp = M('User_cust_prod'); //查询登录人拥有的客户权限
 		$list = $ucp->table('erp_customer as cr,erp_user as ur,erp_user_cust_prod as ucp')
 		->where("cr.id=ucp.cust_id AND ur.id=ucp.user_id AND ucp.cust_id=$id")
-		->getField("ucp.cust_id as cust_id,cr.`name` as `cname`,cr.contacts as contacts,cr.phone as phone,cr.fax as fax,cr.address as address,cr.remark as remark,ur.realname as realname,ucp.expired_time as expired_time,ucp.prod_id as prod_id");
+		->getField("ucp.cust_id as cust_id,cr.`name` as `cname`,cr.contacts as contacts,cr.phone as phone,cr.fax as fax,cr.address as address,cr.remark as remark,ur.id as uid,ur.realname as realname,ucp.expired_time as expired_time,ucp.prod_id as prod_id");
 		$this->assign('list',$list);	
-		//print_r($list);exit();
 		$user = M('User');
 		$user_list = $user->where('status=1')->select();
 		$this->assign('user_list',$user_list);		
@@ -101,9 +97,16 @@ class UsercustprodController extends HomeBaseController {
 		$newdata = array();
 		$newdata['user_id'] = I('param.user_id');
 		$newdata['expired_time'] = strtotime(I('param.expired_time'));	
+		if (empty($newdata['expired_time'])){
+			$newdata['expired_time'] = 0;
+		}
 		$model = M('User_cust_prod');
-		$model->where('cust_id='.$cust_id)->data($newdata)->save();		
-		$this->success('更新成功',U('Customer/lists'));
+		$flag=$model->where('cust_id='.$cust_id)->data($newdata)->save();		
+		if ($flag==1){
+			$this->success('修改成功',U('Customer/lists'));
+		}else {
+			$this->error('修改失败');
+		}
 	}
 	/**权限删除**/
 	public function del(){

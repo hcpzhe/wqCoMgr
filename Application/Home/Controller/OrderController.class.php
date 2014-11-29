@@ -11,6 +11,7 @@ use Home\Model\UserModel;
 use Home\Model\Order_payModel;
 use Home\Model\Order_renewalModel;
 use Home\Model\Order_domainModel;
+header("Content-Type:text/html;charset=utf-8");
 class OrderController extends HomeBaseController{
 /** 订单列表 */
 	public function order_list(){		

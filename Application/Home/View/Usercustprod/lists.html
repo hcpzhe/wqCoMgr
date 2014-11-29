@@ -18,7 +18,7 @@
           <a href="{:U('Usercustprod/add?cust_id='.$cust_id)}" class="btn btn-primary">添加</a>
         <!-- <else />  -->  
            <a href="{:U('Usercustprod/edit?cust_id='.$cust_id)}" class="btn btn-primary">编辑</a>
-           <a href="{:U('Usercustprod/del?cust_id='.$cust_id)}" class="btn btn-primary">删除</a> 	
+           <a href="{:U('Usercustprod/del?cust_id='.$cust_id)}" class="btn btn-primary" onClick="$(this).RSsubmit({success_alert:true});return false;">删除</a> 	
         <!-- </empty> -->         	                                                                                                                     
     </div>
       <div class="table-responsive">

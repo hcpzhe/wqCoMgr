@@ -64,8 +64,8 @@ class  UserController extends HomeBaseController{
 			$this->success('添加成功！');}
 	}
 	/** 查询某个用户的详细信息  */
-	public function user_info(){
-		if (!IS_ROOT){ //非超管
+	public function user_info(){		
+		if (!IS_ROOT){ //非超管			
 		   $this->error('您没有权限，不能进行此操作！');
 		}
 		/** 获取用户id	 */
@@ -124,16 +124,27 @@ class  UserController extends HomeBaseController{
 		$data['birthday']=strtotime($_POST['birthday']);
 		$user=new UserModel();
 		$flag=$user->where("id=$id")->save($data);
-		if($flag==0){	$this->error('修改失败！');
+		$auth_group_access=new Auth_group_accessModel();
+		$flag1=$auth_group_access->up($id,$group_id);
+		if($flag==1 or $flag1==1){	$this->success('修改成功！');
 		}else{	
-			$auth_group_access=new Auth_group_accessModel();
-			$flag1=$auth_group_access->up($id,$group_id);
-			if($flag1==0){
-				$this->error('修改失败');
-			}else{
-				$this->success('修改成功！');
-			}
+			$this->error('修改失败！');
 		}
+	}
+	/***修改登录用户信息***/
+	public function user_update(){
+		/** 获取用户id	 */
+		$id= UID;
+		$user=new UserModel();
+		$this->info=$user->userinfo($id);
+		/*获取所有部门*/
+		$dp=new DepartModel();
+		$this->departs=$dp->alldepart();
+		/*查询所有用户组*/
+		$auth_group=new Auth_groupModel();
+		$this->groups=$auth_group->lists();
+		$this->display();
+		
 	}
 	public function pwd(){
 		   $this->display();
@@ -148,7 +159,7 @@ class  UserController extends HomeBaseController{
 		if($flag == 0){
 				$this->error('修改失败');
 			}else{
-				$this->success('修改成功！');
+				$this->success('修改成功！',U('User/search_list'));
 			}
 	}
 		

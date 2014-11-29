@@ -58,7 +58,7 @@ class CustomervisitController extends HomeBaseController {
 		$id = (int)I('cust_id');   //被选中要进行操作的id
 		$cust = M('customer');
 		if(empty($id)){   //未被选中指定公司  添加拜访记录
-			$newdata['check'] = 1; //公司信息审核通过后 才能添加拜访记录
+			$newdata['status'] = 1; //公司信息审核通过后 才能添加拜访记录
 			$cust_list=$cust->where($newdata)->select();
 			$this->assign('cust_list',$cust_list);
 		}else{

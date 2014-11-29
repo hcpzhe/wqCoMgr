@@ -3,10 +3,10 @@
 <title>洛阳万谦网络科技有限公司</title>
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<script type="text/javascript" language="javascript" src="__JS__/jquery.min.js"></script>
+<script type="text/javascript" src="__JS__/jquery.min.js"></script>
 <link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css" media="screen">
 <link rel="stylesheet" type="text/css" href="__CSS__/index.css">
-<script type="text/javascript" language="javascript" src="__JS__/bootstrap.min.js"></script>
+<script type="text/javascript" src="__JS__/bootstrap.min.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
 </head>
 <body>
@@ -17,8 +17,9 @@
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
+        <li><a href="{:U('User/user_update')}" target="main">信息修改</a></li>
         <li><a href="{:U('User/pwd')}" target="main">密码修改</a></li>
-        <li><a href="{:U('Common/logout')}">退出</a></li>
+        <li><a href="{:U('Common/logout')}" onclick="if(confirm(&#39;您确认要退出吗？&#39;)){$(this).RSsubmit();}return false;">退出</a></li>
         <li><a href="#"></a></li>
       </ul>          
     </div>
@@ -30,7 +31,7 @@
    <div class="col-main">
       <div class="col-main-warp">
         <div class="test-box">
-           <div class="embed-responsive embed-responsive-16by9">
+           <div class="embed-responsive embed-responsive-16by9" style="height: 720px;">
               <iframe id="main" name="main" class="embed-responsive-item" src="{:U('Index/welcome')}"></iframe>
            </div>
         </div>

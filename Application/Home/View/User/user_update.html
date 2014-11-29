@@ -1,0 +1,86 @@
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>信息修改</title>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="__CSS__/index.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css" media="screen">
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+</head>
+<body>
+<div style="width:100%; overflow:hidden;">
+  <div class="b right_next">
+      <h1 class="page-header">信息修改</h1>
+      <font class="red tishi">头部提示信息：时间格式：2000/01/01 00:00:00</font>
+        <!-- 用户详情开始 -->          
+        <form method="post" action="{:U('User/up?id='.$info['id'])}" onsubmit="$(this).RSsubmit({success_alert:true});return false;">       
+            <table class="table_form">
+                  <tr>
+                    <td width="30%" align="right">用 户 名 ：</td>
+                    <td width="70%"><input type="text" value="{$info.uname}" name="uname" class="form-control"></td>
+                  </tr>
+                  <tr>
+                    <td align="right">真实姓名：</td>
+                    <td><input type="text" value="{$info.name}" name="name" class="form-control"></td>
+                  </tr>
+                  <tr>
+                    <td align="right">性 &nbsp;&nbsp;&nbsp; 别：</td>
+                    <td>
+                       <!-- <if condition="$info.sex eq 1"> -->
+	                       <input name="sex" type="radio" value="1" checked/>男
+	                       <input name="sex" type="radio" value="2"/>女
+					   <!-- <else/> -->
+						   <input name="sex" type="radio" value="1" />男
+	                       <input name="sex" type="radio" value="2" checked/>女
+					   <!-- </if> -->
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right">所属部门：</td>
+                    <td>
+                    <select name="dp" class="form-control">
+                    	 <option value="{$info.dpid}">{$info.dpname}</option>
+                    <!-- <foreach name="departs" item="dp_list"> --> 
+                    		<option value="{$dp_list.id}">{$dp_list.name}</option>
+                    <!-- </foreach> --> 		
+                    </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right">职 &nbsp;&nbsp;&nbsp; 位：</td>
+                    <td><input type="text" value="{$info.position} " name="position" class="form-control"></td>
+                  </tr>
+                  <tr>
+                    <td align="right">入职时间：</td>
+                    <td><input type="text" value="{:date('Y/m/d H:i:s',$info['startime'])}" name="startime" class="form-control"></td>
+                  </tr>
+                  <tr>
+                    <td align="right">出生日期：</td>
+                    <td><input type="text" value="{:date('Y/m/d H:i:s',$info['birthday'])}" name="birthday" class="form-control"></td>
+                  </tr>
+                  <tr>
+                    <td align="right">所属用户组：</td>
+                    <td><select name="auth_group" class="form-control">
+                    	 <option value="{$info.group_id}">{$info.group_title}</option>
+                    <!-- <foreach name="groups" item="gp_list"> --> 
+                    		<option value="{$gp_list.id}">{$gp_list.title}</option>
+                    <!-- </foreach> --> 		
+                    	</select>
+                  </tr>
+                  <tr>
+                     <td align="right">
+                        <input type="hidden" value="{$info.id}" name="id">
+                        <input type="submit" value="修改" class="btn btn-primary">　　
+                     </td>
+                     <td>
+                        <a href="{:U('User/search_list')}" class="btn btn-primary">返回</a>
+                     </td>
+                  </tr>
+            </table>  
+       </form>                                 
+    <!-- 用户详情结束 -->            
+  </div>
+</div>
+</body>
+</html>

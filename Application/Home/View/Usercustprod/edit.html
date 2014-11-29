@@ -14,7 +14,7 @@
 <div style="width:100%; overflow:hidden;">
   <div class="b right_next">
     <h1 class="page-header">权限修改</h1>
-           <form action="{:U('Usercustprod/update')}" method="post">
+           <form action="{:U('Usercustprod/update')}" method="post" onSubmit="$(this).RSsubmit({success_alert:true});return false;">
 	        <table class="table_form">
 	         <!-- <foreach name="list" item="list"> --> 
 		      <tr>
@@ -65,7 +65,7 @@
 		       <tr>
                 <td></td>
 		        <td>                     
-		           <input type="submit" value="提交" class="btn btn-primary">
+		           <input type="submit" value="修改" class="btn btn-primary">
 		         </td>		         
 		      </tr>
 		      <!-- </foreach> -->      

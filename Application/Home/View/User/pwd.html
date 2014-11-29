@@ -35,7 +35,7 @@
    <!-- 添加用户结束 -->            
   </div>
 </div>
-<script language="JavaScript" type="text/javascript">
+<script type="text/javascript">
 function checkfrm1(afrm)
 {
 	if(!/^\w{4,}$/i.test(afrm.opwd1.value))
@@ -47,18 +47,18 @@ function checkfrm1(afrm)
 	
 	if( (afrm.pwd1.value != "") && (!/^\w{4,}$/i.test(afrm.pwd1.value)) )
 	{
-		alert("登录密码无效");
+		alert("新登录密码无效");
 		afrm.pwd1.focus();
 		return false;
 	}
 	if( (afrm.pwd1.value != "") &&  (afrm.pwd1c.value != afrm.pwd1.value) )
 	{
-		alert("登录密码确认有误！");
+		alert("新登录密码确认有误！");
 		afrm.pwd1c.focus();
 		return false;
 	}
-	/*$(afrm).RSsubmit({success_alert:true, reload:true});
-	return false;*/
+	$(afrm).RSsubmit({success_alert:true});
+	return false;
 }
 </script>
 </body>

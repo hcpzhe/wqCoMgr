@@ -153,7 +153,7 @@ class UserModel extends Model {
  		$ucpwhere['user_id'] = array('in',$alluser);		
  		$time=time();  		
  		$ucpwhere['expired_time'] = array(array('gt',$time),array('eq',0), 'or');
- 		$cust_id=$Ucp->where($ucpwhere)->getField("cust_id",true);
+ 		$cust_id=$Ucp->where($ucpwhere)->getField("cust_id",true);		
  		return $cust_id;
 					
 	}	
