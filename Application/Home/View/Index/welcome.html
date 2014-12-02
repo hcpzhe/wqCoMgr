@@ -7,54 +7,64 @@
 <link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css" media="screen">
 <script type="text/javascript" src="__JS__/jquery.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+<style>
+th,td{
+	border:none !important;}
+</style>
 <body>
 <div style="width:100%; overflow:hidden;">
    <div class="b right_next">
       <h1 class="page-header">登陆首页</h1>
       <div class="table-responsive">
-        <table class="table table-bordered table-hover">
-         <tbody>
-          <tr>
+        <table class="table  table-hover" style="border:1px solid #eee;">
+         <thead>
+          <tr class="active">
              <th colspan="4" align="left">个人信息</th>                    
           </tr>
-         </tbody>
+         </thead>
           <!-- <foreach name="users" item="users"> -->                  
           <tr>
-            <td width="20%"> 编&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号 </td>
+            <td width="20%" align="right"> 编&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;号 ：</td>
             <td width="30%">{$users['id']}</td>
-            <td width="20%">用&nbsp;&nbsp;户&nbsp;&nbsp;名</td>
+            <td width="20%" align="right">用&nbsp;&nbsp;户&nbsp;&nbsp;名：</td>
             <td width="30%">{$users['account']}</td>
           </tr>                 
           <tr>
-            <td>真实姓名</td>
+            <td align="right">真实姓名：</td>
             <td>{$users['realname']}</td>
-            <td>所属部门</td>
+            <td align="right">所属部门：</td>
             <td>{$users['name']}</td>
           </tr>
           <tr>
-            <td>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</td>
+            <td align="right">性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别：</td>
             <td>
               <!-- <if condition="$users['sex'] eq 1 "> -->男
               <!-- <else /> -->女<!-- </if> -->
             </td>
-            <td>职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位</td>
+            <td align="right">职&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;位：</td>
             <td>{$users['position']}</td>
           </tr>
           <tr>
-            <td>入职时间</td>
+            <td align="right">入职时间：</td>
             <td>{:date('Y/m/d H:i:s',$users['startime'])}</td>
-            <td>生&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日</td>
+            <td align="right">生&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;日：</td>
             <td>{:date('Y/m/d H:i:s',$users['birthday'])}</td>
           </tr>
            <tr>
-            <td>状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态</td>
-            <td>
+            <td align="right">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态：</td>
+            <td class="text-primary">
                <!-- <if condition="$users['status'] eq -1 "> -->删除
                <!-- <elseif condition="$users['status'] eq 0 " /> -->禁用
                <!-- <else /> -->正常<!-- </if> -->
             </td>
-            <td>登 陆 IP</td>
+            <td align="right">登 陆 IP：</td>
             <td>{$users['last_login_ip']}</td>
+          </tr>
+           <tr>
+            <td align="right">登陆次数：</td>
+            <td>{$users['login_times']}</td>
+            <td align="right">登陆时间：</td>
+            <td>{:date('Y/m/d H:i:s',$users['last_login_time'])}</td>
           </tr>
           <!-- </foreach> -->  
        </table>

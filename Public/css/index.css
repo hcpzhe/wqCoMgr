@@ -251,7 +251,11 @@ body {
 	}
 .table_form{
 	width:100%;
-	}	
+	font-size:14px;
+	}		
 .table_form td{
 	height:50px;
 	}
+.table_form input,.table_form select{
+	font-size:13.5px;
+}

@@ -56,17 +56,18 @@ class UserModel extends Model {
 				'uid'             => $user['id'],
 				'login_times'           => array('exp', '`login_times`+1'),
 				'last_login_time' => NOW_TIME,
-				'last_login_ip'   => get_client_ip(1)
+				'last_login_ip'   => get_client_ip(1),
 		);
-		$this->save($data);
-	
+		$User = M("User");
+		$User->where('id='.$user['id'])->save($data);
+		
 		/* 记录登录SESSION和COOKIES */
 		$auth = array(
 				'uid'             => $user['id'],
 				'realname'        => $user['realname'],
 				'last_login_time' => $user['last_login_time'],
 				'last_login_ip'   => $user['last_login_ip'],		
-		);
+		);	
 		session('user_auth', $auth);
 		session('user_auth_sign', data_auth_sign($auth));
 	

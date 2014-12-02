@@ -16,7 +16,7 @@
          <div class="table-responsive">
             <table class="table table-bordered table-hover">
              <tbody>
-				  <tr><th colspan="4"> 基 本 信 息 </th></tr>	
+				  <tr><th colspan="4" class="active"> 基 本 信 息 </th></tr>	
 				  <tr>
 				    <td> 销 售 专 员 ：</td>
 				    <td>{$orderlinfo.uname}</td>
@@ -69,7 +69,7 @@
                 
     <form action="{:U('Orderpay/ad_record?id='.$orderlinfo['id'])}" method="post" name="form1" id="form1" >               
        <table class="table table-bordered">
-           <tr><th colspan="2">添加订单付款记录</th></tr>  
+           <tr><th colspan="2" class="active">添加订单付款记录</th></tr>  
            <tr>
              <td width="30%" align="right">金额：</td>
              <td><input type="text" name="money" class="form-control"></td>

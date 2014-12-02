@@ -17,7 +17,7 @@
          <tbody>
           <!-- 订单详情开始 -->            
              <tr>
-               <th colspan="4" height="30">基本信息<a href="{:U('Order/ord_u_form?id='.$orderinfo['id'])}" style="float:right"><!-- 修改 --></a></th>
+               <th colspan="4" height="30" class="active">基本信息<a href="{:U('Order/ord_u_form?id='.$orderinfo['id'])}" style="float:right"><!-- 修改 --></a></th>
              </tr>	
               <tr>
                 <td>销售专员</td>
@@ -70,7 +70,7 @@
                 </td>
               </tr>
               <tr><td colspan="4">
-                 开发沟通记录：
+                 <b style="height: 40px;display: block;line-height: 30px;">开发沟通记录：</b>
                 <!-- <foreach name="conments" item="list"> -->
                     <p style="padding-left:50px;">{$list.realname}：{$list.content} [{:date('Y/m/d H:i:s',$list['post_time'])}]</p>
                 <!-- </foreach> -->

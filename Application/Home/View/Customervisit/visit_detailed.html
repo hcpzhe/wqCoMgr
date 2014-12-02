@@ -11,7 +11,7 @@
 <body>
 <div style="width:100%; overflow:hidden;">
   <div class="b right_next">
-     <h1 class="page-header">客户拜访详细信息</h1>
+     <h1 class="page-header">拜访详情</h1>
      <div class="top_search">
      	<font style="padding-left: 20px;"> 操作： </font>                                                      
         <a href="{:U('Customervisit/add_visit_prod?visit_id='.$visit_id)}" class="btn btn-primary">添加沟通</a>
@@ -21,7 +21,7 @@
         <tbody>
           <tr>
             <!-- 客户详细信息 -->       
-            <th colspan="4" align="left">拜访记录</th>                    
+            <th colspan="4" align="left" class="active">拜访记录</th>                    
           </tr>
          </tbody>
          <!-- <foreach name="data" item="data"> --> 
@@ -56,7 +56,7 @@
            <!-- <else / >--> 
            <tbody>
               <tr>
-                 <th colspan="4" align="left">沟通记录</th>                    
+                 <th colspan="4" align="left" class="active">沟通记录</th>                    
               </tr>
            </tbody>           
            <!-- <foreach name="visit_prod_list" item="visit_prod_list"> -->                                                           

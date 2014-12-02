@@ -12,10 +12,10 @@
 <div style="width:100%; overflow:hidden;">
    <div class="b right_next">
      <h1 class="page-header">部门列表</h1>
-     <div class="table-responsive">
-        <table class="table table-striped table-bordered table-hover table_center">
-          <thead>
-            <!-- 部门列表开始 -->
+     <!-- 部门列表开始 -->
+    <div class="table-responsive">
+       <table class="table table-striped table-bordered table-hover table_center">
+          <thead>    
             <tr>
               <th>编号</th>
               <th>部门名称</th>
@@ -26,7 +26,7 @@
            </thead>
            <tbody>
               <!-- <foreach name="depa_list" item="list"> -->            
-                <tr class="list_tr">
+                <tr>
                   <td>{$list.id}</td>
                   <td>{$list.name}</td>
                   <td>{$list.realname}</td>
