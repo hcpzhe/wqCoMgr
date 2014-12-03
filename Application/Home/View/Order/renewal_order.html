@@ -54,14 +54,14 @@ function xufei(){
           <thead>
             <tr>
 				<!-- 订单列表开始 -->
-				<th>请选择</th>
-                <th>产品类型</th>
-                <th>客户名称</th>
-                <th>联系人</th>
-                <th>联系电话</th>
-                <th>金额</th>
-                <th>到期时间</th>
-                <th>操作</th>
+				<th width="8%">请选择</th>
+                <th width="10%">产品类型</th>
+                <th width="25%">客户名称</th>
+                <th width="10%">联系人</th>
+                <th width="12%">联系电话</th>
+                <th width="10%">金额</th>
+                <th width="15%">到期时间</th>
+                <th width="10%">操作</th>
 			</tr>
           </thead>
           <tbody>
@@ -72,7 +72,7 @@ function xufei(){
                     <input type="hidden" name="cust_id" class="push" value="{$list.cust_id}" data-url="{:U('Orderrenewal/apy_ren?id='.$list['id'].'&cust_id='.$list['cust_id'])}">
                 </td>
                 <td>{$list.pname}</td>
-                <td>{$list.cname|mb_substr=0,54}</td>
+                <td class="text_left">{$list.cname}</td>
                 <td>{$list.contacts}</td>
                 <td>{$list.phone}</td>
                 <td>{$list.total_fees} 元</td>

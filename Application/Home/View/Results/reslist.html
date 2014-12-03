@@ -1,6 +1,6 @@
 <html lang="en"><head>
 <meta charset="utf-8">
-<title>业绩列表</title>
+<title>业绩清单</title>
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="__CSS__/index.css" rel="stylesheet" type="text/css">
@@ -11,7 +11,7 @@
 <body>
 <div style="width:100%; overflow:hidden;">
    <div class="b right_next">
-     <h1 class="page-header">业绩列表</h1>
+     <h1 class="page-header">业绩清单</h1>
      <!-- 搜索开始 -->
        <div class="top_search">
            <form action="{:U('Results/reslist')}" method="post" class="search_form" name="search">
@@ -32,16 +32,16 @@
           <thead>
            <!-- 订单列表开始 -->
             <tr>
-                <th>订单号</th>
-                <th>销售专员</th>
-                <th>产品</th>
-                <th>金额</th>
-                <th>签单时间</th>
+                <th width="15%">订单号</th>
+                <th width="20%">销售专员</th>
+                <th width="20%">产品</th>
+                <th width="20%">金额</th>
+                <th width="25%">签单时间</th>
             </tr>
           </thead>
           <tbody>	
             <!-- <foreach name="data['order_list']" item="list"> -->
-                <tr class="list_tr">
+                <tr>
                     <td>{$list.id}</td>
                     <td>{$list.uname}</td>
                     <td>{$list.pname}</td>

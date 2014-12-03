@@ -26,22 +26,22 @@
          </tbody>
          <!-- <foreach name="data" item="data"> --> 
           <tr>
-            <td width="20%">拜访编号</td>
-            <td width="30%"> 
+            <td width="15%" align="center">拜访编号</td>
+            <td width="35%"> 
               <input type="hidden" value="{$data['id']}" name="id">                                     
                     {$data['id']}      		                               	                                                 
             </td>
-            <td width="20%">公司名称</td>
-            <td width="30%">{$data.cname}</td>
+            <td width="15%" align="center">公司名称</td>
+            <td width="35%">{$data.cname}</td>
           </tr>                 
           <tr>
-            <td>拜访员工</td>
+            <td align="center">拜访员工</td>
             <td>{$data.uname}</td>
-            <td>拜访时间</td>
+            <td align="center">拜访时间</td>
             <td>{:date('Y/m/d H:i:s',$data['visit_time'])}</td>
           </tr>
           <tr>
-            <td>拜访内容</td>
+            <td align="center">拜访内容</td>
             <td colspan="3">{$data['content']}</td>                    
           </tr> 
           <!-- </foreach> -->                                 
@@ -61,11 +61,11 @@
            </tbody>           
            <!-- <foreach name="visit_prod_list" item="visit_prod_list"> -->                                                           
               <tr>
-                <td> 所 谈 产 品 </td>
+                <td align="center">所谈产品</td>
                 <td colspan="3">{$visit_prod_list['name']} </td>
               </tr>                 
               <tr>
-                <td> 沟 通 内 容 </td>
+                <td align="center">沟通内容</td>
                 <td colspan="3">{$visit_prod_list['content']}</td>                   
               </tr>                                                            
            <!-- </foreach> -->

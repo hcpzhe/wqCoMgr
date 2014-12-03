@@ -169,7 +169,7 @@ class OrderController extends HomeBaseController{
 			$order_pay=new Order_payModel();
 			$flag1=$order_pay->add($map1);
 			if($flag1==0){ $this->error('添加失败');}
-			else{ $this->redirect('Domain/add_domain',array('cust_id'=>$map['cust_id'],'order_id'=>$flag),1,'添加成功！');}
+			else{ $this->redirect('Domain/add_domain',array('cust_id'=>$map['cust_id'],'order_id'=>$flag),1,'<div style="margin: 40px 0 20px;">订单添加成功，请添加域名！</div>');}
 		}
 	}	
 /*

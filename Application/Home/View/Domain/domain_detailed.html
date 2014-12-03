@@ -28,35 +28,35 @@
             <tbody>
                  <!-- <foreach name="domain_list" item="domain_list"> --> 
                   <tr>
-                    <td width="20%">域 名 编 号</td>
-                    <td width="30%"> 
+                    <td width="15%" align="center">域 名 编 号</td>
+                    <td width="35%"> 
                       <input type="hidden" value="{$domain_list['cust_id']}" name="cust_id">                                     
 		                	{$domain_list['id']}      		                               	                                                 
                     </td>
-                    <td width="20%">公 司 名 称</td>
-                    <td width="30%">{$domain_list['name']}</td>
+                    <td width="15%" align="center">公 司 名 称</td>
+                    <td width="35%">{$domain_list['name']}</td>
                   </tr>                 
                   <tr>
-                    <td> 域 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名 </td>
+                    <td align="center"> &nbsp;域 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 名 </td>
                     <td>{$domain_list['domain']}</td>
-                    <td>域名运营商</td>
+                    <td align="center">域名运营商</td>
                     <td>{$domain_list['service']}</td>
                   </tr>
                   <tr>
-                    <td>注 册 时 间</td>
+                    <td align="center">注 册 时 间</td>
                     <td>{:date('Y/m/d H:i:s',$domain_list['reg_time'])}</td>
-                    <td>到 期 时 间</td>
+                    <td align="center">到 期 时 间</td>
                     <td>{:date('Y/m/d H:i:s',$domain_list['expired_time'])}</td>
                   </tr>
                   <tr>
-                    <td>域 名 状 态</td>
-                    <td>
+                    <td align="center">域 名 状 态</td>
+                    <td class="text-info">
                         <!-- <if condition="$domain_list['status'] eq -1 "> -->删除
                         <!-- <elseif condition="$domain_list['status'] eq 0 " /> -->禁用   
                         <font color="red"> 该域名已过期，请抓紧时间续费！</font>
                         <!-- <else /> --> 正常<!-- </if> -->
                     </td>
-                    <td>审 核 状 态</td>
+                    <td align="center">审 核 状 态</td>
                     <td>
                         <!-- <if condition="$domain_list['check'] eq -1 "> -->拒绝
                         <!-- <elseif condition="$domain_list['check'] eq 0 " /> -->
@@ -65,12 +65,12 @@
                     </td>
                   </tr>              
                   <tr>
-                    <td>审 核 时 间</td>
+                    <td align="center">审 核 时 间</td>
                     <td>
                       <!-- <if condition="$domain_list['check'] egt 1 "> -->{:date('Y/m/d H:i:s',$domain_list['check_time'])}
                       <!-- <else /> --><font color="red">域名还未通过审核</font><!-- </if> -->
                     </td>  
-                    <td>域 名 归 属</td>
+                    <td align="center">域 名 归 属</td>
                     <td>
                        <!-- <if condition="$domain_list['doamin_user'] eq 0 "> -->公司
                        <!-- <else /> -->客户<!-- </if> -->

@@ -27,7 +27,11 @@
                         <!-- </notempty> -->
                     </select>
                 </td>
-              </tr>                                 
+              </tr> 
+              <tr>
+                <td align="right">拜访时间：</td>
+                <td><input type="text" name="visit_time" value="{:date('Y/m/d H:i:s',$visit_time)}" class="form-control"></td>
+              </tr>                                
               <tr>
                 <td align="right">拜访情况：</td>
                 <td><textarea name="content" cols="45" rows="8" class="form-control"></textarea></td>

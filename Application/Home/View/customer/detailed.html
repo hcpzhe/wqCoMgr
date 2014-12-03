@@ -28,31 +28,31 @@
           </tr>
          </tbody>                  
           <tr>
-            <td width="20%"> 编&nbsp;&nbsp;&nbsp;&nbsp;号 </td>
-            <td width="30%">{$list['id']}</td>
-            <td width="20%">公司名称</td>
-            <td width="30%">{$list['name']}</td>
+            <td width="15%" align="center"> 编&nbsp;&nbsp;&nbsp;&nbsp;号 </td>
+            <td width="35%">{$list['id']}</td>
+            <td width="15%" align="center">公司名称</td>
+            <td width="35%">{$list['name']}</td>
           </tr>                 
           <tr>
-            <td>联 系  人</td>
+            <td align="center">联 系  人</td>
             <td>{$list['contacts']}</td>
-            <td>联系电话</td>
+            <td align="center">联系电话</td>
             <td>{$list['phone']}</td>
           </tr>
           <tr>
-            <td>传 &nbsp;&nbsp;&nbsp; 真</td>
+            <td align="center">传 &nbsp;&nbsp;&nbsp; 真</td>
             <td>{$list['fax']}</td>
-            <td>地  &nbsp;&nbsp;&nbsp; 址</td>
+            <td align="center">地  &nbsp;&nbsp;&nbsp; 址</td>
             <td>{$list['address']}</td>
           </tr>
           <tr>
-            <td> 添  加  人 </td>
+            <td align="center"> 添  加  人 </td>
             <td>{$list['realname']}</td>
-            <td>添加时间 </td>
+            <td align="center">添加时间 </td>
             <td>{:date('Y/m/d H:i:s',$list['add_time'])}</td>
           </tr>
           <tr>
-            <td>备 &nbsp;&nbsp;&nbsp;注</td>
+            <td align="center">备 &nbsp;&nbsp;&nbsp;&nbsp;注</td>
             <td colspan="3">{$list['remark']}</td>
           </tr>   
           <!-- </foreach> -->  
@@ -73,29 +73,29 @@
              </tbody>
              <!-- <foreach name="order_list" item="order_list"> -->                                            
               <tr>
-                <td>订单编号</td>
+                <td align="center">订单编号</td>
                 <td>{$order_list['id']}</td>
-                <td>签单人员</td>
+                <td align="center">签单人员</td>
                 <td>{$order_list['uname']} </td>
               </tr>                 
               <tr>
-                <td>签单产品</td>
+                <td align="center">签单产品</td>
                 <td>{$order_list['pname']}</td>
-                <td>订单金额</td>
+                <td align="center">订单金额</td>
                 <td>{$order_list['total_fees']}</td>
               </tr>
               <tr>
-                <td>到期时间</td>
+                <td align="center">到期时间</td>
                 <td>{:date('Y/m/d H:i:s',$order_list['expired_time'])}</td>
-                <td>订单状态</td>
-                <td>
+                <td align="center">订单状态</td>
+                <td class="text-info">
                     <!-- <if condition="$order_list['status'] eq -1 "> -->删除
                     <!-- <elseif condition="$order_list['status'] eq 0 " /> -->禁用
                     <!-- <else /> -->正常<!-- </if> -->
                 </td>
               </tr>
               <tr>
-                <td>备 &nbsp;&nbsp;&nbsp; 注</td>
+                <td align="center"> 备 &nbsp;&nbsp;&nbsp;&nbsp; 注</td>
                 <td colspan="3">{$order_list['remark']}</td>
               </tr>                                          
              <!-- </foreach> -->
@@ -116,25 +116,25 @@
             </tbody> 
             <!-- <foreach name="domain_list" item="domain_list"> -->               
               <tr>
-                <td> 域  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 名 </td>
+                <td align="center"> 域  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 名 </td>
                 <td>{$domain_list['domain']}</td>
-                <td>域名运营商</td>
+                <td align="center">域名运营商</td>
                 <td>{$domain_list['service']}</td>
               </tr>                 
               <tr>
-                <td>注 册 时 间</td>
+                <td align="center">注 册 时 间</td>
                 <td>{:date('Y/m/d H:i:s',$domain_list['reg_time'])}</td>
-                <td>过 期 时 间</td>
+                <td align="center">过 期 时 间</td>
                 <td>{:date('Y/m/d H:i:s',$domain_list['expired_time'])}</td>
               </tr>
               <tr>
-                <td>域 名 状 态</td>
-                <td>
+                <td align="center">域 名 状 态</td>
+                <td class="text-info">
                    <!-- <if condition="$domain_list['status'] eq -1 "> --><!--删除-->
                    <!-- <elseif condition="$domain_list['status'] eq 0 " /> -->禁用  <font color="red"> 该域名已过期，请抓紧时间续费！</font>
                    <!-- <else /> -->正常<!-- </if> -->
                 </td>
-                <td>审 核 状 态</td>
+                <td align="center">审 核 状 态</td>
                 <td>
                    <!-- <if condition="$domain_list['check'] eq -1 "> -->拒绝
                    <!-- <elseif condition="$domain_list['check'] eq 0 " /> --><a href="{:U('Domain/check?id='.$domain_list['id'])}">待审</a>
@@ -142,12 +142,12 @@
                </td>
               </tr> 
                <tr>
-                <td>审 核 时 间</td>
+                <td align="center">审 核 时 间</td>
                 <td>
                   <!-- <if condition="$domain_list['check'] egt 1 "> -->{:date('Y/m/d H:i:s',$domain_list['check_time'])}
                   <!-- <else /> --><font color="red">域名还未通过审核</font><!-- </if> -->
                 </td>  
-                <td>域 名 归 属</td>
+                <td align="center">域 名 归 属</td>
                 <td>
                    <!-- <if condition="$domain_list['doamin_user'] eq 0 "> -->公司
                    <!-- <else /> -->客户<!-- </if> -->

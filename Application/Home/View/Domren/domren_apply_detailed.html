@@ -22,52 +22,52 @@
            </tbody>
              <!-- <foreach name="apply_list" item="apply_list"> -->
               <tr>
-                <td width="20%">申请编号</td>
-                <td width="30%"> 
+                <td width="15%" align="center">申 请 编 号 </td>
+                <td width="35%"> 
                   <input type="hidden" value="{$apply_list['id']}" name="id">                                     
                         {$apply_list['id']}	                		                               	                           
                 </td>
-                <td width="20%"> 公 司 名 称 </td>
-                <td width="30%">{$apply_list['name']}</td>
+                <td width="15%" align="center"> 公 司 名 称 </td>
+                <td width="35%">{$apply_list['name']}</td>
               </tr>                 
               <tr>
-                <td> 联  系   人 </td>
+                <td align="center"> 联 &nbsp; 系  &nbsp; 人 </td>
                 <td>{$apply_list['contacts']}</td>
-                <td> 联 系 电 话 </td>
+                <td align="center"> 联 系 电 话 </td>
                 <td>{$apply_list['phone']}</td>
               </tr>
               <tr>
-                <td> 域 &nbsp;&nbsp;&nbsp; 名 </td>
+                <td align="center"> &nbsp;域  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  名 </td>
                 <td>{$apply_list['domain']}</td>
-                <td> 域名运营商</td>
+                <td  align="center"> 域名运营商</td>
                 <td>{$apply_list['service']}</td>
               </tr>
               <tr>
-                <td> 注 册 时 间 </td>
+                <td align="center"> 注 册 时 间 </td>
                 <td>{:date('Y/m/d H:i:s',$apply_list['reg_time'])}</td>
-                <td> 续 费 金 额 </td>
+                <td align="center"> 续 费 金 额 </td>
                 <td>{$apply_list['money']} 元</td>
               </tr>
               <tr>
-                <td>原过期时间</td>
+                <td align="center">原过期时间</td>
                 <td> {:date('Y/m/d H:i:s',$apply_list['org_expired_time'])} </td>
-                <td>新过期时间</td>
+                <td align="center">新过期时间</td>
                 <td>{:date('Y/m/d H:i:s',$apply_list['new_expired_time'])}</td>
               </tr> 
                <tr>
-                <td> 付 款 时 间 </td>
+                <td align="center"> 付 款 时 间 </td>
                 <td> {:date('Y/m/d H:i:s',$apply_list['pay_time'])} </td>
-                <td> 申 &nbsp; 请  &nbsp; 人 </td>
+                <td align="center"> 申 &nbsp; 请  &nbsp; 人 </td>
                 <td> {$apply_list['realname']}   </td>
               </tr> 
               <tr>
-                <td> 审 核 状 态 </td>
+                <td align="center"> 审 核 状 态 </td>
                 <td>
                     <!-- <if condition="$apply_list['check'] eq -1 "> -->拒绝
                     <!-- <elseif condition="$apply_list['check'] eq 0 " /> --><a href="{:U('Domren/check?id='.$data['id'])}">待审</a>
                     <!-- <else /> --> 通过<!-- </if> -->
                 </td>
-                <td> 审 核 时 间 </td>
+                <td align="center"> 审 核 时 间 </td>
                 <td>
                    <!-- <if condition="$apply_list['check'] eq 0 "> --><font color="red">该信息还未审核</font>
                   <!-- <else /> -->{:date('Y/m/d H:i:s',$apply_list['check_time'])}<!-- </if> -->

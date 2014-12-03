@@ -21,49 +21,49 @@
              </tr>	
           </tbody>   
 			 <tr>
-                <td width="20%">销售专员</td>
-                <td width="30%">{$data.rname}</td>
-                <td width="20%">审核结果</td>
-                <td width="30%">
+                <td width="15%" align="center">销售专员</td>
+                <td width="35%">{$data.rname}</td>
+                <td width="15%" align="center">审核结果</td>
+                <td width="35%">
                     <!-- <if condition="$data.checks eq 1">-->通过
                     <!-- <elseif condition="$data.checks eq 0"/> -->待审
                     <!-- <else/> -->拒绝<!-- </if> -->
                 </td>
               </tr>
               <tr>
-                <td>合同编号</td>
+                <td align="center">合同编号</td>
                 <td>{$data.id}</td>
-                <td>公司名称</td>
+                <td align="center">公司名称</td>
                 <td>{$data.cname}</td>
               </tr>
               <tr>
-                <td>订单状态</td>
-                <td>
+                <td align="center">订单状态</td>
+                <td class="text-info">
                     <!-- <if condition="$data.status eq 1"> -->正常
                     <!-- <elseif condition="$data.status eq 0"/> -->禁用
                     <!-- </if> -->	
                 </td>
-                <td>订单金额</td>
+                <td align="center">订单金额</td>
                 <td>{$data.money}元</td>
               </tr>
               <tr>
-                <td>联 系 人</td>
+                <td align="center">联 系 人</td>
                 <td>{$data.contacts}</td>
-                <td>联系电话</td>
+                <td align="center">联系电话</td>
                 <td>{$data.phone}</td>
               </tr>
               <tr>
-                <td>开始时间</td>
+                <td align="center">开始时间</td>
                 <td>{:date('Y/m/d H:i:s',$data['start_time'])}</td>
-                <td>结束时间</td>
+                <td align="center">结束时间</td>
                 <td>{:date('Y/m/d H:i:s',$data['end_time'])}</td>
               </tr>  
               <tr>
-                <td>备注信息</td>
+                <td align="center">备注信息</td>
                 <td colspan="3">{$orderinfo.remark}</td>
               </tr>
               <tr>
-                <td>技术人员</td>
+                <td align="center">技术人员</td>
                 <td colspan="3">
                     <!-- <foreach name="users" item="list"> -->
                         {$list.realname}

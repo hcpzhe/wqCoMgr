@@ -245,6 +245,7 @@ body {
 /**表格内容居中**/
 .table_center th,.table_center td{
 	text-align:center;
+	vertical-align: middle !important;
 	}
 .text_left{
 	text-align:left !important;

@@ -37,14 +37,13 @@
           <thead>
             <tr>
 				<!-- 订单列表开始 -->
-                <th>产品</th>
-                <th>客户</th>
-                <th>续费金额</th>
-                <th>付款时间</th>
-                <th>原到期时间</th>
-                <th>现到期时间</th>
-                <th>提交人</th>
-                <th>审核</th>
+                <th width="10%">产品</th>
+                <th width="27%">客户名称</th>
+                <th width="10%">续费金额</th>
+                <th width="15%">付款时间</th>
+                <th width="15%">原到期时间</th>
+                <th width="15%">现到期时间</th>
+                <th width="8%">审核</th>
             </tr>
           </thead>
           <tbody>
@@ -54,9 +53,8 @@
                 <td class="text_left">{$list.cname}</td>
                 <td>{$list.money}元</td>
                 <td>{:date('Y/m/d H:i:s',$list['pay_time'])}</td>
-                <td>{:date('Y/m/d',$list['org_expired_time'])}</td>
-                <td>{:date('Y/m/d',$list['new_expired_time'])}</td>
-                <td>超管</td>
+                <td>{:date('Y/m/d H:i:s',$list['org_expired_time'])}</td>
+                <td>{:date('Y/m/d H:i:s',$list['new_expired_time'])}</td>
                 <!-- 显示审核状态 -->
                 <td>
                     <!-- <if condition="$list.check eq 1"> -->通过
@@ -69,7 +67,7 @@
        </tbody>
        <tfoot>
 		  <tr>
-            <td colspan="8" align="center" class="page">{$data[show]}</td>
+            <td colspan="7" align="center" class="page">{$data[show]}</td>
           </tr>
         </tfoot>
 	</table>

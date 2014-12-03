@@ -70,6 +70,8 @@ class CustomervisitController extends HomeBaseController {
 				}
 			}
 		}
+		$visit_time = time();
+		$this->assign('visit_time',$visit_time);
 	    $check = $cust->where('id='.$id)->getField('check');
 		$cust_name = $cust->where('id='.$id)->getField('name');
 		$this->assign('cust_id',$id);
@@ -88,10 +90,10 @@ class CustomervisitController extends HomeBaseController {
 		$data['cust_id'] = $cust_id;
 		$data['user_id']  = UID;
 		$data['content'] =  I('param.content');
-		$data['visit_time'] = time();	
+		$data['visit_time'] = strtotime(I('param.visit_time'));	
 		$model = new Customer_visitModel();			
 		$data = $model->data($data)->add();		       
-		$this->redirect('Customervisit/add_visit_prod',array('visit_id'=>$data),1,'拜访记录添加成功，请添加沟通记录'); //拜访记录添加成功后跳转到添加沟通记录页面			
+		$this->redirect('Customervisit/add_visit_prod',array('visit_id'=>$data),1,'<div style="margin: 40px 0 20px;">拜访记录添加成功，请添加沟通记录</div>'); //拜访记录添加成功后跳转到添加沟通记录页面			
 	}
 	
 	/**查看拜访记录的详细信息**/
