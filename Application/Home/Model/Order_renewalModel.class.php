@@ -27,7 +27,7 @@ class Order_renewalModel extends  Model{
 	}
 	/* 查询是否存在某个订单的续费申请记录*/
 	public function s_one($id){
-		$flag=$this->where("order_id=$id and checked=0")->find();
+		$flag=$this->where("order_id=$id and `check`=0")->find();
 		return $flag;
 	}
 	/** 按条件查询一个订单的信息  */
