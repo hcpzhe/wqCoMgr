@@ -46,9 +46,9 @@ class OrderrenewalController extends HomeBaseController{
 		$order=new OrderModel();
 		$this->data=$order->orderinfo($id);
 		/*查询订单续费申请表中是否已经有记录*/
-		$orderren=new Order_renewalModel();
+/*		$orderren=new Order_renewalModel();
 		$flag=$orderren->s_one($id);
-		if($flag!=0){ $this->error("续费申请已提交！");}
+		if($flag!=0){ $this->error("续费申请已提交！");}*/
 		$this->display();
 	}
 	/** 添加续费申请 */
