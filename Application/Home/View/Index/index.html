@@ -13,25 +13,25 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-      <a class="navbar-brand z_navbar_brand" href="#"></a>
+        <div class="top_logo"><img src="__IMG__/logo.png" /></div>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right">
         <li><a href="{:U('User/user_update')}" target="main">信息修改</a></li>
         <li><a href="{:U('User/pwd')}" target="main">密码修改</a></li>
-        <li><a href="{:U('Common/logout')}" onclick="if(confirm(&#39;您确认要退出吗？&#39;)){$(this).RSsubmit();}return false;">退出</a></li>
+        <li><a href="{:U('Common/logout')}" onClick="if(confirm(&#39;您确认要退出吗？&#39;)){$(this).RSsubmit();}return false;">退出</a></li>
         <li><a href="#"></a></li>
       </ul>          
     </div>
   </div>
 </div>
 <!--中间部分-->
-<div class="container-fluid">
+<div class="container-fluid z_container">
   <div class="grid-c2 clearfix"> 
    <div class="col-main">
       <div class="col-main-warp">
         <div class="test-box">
-           <div class="embed-responsive embed-responsive-16by9" style="height: 720px;">
+           <div class="embed-responsive embed-responsive-16by9">
               <iframe id="main" name="main" class="embed-responsive-item" src="{:U('Index/welcome')}"></iframe>
            </div>
         </div>
@@ -144,9 +144,25 @@
   </div>
 </div>
 <!--中间部分结束-->
-
-<!--<div class="foot">
+<div class="gongju">
+   <ul class="">
+      <li class="z_title">工具栏</li>
+      <li class="border_1"></li>
+      <li class="tongzhi"><a href="{:U('Article/art_list?class=1')}" target="main">通知公告</a></li>
+      <li class="dingdan"><a href="{:U('Order/order_list')}" target="main">提交订单</a></li>
+      <li class="xufei"><a href="{:U('Orderrenewal/or_list')}" target="main">续费申请</a></li>
+      <li class="jindu"><a href="{:U('Depord/dep_list')}" target="main">开发进度</a></li>
+   </ul>
+</div>
+<div class="foot">
           <div class="footer">Copyright&copy;2010 &nbsp;&nbsp; 万谦网络科技&nbsp;&nbsp;  All Rights Reserved  &nbsp;&nbsp;版权所有 </div> 
-</div>-->
+</div>
 </body>
 </html>
+<script type="text/javascript">
+/*$(document).ready(function(){
+    $(".panel").find(function(){
+		$(".in")
+		});
+});*/
+</script>

@@ -13,11 +13,21 @@ body {
 .navbar-inverse{
 	background:url(../images/topBg.jpg) no-repeat #0352a7 center;
 	}
-
+.top_logo{
+	margin:15px 40px;
+    }
 /*
  * Top navigation
  * Hide default border to remove 1px line.
  */
+
+#navbar{
+	height:70px !important;
+	}
+	
+.z_container{
+	height:675px;
+	}
 .navbar-fixed-top {
   border: 0;
 }
@@ -27,8 +37,74 @@ body {
 	margin-left:210px !important;}
 .navbar-right{
 	margin-right:20px;
+	margin-top:10px;
+	}
+.gongju{
+	border:1px solid #ccc;
+	border-radius:4px;
+	height:42px;
+	width:90%;
+	margin:0 auto;
+	margin-bottom:10px;
+	}
+.gongju ul{
+	padding:0;
+	margin:0;
+	height:42px;
+	}
+.z_title{
+	font-weight:bold;
+	color:#000;
 	}
 
+.border_1{
+	border-right:1px dashed #666666;
+	width:1px !important;
+	height:20px !important;
+	margin-top:10px !important;
+		}
+.gongju li{	
+	float:left;
+	text-decoration:none;
+	margin:5px 10px;
+	width:94px;
+	height:30px;
+	line-height:30px;
+	text-align:right;
+	}
+.gongju li a{
+	color:#000;
+	padding-right:5px;
+	height: 30px;
+	line-height:30px;
+	width: 94px;
+	display: block;
+	}
+	
+.tongzhi{
+	background:url(../images/gonggao.gif) center no-repeat;
+	}
+.dingdan{
+	background:url(../images/dingdan.gif) center no-repeat;
+	}
+.xufei{
+	background:url(../images/xufei.gif) center no-repeat;
+	}
+.jindu{
+	background:url(../images/kaifa.gif) center no-repeat;
+	}
+#main{
+	height:610px;
+	}
+.foot{
+	background:url(../images/footer_bg.jpg) #244997 no-repeat;
+	height:50px;
+	}
+.footer{
+	color:#FFF;
+	line-height:50px;
+	text-align:right;
+	padding-right:150px;}
 /*
  * Sidebar
  */
@@ -40,14 +116,15 @@ body {
 @media (min-width: 768px) {
   .sidebar {
     position: fixed;
-    top: 51px;
+    top: 71px;
     bottom: 0;
     left: 0;
     z-index: 1000;
     display: block;
-    padding: 12px;
+    padding: 12px 12px 0px 12px;
     overflow-x: hidden;
     overflow-y: auto; 
+	height:580px;
     background-color: #f5f5f5;
     border-right: 1px solid #eee;
   }
@@ -119,12 +196,19 @@ body {
 	background:#428bca;
 	color:#FFF;
 }
+.panel-heading_visited{
+	background:#428bca;
+	color:#FFF;
+	}
 .panel-title{
 		background:url(../images/dayuhei.png) no-repeat left;
 }
 .panel-title:hover{
 	background:url(../images/dayubg.png) no-repeat left;
 }
+.panel-title_visited{
+	background:url(../images/dayubg.png) no-repeat left;
+	}
 .panel-title a{
 	text-decoration:none;
 	display:block;
@@ -132,12 +216,12 @@ body {
 /**两栏自适应布局**/
 .grid-c2 { *zoom:1; }
 .clearfix:after { clear:both; content:"."; display:block; height:0; visibility:hidden; }
-.clearfix { *zoom:1;}
+.clearfix { *zoom:1; height:675px;}
 .col-main { float: left; width: 100%; }
 .col-side, .col-extra { float: left; }
 .col-side { width:240px; }
 .col-extra { width:230px; }
-.col-main-warp { height:auto; min-width:750px; }
+.col-main-warp { height:auto; min-width:675px; }
 .grid-c2 .col-side { margin-left:-100%; }
 .grid-c2 .col-main-warp { margin-left: 250px; }
 .zhedie{ width:240px;}
@@ -149,7 +233,8 @@ body {
 
 	}
 .test-box {
-  padding-top: 30px;
+  padding-top: 50px;
+  height:675px;
 }
 .z_list-group-item{
 	border:0 !important;
@@ -161,8 +246,13 @@ body {
 .z_list-group-item:hover{
 	color:#FFF !important;
 	text-align:center;
-	background:#7b7b7b !important;}
-	
+	background:#7b7b7b !important;
+	}
+.z_list-group-item_visited{
+	color:#FFF !important;
+	text-align:center;
+	background:#7b7b7b !important;
+	}
 	/**右边样式**/
 .right_next{ min-height:600px; width:98% !important; margin:0 auto; background:#FFF !important;}
 .b{ border:1px solid #FFF;}

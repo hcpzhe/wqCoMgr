@@ -76,6 +76,8 @@ class DomrenController extends HomeBaseController{
 		$user_list = $User->table('erp_user as us,erp_depart as de')
 		->where($where)
 		->getField("us.id,de.name,us.realname");
+		$pay_time=time();
+		$this->assign('pay_time',$pay_time);
 		$this->assign('user_list',$user_list);
 		$this->display();
 		}

@@ -2,7 +2,7 @@
 /* CSS Document */
 body{ margin:0; padding:0; FONT-FAMILY: '微软雅黑',Microsoft YaHei,Verdana, Arial,'宋体', Tahoma,Simsun, Arial Unicode MS, Mingliu,  Helvetica;}
 body,a,span,td,a{ font-size:12px; }
-body{  }
+body{ background:#5592be;}
 UL {TEXT-ALIGN: left; PADDING: 0px; LIST-STYLE-TYPE: none; MARGIN: 0px; }
 LI {TEXT-ALIGN: left; PADDING: 0px; LIST-STYLE-TYPE: none; MARGIN: 0px; }
 a{ color:#666666; text-decoration:none; }
@@ -14,14 +14,15 @@ img{ border:0; }
 .padTop10{ padding-top:10px; }
 .lineH2{ line-height:2; }
 
-#loginbody {background: #032454;}
-.loginbg {width:100%; position: absolute; top:0; left:0; z-index: -1;}
+#loginbody { background:url(../images/logo_bg.jpg) no-repeat;}
 .loginbox {margin: 150px auto 0; }
 .login_copyright {margin-top: 100px; color: #3d9dd1; font-size:13px; text-align: center;}
 
-.logo{ background:url(../images/logo.png) no-repeat; width:328px !important; height:57px;}
-.account{ width:326px; height:55px; background:url(../images/account.png) center no-repeat; margin-bottom:15px;}
-.password{width:326px; height:60px; background:url(../images/password.png) center no-repeat; margin-bottom:20px;}
-.input_a{  line-height:20px; font-size:14px; border:0px; margin-left: 110px; height: 20px; width: 200px; outline:none; }
-.btn_submit{  height:46px;}
-.btn_submit input{background:url(../images/login_submit.png) center no-repeat; display:block; width:316px; height:46px; border:0px; color:#FFF; font-size:18px; font-weight:bold; cursor:pointer;}
+.logo{ }
+.account{ }
+.password{}
+.input_a{  line-height:20px; font-size:14px; border:0px; height: 20px; outline:none; }
+.btn_submit{  height:46px; text-align:left;}
+.btn_submit input{ margin-left:20px; margin-top:5px;}
+
+.login_table td{ line-height:42px; height:42px;}

@@ -4,36 +4,44 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>洛阳万谦网络科技有限公司</title>
 <link href="__CSS__/login.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css" media="screen">
 <script type="text/javascript" src="__JS__/jquery.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
 </head>
 <body id="loginbody">
-<div class="loginbg">
-	<img src="__IMG__/logo_bg.jpg" width="100%" >
-</div>
 <div class="loginbox">
-	<table border="0" align="center" cellpadding="0" cellspacing="0">
+	<table width="400" border="0" align="center" cellpadding="0" cellspacing="0">
 	   <tbody>
 	      <tr>
-	         <td width="270" valign="top" align="center">
+             <td width="38%"></td>
+	         <td width="62%" valign="top" align="center">
 	            <form name="form1" method="post" action="__ACTION__" id="form1" onsubmit="$(this).RSsubmit();return false;" autocomplete="off">
-	           <table width="328" border="0" cellspacing="0" cellpadding="0">
+	           <table width="" border="0" cellspacing="0" cellpadding="0" class="login_table">
 	             <tbody>
-	               <tr height="90">
+	               <tr height="110">
 	                 <td colspan="2" class="logo"></td>                        
 	               </tr>
 	               <tr class="account">
-	                 <td colspan="2">
-	                   <input name="account" type="text" size="20" class="input_a">
+                     <td>用户名：</td>
+	                 <td>
+	                   <input name="account" type="text" size="15" class="form-control" style="height:30px; width:150px;">
 	                 </td>
 	               </tr>
 	               <tr class="password">
+                      <td> 密 码 ：</td>
 	                 <td  colspan="2">
-	                   <input name="password" type="password" size="20" class="input_a"></td>
+	                   <input name="password" type="password" size="15" class="form-control" style="height:30px; width:150px;"></td>
+	                </tr>
+                    <tr class="password">
+                      <td>验证码：</td>
+	                 <td  colspan="2">
+	                   <input name="verify" type="text" size="8" class="form-control" style="height:30px; width:50%; float:left;">
+                        <img style="margin-left: 4px; float:left;" width="80" height="30" id="verifyImg" src="{:U('Common/verify')}" onclick="imgClick()" border="0" alt="点击刷新验证码" align="absmiddle">
+                     </td>
 	                </tr>
 	                <tr class="btn_submit">
-	                  <td colspan="2" align="center">
-	                    <input type="submit" name="Submit" value="登  录">       
+	                  <td colspan="2">
+	                    <input type="image" src="__IMG__/submit.jpg" name="Submit" value="">       
 	                  </td>
 	                </tr>
 	              </tbody>
@@ -47,5 +55,10 @@
 		Copyright&copy;2010&nbsp;万谦网络科技&nbsp;All Rights Reserved  &nbsp;&nbsp;版权所有
 	</div>
 </div>
+ <script type="text/javascript">
+        function imgClick() {
+            document.getElementById("verifyImg").src = document.getElementById("verifyImg").src + "?" + Math.random();
+        }
+    </script>
 </body>
 </html>

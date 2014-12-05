@@ -34,13 +34,13 @@ class CommonController extends Controller {
 			}elseif (empty($password)) {
 				$this->error('密码必须！');
 			}
-			
-			/* 检测验证码
+			$code = $_POST['verify'];
+			 //检测验证码
 			$verify = new Verify();
 			if (!$verify->check($code, 1)) {//验证码编号为1
 				$this->error('验证码输入错误！');
 			}
-			*/
+			
 			
             //验证用户
 			$map = array();
