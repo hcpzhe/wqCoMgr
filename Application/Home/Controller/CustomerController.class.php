@@ -25,21 +25,60 @@ class CustomerController extends HomeBaseController {
 		$data['add_time'] = time();
 		$model = new CustomerModel();	
 		$data = $model->create();
-		$model->add($data);
-		$this->success('添加成功',U('Customer/lists'));
+		$res=$model->add($data);
+		if ($res){
+			$arr['user_id'] = UID;
+			$arr['cust_id'] = $res;
+			$arr['expired_time'] = strtotime(I('param.expired_time'));
+			if (empty($arr['expired_time'])){
+				$arr['expired_time'] = 0;
+			}
+			$ucp = M('User_cust_prod');
+			$ucp->add($arr);
+            $this->success('添加成功',U('Customer/lists'));
+		}else {
+			$this->error('添加失败',U('Customer/add'));
+		}		
 	}
 		
 	/**客户列表     公司名称搜索**/
-	public function lists() {
+	public function lists() {		
+		if (!IS_ROOT){ //非超管		
+			$User = new UserModel();
+			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
+			$where['id']=array('in',$cust_id);		
+			if (empty($cust_id)){
+				$this->error('没有相应的公司信息！');
+			}
+		}
+		$where['`status`'] = array('eq',1);		
 		$key = (int)I('param.key'); //选择搜索条件
 		$name = I('param.name');    //输入的搜索信息
 		$visit = new CustomerModel();
 		if(!empty($name) && $key == 1){
-			$where=$where." AND ( cr.`name` like '%".$name."%')"; //公司名称模糊检索
+			//公司名称模糊检索
+			$where['name'] = array('like',"%$name%");
 		}elseif (!empty($name) && $key == 2){
-			$where=$where." AND ( ur.realname like '%".$name."%')"; //按照录入人进行模糊检索
+			//按照联系人进行模糊检索
+			$where['contacts'] = array('like',"%$name%");
+		}elseif (!empty($name) && $key == 3){
+			//按照联系电话进行模糊检索
+			$where['phone'] = array('like',"%$name%");
+		}elseif (!empty($name) && $key == 4){
+			//按照地址进行模糊检索
+			$where['address'] = array('like',"%$name%");
 		}
-	    $this->data=$visit->customer_lists($where);
+		
+		$count=$visit->where($where)->count();       // 查询满足要求的总记录数		
+		$Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(10)
+		$data['show']       = $Page->show();// 分页显示输出
+		$list = $visit->where($where)->limit($Page->firstRow.','.$Page->listRows)
+		->getField('id,name,contacts,phone,fax,address',true);
+		
+        $this->assign('id',$where['id']);
+		$this->assign('page',$data['show']);
+		$this->assign('list',$list);
+
 		$this->display();		
 	}
 	

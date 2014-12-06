@@ -36,14 +36,17 @@ class CustomerModel extends Model {
 	}	
 	/**客户列表***/
 	public function customer_lists($where){
-		$where = "cr.user_id=ur.id AND cr.`status`=1".$where;  //多表查询条件
-		
-		$count=$this->table('erp_user as ur,erp_customer as cr')
+		//$where = "cr.user_id=ur.id AND ucp.cust_id=cr.id AND cr.`status`=1".$where;  //多表查询条件
+        $where['cr.user_id'] = array('eq','ur.id');
+        $where['ucp.cust_id'] = array('eq','cr.id');
+        $where['cr.`status`'] = array('eq',1);
+        
+		$count=$this->table('erp_user as ur,erp_customer as cr,erp_user_cust_prod as ucp')
 		->where($where)
 		->count();       // 查询满足要求的总记录数
 		$Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(10)
 		$data['show']       = $Page->show();// 分页显示输出
-		$data['list'] = $this->table('erp_user as ur,erp_customer as cr')
+		$data['list'] = $this->table('erp_user as ur,erp_customer as cr,erp_user_cust_prod as ucp')
 		->where($where)
 		->field("cr.id as id,ur.realname as uname,cr.`name` as cname,cr.contacts,cr.phone,cr.`check`")
 		->limit($Page->firstRow.','.$Page->listRows)->order('cr.id desc')->select();

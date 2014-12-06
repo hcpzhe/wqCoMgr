@@ -26,7 +26,7 @@ body {
 	}
 	
 .z_container{
-	height:675px;
+	height:670px;
 	}
 .navbar-fixed-top {
   border: 0;
@@ -216,12 +216,12 @@ body {
 /**两栏自适应布局**/
 .grid-c2 { *zoom:1; }
 .clearfix:after { clear:both; content:"."; display:block; height:0; visibility:hidden; }
-.clearfix { *zoom:1; height:675px;}
+.clearfix { *zoom:1; height:670px;}
 .col-main { float: left; width: 100%; }
 .col-side, .col-extra { float: left; }
 .col-side { width:240px; }
 .col-extra { width:230px; }
-.col-main-warp { height:auto; min-width:675px; }
+.col-main-warp { height:auto; min-width:670px; }
 .grid-c2 .col-side { margin-left:-100%; }
 .grid-c2 .col-main-warp { margin-left: 250px; }
 .zhedie{ width:240px;}
@@ -234,7 +234,7 @@ body {
 	}
 .test-box {
   padding-top: 50px;
-  height:675px;
+  height:670px;
 }
 .z_list-group-item{
 	border:0 !important;

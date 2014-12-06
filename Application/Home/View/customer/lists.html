@@ -69,7 +69,9 @@
                   搜索：
                   <select name="key" class="form-control">                                       
                   <option value="1">公司名称</option>   
-                  <option value="2">录入人</option>                      
+                  <option value="2">联&nbsp;&nbsp;系&nbsp;&nbsp;人</option>
+                  <option value="3">联系电话</option>
+                  <option value="4">地 址</option>                      
                 </select>
                 <input type="text" name="name" class="form-control" placeholder="输入您想要查询的内容">
                 <input type="submit" value="搜索" class="btn btn-primary" />               
@@ -88,23 +90,23 @@
                <th width="35%">公司名称</th>
                <th width="17%">联系人</th>
                <th width="20%">联系电话</th>
-               <th width="20%">录入人</th>
+               <th width="20%">地址</th>
             </tr>
           </thead>
-          <tbody>
-           <!-- <foreach name="data['list']" item="data1"> -->  
+          <tbody>        
+          <!-- <foreach name="list" item="data1"> --> 
              <tr>
               <td><input type="checkbox" name="s2[]" value="{$data1.id}" id="check"></td>
-              <td class="text_left">{$data1.cname|mb_substr=0,54}</td>
-              <td>{$data1.contacts}</td>
-              <td>{$data1.phone}</td>
-              <td>{$data1.uname}</td>
-             </tr>                         
+              <td class="text_left">{$data1['name']}</td>
+              <td>{$data1['contacts']}</td>
+              <td>{$data1['phone']}</td>
+              <td>{$data1['address']}</td>
+             </tr>                             
          <!-- </foreach> -->
           </tbody>
           <tfoot>
              <tr>
-               <td colspan="5" align="center" class="page">{$data[show]}</td>
+               <td colspan="5" align="center" class="page">{$page}</td>
              </tr>
           </tfoot>
         </table>

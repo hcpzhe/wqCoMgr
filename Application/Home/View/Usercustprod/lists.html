@@ -15,10 +15,10 @@
     <div class="top_search">
         <font style="margin-left: 20px;">操作：	</font> 
         <!-- <empty name="list"> -->
-          <a href="{:U('Usercustprod/add?cust_id='.$cust_id)}" class="btn btn-primary">添加</a>
-        <!-- <else />  -->  
+          <!-- <a href="{:U('Usercustprod/add?cust_id='.$cust_id)}" class="btn btn-primary">添加</a> -->
+        <!-- <else />  --> 
            <a href="{:U('Usercustprod/edit?cust_id='.$cust_id)}" class="btn btn-primary">编辑</a>
-           <a href="{:U('Usercustprod/del?cust_id='.$cust_id)}" class="btn btn-primary" onclick="if(confirm(&#39;您确定要删除吗？&#39;)){$(this).RSsubmit();}return false;">删除</a> 	
+           <a href="{:U('Usercustprod/del?cust_id='.$cust_id)}" class="btn btn-primary" onclick="if(confirm(&#39;您确定要将权限放入公海吗？&#39;)){$(this).RSsubmit();}return false;">放入公海</a> 	
         <!-- </empty> -->         	                                                                                                                     
     </div>
       <div class="table-responsive">
@@ -32,25 +32,35 @@
 		      </tr>
             </tbody>  
 		      <tr>
-		        <td width="150">公司名称</td>
-		        <td width="220">{$custlist.name}</td>
-		        <td width="150">联&nbsp;系&nbsp;人</td>
-		        <td width="220">{$custlist.contacts}</td>
+		        <td width="15%" align="center">公司名称</td>
+		        <td width="35%">{$custlist.cname}</td>
+		        <td width="15%" align="center">联&nbsp;系&nbsp;人</td>
+		        <td width="35%">{$custlist.contacts}</td>
 		      </tr>  
 		      <tr>
-		        <td>联系电话</td>
+		        <td align="center">联系电话</td>
 		        <td>{$custlist.phone}</td>
-		        <td>传&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;真</td>
+		        <td align="center">传&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;真</td>
 		        <td>{$custlist.fax}</td>
 		      </tr>       
 		      <tr>
-		        <td>地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址</td>
+		        <td align="center">地&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;址</td>
 		        <td>{$custlist.address}</td>
-		         <td> 添加时间</td>
+		         <td align="center"> 添加时间</td>
 		        <td>{:date('Y/m/d H:i:s',$custlist['add_time'])}</td>
 		      </tr>
-		       <tr>
-		        <td>备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注</td>
+		      <tr>
+		        <td align="center">添 加 人</td>
+		        <td>{$custlist.realname}</td>
+		        <td align="center">状&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;态</td>
+		        <td class="text-info">
+		          <!-- <if condition="$custlist['status'] eq -1 "> -->删除
+                  <!-- <elseif condition="$custlist['status'] eq 0 " /> -->禁用
+                  <!-- <else /> -->正常<!-- </if> -->
+		        </td>
+		      </tr> 
+		      <tr>
+		        <td align="center">备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注</td>
 		        <td colspan="3">{$custlist.remark}</td>		        
 		      </tr> 
 		     <!-- </foreach> -->  	
@@ -65,9 +75,9 @@
 		      	<th colspan="4" class="active"> 权限信息</th>
 		      </tr>	   		     
 		      <tr>
-		        <td> 权限拥有者</td>
+		        <td align="center"> 权限拥有者</td>
 		        <td> {$list.realname}</td>
-		         <td>  权限过期时间 </td>
+		         <td align="center">  权限过期时间 </td>
 		        <td>                     
 		            <!-- <if condition="$list['expired_time'] eq 0 "> -->永不过期                        
 		            <!-- <else /> --> {:date('Y/m/d H:i:s',$list['expired_time'])}<!-- </if> --> 

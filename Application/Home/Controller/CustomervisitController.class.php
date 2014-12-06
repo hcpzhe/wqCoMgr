@@ -48,10 +48,9 @@ class CustomervisitController extends HomeBaseController {
 		->where($where)
 		->field("cu.id as id,ur.realname as uname,cr.id as cust_id,cr.`name` as cname,cr.contacts as contacts,cr.phone as phone,cu.visit_time,cu.`content`")
 		->limit($Page->firstRow.','.$Page->listRows)->order('visit_time desc')->select();
-		
-				$this->assign('visit_lisit',$visit_list);
-				$this->assign('page',$show);   //分页显示
-				$this->display();		
+		$this->assign('visit_lisit',$visit_list);
+		$this->assign('page',$show);   //分页显示
+		$this->display();		
 	}	
 	/**拜访记录添加**/
 	public function addvisit(){

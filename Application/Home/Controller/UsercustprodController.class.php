@@ -56,14 +56,16 @@ class UsercustprodController extends HomeBaseController {
 			}
 		}
 		    $customer = M('Customer');   //客户信息
-		    $custlist = $customer->where('id='.$id)->select();
+		    $custlist = $customer->table('erp_customer as cr,erp_user as ur')
+		    ->where("cr.user_id=ur.id AND cr.id=$id")
+		    ->getField("cr.id as id,cr.`name` as `cname`,cr.contacts as contacts,cr.phone as phone,cr.fax as fax,cr.address as address,cr.remark as remark,ur.realname as realname,cr.status as status,cr.add_time as add_time");
 		    $this->assign('custlist',$custlist);
 		    
 			$ucp = M('User_cust_prod');  //权限信息
 			$user_id = UID;
 			$list = $ucp->table('erp_customer as cr,erp_user as ur,erp_user_cust_prod as ucp')
 			->where("cr.id=ucp.cust_id AND ur.id=ucp.user_id AND ucp.cust_id=$id")
-			->getField("ucp.cust_id as id,cr.`name` as `cname`,cr.contacts as contacts,cr.phone as phone,cr.fax as fax,cr.address as address,cr.remark as remark,ur.realname as realname,ucp.expired_time as expired_time,ucp.prod_id as prod_id");
+			->getField("ucp.cust_id as id,ur.realname as realname,ucp.expired_time as expired_time,ucp.prod_id as prod_id");
 			$this->assign('list',$list);
 	
 			$this->assign('cust_id',$id);
@@ -108,7 +110,7 @@ class UsercustprodController extends HomeBaseController {
 			$this->error('修改失败');
 		}
 	}
-	/**权限删除**/
+	/**客户权限放入公海**/
 	public function del(){
 		$id = (int)I('param.cust_id');
 		if (!IS_ROOT){ //非超管
@@ -119,8 +121,14 @@ class UsercustprodController extends HomeBaseController {
 			}
 		}
 		$ucp = M("User_cust_prod"); 
-        $ucp->where('cust_id='.$id)->delete();
-		$this->success('删除成功',U('Customer/lists'));
+        $ucp->where('cust_id='.$id)->delete();  //删除客户权限
+
+        $pcu = M("Public_customer"); //把删除客户权限的客户放入公海
+        $data['cust_id'] = $id;
+        $data['public_time']=time();
+        $pcu->add($data);
+        $this->success('删除成功',U('Customer/lists'));
+		
 	}
 			
 }
