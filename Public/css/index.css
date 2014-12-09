@@ -39,6 +39,8 @@ body {
 	margin-right:20px;
 	margin-top:10px;
 	}
+.navbar-fixed-bottom{
+	background:#FFF;}
 .gongju{
 	border:1px solid #ccc;
 	border-radius:4px;
@@ -97,7 +99,7 @@ body {
 	height:610px;
 	}
 .foot{
-	background:url(../images/footer_bg.jpg) #244997 no-repeat;
+	background:url(../images/footer_bg.jpg) #244997 center;
 	height:50px;
 	}
 .footer{
@@ -197,8 +199,8 @@ body {
 	color:#FFF;
 }
 .panel-heading_visited{
-	background:#428bca;
-	color:#FFF;
+	background:#428bca !important;
+	color:#FFF !important;
 	}
 .panel-title{
 		background:url(../images/dayuhei.png) no-repeat left;
@@ -207,7 +209,7 @@ body {
 	background:url(../images/dayubg.png) no-repeat left;
 }
 .panel-title_visited{
-	background:url(../images/dayubg.png) no-repeat left;
+	background:url(../images/dayubg.png) no-repeat left !important;
 	}
 .panel-title a{
 	text-decoration:none;
@@ -233,7 +235,7 @@ body {
 
 	}
 .test-box {
-  padding-top: 50px;
+  padding-top: 70px;
   height:670px;
 }
 .z_list-group-item{

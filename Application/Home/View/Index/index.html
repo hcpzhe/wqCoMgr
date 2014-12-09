@@ -8,6 +8,27 @@
 <link rel="stylesheet" type="text/css" href="__CSS__/index.css">
 <script type="text/javascript" src="__JS__/bootstrap.min.js"></script>
 <script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+<script type="text/javascript">
+/*$(function(){
+    $(".panel-heading").click(function(){
+			$(this).toggleClass("panel-heading_visited").siblings(".panel-heading").removeClass("panel-heading_visited")
+			$(this).children("h4").toggleClass("panel-title_visited").addveClass("panel-title_visited")
+	})	;
+})*/
+
+$(function(){
+    $(".panel-body a").click(function(){
+        $(".panel-body a").removeClass("z_list-group-item_visited");
+        $(this).addClass("z_list-group-item_visited");
+		$(this).addClass("list-group-item");
+		$(this).addClass("z_list-group-item");
+    });
+});
+function do1(whichLink){
+     whichLink.setAttribute("class","z_list-group-item_visited");
+}
+
+</script>
 </head>
 <body>
 <div class="navbar navbar-inverse navbar-fixed-top">
@@ -48,9 +69,9 @@
                 </div>
                 <div id="collapseOne" class="panel-collapse collapse in">
                   <div class="panel-body">
-                      <a href="{:U('Customer/lists')}" target="main" class="list-group-item z_list-group-item">客户列表</a>
-                      <a href="{:U('Customer/add')}" target="main" class="list-group-item z_list-group-item">添加客户</a>
-                      <a href="{:U('Customervisit/visitlists')}" target="main" class="list-group-item z_list-group-item">拜访记录</a>
+                      <a href="{:U('Customer/lists')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">客户列表</a>
+                      <a href="{:U('Customer/add')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">添加客户</a>
+                      <a href="{:U('Customervisit/visitlists')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">拜访记录</a>
                   </div>
                 </div>
               </div>
@@ -62,9 +83,9 @@
                 </div>
                 <div id="collapseTwo" class="panel-collapse collapse">
                   <div class="panel-body">
-                      <a href="{:U('Order/order_list')}" target="main" class="list-group-item z_list-group-item">订单列表</a>
-                      <a href="{:U('Order/add_order_form')}" target="main" class="list-group-item z_list-group-item">添加订单</a>
-                      <a href="{:U('Orderpay/order_pay_record')}" target="main" class="list-group-item z_list-group-item">订单付款记录</a>
+                      <a href="{:U('Order/order_list')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">订单列表</a>
+                      <a href="{:U('Order/add_order_form')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">添加订单</a>
+                      <a href="{:U('Orderpay/order_pay_record')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">订单付款记录</a>
                   </div>
                 </div>
               </div>
@@ -76,8 +97,8 @@
                 </div>
                 <div id="collapseFour" class="panel-collapse collapse">
                   <div class="panel-body">
-                      <a href="{:U('Depord/dep_list')}" target="main" class="list-group-item z_list-group-item">网站开发订单</a>
-                      <a href="{:U('Seoord/seo_list')}" target="main" class="list-group-item z_list-group-item">优化订单</a>
+                      <a href="{:U('Depord/dep_list')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">网站开发订单</a>
+                      <a href="{:U('Seoord/seo_list')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">优化订单</a>
                   </div>
                 </div>
               </div>
@@ -89,10 +110,10 @@
                 </div>
                 <div id="collapseFive" class="panel-collapse collapse">
                   <div class="panel-body">
-                      <a href="{:U('Order/renewal_order')}" target="main" class="list-group-item z_list-group-item">待续费订单</a>
-                      <a href="{:U('Orderrenewal/or_list')}" target="main" class="list-group-item z_list-group-item">订单续费申请</a>
-                      <a href="{:U('Domren/dom_ren_app')}" target="main" class="list-group-item z_list-group-item">域名续费申请</a>
-                      <a href="{:U('Domain/domain_list')}" target="main" class="list-group-item z_list-group-item">域名库</a>
+                      <a href="{:U('Order/renewal_order')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">待续费订单</a>
+                      <a href="{:U('Orderrenewal/or_list')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">订单续费申请</a>
+                      <a href="{:U('Domren/dom_ren_app')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">域名续费申请</a>
+                      <a href="{:U('Domain/domain_list')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">域名库</a>
                   </div>
                 </div>
               </div>
@@ -104,9 +125,9 @@
                 </div>
                 <div id="collapseSix" class="panel-collapse collapse">
                   <div class="panel-body">
-                      <a href="{:U('Depart/depa_list')}" target="main" class="list-group-item z_list-group-item">部门管理</a>
-                      <a href="{:U('Product/pro_list')}" target="main" class="list-group-item z_list-group-item">产品管理</a>
-                      <a href="{:U('Article/art_list')}" target="main" class="list-group-item z_list-group-item">文章管理</a>
+                      <a href="{:U('Depart/depa_list')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">部门管理</a>
+                      <a href="{:U('Product/pro_list')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">产品管理</a>
+                      <a href="{:U('Article/art_list')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">文章管理</a>
                   </div>
                 </div>
               </div>
@@ -118,8 +139,8 @@
                 </div>
                 <div id="collapseSeven" class="panel-collapse collapse">
                   <div class="panel-body">
-                      <a href="{:U('Results/reslist')}" target="main" class="list-group-item z_list-group-item">业绩清单</a>
-                      <a href="{:U('Results/show_res')}" target="main" class="list-group-item z_list-group-item">业绩排行</a>
+                      <a href="{:U('Results/reslist')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">业绩清单</a>
+                      <a href="{:U('Results/show_res')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">业绩排行</a>
                   </div>
                 </div>
               </div>
@@ -131,10 +152,11 @@
                 </div>
                 <div id="collapseEight" class="panel-collapse collapse">
                   <div class="panel-body">
-                      <a href="{:U('User/search_list')}" target="main" class="list-group-item z_list-group-item">用户管理</a>
-                      <a href="{:U('Authgroup/user_group')}" target="main" class="list-group-item z_list-group-item">用户组管理</a>
-                      <a href="{:U('Authrule/all_rule')}" target="main" class="list-group-item z_list-group-item">权限列表</a>
-                      <a href="{:U('Userdepartmgr/lis')}" target="main" class="list-group-item z_list-group-item">管理者列表</a>
+                      <a href="{:U('User/search_list')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">用户管理</a>
+                      <a href="{:U('Authgroup/user_group')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">用户组管理</a>
+                      <a href="{:U('Authrule/all_rule')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">权限列表</a>
+                      <a href="{:U('Userdepartmgr/lis')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">管理者列表</a>
+                      <a href="{:U('Config/config_list')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">配置管理</a>
                   </div>
                 </div>
               </div>
@@ -144,6 +166,7 @@
   </div>
 </div>
 <!--中间部分结束-->
+<footer class="navbar-fixed-bottom">
 <div class="gongju">
    <ul class="">
       <li class="z_title">工具栏</li>
@@ -154,15 +177,11 @@
       <li class="jindu"><a href="{:U('Depord/dep_list')}" target="main">开发进度</a></li>
    </ul>
 </div>
+
 <div class="foot">
           <div class="footer">Copyright&copy;2010 &nbsp;&nbsp; 万谦网络科技&nbsp;&nbsp;  All Rights Reserved  &nbsp;&nbsp;版权所有 </div> 
 </div>
+</footer>
 </body>
 </html>
-<script type="text/javascript">
-/*$(document).ready(function(){
-    $(".panel").find(function(){
-		$(".in")
-		});
-});*/
-</script>
+
