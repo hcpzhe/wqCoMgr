@@ -40,15 +40,15 @@ class ConfigModel extends Model {
      */
     public function lists(){
         $map    = array('status' => 1);
-        $data   = $this->where($map)->field('type,name,value')->select();
+        $data   = $this->where($map)->field('id,type,name,title,value,update_time')->select();
         
-        $config = array();
-        if($data && is_array($data)){
-            foreach ($data as $value) {
-                $config[$value['name']] = $this->parse($value['type'], $value['value']);
-            }
-        }
-        return $config;
+//         $config = array();
+//         if($data && is_array($data)){
+//             foreach ($data as $value) {
+//                 $config[$value['name']] = $this->parse($value['type'], $value['value']);
+//             }
+//         }
+        return $data;
     }
 
     /**
@@ -78,7 +78,11 @@ class ConfigModel extends Model {
      * 配置更新
      * TODO 数据更新成功后, 要清除DB_CONFIG_DATA缓存
      */
-    public function update() {
+    public function update($id, $data) {
     	
+    	$flag=$this->where("id=$id")->save($data);
+    	
+    	S('DB_CONFIG_DATA',NULL);
+    	return $flag;
     }
 }

@@ -1,0 +1,85 @@
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>配置添加</title>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="__CSS__/index.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css" media="screen">
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+</head>
+<body>
+<div style="width:100%; overflow:hidden;">
+  <div class="b right_next">
+    <h1 class="page-header">权限添加</h1>
+          <form action="{:U('Config/insert')}" method="post" onsubmit="return checkfrm1(this);">
+	        <table class="table_form">
+		      <tr>
+		        <td width="30%" align="right">                     
+		            配置名称：
+		        </td>
+		        <td> 
+		           <input type="text" value="" name="name" class="form-control" />	         
+		        </td>
+		      </tr>  		      
+		      <tr>
+		        <td align="right">                     
+		           配置说明：
+		        </td>
+		        <td>                  
+		           <input type="text" name="title" class="form-control" />
+		        </td>
+		      </tr>
+		      <tr>
+		        <td align="right">                     
+		           配 置 值：
+		         </td>
+		         <td>
+		           <input type="text" name="value"  class="form-control" value="" />                                                                             
+		         </td>
+		      </tr>	
+		      <tr>
+		        <td align="right">                     
+		           备 注：
+		         </td>
+		         <td>
+		           <textarea name="remark"  class="form-control" cols="30" rows="5"></textarea>                                                                             
+		         </td>
+		      </tr>		     		      		     		      
+		      <tr>
+                 <td></td>
+		        <td>                     
+		           <input type="submit" value="提交" class="btn btn-primary">
+		         </td>		         
+		      </tr>
+		     </table>     
+		   </form>       
+   </div>
+</div>
+</body>
+</html>
+<script type="text/javascript">
+function checkfrm1(afrm) {
+ if( (afrm.name.value == "") )
+	{
+		alert("配置名称不能为空！");
+		afrm.name.focus();
+		return false;
+	}
+ if( (afrm.title.value == "") )
+	{
+		alert("配置说明不能为空！");
+		afrm.title.focus();
+		return false;
+	}
+ if( (afrm.value.value == "") )
+	{
+		alert("配置值不能为空！");
+		afrm.value.focus();
+		return false;
+	}
+ 
+	$(afrm).RSsubmit({success_alert:true});
+	return false;
+}
+</script>
