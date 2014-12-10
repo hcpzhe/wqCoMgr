@@ -64,7 +64,7 @@ function push(){
                      <input type="hidden" name="cust_id" class="cust_id" value="{$list.cust_id}" data-url="{:U('Seoord/seo_info?id='.$list['id'].'&cust_id='.$list['cust_id'])}">
                      <input type="hidden" name="cust_id" class="push" value="{$list.cust_id}" data-url="{:U('Seoord/push_form?id='.$list['id'].'&cust_id='.$list['cust_id'])}">
                 </td>
-                <td class="text_left">{$list.cname|mb_substr=0,54}</td>
+                <td class="text_left">{$list.cname}</td>
                 <td>{$list.contacts}</td>
                 <td>{$list.phone}</td>
                 <td>{$list.money}元</td>

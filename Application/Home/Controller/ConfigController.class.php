@@ -5,6 +5,9 @@ use Home\Model\ConfigModel;
 class ConfigController extends HomeBaseController{
 	//配置列表
 	public function config_list(){
+		if (!IS_ROOT){ //非超管
+			$this->error('您没有权限，不能进行此操作！');
+		}
 		$model = new ConfigModel();
 		$list=$model->lists();
 		$this->assign('list',$list);	

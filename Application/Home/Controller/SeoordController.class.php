@@ -90,6 +90,7 @@ class SeoordController extends HomeBaseController{
 		$depart=new DepartModel();
 		$this->id=$id;
 		$this->dp=$depart->alldepart(); 
+		$this->assign("cust_id",$_GET['cust_id']);
 		$this->display();
 	}
 	/** 推送至下一个部门 */

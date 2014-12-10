@@ -48,7 +48,7 @@ class CustomerController extends HomeBaseController {
 			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
 			$where['id']=array('in',$cust_id);		
 			if (empty($cust_id)){
-				$this->error('没有相应的公司信息！');
+				$this->error('没有相应的公司信息！',U('Index/welcome'));
 			}
 		}
 		$where['`status`'] = array('eq',1);		

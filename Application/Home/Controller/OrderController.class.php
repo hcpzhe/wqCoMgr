@@ -11,6 +11,7 @@ use Home\Model\UserModel;
 use Home\Model\Order_payModel;
 use Home\Model\Order_renewalModel;
 use Home\Model\Order_domainModel;
+use Home\Model\User_depart_mgrModel;
 header("Content-Type:text/html;charset=utf-8");
 class OrderController extends HomeBaseController{
 /** 订单列表 */
@@ -213,12 +214,26 @@ class OrderController extends HomeBaseController{
 			$depart=new DepartModel();
 			$this->id=$id;
 			$this->dp=$depart->alldepart();
+			$this->assign("cust_id",$_GET['cust_id']);
 			$this->display();
 		
 	}
 	/** 推送至下一个部门 */
 	public function push($id){
 		$dp_id=$_POST['dp'];
+		$cust_id=$_POST['cust_id'];
+		$order=new OrderModel();
+		$user_id=$order->where("cust_id=$cust_id")->getField("user_id");
+		$user=new UserModel();
+		$dep_id=$user->where("id=$user_id")->getField("depart_id");
+		$udm=new User_depart_mgrModel();
+		$userid=$udm->where("depart_id=$dep_id")->getField("user_id");  //找到订单添加人所在部门的管理者 
+		//print_r($userid);exit();
+		$uid = UID;   //登陆用户				
+		if ($userid != $uid){
+			$this->error("没有推送权限");
+		}
+		//print_r("buneng");exit();
 		/**  */
 		/**技术 */
 		if($dp_id==1){
