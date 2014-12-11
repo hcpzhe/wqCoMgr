@@ -1,0 +1,65 @@
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>客户权限申请</title>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="__CSS__/index.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css" media="screen">
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+<script type="text/javascript" src="__PUBLIC__/My97DatePicker/WdatePicker.js"></script>
+<link href="__PUBLIC__/My97DatePicker/skin/WdatePicker.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<div style="width:100%; overflow:hidden;">
+  <div class="b right_next">
+     <h1 class="page-header">客户权限申请</h1>
+      <form action="{:U('Publiccust/apply_insert')}" method="post">           
+            <table class="table_form">
+                  <tr>
+                    <td width="30%" align="right">公司名称：</td>
+                    <td width="70%">                                      
+		                {$cname}		                
+		                <input type="hidden" name="cust_id" value="{$cust_id}" />		               		                                          
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right">申 请 人：</td>
+                    <td>
+                       <select name="user_id" class="form-control">  
+                         <!-- <notempty name="user_id"> -->          
+                          <option value="{$user_id}">{$realname}</option>
+                         <!-- <else/> -->
+                          <!-- <foreach  name="user_list" item="u_list"> -->
+                          <option value="{$u_list.id}">{$u_list.realname}</option>
+                          <!-- </foreach> -->
+                         <!-- </notempty> -->
+                        </select>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right">申请类型：</td>
+                    <td>
+                        <select name="class" class="form-control">    
+                         <!-- <if condition="$class eq 'new' "> -->        
+                          <option value="{$class}">新申请</option>
+                         <!-- <else /> -->
+                          <option value="{$class}">延期</option>
+                         <!-- </if> -->
+                        </select>	                   
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align="right">申请天数：</td>
+                    <td><input type="text" name="apply_days" value="30" size="1" class="form-control" style="text-align: center;">&nbsp;&nbsp;天</td>
+                  </tr>                  
+                  <tr>
+                    <td>&nbsp;</td>
+                    <td><input type="submit" name="Submit" value=" 申请 " class="btn btn-primary"></td>
+                  </tr>
+            </table>                              
+           </form>
+  </div>
+</div>
+</body>
+</html>
