@@ -72,9 +72,8 @@ class UsercustprodController extends HomeBaseController {
 			$this->assign('list',$list);	
 			$this->assign('cust_id',$id);
 			
-			$is=$ucp->where("cust_id=$id AND expired_time>$time OR expired_time=0")->select();
+			$is=$ucp->where("cust_id=$id AND (expired_time>$time OR expired_time=0)")->select();
 			$this->assign("is",$is);  //判断权限是否过期
-			//print_r($is);exit();
 			$this->display();		
 	}
 	

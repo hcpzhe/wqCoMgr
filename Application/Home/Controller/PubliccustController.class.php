@@ -77,6 +77,9 @@ class PubliccustController extends HomeBaseController {
 	}
 	//员工客户权限申请列表   需审核
 	public function uca_lists() {
+		if (!IS_ROOT){ //非超管
+			$this->error('您没有权限，不能进行此操作！');
+		}
 		$uca = M("User_cust_apply");
 		$list = $uca->table("erp_customer as ec,erp_user as eu,erp_user_cust_apply as ea")
 		->where("ea.user_id=eu.id AND ea.cust_id=ec.id AND ea.check=0")
