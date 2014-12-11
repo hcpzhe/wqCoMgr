@@ -126,7 +126,7 @@ class OrderController extends HomeBaseController{
 		$id = (int)I('id');	//被选中要进行操作的id
 	    if (!IS_ROOT){ //非超管	
 			$User = new UserModel();
-		    $cust_id=$User->user_auto();  //登录人拥有的客户权限id
+		    $cust_id=$User->user_auto();  //登录人拥有的客户权限id		    
 			if(!in_array($id,$cust_id)){
 				$this->error('您没有权限，不能进行此操作！');
 			}
@@ -228,13 +228,11 @@ class OrderController extends HomeBaseController{
 		$dep_id=$user->where("id=$user_id")->getField("depart_id");
 		$udm=new User_depart_mgrModel();
 		$userid=$udm->where("depart_id=$dep_id")->getField("user_id");  //找到订单添加人所在部门的管理者 
-		//print_r($userid);exit();
 		$uid = UID;   //登陆用户				
 		if ($userid != $uid){
 			$this->error("没有推送权限");
 		}
-		//print_r("buneng");exit();
-		/**  */
+		
 		/**技术 */
 		if($dp_id==1){
 			/*网站开发模型*/

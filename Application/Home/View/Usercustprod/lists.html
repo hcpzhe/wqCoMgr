@@ -14,12 +14,12 @@
     <h1 class="page-header">权限信息</h1>
     <div class="top_search">
         <font style="margin-left: 20px;">操作：	</font> 
-        <!-- <empty name="list"> -->
-          <!-- <a href="{:U('Usercustprod/add?cust_id='.$cust_id)}" class="btn btn-primary">添加</a> -->
-        <!-- <else />  --> 
-           <a href="{:U('Usercustprod/edit?cust_id='.$cust_id)}" class="btn btn-primary">编辑</a>
+          <!-- <empty name="is"> -->
+           <a href="{:U('Publiccust/apply?cust_id='.$cust_id.'&user_id='.$user_id)}" class="btn btn-primary">申请延期</a> 
+          <!-- </empty> --> 
+           <!-- <a href="{:U('Usercustprod/edit?cust_id='.$cust_id)}" class="btn btn-primary">编辑</a> -->
            <a href="{:U('Usercustprod/del?cust_id='.$cust_id)}" class="btn btn-primary" onclick="if(confirm(&#39;您确定要将权限放入公海吗？&#39;)){$(this).RSsubmit();}return false;">放入公海</a> 	
-        <!-- </empty> -->         	                                                                                                                     
+                	                                                                                                                     
     </div>
       <div class="table-responsive">
         <table class="table table-bordered table-hover">
@@ -80,7 +80,11 @@
 		         <td align="center">  权限过期时间 </td>
 		        <td>                     
 		            <!-- <if condition="$list['expired_time'] eq 0 "> -->永不过期                        
-		            <!-- <else /> --> {:date('Y/m/d H:i:s',$list['expired_time'])}<!-- </if> --> 
+		            <!-- <else /> --> {:date('Y/m/d H:i:s',$list['expired_time'])}
+		            
+		            <!-- <if condition="$list['expired_time'] lt $time "> --><font class="red"> 权限已过期</font><!-- </if> -->
+		            
+		            <!-- </if> --> 
 		        </td>
 		      </tr> 
 		      <!-- </foreach> -->       

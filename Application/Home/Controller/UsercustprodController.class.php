@@ -62,13 +62,19 @@ class UsercustprodController extends HomeBaseController {
 		    $this->assign('custlist',$custlist);
 		    
 			$ucp = M('User_cust_prod');  //权限信息
-			$user_id = UID;
+			$user_id = UID;		
 			$list = $ucp->table('erp_customer as cr,erp_user as ur,erp_user_cust_prod as ucp')
 			->where("cr.id=ucp.cust_id AND ur.id=ucp.user_id AND ucp.cust_id=$id")
-			->getField("ucp.cust_id as id,ur.realname as realname,ucp.expired_time as expired_time,ucp.prod_id as prod_id");
-			$this->assign('list',$list);
-	
+			->getField("ucp.cust_id as id,ur.id as uid,ur.realname as realname,ucp.expired_time as expired_time,ucp.prod_id as prod_id");
+			$time=time();			
+			$this->assign("user_id",$list[$id]['uid']);   //权限拥有者id
+			$this->assign('time',$time);
+			$this->assign('list',$list);	
 			$this->assign('cust_id',$id);
+			
+			$is=$ucp->where("cust_id=$id AND expired_time>$time OR expired_time=0")->select();
+			$this->assign("is",$is);  //判断权限是否过期
+			//print_r($is);exit();
 			$this->display();		
 	}
 	
