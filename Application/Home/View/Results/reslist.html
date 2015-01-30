@@ -14,24 +14,29 @@
      <h1 class="page-header">部门任务</h1>
      <!-- 搜索开始 -->
        <div class="top_search">
-           <form action="{:U('Results/reslist')}" method="post" class="search_form" name="search">
-                <!-- <select name="product" class="form-control">
-                    <option value="">所有产品</option>   -->
-                    <!-- <foreach  name="pro_list" item="po_list"> -->
-                   <!-- <option value="{$po_list.id}">{$po_list.name}</option>  -->
-                    <!-- </foreach> -->	
-                <!-- </select>-->
-                <!-- <input type="hidden" name="check" value="1">
-                关键字  <input type="text" name="key" class="form-control">
-                <input type="submit" value="搜索" class="btn btn-primary">
-                 -->
+           <form action="{:U('Results/reslist')}" method="post" class="search_form" name="search">               
                  年月检索：
-                 <select name="product" class="form-control">
-                    <option value="">2015年</option>                    
-                 </select>
-                 <select name="product" class="form-control">
-                    <option value="">1月</option>                    
-                 </select>
+                 <select name="year" class="form-control">
+                    <option value="当前年份-4">2011</option>
+                    <option value="当前年份-3">2012</option>
+                    <option value="当前年份-2">2013</option>
+                    <option value="当前年份-1">2014</option>
+                    <option value="">2015</option>                    
+                 </select> 年
+                 <select name="month" class="form-control">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>                    
+                 </select> 月  &nbsp;&nbsp;
                  <input type="submit" value="搜索" class="btn btn-primary">
            </form> 
        </div>            
@@ -53,7 +58,7 @@
                     <td>{$list.id}</td>
                     <td>{$list.uname}</td>
                     <td>{$list.pname}</td>
-                    <td><a href="">编辑</a></td>
+                    <td><a href="{:U('Results/edit')}">编辑</a></td>
                 </tr>
             <!-- </foreach> -->
           </tbody>          

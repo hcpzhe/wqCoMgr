@@ -16,12 +16,27 @@
        <div class="top_search">
            <form action="{:U('Results/reslist')}" method="post" class="search_form" name="search">              
                  选择年月：
-                 <select name="product" class="form-control">
+                 <select name="year" class="form-control">
+                    <option value="当前年份-4">2011</option>
+                    <option value="当前年份-3">2012</option>
+                    <option value="当前年份-2">2013</option>
+                    <option value="当前年份-1">2014</option>
                     <option value="">2015</option>                    
                  </select> 年
-                 <select name="product" class="form-control">
-                    <option value="">1</option>                    
-                 </select> 月
+                 <select name="month" class="form-control">
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                    <option value="6">6</option>
+                    <option value="7">7</option>
+                    <option value="8">8</option>
+                    <option value="9">9</option>
+                    <option value="10">10</option>
+                    <option value="11">11</option>
+                    <option value="12">12</option>                      
+                 </select> 月  &nbsp;&nbsp;
                  <input type="submit" value="查看" class="btn btn-primary">
            </form> 
        </div>            
@@ -34,7 +49,7 @@
                <!-- 左侧内容 开始 -->
 			        <table class="table table-striped table-bordered">			          
 			            <tr class="active">
-			                <td width="100%">2015年1月销售业绩排行榜</td>
+			                <th width="100%">2015年1月销售业绩排行榜</th>
 			            </tr>			       
 		                <tr>
 		                    <td>
@@ -72,7 +87,7 @@
                   <!-- 右侧内容 开始-->
 			        <table class="table table-striped table-bordered">
 			          <tr class="active">
-			                <td width="100%">销售业绩进度达成率</td>
+			                <th width="100%">销售业绩进度达成率</th>
 			            </tr>			       
 		                <tr>
 		                    <td>
