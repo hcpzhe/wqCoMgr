@@ -1,0 +1,68 @@
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>部门业绩添加</title>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="__CSS__/index.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css" media="screen">
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+</head>
+<body>
+<div style="width:100%; overflow:hidden;">
+  <div class="b right_next">
+     <h1 class="page-header">部门业绩添加</h1>
+      <form action="{:U('Mission/addmission')}" method="post">           
+        <table class="table_form">
+              <tr>
+                <td width="30%" align="right">部门：</td>
+                <td width="70%"> 
+                 <select name="depart_id" class="form-control">
+                   <!-- <if condition="($dep_id neq '') AND ($mission_date neq '')"> --> 
+                        <option value="{$dep_id}">{$dname}</option>
+                   <!-- <else /> --> 
+                        <!-- <foreach name="depart" item="dep"> --> 
+	                    <option value="{$dep.id}">{$dep['name']}</option>
+	                    <!-- </foreach> -->
+                   <!-- </if> -->
+                   
+                 </select>	                		                               	                                                 
+                </td>
+              </tr>
+              <tr>
+                <td align="right">月份：</td>
+                <td>
+                    <select name="month" class="form-control">
+                     <!-- <if condition="($dep_id neq '') AND ($mission_date neq '')"> --> 
+                        <option value="{$mission_date|mb_substr=4,2}">{$mission_date|mb_substr=4,2}</option>
+                     <!-- <else /> --> 
+                        <option value="01">01</option>
+	                    <option value="02">02</option>
+	                    <option value="03">03</option>
+	                    <option value="04">04</option>
+	                    <option value="05">05</option>
+	                    <option value="06">06</option>
+	                    <option value="07">07</option>
+	                    <option value="08">08</option>
+	                    <option value="09">09</option>
+	                    <option value="10">10</option>
+	                    <option value="11">11</option>
+	                    <option value="12">12</option> 
+	                  <!-- </if> -->
+                    </select>  月 &nbsp;&nbsp;
+                </td>
+              </tr>
+              <tr>
+                <td align="right">业绩：</td>
+                <td><input type="text" name="task" class="form-control"></td>
+              </tr>
+              <tr>
+                <td>&nbsp;</td>
+                <td><input type="submit" name="Submit" value=" 添加 " class="btn btn-primary"></td>
+              </tr>
+        </table>                              
+      </form>
+  </div>
+</div>
+</body>
+</html>
