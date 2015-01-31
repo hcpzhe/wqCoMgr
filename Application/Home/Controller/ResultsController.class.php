@@ -4,7 +4,7 @@ use Common\Controller\HomeBaseController;
 use Home\Model\OrderModel;
 use Home\Model\ProductModel;
 class ResultsController extends HomeBaseController{
-	/**业绩列表 */
+	/**部门任务列表 */
 	public  function reslist(){
 		/*获取搜索条件*/
 		$pro=$_POST['product'];
@@ -27,6 +27,8 @@ class ResultsController extends HomeBaseController{
 		$this->pro_list=$product->p_list();
 		$this->display();
 	}
+
+	/***业绩排行***/
 	public function show_res(){
 		$order=new OrderModel();
 		$this->showres=$order->result();
