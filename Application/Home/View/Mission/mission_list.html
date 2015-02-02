@@ -21,25 +21,25 @@
                     <option value="{$year-3}">{$year-3}</option>
                     <option value="{$year-2}">{$year-2}</option>
                     <option value="{$year-1}">{$year-1}</option>
-                    <option value="{$year}">{$year}</option>                    
+                    <option value="{$year}" selected>{$year}</option>                    
                  </select> 年
                  <select name="month" class="form-control">
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
+                    <option value="01">01</option>
+                    <option value="02">02</option>
+                    <option value="03">03</option>
+                    <option value="04">04</option>
+                    <option value="05">05</option>
+                    <option value="06">06</option>
+                    <option value="07">07</option>
+                    <option value="08">08</option>
+                    <option value="09">09</option>
                     <option value="10">10</option>
                     <option value="11">11</option>
                     <option value="12">12</option>                    
                  </select> 月  &nbsp;&nbsp;
                  <input type="submit" value="搜索" class="btn btn-primary">
            </form>
-           <a href="{:U('Mission/add')}" class="btn btn-primary">业绩添加</a> 
+           <a href="{:U('Mission/add')}" class="btn btn-primary">任务添加</a> 
        </div>            
     <!-- 搜索结束 -->
        <div class="table-responsive">
@@ -53,22 +53,27 @@
                 <th width="30%">操作</th>
             </tr>
           </thead>
-          <tbody>	
+          <tbody>
+           <!-- <if condition="$mission_list eq ''"> -->
+              <!-- <foreach name="depart" item="depart"> -->
+                <tr>
+                    <td>{$depart.name}</td>
+                    <td>{$month}</td>
+                    
+                    <td>0</td>
+                    <td><a href="{:U('Mission/add?dep_id='.$depart['id'].'&mission_date='.$month.'&dname='.$depart['name'])}">编辑</a></td>
+                </tr>
+               <!-- </foreach> -->
+           <!-- <else /> -->         	
             <!-- <foreach name="mission_list" item="list"> -->
                 <tr>
                     <td>{$list.dname}</td>
-                    <td>{$list.mission_date|mb_substr=4,2}</td>
-                    
+                    <td>{$list.mission_date|mb_substr=4,2}</td>                   
                     <td>{$list.task}</td>
-                    <td>
-                      <!-- <if condition="$list.task neq ''"> --> 
-                        <a href="{:U('Mission/add?dep_id='.$list['dep_id'].'&mission_date='.$list['mission_date'].'&dname='.$list['dname'])}">编辑</a>
-                      <!-- <else /> -->
-                        <a href="{:U('Mission/add')}">编辑</a>
-                      <!-- </if> -->
-                    </td>
+                    <td><a href="#" readonly >编辑</a></td>
                 </tr>
             <!-- </foreach> -->
+          <!-- </if> -->
           </tbody>          
 		 <!-- 部门任务列表结束-->
       </table> 
