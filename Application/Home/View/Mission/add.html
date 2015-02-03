@@ -12,7 +12,7 @@
 <div style="width:100%; overflow:hidden;">
   <div class="b right_next">
      <h1 class="page-header">部门业绩添加</h1>
-      <form action="{:U('Mission/addmission')}" method="post">           
+      <form action="{:U('Mission/addmission')}" method="post"  onSubmit="$(this).RSsubmit({success_alert:true});return false;">           
         <table class="table_form">
               <tr>
                 <td width="30%" align="right">部门：</td>
