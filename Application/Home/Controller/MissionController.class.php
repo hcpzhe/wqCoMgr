@@ -6,6 +6,18 @@ use Home\Model\ProductModel;
 class MissionController extends HomeBaseController{
 	/**部门任务列表 */
 	public  function mission_list(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		//当前日期所在的年份
 		$now_year=date('Y');
 		$this->assign('year',$now_year);
@@ -37,6 +49,18 @@ class MissionController extends HomeBaseController{
 	}
 	/***部门业绩添加***/
 	public function add(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$dep_id = I('param.dep_id');
 		$dname = I('param.dname');
 		$mission_date = I('param.mission_date');
@@ -53,6 +77,18 @@ class MissionController extends HomeBaseController{
 	}
 	/***部门业绩添加  **/
 	public function addmission(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$now_year=date('Y');  //当前年份
 		$month = I('param.month');
 		$data['mission_date'] = $now_year . $month;		

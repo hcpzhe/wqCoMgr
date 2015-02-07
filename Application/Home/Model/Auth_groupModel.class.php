@@ -34,4 +34,9 @@ class Auth_groupModel extends Model{
 		}
 		return $cate_tree;
 	}	
+	//获取指定用户组所有的权限
+	public function user_all_rule($id){
+		$result=$this->where("id=".$id)->field("rules")->find();
+		return $result['rules'];
+	}
 }

@@ -13,6 +13,18 @@ class PubliccustController extends HomeBaseController {
 		
 	/**公海客户列表**/
 	public function lists() {		
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/		
 		$pub_cust = M("Public_customer");
 		$list = $pub_cust->table('erp_customer as cr,erp_public_customer as epc')
 		->where('cr.id=epc.cust_id')
@@ -22,6 +34,18 @@ class PubliccustController extends HomeBaseController {
 	}
 	//公海客户权限申请
 	public function apply(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$cust_id = (int)I('cust_id');
 		$user_id = (int)I('user_id'); 
 		$cust=new CustomerModel();
@@ -77,9 +101,21 @@ class PubliccustController extends HomeBaseController {
 	}
 	//员工客户权限申请列表   需审核
 	public function uca_lists() {
-		if (!IS_ROOT){ //非超管
-			$this->error('您没有权限，不能进行此操作！');
+// 		if (!IS_ROOT){ //非超管
+// 			$this->error('您没有权限，不能进行此操作！');
+// 		}
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
 		}
+		/*--------wcd权限判断---------*/
 		$uca = M("User_cust_apply");
 		$list = $uca->table("erp_customer as ec,erp_user as eu,erp_user_cust_apply as ea")
 		->where("ea.user_id=eu.id AND ea.cust_id=ec.id AND ea.check=0")
@@ -89,6 +125,18 @@ class PubliccustController extends HomeBaseController {
 	}
 	//权限审核
 	public function check(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$id = (int)I('id');
 		$cust_id = (int)I('cust_id');
 		$user_id = (int)I('user_id');

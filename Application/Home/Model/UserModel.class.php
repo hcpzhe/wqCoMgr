@@ -125,13 +125,15 @@ class UserModel extends Model {
 	/**登录人拥有的客户未过期权限 id**/
 	public function user_auto(){
 		$cust_id=array();
- 		$uid = UID; 		
+		//登录者id
+ 		$uid = UID; 	
+ 		//定义数组
  		$map = array('user_id'=>$uid);
  		$model = M('User_depart_mgr');
  		$depidarr = $model->where($map)->getField('depart_id',true);   //取出当前用户所管理的部门
  		//如果是普通员工，没有部门管理权限
  		if(empty($depidarr)){
- 			// 获取登陆用户的客户权限
+ 			// 获取登陆用户的客户产品权限
  			$Ucp=M('User_cust_prod');
  			$ucpwhere['user_id'] = UID;
  			$time=time();
@@ -160,7 +162,10 @@ class UserModel extends Model {
  		$ucpwhere['user_id'] = array('in',$alluser);		
  		$time=time();  		
  		$ucpwhere['expired_time'] = array(array('gt',$time),array('eq',0), 'or');
- 		$cust_id=$Ucp->where($ucpwhere)->getField("cust_id",true);		
+ 		$cust_id=$Ucp->where($ucpwhere)->getField("cust_id",true);	
+//  		echo "<pre>";
+// 		print_r($cust_id);exit();	
+//  		echo "</pre>";
  		return $cust_id;
 					
 	}	

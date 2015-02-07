@@ -6,12 +6,36 @@ use Home\Model\UserModel;
 class DepartController extends HomeBaseController{
 	/**  部门列表 */
 	public function depa_list(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$depa=new DepartModel();
 		$this->depa_list=$depa->depalists();
 		$this->display();
 	}	
 	/** 跳转到添加部门页面 */
 	public function ad_dp_form(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		if (!IS_ROOT){ //非超管
 		   $this->error('您没有权限，不能进行此操作！');
 		}
@@ -48,6 +72,18 @@ class DepartController extends HomeBaseController{
 	}
 	/** 跳转到编辑页面 */
 	public function up_dp_form(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		if (!IS_ROOT){ //非超管
 		   $this->error('您没有权限，不能进行此操作！');
 		}
@@ -86,6 +122,18 @@ class DepartController extends HomeBaseController{
 	}
 	/** 部门删除 */
 	public function del_dp(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		if (!IS_ROOT){ //非超管
 		   $this->error('您没有权限，不能进行此操作！');
 		}
@@ -100,6 +148,18 @@ class DepartController extends HomeBaseController{
 	}
 	/** 禁用 */
 	public function stop($id){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$depart=new DepartModel();
 		$flag=$depart->where("id=$id")->setField("status","0");
 		if($flag==1){ $this->success('成功');}
@@ -107,6 +167,18 @@ class DepartController extends HomeBaseController{
 	}
 	/** 启用 */
 	public function star($id){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$depart=new DepartModel();
 		$flag=$depart->where("id=$id")->setField("status","1");
 		if($flag==1){ $this->success('成功');}

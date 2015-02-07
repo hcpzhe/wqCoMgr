@@ -65,5 +65,14 @@ class Auth_ruleModel extends Model{
 		}
 		return $cate_tree;
 	}	
-	
+	//获取指定id的规则
+	public function guize($id){
+		$auth_rule=$this->where("id=".$id)->field("name")->find();
+		return $auth_rule['name'];
+	}
+	//获取指定id的规则
+	public function guize_id($gz){
+		$auth_rule=$this->where("name='".$gz."'")->field("id")->find();
+		return $auth_rule['id'];
+	}
 }

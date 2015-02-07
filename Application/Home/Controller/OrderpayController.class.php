@@ -8,6 +8,18 @@ use Home\Model\UserModel;
 class OrderpayController extends HomeBaseController{
 	/*订单付款记录*/
 	public function order_pay_record(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		/*获取搜索条件*/
 		$class = (int)I('param.class');
 		$check = (int)I('param.check');  
@@ -31,6 +43,18 @@ class OrderpayController extends HomeBaseController{
 	}
 	/*订单付款详情*/
 	public function op_info(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$id=$_GET['id'];		
 		if (!IS_ROOT){ //非超管
 			$ids=$_GET['cust_id'];   //选择的客户id
@@ -46,6 +70,18 @@ class OrderpayController extends HomeBaseController{
 	}	
 	/*修改订单付款记录*/
 	public function up(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$id=$_GET['id'];
 		$data['money']=$_POST['money'];
 		$data['pay_time']=strtotime($_POST['pay_time']);
@@ -56,6 +92,18 @@ class OrderpayController extends HomeBaseController{
 	}
 	/** 添加订单付款记录 */
 	public function ad_form(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$id=$_GET['id'];
 		//print_r($id);
 		//exit();

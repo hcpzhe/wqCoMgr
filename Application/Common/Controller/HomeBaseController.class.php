@@ -2,6 +2,9 @@
 namespace Common\Controller;
 use Think\Controller;
 use Home\Model\ConfigModel;
+use Home\Model\Auth_group_accessModel;
+use Home\Model\Auth_groupModel;
+use Home\Model\Auth_ruleModel;
 
 abstract class HomeBaseController extends Controller {
 	
@@ -72,5 +75,29 @@ abstract class HomeBaseController extends Controller {
 			return false;
 		}
 		return true;
+	}
+	/**
+	 * 判断当前登录用户是否有权限进行该操作
+	 * 1.获取登录者id
+	 * 2.获取登录者所在用户组id
+	 * 3.获取登录者所在用户组权限列表
+	 * 4.判断用户是否拥有当前操作的权限
+	 */
+	public function cd_rule_check($uid,$urule){
+		//获取改登陆用户所在用户组
+		$auth_group_access=new Auth_group_accessModel();
+		$cd_group_id=$auth_group_access->user_in_group($uid);
+		//获取该用户组所有的权限
+		$auth_group=new Auth_groupModel();
+		$rul=$auth_group->user_all_rule($cd_group_id);
+		$rule=explode(",",$rul);
+// 		echo $urule;
+// 		echo "<pre>";
+// 		print_r($rule);exit();
+// 		echo "</pre>";
+		//获取当前访问规则的id
+		$auth_rule=new Auth_ruleModel();
+		$ru_id=$auth_rule->guize_id($urule);
+		return  in_array($ru_id, $rule);
 	}
 }

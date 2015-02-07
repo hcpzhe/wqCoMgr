@@ -8,6 +8,18 @@ use Home\Model\UserModel;
 class DomrenController extends HomeBaseController{
 	/*域名续费申请  列表*/
 	public function dom_ren_app(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$model = M('Domain_renewal');	
 		$check = (int)I('param.check');  //按照审核状态搜索
 		$status = (int)I('param.status');  //按照域名状态搜索
@@ -48,6 +60,18 @@ class DomrenController extends HomeBaseController{
 	}
 	/**域名申请续费 **/
 	public function apply_renewal(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		if (!IS_ROOT){ //非超管
 			$ids = (int)I('cust_id');   //被选中要进行操作的id
 			$User = new UserModel();
@@ -100,6 +124,18 @@ class DomrenController extends HomeBaseController{
 	
 	/**提交 待审申请**/
 	public function check(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		if (!IS_ROOT){ //非超管
 			$ids = (int)I('param.cust_id');	   //被选中要进行操作的客户id
 			$User = new UserModel();
@@ -135,7 +171,19 @@ class DomrenController extends HomeBaseController{
 	}
 	
 	/**查看域名申请的详细信息***/
-	public function domren_apply_detailed(){		
+	public function domren_apply_detailed(){	
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		if (!IS_ROOT){ //非超管
 			$ids = (int)I('param.cust_id');	   //被选中要进行操作的客户id
 			$User = new UserModel();

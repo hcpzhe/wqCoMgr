@@ -8,6 +8,18 @@ use Home\Model\Auth_group_accessModel;
 class  UserController extends HomeBaseController{
 	/*按条件查询系统用户*/
 	public  function search_list(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		/*获取搜索条件*/
 		$depart = (int)I('param.depart');
 		$key = I('param.key');
@@ -27,6 +39,18 @@ class  UserController extends HomeBaseController{
 	}
 	/** 跳转到添加系统用户页面 */
 	public function ad_user_form(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		if (!IS_ROOT){ //非超管
 		   $this->error('您没有权限，不能进行此操作！');
 		}
@@ -64,7 +88,19 @@ class  UserController extends HomeBaseController{
 			$this->success('添加成功！');}
 	}
 	/** 查询某个用户的详细信息  */
-	public function user_info(){		
+	public function user_info(){	
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		if (!IS_ROOT){ //非超管			
 		   $this->error('您没有权限，不能进行此操作！');
 		}
@@ -82,9 +118,21 @@ class  UserController extends HomeBaseController{
 	}
 	/** 删除某个用户*/
 	public function del_user($id){
-		if (!IS_ROOT){ //非超管
-		   $this->error('您没有权限，不能进行此操作！');
-		}
+// 		/*--------wcd权限判断---------*/
+// 		//获取当前模块名称
+// 		$contro=CONTROLLER_NAME;
+// 		//获取当前操作名称
+// 		$actio=ACTION_NAME;
+// 		//获取当前访问规则
+// 		$cd_rule="Home/".$contro."/".$actio;
+// 		$uid = UID;
+// 		if($this::cd_rule_check($uid,$cd_rule)!=1){
+// 			$this->error('没有权限禁止操作！！！');
+// 		}
+		/*--------wcd权限判断---------*/
+// 		if (!IS_ROOT){ //非超管
+// 		   $this->error('您没有权限，不能进行此操作！');
+// 		}
 		$user=new UserModel();
 		$flag=$user->where("id=$id")->setField('status','-1');
 		if($flag==1){	$this->success('删除成功！');
@@ -92,6 +140,18 @@ class  UserController extends HomeBaseController{
 	}
 	/** 禁用 */
 	public function stop($id){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		if (!IS_ROOT){ //非超管
 		   $this->error('您没有权限，不能进行此操作！');
 		}
@@ -102,6 +162,18 @@ class  UserController extends HomeBaseController{
 	}
 	/** 启用 */
 	public function star($id){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		if (!IS_ROOT){ //非超管
 		   $this->error('您没有权限，不能进行此操作！');
 		}
@@ -110,7 +182,7 @@ class  UserController extends HomeBaseController{
 		if($flag==1){ $this->success('成功');}
 		else{ $this->error('失败');}
 	}	
-	/** 修改系统用户信息 */
+	/** 系统用户信息更改 */
 	public function up(){
 		$id=$_POST['id'];
 		$group_id=$_POST['auth_group'];
@@ -131,8 +203,20 @@ class  UserController extends HomeBaseController{
 			$this->error('修改失败！');
 		}
 	}
-	/***修改登录用户信息***/
+	/***修改登录用户信息form***/
 	public function user_update(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		/** 获取用户id	 */
 		$id= UID;
 		$user=new UserModel();
@@ -147,10 +231,34 @@ class  UserController extends HomeBaseController{
 		
 	}
 	public function pwd(){
-		   $this->display();
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
+		$this->display();
 		}
 	/***密码修改***/
 	public function pwdupdate(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$User = M("User"); 
 		$password = $_POST['pwd1c'];
 	    $id = UID;
