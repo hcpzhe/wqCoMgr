@@ -76,6 +76,7 @@ class ProductController extends HomeBaseController{
 	}
 	/** 修改产品详情 */
 	public function up_info($id){
+<<<<<<< HEAD
 // 		/*--------wcd权限判断---------*/
 // 		//获取当前模块名称
 // 		$contro=CONTROLLER_NAME;
@@ -88,6 +89,20 @@ class ProductController extends HomeBaseController{
 // 			$this->error('没有权限禁止操作！！！');
 // 		}
 // 		/*--------wcd权限判断---------*/
+=======
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
+>>>>>>> ef0add2d1cd09f4bc251842f1eca6e0044df7d75
 		$map['name']=$_POST['name'];
 		$product=new ProductModel();
 		$flag=$product->where("status=1 AND id=$id")->save($map);

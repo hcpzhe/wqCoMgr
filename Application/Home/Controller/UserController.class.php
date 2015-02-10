@@ -49,6 +49,13 @@ class  UserController extends HomeBaseController{
 		$uid = UID;
 		if($this::cd_rule_check($uid,$cd_rule)!=1){
 			$this->error('没有权限禁止操作！！！');
+<<<<<<< HEAD
+=======
+		}
+		/*--------wcd权限判断---------*/
+		if (!IS_ROOT){ //非超管
+		   $this->error('您没有权限，不能进行此操作！');
+>>>>>>> ef0add2d1cd09f4bc251842f1eca6e0044df7d75
 		}
 		/*--------wcd权限判断---------*/
 // 		if (!IS_ROOT){ //非超管
@@ -99,6 +106,13 @@ class  UserController extends HomeBaseController{
 		$uid = UID;
 		if($this::cd_rule_check($uid,$cd_rule)!=1){
 			$this->error('没有权限禁止操作！！！');
+<<<<<<< HEAD
+=======
+		}
+		/*--------wcd权限判断---------*/
+		if (!IS_ROOT){ //非超管			
+		   $this->error('您没有权限，不能进行此操作！');
+>>>>>>> ef0add2d1cd09f4bc251842f1eca6e0044df7d75
 		}
 		/*--------wcd权限判断---------*/
 // 		if (!IS_ROOT){ //非超管			
@@ -247,6 +261,7 @@ class  UserController extends HomeBaseController{
 		}
 	/***密码修改***/
 	public function pwdupdate(){
+<<<<<<< HEAD
 // 		/*--------wcd权限判断---------*/
 // 		//获取当前模块名称
 // 		$contro=CONTROLLER_NAME;
@@ -259,6 +274,20 @@ class  UserController extends HomeBaseController{
 // 			$this->error('没有权限禁止操作！！！');
 // 		}
 // 		/*--------wcd权限判断---------*/
+=======
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
+>>>>>>> ef0add2d1cd09f4bc251842f1eca6e0044df7d75
 		$User = M("User"); 
 		$password = $_POST['pwd1c'];
 	    $id = UID;

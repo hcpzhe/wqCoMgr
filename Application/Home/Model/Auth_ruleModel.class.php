@@ -72,7 +72,11 @@ class Auth_ruleModel extends Model{
 	}
 	//获取指定id的规则
 	public function guize_id($gz){
+<<<<<<< HEAD
 		$auth_rule=$this->where("name='".$gz."'")->field("id")->find();//echo $this->_sql();exit();
+=======
+		$auth_rule=$this->where("name='".$gz."'")->field("id")->find();
+>>>>>>> ef0add2d1cd09f4bc251842f1eca6e0044df7d75
 		return $auth_rule['id'];
 	}
 }

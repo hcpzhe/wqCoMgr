@@ -6,6 +6,7 @@ use Home\Model\Auth_ruleModel;
 class AuthgroupController extends HomeBaseController{
 	/** 用户组列表 */
 	public function user_group(){
+<<<<<<< HEAD
 // 		if (!IS_ROOT){ //非超管
 // 			$this->error('您没有权限，不能进行此操作！');
 // 		}		
@@ -21,6 +22,11 @@ class AuthgroupController extends HomeBaseController{
 			$this->error('没有权限禁止操作！！！');
 		}
 		/*--------wcd权限判断---------*/
+=======
+		if (!IS_ROOT){ //非超管
+			$this->error('您没有权限，不能进行此操作！');
+		}		
+>>>>>>> ef0add2d1cd09f4bc251842f1eca6e0044df7d75
 		$auth_group=new Auth_groupModel();
 		$this->list=$auth_group->lists();
 		$this->display();
@@ -56,6 +62,7 @@ class AuthgroupController extends HomeBaseController{
 	}
 	/*修改用户组信息*/
 	public function up(){
+<<<<<<< HEAD
 // 		if (!IS_ROOT){ //非超管
 // 			$this->error('您没有权限，不能进行此操作！');
 // 		}
@@ -71,6 +78,11 @@ class AuthgroupController extends HomeBaseController{
 			$this->error('没有权限禁止操作！！！');
 		}
 		/*--------wcd权限判断---------*/
+=======
+		if (!IS_ROOT){ //非超管
+			$this->error('您没有权限，不能进行此操作！');
+		}
+>>>>>>> ef0add2d1cd09f4bc251842f1eca6e0044df7d75
 		$id=$_POST['id'];
 		$map['title']=$_POST['gp_tit'];
 		$map['description']=$_POST['gp_des'];

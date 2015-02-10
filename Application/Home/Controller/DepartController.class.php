@@ -34,6 +34,13 @@ class DepartController extends HomeBaseController{
 		$uid = UID;
 		if($this::cd_rule_check($uid,$cd_rule)!=1){
 			$this->error('没有权限禁止操作！！！');
+<<<<<<< HEAD
+=======
+		}
+		/*--------wcd权限判断---------*/
+		if (!IS_ROOT){ //非超管
+		   $this->error('您没有权限，不能进行此操作！');
+>>>>>>> ef0add2d1cd09f4bc251842f1eca6e0044df7d75
 		}
 		/*--------wcd权限判断---------*/
 // 		if (!IS_ROOT){ //非超管
@@ -82,6 +89,13 @@ class DepartController extends HomeBaseController{
 		$uid = UID;
 		if($this::cd_rule_check($uid,$cd_rule)!=1){
 			$this->error('没有权限禁止操作！！！');
+<<<<<<< HEAD
+=======
+		}
+		/*--------wcd权限判断---------*/
+		if (!IS_ROOT){ //非超管
+		   $this->error('您没有权限，不能进行此操作！');
+>>>>>>> ef0add2d1cd09f4bc251842f1eca6e0044df7d75
 		}
 		/*--------wcd权限判断---------*/
 // 		if (!IS_ROOT){ //非超管

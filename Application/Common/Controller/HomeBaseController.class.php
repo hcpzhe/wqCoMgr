@@ -93,12 +93,19 @@ abstract class HomeBaseController extends Controller {
 		$rule=explode(",",$rul);
 // 		echo $urule;
 // 		echo "<pre>";
+<<<<<<< HEAD
 // 		print_r($rule);
+=======
+// 		print_r($rule);exit();
+>>>>>>> ef0add2d1cd09f4bc251842f1eca6e0044df7d75
 // 		echo "</pre>";
 		//获取当前访问规则的id
 		$auth_rule=new Auth_ruleModel();
 		$ru_id=$auth_rule->guize_id($urule);
+<<<<<<< HEAD
 // 		echo $ru_id; exit();
+=======
+>>>>>>> ef0add2d1cd09f4bc251842f1eca6e0044df7d75
 		return  in_array($ru_id, $rule);
 	}
 }
