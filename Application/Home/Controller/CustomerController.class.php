@@ -12,6 +12,18 @@ header("Content-Type:text/html;charset=utf-8");
 class CustomerController extends HomeBaseController {
     /**客户添加***/
 	public function add(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$User = M("User");
 		$id = UID;		
 		$user_list = $User->where('id='.$id)->select();
@@ -43,10 +55,22 @@ class CustomerController extends HomeBaseController {
 		
 	/**客户列表     公司名称搜索**/
 	public function lists() {		
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		if (!IS_ROOT){ //非超管		
 			$User = new UserModel();
 			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
-			$where['id']=array('in',$cust_id);		
+			$where['id']=array('in',$cust_id);
 			if (empty($cust_id)){
 				$this->error('没有相应的公司信息！',U('Index/welcome'));
 			}
@@ -108,6 +132,18 @@ class CustomerController extends HomeBaseController {
 	}
 	/**公司信息修改**/
 	public function edit(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$id = (int)I('id');   //被选中要进行操作的id
 		if (!IS_ROOT){ //非超管
 			$User = new UserModel();
@@ -138,7 +174,19 @@ class CustomerController extends HomeBaseController {
 		$this->success('更新成功',U('Customer/lists'));
 	}
 	/*查看公司详情*/
-	public function detailed(){			
+	public function detailed(){		
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$id = (int)I('id');   //被选中要进行操作的id
 		$cust = M('Customer'); //获取客户详细信息
 		if (!IS_ROOT){ //非超管

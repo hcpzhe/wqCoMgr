@@ -9,6 +9,18 @@ use Think\Model;
 class ArticleController extends HomeBaseController {
     /**文章添加***/
 	public function art_add(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$User = M("User");
 		$user_list = $User->where('status=1')->select();
 		$this->assign('user_list',$user_list);  //文章添加人
@@ -26,6 +38,18 @@ class ArticleController extends HomeBaseController {
 		
 	/**文章列表**/
 	public function art_list() {
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$class = (int)I('class');    //文章类型
 		$article = M('article');
 		if (empty($class)){
@@ -49,6 +73,18 @@ class ArticleController extends HomeBaseController {
 	
 	/*查看文章详情*/
 	public function art_detailed(){		
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$id = (int)I('id');  
  		$prev = (int)I('id')-1;
  	    $next = (int)I('id')+1;
@@ -80,6 +116,18 @@ class ArticleController extends HomeBaseController {
 	}
 	/***文章评论的添加***/
 	public function insert_comment(){		
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$data['add_time'] = time();  //评论的时间
 		$data['user_id'] = UID;   //参与评论的员工
 		$data['art_id'] = (int)I('id');     //参与评论的文章id

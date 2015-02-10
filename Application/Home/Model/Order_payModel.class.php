@@ -35,5 +35,23 @@ class Order_payModel extends Model{
 		$olist=$this->where("order_id=$id AND status=1")->select();
 		return $olist;
 	}
-
+	/**
+	 * 以员工为分组求每个员工的业绩和
+	 */
+	public function group_sum($sta_time,$end_time){
+		$sql="SELECT SUM(money) as money ,ed.id,eu.id as uid,realname FROM wqerp.erp_order_pay as eop INNER JOIN wqerp.erp_user as eu ON eu.id=eop.user_id INNER JOIN erp_depart as ed ON ed.id=eu.depart_id where pay_time>='".$sta_time."' and pay_time<='".$end_time."'  GROUP BY user_id";
+		return $this->query($sql);
+	}
+	/**
+	 * 以部门名称分组求各个部门的总业绩
+	 */
+	public function depart_resu($sta_time,$end_time){
+		$sql="SELECT ed.id,ed.`name`,SUM(eop.money) as money FROM erp_order_pay as eop INNER JOIN erp_user as eu ON eop.user_id=eu.id INNER JOIN erp_depart as ed ON eu.depart_id=ed.id where pay_time>='".$sta_time."' and pay_time<='".$end_time."'  GROUP BY ed.`name`";
+		return $this->query($sql);
+	}
+	/** 总业绩 */
+	public function all_yj($sta_time,$end_time){
+		$sql="select sum(money) as smoney from erp_order_pay where status=1 and pay_time>='".$sta_time."' and pay_time<='".$end_time."'";
+		return $this->query($sql);
+	}
 }

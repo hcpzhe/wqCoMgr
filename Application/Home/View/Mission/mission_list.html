@@ -50,7 +50,7 @@
                 <th width="20%">部门</th>
                 <th width="20%">月份</th>
                 <th width="30%">任务</th>
-                <th width="30%">操作</th>
+               <!-- <th width="30%">操作</th>  -->
             </tr>
           </thead>
           <tbody>
@@ -58,10 +58,10 @@
               <!-- <foreach name="depart" item="depart"> -->
                 <tr>
                     <td>{$depart.name}</td>
-                    <td>{$month}</td>
+                    <td>{$depart.mission_date}</td>
                     
-                    <td>0</td>
-                    <td><a href="{:U('Mission/add?dep_id='.$depart['id'].'&mission_date='.$month.'&dname='.$depart['name'])}">编辑</a></td>
+                    <td>{$depart.task}</td>
+ <!--                	<td><a href="{:U('Mission/up_mission_form?dep_id='.$depart['depart_id'].'&mission_date='.$depart['mission_date'].'&task='.$depart['task'].'&dep_name='.$depart['name'])}">编辑</a></td>-->
                 </tr>
                <!-- </foreach> -->
            <!-- <else /> -->         	
@@ -70,7 +70,7 @@
                     <td>{$list.dname}</td>
                     <td>{$list.mission_date|mb_substr=4,2}</td>                   
                     <td>{$list.task}</td>
-                    <td><a href="#" readonly >编辑</a></td>
+ <!--              <td><a href="{:U('Mission/up_mission_form?dep_id='.$depart['depart_id'].'&mission_date='.$depart['mission_date'].'&task='.$depart['task'].'&dep_name='.$depart['name'])}" readonly >编辑</a></td>-->
                 </tr>
             <!-- </foreach> -->
           <!-- </if> -->

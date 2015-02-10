@@ -35,4 +35,23 @@ class Order_renewalModel extends  Model{
 		$data=$this->where("order_id=$id")->find();
 		return $data;
 	}
+	/**
+	 *获取订单续费表业绩
+	 */
+	public function group_sum($sta_time,$end_time){
+		$sql="SELECT ed.id,realname,SUM(money) as money FROM wqerp.erp_order_renewal as eor INNER JOIN wqerp.erp_user as eu ON eu.id=eor.user_id INNER JOIN erp_depart as ed ON ed.id=eu.depart_id  where pay_time>='".$sta_time."' and pay_time<='".$end_time."'  GROUP BY user_id";
+		return $this->query($sql);
+	}
+	/**
+	 * 获取部门续费总金额
+	 */
+	public function depart_renewal($sta_time,$end_time){
+		$sql="SELECT ed.id,ed.`name`,SUM(eor.money) as money FROM erp_order_renewal as eor INNER JOIN erp_user as eu ON eor.user_id=eu.id INNER JOIN erp_depart as ed ON eu.depart_id=ed.id  where pay_time>='".$sta_time."' and pay_time<='".$end_time."'  GROUP BY ed.`name`";//echo $sql;echo "<br/>";
+		return $this->query($sql);
+	}	
+	/** 总业绩 */
+	public function all_yj($sta_time,$end_time){
+		$sql="select sum(money) as smoney from erp_order_renewal where status=1 and pay_time>='".$sta_time."' and pay_time<='".$end_time."'";
+		return $this->query($sql);
+	}
 }

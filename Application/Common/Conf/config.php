@@ -5,13 +5,13 @@ return array(
 	'URL_PATHINFO_DEPR'			=>	'-', //参数之间的分割符号  默认是'/'
 	'URL_CASE_INSENSITIVE' => true, //默认false 表示URL区分大小写 true则表示不区分大小写
     'URL_MODEL'                 =>  2, // 1:PATHINFO  2:rewrite 如果你的环境不支持PATHINFO 请设置为3
-    'SHOW_PAGE_TRACE'           =>  true,//显示调试信息
+    'SHOW_PAGE_TRACE'           =>  false,//显示调试信息
     
     'DB_TYPE'                   =>  'mysqli',
-    'DB_HOST'                   =>  '192.168.1.7',
+    'DB_HOST'                   =>  'localhost',
     'DB_NAME'                   =>  'wqerp',
-    'DB_USER'                   =>  'local',
-    'DB_PWD'                    =>  '123456',
+    'DB_USER'                   =>  'root',
+    'DB_PWD'                    =>  '',
     'DB_PORT'                   =>  '3306',
     'DB_PREFIX'                 =>  'erp_',
 	
