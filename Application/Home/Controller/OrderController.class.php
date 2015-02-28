@@ -16,6 +16,18 @@ header("Content-Type:text/html;charset=utf-8");
 class OrderController extends HomeBaseController{
 /** 订单列表 */
 	public function order_list(){		
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 // 		$time=1419868800;
 // / 		echo date('Y-m-d H:i:s',"1451448732");exit();
 		//$time=time();
@@ -47,6 +59,18 @@ class OrderController extends HomeBaseController{
 	}
 /** 待续费订单列表 (距订单到期时间三个月进入带续费期)*/
 	public function renewal_order(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		/*获取搜索条件*/
 		$pro = (int)I('param.product');
 		$check = (int)I('param.check');
@@ -74,6 +98,16 @@ class OrderController extends HomeBaseController{
 	
 /**   订单详情   */
 	public function order_info(){
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');	
+		}
 		$id = (int)I('cust_id');   //被选中要进行操作的id
 		if (!IS_ROOT){ //非超管
 			$User = new UserModel();
@@ -100,6 +134,18 @@ class OrderController extends HomeBaseController{
 	}
 /**  订单修改表单 */
 	public function ord_u_form(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/		
 		$id=$_GET['id'];
 		/** 查询数据   */
 		$order=new OrderModel();
@@ -111,6 +157,18 @@ class OrderController extends HomeBaseController{
 	}	
 /**  修改订单 */
 	public function up(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$id=$_GET['id'];
 		$data['prod_id']=$_POST['pid'];
 		$data['total_fees']=$_POST['money'];
@@ -122,6 +180,18 @@ class OrderController extends HomeBaseController{
 	}	
 /** 跳转到添加订单页面*/
 	public function add_order_form(){/** 判断是否传出客户id */
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		/** 接收客户id */
 		$id = (int)I('id');	//被选中要进行操作的id
 	    if (!IS_ROOT){ //非超管	
@@ -135,7 +205,9 @@ class OrderController extends HomeBaseController{
 			$customer=new CustomerModel();
 			$this->cus=$customer->one($id);
 		}else{
-			
+			/*查询所有客户*/
+			$customer=new CustomerModel();
+			$this->cus_list=$customer->cus_list();
 		}
 			/*查询产品分类*/
 			$product=new ProductModel();
@@ -143,9 +215,7 @@ class OrderController extends HomeBaseController{
 			/** 查询系统 用户 */
 			$user=new UserModel();
 			$this->user_list=$user->alluser();
-			/*查询所有客户*/
-			$customer=new CustomerModel();
-			$this->cus_list=$customer->cus_list();
+			
 			$this->display();
 	}		
 /** 添加订单   订单表添加一条记录，订单付款表添加一条预付款记录*/
@@ -179,6 +249,18 @@ class OrderController extends HomeBaseController{
  * 如果为优化订单，erp_seo_order增加一条记录
  * 如果两者都不是不进行其他操作*/
 	public function check_order(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$cid = (int)I('cust_id');   //被选中要进行操作的cust_id
 		if (!IS_ROOT){ //非超管
 			$User = new UserModel();
@@ -198,8 +280,21 @@ class OrderController extends HomeBaseController{
 	}	
 	/** 推送订单至下一个部门      表单 */
 	public function push_form($id){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		if (!IS_ROOT){ //非超管
 			$ids = (int)I('cust_id');   //被选中要进行操作的cust_id
+// 			echo $ids;exit();
 			$User = new UserModel();
 			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
 			if(!in_array($ids,$cust_id)){
@@ -252,6 +347,18 @@ class OrderController extends HomeBaseController{
 	}
 	/** 停止订单 */
 	public function stop($id){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		if (!IS_ROOT){ //非超管
 			$ids = (int)I('cust_id');   //被选中要进行操作的id
 			$User = new UserModel();
@@ -267,6 +374,18 @@ class OrderController extends HomeBaseController{
 	}
 	/** 开始订单 */
 	public function star($id){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		if (!IS_ROOT){ //非超管
 			$ids = (int)I('cust_id');   //被选中要进行操作的id
 			$User = new UserModel();
@@ -280,5 +399,19 @@ class OrderController extends HomeBaseController{
 		if($flag==1){ $this->success('成功');}
 		else{ $this->error('失败');}
 	}
-
+    /***订单添加 客户名称模糊检索***/
+	public function search(){
+		$name = I('param.name');    //输入的搜索信息
+		//print_r($name);exit();
+		$where['status'] = 1;
+		if(!empty($name)){
+			//公司名称模糊检索
+			$where['name'] = array('like',"%$name%");
+		}
+		$customer=new CustomerModel();
+		$cus_list = $customer->where($where)				
+				->order('id desc')->select();
+		$this->assign('cus_list',$cus_list);
+		$this->display();
+	}
 }

@@ -10,6 +10,18 @@ use Home\Model\DepartModel;
 class SeoordController extends HomeBaseController{
 	/*优化订单*/
 	public function seo_list(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		/*获取搜索条件*/
 		$check = (int)I('param.check');
 		$key = I('param.key');
@@ -26,6 +38,18 @@ class SeoordController extends HomeBaseController{
 	}
 	/**网站开发订单详细页面，订单详细信息，订单参与人员，订单沟通记录 */
 	public function seo_info(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$oid=$_GET['id'];
 // 		if (!IS_ROOT){ //非超管
 // 			$id=$_GET['cust_id'];  //选中的公司id
@@ -48,6 +72,18 @@ class SeoordController extends HomeBaseController{
 	}	
 	/*跳转到分单页面*/
 	public function dist(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$oid=$_GET['id'];
 		if (!IS_ROOT){ //非超管
 			$id=$_GET['cust_id'];  //选中的公司id
@@ -74,6 +110,18 @@ class SeoordController extends HomeBaseController{
 	}	
 	/** 推送订单至下一个部门      表单 */
 	public function push_form($id){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		/** 查询订单信息  判断该订单是否通过审核 */
 		// 		$order=new OrderModel();
 		// 		$flag=$order->field('check')->where("id=$id")->find();
@@ -115,6 +163,18 @@ class SeoordController extends HomeBaseController{
 	}	
 	/*增加一条开发沟通记录*/
 	public function ad_record(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$map['order_id']=$_POST['o_id'];
 		$map['user_id']=UID;
 		$map['post_time']=time();

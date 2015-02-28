@@ -74,7 +74,15 @@ function ad(){
                 <td><!-- <if condition="$list.class eq 1"> -->预付款<!-- <else/> -->余款<!-- </if> --></td>
                 <td>{:date('Y/m/d H:i:s',$list['pay_time'])}</td>
                 <td>{:date('Y/m/d H:i:s',$list['check_time'])}</td>
-                <td><!-- <if condition="$list.check eq 1"> -->通过<!-- <elseif condition="$list.check eq 0"/> -->待审<!-- <else/> -->拒绝<!-- </if> --></td>
+                <td>
+                	<!-- <if condition="$list.check eq 1"> -->
+                		通过
+                	<!-- <elseif condition="$list.check eq 0"/> -->
+                		<a href="{:U('Orderpay/check_order?pay_id='.$list['id'])}">待审</a>
+                	<!-- <else/> -->
+                		拒绝
+                	<!-- </if> -->
+                </td>
                 <td>{$list.uname}</td>
             </tr>
            <!-- </foreach> -->

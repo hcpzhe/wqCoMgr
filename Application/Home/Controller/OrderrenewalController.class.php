@@ -9,6 +9,18 @@ use Home\Model\Order_payModel;
 class OrderrenewalController extends HomeBaseController{
 	/** 订单续费申请列表 */
 	public function or_list(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		/*获取搜索条件*/		
 		$pro=$_REQUEST['product'];
 		$check=$_REQUEST['check'];
@@ -35,6 +47,18 @@ class OrderrenewalController extends HomeBaseController{
 	}
 	/** 续费申请表单rene */
 	public function apy_ren($id){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		if (!IS_ROOT){ //非超管
 			$ids = (int)I('cust_id');   //被选中要进行操作的id
 			$User = new UserModel();
@@ -53,6 +77,18 @@ class OrderrenewalController extends HomeBaseController{
 	}
 	/** 添加续费申请 */
 	public function ap_re($id){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$Ordren=new Order_renewalModel();
 		$map['order_id']=$id;
 		$map['money']=$_POST['money'];
@@ -79,6 +115,18 @@ class OrderrenewalController extends HomeBaseController{
 	}
 	/** 申请订单续费申请 */
 	public function checked($id){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		if (!IS_ROOT){ //非超管
 			$ids = (int)I('cust_id');   //被选中要进行操作的id
 			$User = new UserModel();

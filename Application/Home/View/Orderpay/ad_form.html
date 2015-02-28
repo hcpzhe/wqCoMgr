@@ -50,9 +50,9 @@
 				    <td>{$orderlinfo.contacts}</td>   
 				    <td align="center"> 订单状态</td>
 				    <td class="text-info">
-				    	<!-- <if condition="$orderinfo.status eq 1"> -->
+				    	<!-- <if condition="$orderlinfo.oe_status eq 1"> -->
 				    	正常
-				    	<!-- <elseif condition="$orderinfo.status eq 0"/> -->
+				    	<!-- <elseif condition="$orderlinfo.oe_status eq 0"/> -->
 				    	禁用
 				    	<!-- </if> -->
 				    </td>
@@ -66,6 +66,41 @@
 				</table>
 			   </div>	
 				<!-- 订单详情结束 -->    
+
+<table class="table table-striped table-bordered table-hover table_center">
+          <thead>
+          <tr>
+			<!-- 订单付费列表开始 -->
+            <th width="10%">付款编号</th>
+            <th width="12%">续费金额</th>
+            <th width="12%">类型</th>
+            <th width="16%">付款时间</th>
+            <th width="16%">审核时间</th>
+            <th width="8%">审核</th>
+          </tr>	
+          </thead>
+          <tbody>
+<!-- <foreach name="op_lists" item="list"> -->          
+          <tr>
+          	<td>{$list.id}</td>
+          	<td>{$list.money}</td>
+          	<td><!-- <if condition="$list.check eq 1"> -->预付款<!-- <else/> -->余款<!-- </if> --></td></td>
+          	<td>{:date('Y/m/d H:i:s',$list['pay_time'])}</td>
+          	<td>{:date('Y/m/d H:i:s',$list['check_time'])}</td>
+          	<td>
+          	<!-- <if condition="$list.check eq 1"> -->
+                		通过
+                	<!-- <elseif condition="$list.check eq 0"/> -->
+                		<a href="{:U('Orderpay/check_order?pay_id='.$list['id'])}">待审</a>
+                	<!-- <else/> -->
+                		拒绝
+                	<!-- </if> -->
+          	</td>
+          </tr>
+<!-- </foreach> -->          
+		  </tbody>
+</table>          
+
                 
     <form action="{:U('Orderpay/ad_record?id='.$orderlinfo['id'])}" method="post" name="form1" id="form1" >               
        <table class="table table-bordered">
@@ -77,6 +112,13 @@
            <tr>
              <td align="right">时间：</td>
              <td><input type="text" name="pay_time" class="form-control"></td>
+           </tr> 
+           <tr>
+           	 <td align="right">付款类型：</td>
+           	 <td><select name="type" class="form-control">
+           	 	 <option value="2">余款</option>
+           	 	 <option value="1">预付款</option>
+           	 </select></td>	
            </tr> 
            <tr>
              <td align="right"></td>

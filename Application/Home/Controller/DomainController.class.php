@@ -10,6 +10,18 @@ header("Content-Type:text/html;charset=utf-8");
 class DomainController extends HomeBaseController{
 	/*域名庫*/
 	public function domain_list($domain=null, $tpl=null){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$map=array();
 		$model=new DomainModel();
 		$id = (int)I('param.id');
@@ -43,16 +55,28 @@ class DomainController extends HomeBaseController{
 	}
 	/*添加域名*/
 	public function add_domain(){
+// 		/*--------wcd权限判断---------*/
+// 		//获取当前模块名称
+// 		$contro=CONTROLLER_NAME;
+// 		//获取当前操作名称
+// 		$actio=ACTION_NAME;
+// 		//获取当前访问规则
+// 		$cd_rule="Home/".$contro."/".$actio;
+// 		$uid = UID;
+// 		if($this::cd_rule_check($uid,$cd_rule)!=1){
+// 			$this->error('没有权限禁止操作！！！');
+// 		}
+// 		/*--------wcd权限判断---------*/
 		$id = (int)I('param.cust_id');  //被选中要进行操作的id
 		$order_id = I('param.order_id');
 		$domain = M('Customer');		
-		if (!IS_ROOT){ //非超管
-			$User = new UserModel();
-			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
-			if(!in_array($id,$cust_id)){
-				$this->error('您没有该公司的权限，不能进行相关操作！');
-			}
-		}
+// 		if (!IS_ROOT){ //非超管
+// 			$User = new UserModel();
+// 			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
+// 			if(!in_array($id,$cust_id)){
+// 				$this->error('您没有该公司的权限，不能进行相关操作！');
+// 			}
+// 		}
 			//查询客户信息的审核状态
 			$check = $domain->where('id='.$id)->getField('check');	
 			$this->assign('cust_id',$id);
@@ -102,6 +126,18 @@ class DomainController extends HomeBaseController{
 	}
 	/**域名详细信息**/
 	public function domain_detailed(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		if (!IS_ROOT){ //非超管
 			$ids = (int)I('cust_id');   //被选中要进行操作的id
 			$User = new UserModel();
@@ -132,6 +168,18 @@ class DomainController extends HomeBaseController{
 	
 	/**域名信息修改**/
 	public function domain_edit(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		if (!IS_ROOT){ //非超管
 			$ids = (int)I('cust_id');   //被选中要进行操作的id
 			$User = new UserModel();
@@ -167,6 +215,18 @@ class DomainController extends HomeBaseController{
 	
 	/**提交 待审申请**/
 	public function check(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		if (!IS_ROOT){ //非超管
 			$ids = (int)I('cust_id');   //被选中要进行操作的id
 			$User = new UserModel();
@@ -187,7 +247,19 @@ class DomainController extends HomeBaseController{
 		$this->success('审核成功',U('Domain/domain_list'));
 	}
 	/***域名删除**/
-	public function domain_del(){		
+	public function domain_del(){	
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		if (!IS_ROOT){ //非超管
 			$ids = (int)I('cust_id');   //被选中要进行操作的id
 			$User = new UserModel();

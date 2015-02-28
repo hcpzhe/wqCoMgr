@@ -10,6 +10,18 @@ use Home\Model\DepartModel;
 class DepordController extends HomeBaseController{
 	/*网站开发订单列表*/
 	public function dep_list(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		/*获取搜索条件*/
 		$check = (int)I('param.check'); 
 		$key = I('param.key');
@@ -26,6 +38,18 @@ class DepordController extends HomeBaseController{
 	}
 	/*增加一条开发沟通记录*/
 	public function ad_record(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$map['order_id']=$_POST['oid'];
  		$map['user_id']=UID;
 		$map['post_time']=time();
@@ -38,6 +62,18 @@ class DepordController extends HomeBaseController{
 	}
 	/**网站开发订单详细页面，订单详细信息，订单参与人员，订单沟通记录 */
 	public function dep_info(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$oid=$_GET['id'];
 // 		if (!IS_ROOT){ //非超管
 // 			$id=$_GET['cust_id'];  //选中的客户id
@@ -60,15 +96,27 @@ class DepordController extends HomeBaseController{
 	}
 	/*跳转到分单页面*/
 	public function dist(){
-		$oid=$_GET['id'];
-		if (!IS_ROOT){ //非超管
-			$id=$_GET['cust_id'];  //选中的客户id
-			$User = new UserModel();
-		    $cust_id=$User->user_auto();  //登录人拥有的客户权限id
-			if(!in_array($id,$cust_id)){
-				$this->error('您没有该公司的权限，不能进行相关操作！');
-			}
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
 		}
+		/*--------wcd权限判断---------*/
+		$oid=$_GET['id'];
+// 		if (!IS_ROOT){ //非超管
+// 			$id=$_GET['cust_id'];  //选中的客户id
+// 			$User = new UserModel();
+// 		    $cust_id=$User->user_auto();  //登录人拥有的客户权限id
+// 			if(!in_array($id,$cust_id)){
+// 				$this->error('您没有该公司的权限，不能进行相关操作！');
+// 			}
+// 		}
 		/*查询技术部所有人员*/
 		$depart = M('Depart');
 		$dep_id = $depart->where("name='技术部'")->getField('id'); //技术部所在id	
@@ -86,19 +134,31 @@ class DepordController extends HomeBaseController{
 	}	
 	/** 推送订单至下一个部门      表单 */
 	public function push_form($id){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		/** 查询订单信息  判断该订单是否通过审核 */
 // 		$order=new OrderModel();
 // 		$flag=$order->field('check')->where("id=$id")->find();
 // 		if($flag['check']==0){ $this->error('订单未审核');}
 	
-		if (!IS_ROOT){ //非超管
-			$id=$_GET['cust_id'];  //选中的客户id
-			$User = new UserModel();
-		    $cust_id=$User->user_auto();  //登录人拥有的客户权限id
-			if(!in_array($id,$cust_id)){
-				$this->error('您没有该公司的权限，不能进行相关操作！');
-			}
-		}
+// 		if (!IS_ROOT){ //非超管
+// 			$id=$_GET['cust_id'];  //选中的客户id
+// 			$User = new UserModel();
+// 		    $cust_id=$User->user_auto();  //登录人拥有的客户权限id
+// 			if(!in_array($id,$cust_id)){
+// 				$this->error('您没有该公司的权限，不能进行相关操作！');
+// 			}
+// 		}
 		/** 查询所有部门 */
 		$depart=new DepartModel();
 		$this->id=$id;

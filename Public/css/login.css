@@ -21,8 +21,9 @@ img{ border:0; }
 .logo{ }
 .account{ }
 .password{}
+.verify img{ +width:85px; +margin-top:10px;}
 .input_a{  line-height:20px; font-size:14px; border:0px; height: 20px; outline:none; }
 .btn_submit{  height:46px; text-align:left;}
+.btn_submit input{ +height:42px;}
 .btn_submit input{ margin-left:20px; margin-top:5px;}
-
 .login_table td{ line-height:42px; height:42px;}

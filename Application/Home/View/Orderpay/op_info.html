@@ -13,20 +13,32 @@
    <div class="b right_next">
      <h1 class="page-header">订单付费修改</h1>
         <!-- 订单付费详情开始 -->
-        <form method="post" action="{:U('Orderpay/up?id='.$opinfo['id'])}">
+        <form method="post" action="{:U('Orderpay/up?id='.$opinfo['op_id'])}">
           <table class="table_form">
             <tr>
               <td width="30%" align="right"> 客 户 名 称 ：</td>
               <td width="70%">{$opinfo.cname}</td>
             </tr>
             <tr>
-              <td align="right"> 续 费 金 额：</td>
+              <td align="right"> 付 款 金 额：</td>
               <td><input type="text" name="money" value="{$opinfo.money}" class="form-control"></td>
             </tr>
             <tr>
-              <td align="right"> 续 费 日 期：</td>
+              <td align="right"> 付 款 日 期：</td>
               <td><input type="text" name="pay_time" value="{:date('Y/m/d H:i:s',$opinfo['pay_time'])}" class="form-control"></td>
-            </tr>            
+            </tr>   
+            <tr>
+           	 <td align="right">付款类型：</td>
+           	 <td><select name="type" class="form-control">
+           	 	 <!-- <if condition="$opinfo.class eq 1"> -->
+           	 	 <option value="1">预付款</option>
+           	 	 <!-- <elseif condition="$opinfo.class eq 2"/> -->
+           	 	 <option value="2">余款</option>
+           	 	 <!-- </if> -->
+           	 	 <option value="2">余款</option>
+           	 	 <option value="1">预付款</option>
+           	 </select></td>	
+           </tr>          
             <tr>
               <td align="right"> &nbsp;提 &nbsp;交 &nbsp;人 ：</td>
               <td>{$opinfo.uname}</td>

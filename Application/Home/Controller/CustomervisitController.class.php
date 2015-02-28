@@ -11,6 +11,18 @@ class CustomervisitController extends HomeBaseController {
 
 	/**拜访记录列表**/
 	public function visitlists(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		//用户名
 		$user=M('User');
 		$user_list=$user->where('status=1')->select();
@@ -54,6 +66,18 @@ class CustomervisitController extends HomeBaseController {
 	}	
 	/**拜访记录添加**/
 	public function addvisit(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$id = (int)I('cust_id');   //被选中要进行操作的id
 		$cust = M('customer');
 		if(empty($id)){   //未被选中指定公司  添加拜访记录
@@ -97,6 +121,18 @@ class CustomervisitController extends HomeBaseController {
 	
 	/**查看拜访记录的详细信息**/
 	public function visit_detailed(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$id = (int)I('cust_id');   //被选中要进行操作的id
 		if (!IS_ROOT){ //非超管
 			$User = new UserModel();
@@ -126,6 +162,18 @@ class CustomervisitController extends HomeBaseController {
 	}
 	/**添加沟通记录**/
 	public function add_visit_prod(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$id = (int)I('cust_id');   //被选中要进行操作的id
 		if (!IS_ROOT){ //非超管
 			$User = new UserModel();

@@ -3,9 +3,22 @@ namespace Home\Controller;
 use Common\Controller\HomeBaseController;
 use Home\Model\OrderModel;
 use Home\Model\ProductModel;
+use Home\Model\Depart_missionModel;
 class MissionController extends HomeBaseController{
 	/**部门任务列表 */
 	public  function mission_list(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		//当前日期所在的年份
 		$now_year=date('Y');
 		$this->assign('year',$now_year);
@@ -28,8 +41,14 @@ class MissionController extends HomeBaseController{
 		->select();
 		if (empty($mission_list)){
 			$dep = M('Depart');   //部门任务为空， 查询部门
-			$dep_list = $dep->where('status=1')->select();
-			$this->assign('depart',$dep_list);			
+			$dep_list = $dep->table('erp_depart_mission as edm,erp_depart as ed')
+						->where("edm.depart_id=ed.id and ed.status=1")
+						->select();
+// 			echo $dep->_sql();exit();
+			$this->assign('depart',$dep_list);	
+// 			echo "<pre>";
+// 			print_r($dep_list);
+// 			echo "</pre>";exit();
 		}
 		$this->assign('month',$time['month']);$time['month'];   //搜索月份
 		$this->assign('mission_list',$mission_list);  //任务列表
@@ -37,6 +56,18 @@ class MissionController extends HomeBaseController{
 	}
 	/***部门业绩添加***/
 	public function add(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$dep_id = I('param.dep_id');
 		$dname = I('param.dname');
 		$mission_date = I('param.mission_date');
@@ -53,6 +84,18 @@ class MissionController extends HomeBaseController{
 	}
 	/***部门业绩添加  **/
 	public function addmission(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
 		$now_year=date('Y');  //当前年份
 		$month = I('param.month');
 		$data['mission_date'] = $now_year . $month;		
@@ -70,4 +113,22 @@ class MissionController extends HomeBaseController{
 			$this->error('添加失败！',U('Mission/mission_list'));
 		}		
 	}	
+	/* 修改部门业绩表单 */
+	public function up_mission_form(){
+		$this->time=$_GET['mission_date'];
+		$this->depart_id=$_GET['dep_id'];
+		$this->task=$_GET['task'];
+		$this->dep_name=$_GET['dep_name'];
+		$this->display();
+	}
+	/**/
+	Public function up_to(){
+		$depart_id=$_POST['dep_id'];
+		$mission_date=$_POST['month'];
+		$task=$_POST['task'];
+		$mission=new Depart_missionModel();
+		$flag=$mission->query("UPDATE erp_depart_mission SET task='".$task."' WHERE depart_id=".$depart_id." and mission_date='".$mission_date."'");		
+		if($flag==1){	$this->success('修改成功！');
+		}else{	$this->error('修改失败！');}
+	}
 }
