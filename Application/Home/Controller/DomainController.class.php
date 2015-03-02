@@ -33,10 +33,12 @@ class DomainController extends HomeBaseController{
 		}elseif (!empty($check) && $check == 2){
 			$map['check'] = 0; //待审
 		}
-		if (!empty($status) && $status == 1){
+		if (!empty($status) && $status == 2){
+			$map['status'] = 0; //域名禁用
+		}elseif (!empty($status) && $status == 3){
+			$map['status'] = -1; //域名删除
+		}else{
 			$map['status'] = 1; //域名正常
-		}elseif (!empty($status) && $status == 2){
-			$map['status'] = 0; //域名专题为禁用
 		}
 		
 		if ($id>0) $map['id'] = $id;
@@ -272,6 +274,60 @@ class DomainController extends HomeBaseController{
 		$model = M('Domain');
 		$model-> where('id='.$id)->setField('status','-1');
 		$this->success('域名删除成功',U('Domain/domain_list'));
+	}
+	/***域名禁用**/
+	public function disable(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
+		if (!IS_ROOT){ //非超管
+			$ids = (int)I('cust_id');   //被选中要进行操作的id
+			$User = new UserModel();
+			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
+			if(!in_array($ids,$cust_id)){
+				$this->error('您没有该公司的权限，不能进行相关操作！');
+			}
+		}
+		$id = (int)I('param.id');
+		$model = M('Domain');
+		$model-> where('id='.$id)->setField('status','0');
+		$this->success('域名禁用成功',U('Domain/domain_list'));
+	}
+	/***域名恢复正常**/
+	public function Recovery(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
+		if (!IS_ROOT){ //非超管
+			$ids = (int)I('cust_id');   //被选中要进行操作的id
+			$User = new UserModel();
+			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
+			if(!in_array($ids,$cust_id)){
+				$this->error('您没有该公司的权限，不能进行相关操作！');
+			}
+		}
+		$id = (int)I('param.id');
+		$model = M('Domain');
+		$model-> where('id='.$id)->setField('status','1');
+		$this->success('域名恢复成功',U('Domain/domain_list'));
 	}
 		
 }     
