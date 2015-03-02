@@ -214,10 +214,10 @@ class CustomerController extends HomeBaseController {
 				
  		//判断是否有拜访记录
 		$cust_vi = M('Customer_visit');
-		$res = $cust_vi->table('erp_customer as cr,erp_customer_visit as cv')
-		->where("cr.id=cv.cust_id AND cr.id=$id")
-		->count();
-		$this->assign('res',$res);
+		$res = $cust_vi->table('erp_customer as cr,erp_customer_visit as cv,erp_user as eu')
+		->where("cv.user_id=eu.id AND cr.id=cv.cust_id AND cr.id=$id")
+		->getField("cv.id as v_id,eu.realname as uname,cr.`name` as cname,cr.contacts as clink,cv.visit_time as vtime,cr.phone as cphone,cr.id as cust_id");
+		$this->assign('visits',$res);
 		$this->display();
 	}
 	

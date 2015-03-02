@@ -155,6 +155,52 @@
               </tr>                                  
             <!-- </foreach> -->  
            <!-- </if> -->     
+           <!-- <if condition="$visits eq ' '"> -->
+			<tbody>
+              <tr>
+                 <th colspan="4" align="left" class="red">没有拜访记录！</th>                    
+              </tr>
+            </tbody>           
+           <!-- <else/> -->
+           <tbody>
+           	  <tr>
+                 <th colspan="4" align="left" class="active">拜访记录</th>                    
+              </tr>
+              <tr>
+		         <td colspan="4" align="left" class="active">     
+		         	<table class="table table-striped table-bordered table-hover table_center">
+				        <thead>    
+				          <tr>
+				            <th width="5%">编号</th>
+				            <th width="10%">拜访员工</th>
+				            <th width="25%">公司名称</th>
+				            <th width="10%">联系人</th>
+				            <th width="15%">联系电话</th>
+				            <th width="16%">拜访时间</th>
+				            <th width="19%">操作</th>
+				          </tr>
+				        </thead>
+				        <tbody>
+			          	<!-- <foreach name="visits" item="data"> -->       
+				           <tr>
+				             <td>{$data.v_id}</td>
+				             <td>{$data.uname}</td>
+				             <td class="text_left">{$data.cname}</td>
+				             <td>{$data.clink}</td>
+				             <td>{$data.cphone}</td>
+				             <td>{:date('Y/m/d H:i:s',$data['vtime'])}</td>
+				             <td>
+				               <a href="{:U('Customervisit/visit_detailed?id='.$data['v_id'].'&cust_id='.$data['cust_id'])}">查看详细</a> | 
+				               <a href="{:U('Customervisit/add_visit_prod?visit_id='.$data['v_id'].'&cust_id='.$data['cust_id'])}">添加沟通记录 </a>
+				             </td>
+				           </tr>                         
+			           <!-- </foreach> -->
+			           </tbody>
+				    </table> 
+				 </td>       	
+			  </tr>	        
+           </tbody>           
+           <!-- </if> -->
         </table>
       </div>
   </div>
