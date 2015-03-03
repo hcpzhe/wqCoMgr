@@ -5,6 +5,7 @@ use Common\Controller\HomeBaseController;
 use Home\Model\Customer_visitModel;
 use Home\Model\Visit_prodModel;
 use Home\Model\UserModel;
+use Home\Model\CustomerModel;
 
 header("Content-Type:text/html;charset=utf-8");
 class CustomervisitController extends HomeBaseController {
@@ -204,5 +205,19 @@ class CustomervisitController extends HomeBaseController {
 		$this->success('沟通记录添加成功',U('Customervisit/visitlists'));
 		
 	}
-	
+	/***拜访记录添加 客户名称模糊检索***/
+	public function search(){
+		$name = I('param.name');    //输入的搜索信息
+		//print_r($name);exit();
+		$where['status'] = 1;
+		if(!empty($name)){
+			//公司名称模糊检索
+			$where['name'] = array('like',"%$name%");
+		}
+		$customer=new CustomerModel();
+		$cus_list = $customer->where($where)
+		->order('id desc')->select();
+		$this->assign('cus_list',$cus_list);
+		$this->display();
+	}
 }

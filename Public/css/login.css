@@ -14,8 +14,8 @@ img{ border:0; }
 .padTop10{ padding-top:10px; }
 .lineH2{ line-height:2; }
 
-#loginbody { background:url(../images/logo_bg.jpg) no-repeat;}
-.loginbox {margin: 150px auto 0; }
+#loginbody { background:url(../images/logo_bg.jpg) no-repeat center center;}
+.loginbox {/*margin: 150px auto 0;*/ height:630px; }
 .login_copyright {margin-top: 100px; color: #3d9dd1; font-size:13px; text-align: center;}
 
 .logo{ }

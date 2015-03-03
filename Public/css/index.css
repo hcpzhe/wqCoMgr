@@ -98,7 +98,7 @@ body {
 	background:url(../images/kaifa.gif) center no-repeat;
 	}
 #main{
-	height:610px;
+	max-height:580px;
 	}
 .foot{
 	background:url(../images/footer_bg.jpg) #244997 center;
@@ -258,7 +258,7 @@ body {
 	background:#7b7b7b !important;
 	}
 	/**右边样式**/
-.right_next{ min-height:600px; width:98% !important; margin:0 auto; background:#FFF !important;}
+.right_next{ min-height:580px; width:98% !important; margin:0 auto; background:#FFF !important;}
 .b{ border:1px solid #FFF;}
 
 
@@ -337,6 +337,7 @@ body {
 }
 
 /**表格内容居中**/
+.table_center{ margin-bottom:60px !important;}
 .table_center th,.table_center td{
 	text-align:center;
 	vertical-align: middle !important;
@@ -376,3 +377,8 @@ body {
 .z_complete td,.z_complete th{
 	height:35px;
 }
+
+
+
+#right{ float:left; width:340px;}
+.left{ float:left;}

@@ -112,6 +112,7 @@ class ResultsController extends HomeBaseController{
 				}
 			}
 			$departs[$dep]['user_list']=$user_list;
+			$departs[$dep]['number']=count($user_list);
 			$user_list="";
 		}	
 		/**
@@ -128,7 +129,7 @@ class ResultsController extends HomeBaseController{
 				}
 			}
 		}
-// 		echo "<pre>";print_r($departs);echo "</pre>";		
+		echo "<pre>";print_r($departs);echo "</pre>";		
 		
 		/**
 		 *  获取部门业绩 */	
@@ -178,7 +179,7 @@ class ResultsController extends HomeBaseController{
 		$this->zwcl=ceil($zyj/$zrw*100);
 		/** 对员工总业绩数组进行排序 */
 		arsort($a);
-		$this->user_money=$a;		
+		$this->user_money=$a;	
 		$this->display();
 	}
 }

@@ -94,7 +94,7 @@
 						      <!-- <foreach name="department" item="dep_list"> -->
 						      <table style="width: 100%;" class="z_complete">						          
 						            <tr>
-						                <th width="20%" rowspan="7">{$dep_list.name}</th>
+						                <th width="20%" rowspan="{$dep_list['number']+2}" class="number">{$dep_list.name}</th>
 						                <th width="20%">部门达成率</th>
 						                <th width="60%">
                                             <div class="progress">

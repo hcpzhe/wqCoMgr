@@ -1,0 +1,206 @@
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>洛阳万谦网络科技有限公司</title>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="__JS__/jquery.min.js"></script>
+<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css" media="screen">
+<link rel="stylesheet" type="text/css" href="__CSS__/index.css">
+<script type="text/javascript" src="__JS__/bootstrap.min.js"></script>
+<script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+<script type="text/javascript">
+/*$(function(){
+    $(".panel-heading").click(function(){
+			$(this).toggleClass("panel-heading_visited").siblings(".panel-heading").removeClass("panel-heading_visited")
+			$(this).children("h4").toggleClass("panel-title_visited").addveClass("panel-title_visited")
+	})	;
+})*/
+
+$(function(){
+    $(".panel-body a").click(function(){
+        $(".panel-body a").removeClass("z_list-group-item_visited");
+        $(this).addClass("z_list-group-item_visited");
+		$(this).addClass("list-group-item");
+		$(this).addClass("z_list-group-item");
+    });
+});
+function do1(whichLink){
+     whichLink.setAttribute("class","z_list-group-item_visited");
+}
+
+function SetCwinHeight() {
+    var iframeid = document.getElementById("main"); //iframe id
+    if (document.getElementById) {
+        if (iframeid && !window.opera) {
+            if (iframeid.contentDocument && iframeid.contentDocument.body.scrollHeight) {
+                iframeid.height = iframeid.contentDocument.body.scrollHeight;
+            } else if (iframeid.Document && iframeid.Document.body.offsetHeight) {
+                iframeid.height = iframeid.Document.body.offsetHeight;
+            }
+        }
+    }
+}
+
+$(function($) {
+	$("#main").resize(function(){
+		SetCwinHeight();
+	})
+
+</script>
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+        <div class="top_logo"><img src="__IMG__/logo.png" /></div>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="{:U('User/user_update')}" target="main">信息修改</a></li>
+        <li><a href="{:U('User/pwd')}" target="main">密码修改</a></li>
+        <li><a href="{:U('Common/logout')}" onClick="if(confirm(&#39;您确认要退出吗？&#39;)){$(this).RSsubmit();}return false;">退出</a></li>
+        <li><a href="#"></a></li>
+      </ul>          
+    </div>
+  </div>
+</div>
+<!--中间部分-->
+<div class="container-fluid z_container">
+  <div class="grid-c2 clearfix"> 
+   <div class="col-main">
+      <div class="col-main-warp">
+        <div class="test-box">
+           <div class="embed-responsive embed-responsive-16by9">
+              <iframe id="main" onload="Javascript:SetCwinHeight()" height="auto" name="main" class="embed-responsive-item" src="{:U('Index/welcome')}"></iframe>
+           </div>
+        </div>
+      </div>
+   </div>
+   <div class="col-side">
+      <div class="test-box-big sidebar">         
+          <div class="panel-group zhedie" id="accordion">
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title z_panel_title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">客户管理</a>
+                  </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse in">
+                  <div class="panel-body">
+                      <a href="{:U('Publiccust/lists')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">公海客户</a>
+                      <a href="{:U('Customer/lists')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">客户列表</a>
+                      <a href="{:U('Customer/add')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">添加客户</a>
+                      <a href="{:U('Customervisit/visitlists')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">拜访记录</a>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title z_panel_title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">订单管理</a>
+                  </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      <a href="{:U('Order/order_list')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">订单列表</a>
+                      <a href="{:U('Order/add_order_form')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">添加订单</a>
+                      <a href="{:U('Orderpay/order_pay_record')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">订单付款记录</a>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title z_panel_title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour">开发管理</a>
+                  </h4>
+                </div>
+                <div id="collapseFour" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      <a href="{:U('Depord/dep_list')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">网站开发订单</a>
+                      <a href="{:U('Seoord/seo_list')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">优化订单</a>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title z_panel_title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive">续费管理</a>
+                  </h4>
+                </div>
+                <div id="collapseFive" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      <a href="{:U('Order/renewal_order')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">待续费订单</a>
+                      <a href="{:U('Orderrenewal/or_list')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">订单续费申请</a>
+                      <a href="{:U('Domren/dom_ren_app')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">域名续费申请</a>
+                      <a href="{:U('Domain/domain_list')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">域名库</a>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title z_panel_title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseSix">综合管理</a>
+                  </h4>
+                </div>
+                <div id="collapseSix" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      <a href="{:U('Depart/depa_list')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">部门管理</a>
+                      <a href="{:U('Product/pro_list')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">产品管理</a>
+                      <a href="{:U('Article/art_list')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">文章管理</a>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title z_panel_title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseSeven">业绩管理</a>
+                  </h4>
+                </div>
+                <div id="collapseSeven" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      <a href="{:U('Mission/mission_list')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">部门任务</a>
+                      <a href="{:U('Results/show_res')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">业绩排行</a>
+                  </div>
+                </div>
+              </div>
+              <div class="panel panel-default">
+                <div class="panel-heading">
+                  <h4 class="panel-title z_panel_title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseEight">系统管理</a>
+                  </h4>
+                </div>
+                <div id="collapseEight" class="panel-collapse collapse">
+                  <div class="panel-body">
+                      <a href="{:U('User/search_list')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">用户管理</a>
+                      <a href="{:U('Authgroup/user_group')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">用户组管理</a>
+                      <a href="{:U('Authrule/all_rule')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">权限列表</a>
+                      <a href="{:U('Userdepartmgr/lis')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">管理者列表</a>
+                      <a href="{:U('Config/config_list')}" target="main" class="list-group-item z_list-group-item" onclick="do1(this)">配置管理</a>
+                  </div>
+                </div>
+              </div>
+          </div>
+       </div>  
+    </div>
+  </div>
+</div>
+<!--中间部分结束-->
+<footer class="navbar-fixed-bottom">
+<div class="gongju">
+   <ul class="">
+      <li class="z_title">工具栏</li>
+      <li class="border_1"></li>
+      <li class="tongzhi"><a href="{:U('Article/art_list?class=1')}" target="main">通知公告</a></li>
+      <li class="dingdan"><a href="{:U('Order/order_list')}" target="main">提交订单</a></li>
+      <li class="xufei"><a href="{:U('Orderrenewal/or_list')}" target="main">续费申请</a></li>
+      <li class="jindu"><a href="{:U('Depord/dep_list')}" target="main">开发进度</a></li>
+   </ul>
+</div>
+
+<div class="foot">
+          <div class="footer">Copyright&copy;2010 &nbsp;&nbsp; 万谦网络科技&nbsp;&nbsp;  All Rights Reserved  &nbsp;&nbsp;版权所有 </div> 
+</div>
+</footer>
+</body>
+</html>
+

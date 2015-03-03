@@ -7,18 +7,18 @@ use Home\Model\User_depart_mgrModel;
 class UserdepartmgrController extends HomeBaseController{
 	/*查询所有部门的管理人员*/
 	public function lis(){
-		/*--------wcd权限判断---------*/
-		//获取当前模块名称
-		$contro=CONTROLLER_NAME;
-		//获取当前操作名称
-		$actio=ACTION_NAME;
-		//获取当前访问规则
-		$cd_rule="Home/".$contro."/".$actio;
-		$uid = UID;
-		if($this::cd_rule_check($uid,$cd_rule)!=1){
-			$this->error('没有权限禁止操作！！！');
-		}
-		/*--------wcd权限判断---------*/
+// 		/*--------wcd权限判断---------*/
+// 		//获取当前模块名称
+// 		$contro=CONTROLLER_NAME;
+// 		//获取当前操作名称
+// 		$actio=ACTION_NAME;
+// 		//获取当前访问规则
+// 		$cd_rule="Home/".$contro."/".$actio;
+// 		$uid = UID;
+// 		if($this::cd_rule_check($uid,$cd_rule)!=1){
+// 			$this->error('没有权限禁止操作！！！');
+// 		}
+// 		/*--------wcd权限判断---------*/
 		$mgr=new User_depart_mgrModel();
 		$this->ugs=$mgr->table('erp_user_depart_mgr as eudm,erp_user as eu,erp_depart as ed')->where("eudm.user_id=eu.id AND eudm.depart_id=ed.id")->field("eu.realname as uname,ed.name as dname,eudm.user_id as uid,eudm.depart_id as did")->select();
 		$this->display();
