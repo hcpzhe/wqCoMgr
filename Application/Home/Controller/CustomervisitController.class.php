@@ -74,7 +74,7 @@ class CustomervisitController extends HomeBaseController {
 		$actio=ACTION_NAME;
 		//获取当前访问规则
 		$cd_rule="Home/".$contro."/".$actio;
-		$uid = UID;
+		$uid = UID;//echo $this::cd_rule_check($uid,$cd_rule);exit();
 		if($this::cd_rule_check($uid,$cd_rule)!=1){
 			$this->error('没有权限禁止操作！！！');
 		}

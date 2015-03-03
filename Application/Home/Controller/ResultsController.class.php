@@ -129,7 +129,7 @@ class ResultsController extends HomeBaseController{
 				}
 			}
 		}
-		echo "<pre>";print_r($departs);echo "</pre>";		
+// 		echo "<pre>";print_r($departs);echo "</pre>";		
 		
 		/**
 		 *  获取部门业绩 */	
