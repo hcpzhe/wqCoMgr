@@ -116,18 +116,18 @@ class ArticleController extends HomeBaseController {
 	}
 	/***文章评论的添加***/
 	public function insert_comment(){		
-		/*--------wcd权限判断---------*/
-		//获取当前模块名称
-		$contro=CONTROLLER_NAME;
-		//获取当前操作名称
-		$actio=ACTION_NAME;
-		//获取当前访问规则
-		$cd_rule="Home/".$contro."/".$actio;
-		$uid = UID;
-		if($this::cd_rule_check($uid,$cd_rule)!=1){
-			$this->error('没有权限禁止操作！！！');
-		}
-		/*--------wcd权限判断---------*/
+// 		/*--------wcd权限判断---------*/
+// 		//获取当前模块名称
+// 		$contro=CONTROLLER_NAME;
+// 		//获取当前操作名称
+// 		$actio=ACTION_NAME;
+// 		//获取当前访问规则
+// 		$cd_rule="Home/".$contro."/".$actio;
+// 		$uid = UID;
+// 		if($this::cd_rule_check($uid,$cd_rule)!=1){
+// 			$this->error('没有权限禁止操作！！！');
+// 		}
+// 		/*--------wcd权限判断---------*/
 		$data['add_time'] = time();  //评论的时间
 		$data['user_id'] = UID;   //参与评论的员工
 		$data['art_id'] = (int)I('id');     //参与评论的文章id

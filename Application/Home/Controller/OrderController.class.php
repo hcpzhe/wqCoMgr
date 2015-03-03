@@ -300,9 +300,14 @@ class OrderController extends HomeBaseController{
 			if(!in_array($ids,$cust_id)){
 				$this->error('您没有该公司的权限，不能进行相关操作！');
 			}
-	     }
+	     }	
+	     	//检测订单是否已经被推送
+	     	$order=new OrderModel();
+			$push_res=$order->field("push")->where("id=$id")->find();
+			if($push_res['push']==1){
+				$this->error('订单已经被推送！',U('Order/order_list'));
+			}
 			/** 查询订单信息  判断该订单是否通过审核 */
-			$order=new OrderModel();
 			$flag=$order->field('check')->where("id=$id")->find();
 			if($flag['check']==0){ $this->error('订单未审核');}
 			/** 查询所有部门 */
@@ -315,31 +320,40 @@ class OrderController extends HomeBaseController{
 	}
 	/** 推送至下一个部门 */
 	public function push($id){
+		//所推送部门
 		$dp_id=$_POST['dp'];
+		//所推送客户
 		$cust_id=$_POST['cust_id'];
+		//所推送订单id
+		$or_id=$_POST['id'];
+		//获取签单人员id
 		$order=new OrderModel();
-		$user_id=$order->where("cust_id=$cust_id")->getField("user_id");
+		$user_id=$order->where("id=$or_id")->getField("user_id");
+		//获取签单人员所在部门
 		$user=new UserModel();
 		$dep_id=$user->where("id=$user_id")->getField("depart_id");
+		//找到订单添加人所在部门的管理者 
 		$udm=new User_depart_mgrModel();
-		$userid=$udm->where("depart_id=$dep_id")->getField("user_id");  //找到订单添加人所在部门的管理者 
+		$userid=$udm->where("depart_id=$dep_id")->getField("user_id");
 		$uid = UID;   //登陆用户				
 		if ($userid != $uid){
 			$this->error("没有推送权限");
 		}
-		
+		//更改订单推送状态
+		$data["push"]=1;
+		$order->where("id=".$or_id)->save($data);
 		/**技术 */
 		if($dp_id==1){
 			/*网站开发模型*/
 			$dor=new Develop_orderModel();
 			$flag1=$dor->add_do($id);
-			if($flag1==1){ 	$this->success('推送成功');}
+			if($flag1==1){ 	$this->success('推送成功',U('Order/order_list'));}
 			else{ $this->error('推送失败');}
 		}else if($dp_id==10){/** 优化 产品客服部*/
 			/*优化模型*/
 			$sor=new Seo_orderModel();
 			$flag2=$sor->add_so($id);
-			if($flag2==1){ $this->success('推送成功');}
+			if($flag2==1){ $this->success('推送成功',U('Order/order_list'));}
 			else{ $this->error('推送失败');}
 		}else if($dp_id==11){/** 客服 */
 			

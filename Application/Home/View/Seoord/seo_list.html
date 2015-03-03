@@ -48,13 +48,14 @@ function push(){
         <thead>
           <tr>
                <!-- 订单列表开始 -->
-                <th width="8%">请选择</th>
-                <th width="40%">客户名称</th>
-                <th width="10%">联系人</th>
-                <th width="12%">联系方式</th>
-                <th width="10%">订单金额</th>
-                <th width="10%">销售人员</th>
-                <th width="10%">分配</th>
+                <th width="7%">请选择</th>
+                <th width="39%">客户名称</th>
+                <th width="9%">联系人</th>
+                <th width="11%">联系方式</th>
+                <th width="9%">订单金额</th>
+                <th width="9%">销售人员</th>
+                <th width="9%">分配</th>
+                <th width="7%">推送状态</th>
             </tr>
           </thead>
           <tbody>
@@ -75,6 +76,13 @@ function push(){
                     <!-- <elseif condition="$list.checks eq 0"/> -->
                         <a href="{:U('Seoord/dist?id='.$list['id'].'&cust_id='.$list['cust_id'])}">未分配</a>
                     <!-- <else/> -->失效<!-- </if> -->
+                </td>
+                <td>
+                	<!-- <if condition="$list.push eq 1"> -->
+                   	已推送
+                    <!-- <else/> -->
+                         <span style="color:#cc0001;">未推送</span>
+                    <!-- </if> -->
                 </td>
             </tr>
         <!-- </foreach> -->
