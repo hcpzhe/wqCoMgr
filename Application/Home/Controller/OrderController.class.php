@@ -194,14 +194,15 @@ class OrderController extends HomeBaseController{
 		/*--------wcd权限判断---------*/
 		/** 接收客户id */
 		$id = (int)I('id');	//被选中要进行操作的id
-	    if (!IS_ROOT){ //非超管	
-			$User = new UserModel();
-		    $cust_id=$User->user_auto();  //登录人拥有的客户权限id		    
-			if(!in_array($id,$cust_id)){
-				$this->error('您没有权限，不能进行此操作！');
-			}
-	    }
+	    
 		if(!empty($id)){
+			if (!IS_ROOT){ //非超管
+				$User = new UserModel();
+				$cust_id=$User->user_auto();  //登录人拥有的客户权限id
+				if(!in_array($id,$cust_id)){
+					$this->error('您没有权限，不能进行此操作！');
+				}
+			}
 			$customer=new CustomerModel();
 			$this->cus=$customer->one($id);
 		}else{
@@ -217,7 +218,7 @@ class OrderController extends HomeBaseController{
 			$this->user_list=$user->alluser();
 			
 			$this->display();
-	}		
+	}	
 /** 添加订单   订单表添加一条记录，订单付款表添加一条预付款记录*/
 	public function add_order(){
 		$map['cust_id']=$_POST['cusid'];
