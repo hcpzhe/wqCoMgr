@@ -1,0 +1,33 @@
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>网站开发分单</title>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="__CSS__/index.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css" media="screen">
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+</head>
+<body>
+<div style="width:100%; overflow:hidden;">
+   <div class="b right_next">
+      <h1 class="page-header">维护客服分配客服</h1>
+          <table class="table_form">
+			<tr>
+              <td colspan="2" style="padding-left:22%;"> 
+			   <form method="post" action="{:U('Order/dist')}">
+                    <select name="user" class="form-control">
+                    <!-- <foreach name="severs" item="list"> -->
+                        <option value="{$list.realname}">{$list.realname}</option>
+                    <!-- </foreach> -->	
+                    </select>                   
+                    <input type="hidden" value="{$order_id}" name="oid" > 
+                    <input type="submit" value="分配" class="btn btn-primary">
+				</form>
+			  </td>
+            </tr>					
+		 </table>                 	
+   </div>
+</div>   
+</body>
+</html>

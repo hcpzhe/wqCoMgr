@@ -54,6 +54,7 @@ class DepordController extends HomeBaseController{
  		$map['user_id']=UID;
 		$map['post_time']=time();
 		$map['content']=$_POST['content'];
+		$map['pace']=$_POST['pace'];
 		$develop_order_comment=new Develop_order_commentModel();
 		$flag=$develop_order_comment->add($map);
 		if($flag==0){
@@ -147,9 +148,9 @@ class DepordController extends HomeBaseController{
 		}
 		/*--------wcd权限判断---------*/
 		/** 查询订单信息  判断该订单是否通过审核 */
-// 		$order=new OrderModel();
-// 		$flag=$order->field('check')->where("id=$id")->find();
-// 		if($flag['check']==0){ $this->error('订单未审核');}
+		$order=new OrderModel();
+		$flag=$order->field('check')->where("id=$id")->find();
+		if($flag['check']==0){ $this->error('订单未审核');}
 	
 // 		if (!IS_ROOT){ //非超管
 // 			$id=$_GET['cust_id'];  //选中的客户id
@@ -159,6 +160,12 @@ class DepordController extends HomeBaseController{
 // 				$this->error('您没有该公司的权限，不能进行相关操作！');
 // 			}
 // 		}
+		//检测订单是否已经被推送
+		$order_dev=new Develop_orderModel();
+		$push_res=$order_dev->field("push")->where("order_id=$id")->find();
+		if($push_res['push']==1){
+			$this->error('订单已经被推送！',U('Depord/dep_list'));
+		}
 		/** 查询所有部门 */
 		$depart=new DepartModel();
 		$this->id=$id;
@@ -169,12 +176,20 @@ class DepordController extends HomeBaseController{
 	/** 推送至下一个部门 */
 	public function push($id){
 		$dp_id=$_POST['dp'];
+		$order_dev=new Develop_orderModel();
+		//更改订单推送状态
+		$data["push"]=1;
+		$order_dev->where("id=".$id)->save($data);
 		/**技术 */
 		if($dp_id==1){
 			/*网站开发模型*/
 			$dor=new Develop_orderModel();
 			$flag1=$dor->add_do($id);
-			if($flag1==1){ 	$this->success('推送成功');}
+			if($flag1==1){ 	
+				$order_dp=new Order_departController();
+				$order_dp->ad_reco($or_id, 1, 2);
+				$this->success('推送成功');
+			}
 			else{ $this->error('推送失败');}
 		}else if($dp_id==10){/** 优化 */
 			/*优化模型*/

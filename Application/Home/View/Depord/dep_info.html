@@ -79,7 +79,8 @@
               <tr align='center'>
                 <td colspan='4'>
                 <form method="post"	action="{:U('Depord/ad_record')}">
-                    <textarea name="content" rows="3" cols="100" class="form-control"></textarea><br/>
+                    <textarea name="content" rows="3" cols="100" class="form-control"></textarea><br/><br/>
+                    	完成率：<input type="text" name="pace"><br/>
                     <input type="hidden" name="oid" value="{$data.id}">
                     <input type="submit" value="添加" class="btn btn-primary" style="margin-top:10px;">
                 </form>

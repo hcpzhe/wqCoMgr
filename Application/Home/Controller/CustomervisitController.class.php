@@ -146,8 +146,8 @@ class CustomervisitController extends HomeBaseController {
 			$model = new Customer_visitModel();  //拜访的详细信息
 			$data = $model->table('erp_customer_visit as cu,erp_user as ur,erp_customer as cr')
 			->where("cu.user_id=ur.id AND cu.cust_id=cr.id AND cu.id=$visit_id")
-			->getField("cu.id as id,ur.realname as uname,cr.name as cname,cu.visit_time,cu.content");	
-	
+			->getField("cu.id as id,cr.id as cust_id,ur.realname as uname,cr.name as cname,cu.visit_time,cu.content");	
+			$this->assign('cust_id',$id);   //客户编号
 	        $this->assign('visit_id',$visit_id);   //拜访编号
 	        $this->assign('cname',$data[$visit_id]['cname']);   //公司名称
 	        $this->assign('uname',$data[$visit_id]['uname']);   //拜访员工

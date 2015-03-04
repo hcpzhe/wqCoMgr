@@ -14,7 +14,7 @@
      <h1 class="page-header">拜访详情</h1>
      <div class="top_search">
      	<font style="padding-left: 20px;"> 操作： </font>                                                      
-        <a href="{:U('Customervisit/add_visit_prod?visit_id='.$visit_id)}" class="btn btn-primary">添加沟通</a>
+        <a href="{:U('Customervisit/add_visit_prod?visit_id='.$visit_id.'&cust_id='.$cust_id)}" class="btn btn-primary">添加沟通</a>
       </div>
      <div class="table-responsive">
        <table class="table table-bordered table-hover">
@@ -67,8 +67,7 @@
               <tr>
                 <td align="center">沟通内容</td>
                 <td colspan="3">{$visit_prod_list['content']}</td>                   
-              </tr>                
-              <tr height="2" style="background-color: #f5f5f5;"><td colspan="4"></td></tr>                                            
+              </tr>                                                            
            <!-- </foreach> -->
            <!-- </if> -->                             
      </table>

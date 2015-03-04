@@ -233,6 +233,10 @@ class OrderController extends HomeBaseController{
 		$flag=$order->add($map);
 		if($flag==0){	$this->error('添加失败！');
 		}else{	
+			//订单所在部门表中添加一条记录
+			$order_depart=new Order_departController();
+			$order_depart->ad_reco($flag,12);
+			//添加订单付款记录
 			$map1['money']=$_POST['yfk'];
 			$map1['order_id']=$flag;
 			$map1['pay_time']=time();
@@ -347,7 +351,12 @@ class OrderController extends HomeBaseController{
 			/*网站开发模型*/
 			$dor=new Develop_orderModel();
 			$flag1=$dor->add_do($id);
-			if($flag1==1){ 	$this->success('推送成功',U('Order/order_list'));}
+			if($flag1==1){ 	
+			//订单所在部门表添加一条记录
+				$order_dp=new Order_departController();
+				$order_dp->ad_reco($or_id, $dp_id, 1);	
+				$this->success('推送成功',U('Order/order_list'));
+			}
 			else{ $this->error('推送失败');}
 		}else if($dp_id==10){/** 优化 产品客服部*/
 			/*优化模型*/
@@ -427,5 +436,45 @@ class OrderController extends HomeBaseController{
 				->order('id desc')->select();
 		$this->assign('cus_list',$cus_list);
 		$this->display();
+	}
+	//推送至客服部订单
+	function severs(){
+ 		$text = I('param.text');
+ 		$order=new OrderModel();
+ 		if(empty($text)){
+ 			$sql="SELECT eo.status as status,eo.sever_id  as sever_id,eo.id as o_id,eu.realname as realname,ec.`name` as name,eo.signed_time as stime,eo.expired_time as etime,eo.total_fees as money,ep.`name` as pro_name
+FROM erp_order as eo,erp_user as eu,erp_customer as ec,erp_order_depart as eod,erp_product as ep
+WHERE eo.user_id=eu.id and eo.cust_id=ec.id AND eod.order_id=eo.id AND ep.id=eo.prod_id
+AND eo.status>=0 AND eod.is_use=1 AND eod.depart_id=2";
+ 		}else {
+ 			$sql="SELECT eo.status as status,eo.sever_id  as sever_id,eo.id as o_id,eu.realname as realname,ec.`name` as name,eo.signed_time as stime,eo.expired_time as etime,eo.total_fees as money,ep.`name` as pro_name
+FROM erp_order as eo,erp_user as eu,erp_customer as ec,erp_order_depart as eod,erp_product as ep
+WHERE eo.user_id=eu.id and eo.cust_id=ec.id AND eod.order_id=eo.id AND ep.id=eo.prod_id
+AND eo.status>=0 AND eod.is_use=1 AND eod.depart_id=2 AND ec.`name` LIKE '%".$text."%'";
+ 		}
+ 		$order_severs=$order->query($sql);
+ 		$this->severs=$order_severs;
+ 		$this->display();
+	}
+	function distform(){
+		//获取要分配订单id
+		$this->order_id=$_GET['id'];
+		//获取网站客服部所以人员
+		$users=new UserModel();
+		$sever=$users->where("depart_id=2")->select();
+		$this->severs=$sever;
+		$this->display();
+	}
+	function dist(){
+		//获取订单id
+		$oid=$_POST['oid'];
+		$map['sever_id']=$_POST['user'];
+		$order=new OrderModel();
+		$flag=$order->where("id=$oid")->save($map);
+		if($flag==1){
+			$this->success('分配客服成功！',U('Order/severs'));
+		}else {
+			$this->error('分配客服失败！',U('Order/severs'));
+		}
 	}
 }

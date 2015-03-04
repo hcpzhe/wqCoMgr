@@ -1,0 +1,127 @@
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>客服部维护客户列表</title>
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="__CSS__/index.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css" href="__CSS__/bootstrap.min.css" media="screen">
+<script type="text/javascript" src="__JS__/jquery.js"></script>
+<script type="text/javascript" src="__JS__/RSsubmit.js"></script>
+</head>
+<body>
+<div style="width:100%; overflow:hidden;">
+  <div class="b right_next">
+     <h1 class="page-header">客户维护列表</h1>
+     <div class="top_search">
+           <form action="{:U('Order/severs')}" method="get">
+               <!-- 域名搜索：<input type="text" name="domain" class="search" value="" />
+                <input type=submit value="搜索" class="button_submit" /> -->
+                  搜索条件：
+
+                <input type="text" name="text" value="" class="form-control" placeholder="输入查询内容" />	                                        
+                <input type=submit value="搜索" class="btn btn-primary" />
+           </form> 
+           <script type="text/javascript">	 
+                //查看域名详细信息    跳转 
+                function Detailed(){
+                    $("input[name='domain_id']").each(function(){
+                        if($(this).attr("checked")=="checked"){								
+                            location.href=$(this).next(".cust_id").attr('data-url');
+                            }
+                        });
+                }
+                //编辑客户信息   跳转 
+                function Edit(){
+                    $("input[name='domain_id']").each(function(){
+                        if($(this).attr("checked")=="checked"){								
+                            location.href=$(this).nextAll(".edit").attr('data-url');
+                            }
+                        });
+                }
+                //域名续费申请    跳转 
+                function Dom_ren_app(){
+                    $("input[name='domain_id']").each(function(){
+                        if($(this).attr("checked")=="checked"){									
+                            location.href=$(this).nextAll(".renewal").attr('data-url');			
+                            }
+                        });
+                }
+                //域名删除 
+                function Domain_del(){
+                    $("input[name='domain_id']").each(function(){
+                        if($(this).attr("checked")=="checked"){									
+                            location.href=$(this).nextAll(".del").attr('data-url');	
+                            }
+                        });
+                }
+              //域名禁用 
+                function Disable(){
+                    $("input[name='domain_id']").each(function(){
+                        if($(this).attr("checked")=="checked"){									
+                            location.href=$(this).nextAll(".disable").attr('data-url');	
+                            }
+                        });
+                }
+              //域名恢复正常 Recovery
+                function Recovery(){
+                    $("input[name='domain_id']").each(function(){
+                        if($(this).attr("checked")=="checked"){									
+                            location.href=$(this).nextAll(".recovery").attr('data-url');	
+                            }
+                        });
+                }
+           </script>                              
+                           
+       </div> 
+       <div class="table-responsive">
+          <table class="table table-striped table-bordered table-hover table_center">
+            <thead>
+              <tr>
+                <th width="21%">客户名称</th>
+                <th width="9%">签单人员</th>
+                <th width="18%">签单时间</th>
+                <th width="14%">到期时间</th>
+                <th width="14%">金额</th>
+                <th width="9%">产品</th>
+                <th width="7%">分配客服</th>
+                <th width="9">操作</th>
+              </tr>
+            </thead>
+            <tbody>     
+            <!-- <foreach name="severs" item="data"> -->        
+             <tr>
+                 <td>{$data.name}</td>
+                 <td>{$data.realname}</td>
+                 <td>{:date('Y/m/d H:i:s',$data['stime'])}</td>
+                 <td>{:date('Y/m/d H:i:s',$data['etime'])}</td>
+                 <td>{$data.money}</td>
+                 <td>{$data.pro_name}</td>
+                 <td>
+                 	<!-- <if condition="$data['sever_id'] eq '' "> -->
+                 	    <a href="{:U('Order/distform?id='.$data['o_id'])}">未分配</a>
+                    <!-- <else /> --> 
+                  	  	{$data.sever_id}
+                    <!-- </if> -->
+                 <td>
+                 	<!-- <if condition="$data['status'] eq 0"> -->
+                 		<a href="{:U('Order/star?id='.$data['o_id'])}">开始</a>
+                 		停止
+                 	<!-- <else/> -->
+                 		开始
+                 		<a href="{:U('Order/stop?id='.$data['o_id'])}">停止</a></td>
+                 	<!-- </if> -->
+                 	     
+              </tr>                         
+             <!-- </foreach> -->
+           </tbody>
+           <tfoot>
+            <tr>
+              <td colspan="8" align="center" class="page">{$page}</td>
+            </tr>
+           </tfoot>
+          </table>
+        </div>
+      </div>
+</div>
+</body>
+</html>
