@@ -45,12 +45,21 @@ class ResultsController extends HomeBaseController{
 			$this->error('没有权限禁止操作！！！');
 		}
 		/*--------wcd权限判断---------*/
+		//获取年份
+		if(empty($_POST['year'])){
+			$ye=date('Y');
+		}else {$ye=$_POST['year'];}
+		//获取月份
+		if(empty($_POST['month'])){
+			$mo=date('m');
+		}else {$mo=$_POST['month'];}
 		//获取年份，月份
-		$sta_time= strtotime($_POST['year'].$_POST['month']."01");
-		$end_time= strtotime($_POST['year'].$_POST['month']."31");
+		$sta_time= strtotime($ye.$mo."01");
+		$end_time= strtotime($ye.$mo."31");
+
 		//时间值赋值
-		$this->year=$_POST['year'];
-		$this->month=$_POST['month'];
+		$this->year=$ye;
+		$this->month=$mo;
 		/**
 		 * 获取有业绩员工的总业绩，以及页面显示所占比例
 		 */
