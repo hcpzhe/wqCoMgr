@@ -10,6 +10,7 @@ class Depart_missionModel extends Model {
 		$data = $dep->table('erp_depart as de,erp_depart_mission as edm')
 		->where("de.id=edm.depart_id and edm.mission_date='".$time."'")
 		->getField('de.id,de.name,edm.task,edm.mission_date');
+		echo $this->_sql();
 		return $data;
 	}
 	/** 总任务 */

@@ -51,20 +51,26 @@ class MissionController extends HomeBaseController{
 		->where($where)
 		->field("dm.mission_date as mission_date,dm.task as task,de.name as dname,de.id as dep_id")
 		->select();
-		if (empty($mission_list)){
-			$dep = M('Depart');   //部门任务为空， 查询部门
-			$dep_list = $dep->table('erp_depart_mission as edm,erp_depart as ed')
-						->where("edm.depart_id=ed.id and ed.status=1")
-						->select();
-// 			echo $dep->_sql();exit();
-			$this->assign('depart',$dep_list);	
-// 			echo "<pre>";
-// 			print_r($dep_list);
-// 			echo "</pre>";exit();
-		}
+		
+		
+		
+// 		if (empty($mission_list)){
+// 			$dep = M('Depart');   //部门任务为空， 查询部门
+// 			$dep_list = $dep->table('erp_depart_mission as edm,erp_depart as ed')
+// 						->where("edm.depart_id=ed.id and ed.status=1")
+// 						->select();
+// // 			echo $dep->_sql();exit();
+// 			$this->assign('depart',$dep_list);	
+// // 			echo "<pre>";
+// // 			print_r($dep_list);
+// // 			echo "</pre>";exit();
+// 		}
 // 		$this->year=$time['year'];
 // 		$this->month=$time['month'];
 // 		$this->assign('month',$time['month']); $time['month'];   //搜索月份
+
+		
+		
 		$this->assign('mission_list',$mission_list);  //任务列表
 		/** 定义年份 */
 		$this->years=array('2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018');

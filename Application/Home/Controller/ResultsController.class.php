@@ -134,7 +134,10 @@ class ResultsController extends HomeBaseController{
 		 * 获取部门任务
 		 */
 		$d_mission=new Depart_missionModel();
-		$depart_m_list=$d_mission->dp_mission_list($_POST['year'].$_POST['month']);
+		$depart_m_list=$d_mission->dp_mission_list($ye.$mo);
+// 				echo "<pre>";
+// 				print_r($depart_m_list);
+// 				echo "</pre>";		
 		/** 将部门任务放入部门数组中 */
 		for ($dm=0;$dm<count($departs);$dm++){
 			foreach ($depart_m_list as $dmkey=>$dmvalue){
@@ -181,6 +184,9 @@ class ResultsController extends HomeBaseController{
 		/** 定义月份 */
 		$this->months=array('01','02','03','04','05','06','07','08','09','10','11','12');	
 		/** 获取公司总任务，获取公司总达成率 */
+// 		echo "<pre>";
+// 		print_r($departs);
+// 		echo "</pre>";
 		$zrw=0;
 		for ($z=0;$z<count($departs);$z++){
 			$zrw=$zrw+$departs[$z]['mission'];
