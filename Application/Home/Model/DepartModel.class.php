@@ -38,7 +38,7 @@ class DepartModel extends Model{
 	}
 	/** 查询所有部门 */
 	public function alldepart(){
-		$data=$this->where('status=1')->select();
+		$data=$this->where('status=1 and id IN (2,7,8,10,13,15)')->select();
 		return $data;
 	}
 	/** 查询某一部门的详细信息 */

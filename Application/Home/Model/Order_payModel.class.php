@@ -18,7 +18,6 @@ class Order_payModel extends Model{
 		->where($where)
 		->field("op.id as id,cr.id as cust_id,cr.name as cname,op.money as money,op.class as class,op.`check` as `check`,op.pay_time as pay_time,op.check_time as check_time,ur.realname as uname")
 		->limit($page->firstRow.','.$page->listRows)->order('op.id desc')->select();
-		echo $this->_sql();
 		return $data;
 	}
 	/*订单付款详情*/
@@ -41,6 +40,7 @@ class Order_payModel extends Model{
 	 */
 	public function group_sum($sta_time,$end_time){
 		$sql="SELECT SUM(money) as money ,ed.id,eu.id as uid,realname FROM wqerp.erp_order_pay as eop INNER JOIN wqerp.erp_user as eu ON eu.id=eop.user_id INNER JOIN erp_depart as ed ON ed.id=eu.depart_id where pay_time>='".$sta_time."' and pay_time<='".$end_time."'  GROUP BY user_id";
+// 		echo $sql;
 		return $this->query($sql);
 	}
 	/**

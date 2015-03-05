@@ -106,6 +106,9 @@ class ResultsController extends HomeBaseController{
 		/** 1.获取所有部门 */
 		$depart=new DepartModel();
 		$departs=$depart->alldepart();
+// 				echo "<pre>";
+// 				print_r($departs);
+// 				echo "</pre>";		
 		/** 2.将每个部门下所有员工以数组形式放入部门数组中 */
 		$user_list=array();
 		for($dep=0;$dep<count($departs);$dep++){
