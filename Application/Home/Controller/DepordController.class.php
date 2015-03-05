@@ -22,6 +22,8 @@ class DepordController extends HomeBaseController{
 			$this->error('没有权限禁止操作！！！');
 		}
 		/*--------wcd权限判断---------*/
+		
+		
 		/*获取搜索条件*/
 		$check = (int)I('param.check'); 
 		$key = I('param.key');

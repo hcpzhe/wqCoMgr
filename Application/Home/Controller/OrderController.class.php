@@ -12,6 +12,7 @@ use Home\Model\Order_payModel;
 use Home\Model\Order_renewalModel;
 use Home\Model\Order_domainModel;
 use Home\Model\User_depart_mgrModel;
+use Home\Model\Order_departModel;
 header("Content-Type:text/html;charset=utf-8");
 class OrderController extends HomeBaseController{
 /** 订单列表 */
@@ -147,6 +148,21 @@ class OrderController extends HomeBaseController{
 		}
 		/*--------wcd权限判断---------*/		
 		$id=$_GET['id'];
+		/* 判断该订单权限是否在当前操作者所在的部门
+		 * 1.根据订单id查询订单当前所在部门
+		 * 2.根据当前登录者id查询当前登录者所在部门
+		 * 3.对比两者是否一致
+		 */
+		$order_depart=new Order_departModel();
+		$dep_id=$order_depart->field("depart_id")->where("order_id=$id and is_use=1")->find();
+		
+		$user=new UserModel();
+		$dep_id1=$user->field("depart_id")->where("id=$uid")->find();
+
+		if($dep_id['depart_id']!=$dep_id1["depart_id"]){
+			$this->error("该订单已不再您所在的部门！");
+		}
+		
 		/** 查询数据   */
 		$order=new OrderModel();
 		$this->orderinfo=$order->orderinfo($id);
