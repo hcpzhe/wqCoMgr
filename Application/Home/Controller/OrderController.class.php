@@ -319,7 +319,7 @@ class OrderController extends HomeBaseController{
 			/** 查询所有部门 */
 			$depart=new DepartModel();
 			$this->id=$id;
-			$this->dp=$depart->alldepart();
+			$this->dp=$depart->alldep();
 			$this->assign("cust_id",$_GET['cust_id']);
 			$this->display();
 		

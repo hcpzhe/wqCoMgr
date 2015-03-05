@@ -41,6 +41,11 @@ class DepartModel extends Model{
 		$data=$this->where('status=1 and id IN (2,7,8,10,13,15)')->select();
 		return $data;
 	}
+	/** 查询所有可推送部门 */
+	public function alldep(){
+		$data=$this->where('status=1 and id IN (1,2,10)')->select();
+		return $data;
+	}	
 	/** 查询某一部门的详细信息 */
 	public function s_one($id){
 		return $this->where("status=1 AND id=$id")->find();
