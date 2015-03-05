@@ -17,25 +17,16 @@
            <form action="{:U('Mission/mission_list')}" method="get" class="search_form" name="search">               
                  年月检索：
                  <select name="year" class="form-control">
-                    <option value="{$year-4}">{$year-4}</option>
-                    <option value="{$year-3}">{$year-3}</option>
-                    <option value="{$year-2}">{$year-2}</option>
-                    <option value="{$year-1}">{$year-1}</option>
-                    <option value="{$year}" selected>{$year}</option>                    
+                 	<option value="{$year}" selected>{$year}</option>   
+                 	<!-- <foreach name="years" item="list"> -->	
+                    <option value="{$list}">{$list}</option>      
+                    <!-- </foreach> -->                   
                  </select> 年
                  <select name="month" class="form-control">
-                    <option value="01">01</option>
-                    <option value="02">02</option>
-                    <option value="03">03</option>
-                    <option value="04">04</option>
-                    <option value="05">05</option>
-                    <option value="06">06</option>
-                    <option value="07">07</option>
-                    <option value="08">08</option>
-                    <option value="09">09</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>                    
+                    <option value="{$month}" selected>{$month}</option>   
+                 	<!-- <foreach name="months" item="list"> -->	
+                    <option value="{$list}">{$list}</option>      
+                    <!-- </foreach> -->                   
                  </select> 月  &nbsp;&nbsp;
                  <input type="submit" value="搜索" class="btn btn-primary">
            </form>

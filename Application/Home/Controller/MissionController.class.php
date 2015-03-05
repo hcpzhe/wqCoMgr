@@ -19,16 +19,28 @@ class MissionController extends HomeBaseController{
 			$this->error('没有权限禁止操作！！！');
 		}
 		/*--------wcd权限判断---------*/
-		//当前日期所在的年份
+		//当前日期所在的年份 月份
 		$now_year=date('Y');
-		$this->assign('year',$now_year);
+		$now_month=date('m');
+		
+		$this->assign('month',$now_month);
+		
 		$now=date('Ym');
 		//print_r($now_month);exit();
 		$Mission = M("Depart_mission");
 		$where = "dm.depart_id=de.id";  //多表查询条件
+		
 		/*获取搜索条件*/
 		$time['year'] = I('param.year');
 		$time['month'] = I('param.month');
+		//年份和月份
+		if(empty($time['year'])){
+			$this->assign('year',$now_year);
+		}else { $this->assign("year",$time['year']);}
+		if(empty($time['month'])){
+			$this->assign('month',$now_month);
+		}else { $this->assign("month",$time['month']);}
+		
 		$seartime=$time['year'].$time['month']; //搜索的时间
 		if (empty($seartime) || $seartime == ''){			
 			$where=$where." AND ( dm.mission_date = $now)";			
@@ -50,8 +62,14 @@ class MissionController extends HomeBaseController{
 // 			print_r($dep_list);
 // 			echo "</pre>";exit();
 		}
-		$this->assign('month',$time['month']);$time['month'];   //搜索月份
+// 		$this->year=$time['year'];
+// 		$this->month=$time['month'];
+// 		$this->assign('month',$time['month']); $time['month'];   //搜索月份
 		$this->assign('mission_list',$mission_list);  //任务列表
+		/** 定义年份 */
+		$this->years=array('2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018');
+		/** 定义月份 */
+		$this->months=array('01','02','03','04','05','06','07','08','09','10','11','12');
 		$this->display();
 	}
 	/***部门业绩添加***/
