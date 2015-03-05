@@ -135,6 +135,7 @@ class OrderpayController extends HomeBaseController{
 		$map["money"]=$_POST["money"];
 		$map["class"]=2;
 		$map["pay_time"]=strtotime($_POST["pay_time"]);
+		$map['user_id']=UID;
 		$orderpay=new Order_payModel();
 		$flay=$orderpay->add($map);
 		if($flay==0){$this->error("添加失败");	}

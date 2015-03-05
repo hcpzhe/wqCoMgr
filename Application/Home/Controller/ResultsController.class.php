@@ -57,6 +57,9 @@ class ResultsController extends HomeBaseController{
 		/** 1 获取订单付费表业绩 */
 		$ordr_pay=new Order_payModel();
 		$a=$ordr_pay->group_sum($sta_time,$end_time);
+// 		echo "<pre>";
+// 		print_r($a);
+// 		echo "</pre>";
 		/** 2 获得续费表业绩*/
 		$order_renewal=new Order_renewalModel();
 		$b=$order_renewal->group_sum($sta_time,$end_time);

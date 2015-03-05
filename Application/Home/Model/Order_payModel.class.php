@@ -18,6 +18,7 @@ class Order_payModel extends Model{
 		->where($where)
 		->field("op.id as id,cr.id as cust_id,cr.name as cname,op.money as money,op.class as class,op.`check` as `check`,op.pay_time as pay_time,op.check_time as check_time,ur.realname as uname")
 		->limit($page->firstRow.','.$page->listRows)->order('op.id desc')->select();
+		echo $this->_sql();
 		return $data;
 	}
 	/*订单付款详情*/

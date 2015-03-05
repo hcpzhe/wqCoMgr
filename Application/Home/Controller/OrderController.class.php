@@ -242,6 +242,7 @@ class OrderController extends HomeBaseController{
 			$map1['order_id']=$flag;
 			$map1['pay_time']=time();
 			$map1['class']=1;
+			$map1['user_id']= UID;
 			$order_pay=new Order_payModel();
 			$flag1=$order_pay->add($map1);
 			if($flag1==0){ $this->error('添加失败');}
