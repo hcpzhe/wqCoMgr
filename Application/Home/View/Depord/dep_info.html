@@ -72,7 +72,7 @@
               <tr><td colspan="4">
                  <b style="height: 40px;display: block;line-height: 30px;">开发沟通记录：</b>
                 <!-- <foreach name="conments" item="list"> -->
-                    <p style="padding-left:50px;">{$list.realname}：{$list.content}&nbsp;&nbsp;&nbsp;&nbsp;[{:date('Y/m/d H:i:s',$list['post_time'])}]&nbsp;&nbsp;&nbsp;&nbsp;完成率：{$list.pace}</p>
+                    <p style="padding-left:50px;">{$list.realname}：{$list.content}&nbsp;&nbsp;&nbsp;&nbsp;[{:date('Y/m/d H:i:s',$list['post_time'])}]&nbsp;&nbsp;&nbsp;&nbsp;完成率：{$list.pace}%</p>
                 <!-- </foreach> -->
                 </td>
               </tr>   	
@@ -80,7 +80,7 @@
                 <td colspan='4'>
                 <form method="post"	action="{:U('Depord/ad_record')}">
                     <textarea name="content" rows="3" cols="100" class="form-control"></textarea><br/><br/>
-                    	完成率：<input type="text" name="pace"><br/>
+                    	完成率：<input type="number" min="0" max="100" step="10" name="pace">  %<br/>
                     <input type="hidden" name="oid" value="{$data.id}">
                     <input type="submit" value="添加" class="btn btn-primary" style="margin-top:10px;">
                 </form>
