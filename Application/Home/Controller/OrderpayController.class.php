@@ -39,6 +39,9 @@ class OrderpayController extends HomeBaseController{
 		}
 		$orderpay=new Order_payModel();
 		$this->data=$orderpay->op_record($where);
+// 		echo "<pre>";
+// 		print_r($data);
+// 		echo "</pre>";exit();		
 		$this->display();
 	}
 	/*订单付款详情*/
@@ -165,7 +168,9 @@ class OrderpayController extends HomeBaseController{
 		$pid=$_GET['pay_id'];
 		/*改变审核状态操作*/
 		$order_pay=new Order_payModel();
-		$flag11=$order_pay->where("id=$pid")->setField("check","1");
+		$map['check']=1;
+		$map['check_time']=time();
+		$flag11=$order_pay->where("id=$pid")->save($map);
 		/*判断操作结果*/
 		if($flag11==0){ $this->error('审核失败');}
 		else { $this->success('审核成功');}
