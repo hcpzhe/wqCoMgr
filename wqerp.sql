@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50508
 File Encoding         : 65001
 
-Date: 2015-03-05 14:10:08
+Date: 2015-03-05 16:04:03
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -80,15 +80,16 @@ CREATE TABLE `erp_auth_group` (
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '用户组状态：为1正常，为0禁用,-1为删除',
   `rules` varchar(500) NOT NULL DEFAULT '' COMMENT '用户组拥有的规则id，多个规则 , 隔开',
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of erp_auth_group
 -- ----------------------------
 INSERT INTO `erp_auth_group` VALUES ('1', 'admin', '1', '默认用户组', '默认用户组', '1', '1,11,111,112,113,114,12,121,122,123,124,125,126,13,14,141,143,144,2,21,211,212,2121,213,214,215,22,23,231,232,233,234,3,31,311,312,3121,313,314,32,321,322,3221,323,324,4,41,411,412,4121,413,414,415,42,43,431,432,433,44,441,442,443,444,445,446,447,448,5,51,511,512,513,514,515,52,521,522,523,524,525,53,531,532,6,61,611,612,613,614,62,621,7,71,711,712,713,714,715,716,717,718,72,721,722,73,74,741,742,75,751,752,753');
-INSERT INTO `erp_auth_group` VALUES ('2', 'admin', '1', '部门领导组', '部门领导组', '1', '1,11,111,112,114,12,121,122,123,124,125,126,13,14,141,143,2,21,211,212,2121,213,214,215,22,23,231,232,233,3,31,311,312,3121,313,314,32,321,322,3221,323,324,4,41,411,412,4121,413,414,42,43,431,432,433,44,441,442,443,444,445,446,5,53,531,532,6,61,611,62,621,7,71,711,716,717,73');
+INSERT INTO `erp_auth_group` VALUES ('2', 'admin', '1', '部门领导组', '部门领导组', '1', '1,11,111,112,114,12,121,122,123,124,125,126,13,14,141,143,2,21,211,212,2121,213,214,215,22,23,231,232,233,4,41,411,412,4121,413,414,42,43,431,432,433,44,441,442,443,444,445,446,5,53,531,532,6,61,611,62,621,7,71,711,716,717,73');
 INSERT INTO `erp_auth_group` VALUES ('7', 'admin', '1', '员工用户组', '员工用户组', '1', '1,11,111,112,114,12,121,122,123,124,125,13,14,141,143,144,2,21,211,212,2121,213,22,23,231,232,233,3,31,311,312,3121,32,321,322,3221,4,41,411,42,43,431,44,441,442,444,5,53,531,532,6,61,611,62,621,7,71,711,716,717');
 INSERT INTO `erp_auth_group` VALUES ('8', 'admin', '1', '维护组', '维护组', '1', '5,51,511,512,513,514,52,521,522,523,524,53,531,532,7,71,711,712,713,714,715,716,717');
+INSERT INTO `erp_auth_group` VALUES ('9', 'admin', '1', '技术部领导', '技术部领导', '1', '1,12,122,14,141,143,2,21,211,3,31,311,312,3121,313,314,4,41,411,412,4121,413,414,415,43,431,432,433,44,441,442,443,444,445,446,447,448,5,53,531,532,6,61,611,62,621,7,71,711,716,717');
 
 -- ----------------------------
 -- Table structure for `erp_auth_group_access`
@@ -141,7 +142,7 @@ INSERT INTO `erp_auth_group_access` VALUES ('36', '2');
 INSERT INTO `erp_auth_group_access` VALUES ('37', '2');
 INSERT INTO `erp_auth_group_access` VALUES ('38', '1');
 INSERT INTO `erp_auth_group_access` VALUES ('39', '2');
-INSERT INTO `erp_auth_group_access` VALUES ('40', '2');
+INSERT INTO `erp_auth_group_access` VALUES ('40', '9');
 INSERT INTO `erp_auth_group_access` VALUES ('41', '2');
 INSERT INTO `erp_auth_group_access` VALUES ('42', '7');
 INSERT INTO `erp_auth_group_access` VALUES ('43', '7');
@@ -473,7 +474,7 @@ CREATE TABLE `erp_depart` (
   `sort` tinyint(4) DEFAULT '100' COMMENT '排序',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '-1:删除 0:禁用 1:正常',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8 COMMENT='部门; 通过class来区别不同类型的部门, 不同\r\n\r\n类型的部门, 管理的数据表不同';
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='部门; 通过class来区别不同类型的部门, 不同\r\n\r\n类型的部门, 管理的数据表不同';
 
 -- ----------------------------
 -- Records of erp_depart
@@ -551,6 +552,9 @@ CREATE TABLE `erp_develop_order` (
 -- ----------------------------
 INSERT INTO `erp_develop_order` VALUES ('47', null, '0', '0', '0', '1', '1', '0');
 INSERT INTO `erp_develop_order` VALUES ('60', null, '0', '0', '0', '1', '1', '0');
+INSERT INTO `erp_develop_order` VALUES ('64', null, '0', '0', '0', '1', '1', '0');
+INSERT INTO `erp_develop_order` VALUES ('63', null, '0', '0', '0', '1', '1', '0');
+INSERT INTO `erp_develop_order` VALUES ('62', null, '0', '0', '0', '1', '1', '0');
 
 -- ----------------------------
 -- Table structure for `erp_develop_order_comment`
@@ -579,6 +583,8 @@ INSERT INTO `erp_develop_order_comment` VALUES ('47', '62', '1425372604', '啊�
 INSERT INTO `erp_develop_order_comment` VALUES ('47', '62', '1425372834', '231', '12312');
 INSERT INTO `erp_develop_order_comment` VALUES ('47', '42', '1425433868', '进来测试', '12');
 INSERT INTO `erp_develop_order_comment` VALUES ('60', '42', '1425527558', '还未开始', '120%');
+INSERT INTO `erp_develop_order_comment` VALUES ('60', '42', '1425535949', 'ceshi', '10');
+INSERT INTO `erp_develop_order_comment` VALUES ('60', '1', '1425536367', '123', '80');
 
 -- ----------------------------
 -- Table structure for `erp_develop_user`
@@ -610,6 +616,10 @@ INSERT INTO `erp_develop_user` VALUES ('47', '64', '10000.00', '0', '0');
 INSERT INTO `erp_develop_user` VALUES ('47', '65', '10000.00', '0', '0');
 INSERT INTO `erp_develop_user` VALUES ('47', '66', '10000.00', '0', '0');
 INSERT INTO `erp_develop_user` VALUES ('60', '62', '50000.00', '0', '0');
+INSERT INTO `erp_develop_user` VALUES ('62', '64', '3000.00', '0', '0');
+INSERT INTO `erp_develop_user` VALUES ('63', '63', '3000.00', '0', '0');
+INSERT INTO `erp_develop_user` VALUES ('64', '62', '10000.00', '0', '0');
+INSERT INTO `erp_develop_user` VALUES ('64', '63', '10000.00', '0', '0');
 
 -- ----------------------------
 -- Table structure for `erp_domain`
@@ -709,9 +719,9 @@ INSERT INTO `erp_order` VALUES ('46', '32', '27', '1', '10000.00', '孙育鹏', 
 INSERT INTO `erp_order` VALUES ('47', '34', '26', '1', '10000.00', '贾燕\r\n', '1456561359', '1425025359', '1', '1', '1', '1', '');
 INSERT INTO `erp_order` VALUES ('60', '35', '30', '1', '50000.00', '没有什呢，就是有钱', '1456972580', '1425436580', '1', '1', '1', '1', '张希瑞');
 INSERT INTO `erp_order` VALUES ('61', '1', '29', '1', '2000.00', '', '1456975333', '1425439333', '1', '1', '1', '1', '常玉玲');
-INSERT INTO `erp_order` VALUES ('62', '42', '31', '6', '3000.00', '新订单', '1456990071', '1425454071', '0', '1', '1', '0', '');
-INSERT INTO `erp_order` VALUES ('63', '42', '31', '2', '3000.00', '', '1457059553', '1425523553', '0', '1', '1', '0', null);
-INSERT INTO `erp_order` VALUES ('64', '42', '31', '7', '10000.00', '郝向飞', '1488595928', '1425523928', '0', '1', '2', '0', null);
+INSERT INTO `erp_order` VALUES ('62', '42', '31', '6', '3000.00', '新订单', '1456990071', '1425454071', '1', '1', '1', '1', '');
+INSERT INTO `erp_order` VALUES ('63', '42', '31', '2', '3000.00', '', '1457059553', '1425523553', '1', '1', '1', '1', null);
+INSERT INTO `erp_order` VALUES ('64', '42', '31', '7', '10000.00', '郝向飞', '1488595928', '1425523928', '1', '1', '2', '1', null);
 
 -- ----------------------------
 -- Table structure for `erp_order_depart`
@@ -734,9 +744,12 @@ INSERT INTO `erp_order_depart` VALUES ('60', '2', '0', '1', '1425436864');
 INSERT INTO `erp_order_depart` VALUES ('60', '12', '0', '0', '1425436580');
 INSERT INTO `erp_order_depart` VALUES ('61', '2', '0', '1', '1425436864');
 INSERT INTO `erp_order_depart` VALUES ('61', '12', '0', '0', '1425439333');
-INSERT INTO `erp_order_depart` VALUES ('62', '12', '0', '1', '1425454071');
-INSERT INTO `erp_order_depart` VALUES ('63', '12', '0', '1', '1425523553');
-INSERT INTO `erp_order_depart` VALUES ('64', '12', '0', '1', '1425523928');
+INSERT INTO `erp_order_depart` VALUES ('62', '1', '0', '1', '1425538236');
+INSERT INTO `erp_order_depart` VALUES ('62', '12', '0', '0', '1425454071');
+INSERT INTO `erp_order_depart` VALUES ('63', '1', '0', '1', '1425538198');
+INSERT INTO `erp_order_depart` VALUES ('63', '12', '0', '0', '1425523553');
+INSERT INTO `erp_order_depart` VALUES ('64', '1', '0', '1', '1425538191');
+INSERT INTO `erp_order_depart` VALUES ('64', '12', '0', '0', '1425523928');
 
 -- ----------------------------
 -- Table structure for `erp_order_domain`
@@ -859,7 +872,6 @@ CREATE TABLE `erp_public_customer` (
 -- ----------------------------
 -- Records of erp_public_customer
 -- ----------------------------
-INSERT INTO `erp_public_customer` VALUES ('28', '1425437235');
 
 -- ----------------------------
 -- Table structure for `erp_seo_order`
@@ -880,6 +892,8 @@ CREATE TABLE `erp_seo_order` (
 -- ----------------------------
 -- Records of erp_seo_order
 -- ----------------------------
+INSERT INTO `erp_seo_order` VALUES ('63', null, '0', '0', '0', '0', '1', '0');
+INSERT INTO `erp_seo_order` VALUES ('64', null, '0', '0', '0', '0', '1', '0');
 
 -- ----------------------------
 -- Table structure for `erp_seo_order_comment`
@@ -953,19 +967,19 @@ CREATE TABLE `erp_user` (
 -- ----------------------------
 -- Records of erp_user
 -- ----------------------------
-INSERT INTO `erp_user` VALUES ('1', 'admin', '6fa0446fa9335c25c3cf97b241210b35', '1', '超管', '1', '经理1               ', '1396886400', '724089600', '170', '1425533611', '2130706433', '1');
+INSERT INTO `erp_user` VALUES ('1', 'admin', '6fa0446fa9335c25c3cf97b241210b35', '1', '超管', '1', '经理1               ', '1396886400', '724089600', '174', '1425540897', '2130706433', '1');
 INSERT INTO `erp_user` VALUES ('2', 'wcd', 'a55e13ed476b60ccafaf60c6f9ab67ac', '1', '王晨东', '1', '', '', '', '4', '1423529173', '2130706433', '1');
 INSERT INTO `erp_user` VALUES ('27', 'test', 'b05ba8b0a98c73e182b6341ab6d8999b', '6', '付影', '1', '测试 ', '1388764800', '1388764800', '1', '1425440819', '3232235783', '1');
 INSERT INTO `erp_user` VALUES ('30', 'lina', '26e758a54193f4db69ac2527e688e492', '6', '李娜', '0', '人力资源经理', '1418227200', '', '2', '1425436600', '3232235783', '1');
-INSERT INTO `erp_user` VALUES ('31', 'songnana', 'a258669d31e44d4804dd63bbd36e8c08', '7', '宋娜娜', '0', '主管', '1291046400', '943891200', '2', '1425439404', '2130706433', '1');
+INSERT INTO `erp_user` VALUES ('31', 'songnana', 'a258669d31e44d4804dd63bbd36e8c08', '7', '宋娜娜', '0', '主管', '1291046400', '943891200', '6', '1425540827', '2130706433', '1');
 INSERT INTO `erp_user` VALUES ('32', 'sunyupeng', 'c07254894fd778273660c2648bab6df1', '13', '孙育鹏', '1', '主管', '', '943891200', '0', '0', '0', '1');
-INSERT INTO `erp_user` VALUES ('34', 'jiayan', 'c75a2e8172aa6e53aa6d5b457f1688fd', '8', '贾燕', '0', '主管', '', '', '2', '1425369603', '2130706433', '1');
+INSERT INTO `erp_user` VALUES ('34', 'jiayan', 'c75a2e8172aa6e53aa6d5b457f1688fd', '8', '贾燕', '0', '主管', '', '', '3', '1425538210', '2130706433', '1');
 INSERT INTO `erp_user` VALUES ('35', 'guoxiao', '265de4f27daf3bce41a51b7889995e26', '2', '郭晓', '0', '主管', '943891200', '', '4', '1425436846', '2130706433', '1');
 INSERT INTO `erp_user` VALUES ('36', 'lixuhao', '20eec87e63013b26c4447c4d93be688d', '10', '李旭豪', '1', '主管', '943891200', '943891200', '0', '0', '0', '1');
 INSERT INTO `erp_user` VALUES ('37', 'yupeng', 'abb7c105f441e710f47bfe41a427e797', '1', '俞鹏鹏', '1', '组长', '943891200', '943891200', '0', '0', '0', '1');
 INSERT INTO `erp_user` VALUES ('38', 'zyh', 'e41d657839d512cd160ca945065a2e96', '1', '赵玉花', '1', '   ', '', '', '2', '1423453002', '2130706433', '1');
 INSERT INTO `erp_user` VALUES ('39', 'zhangyaohua', '28929d4904c275e8a33114b2bd85de73', '9', '张耀华', '1', '组长', '943891200', '943891200', '0', '0', '0', '1');
-INSERT INTO `erp_user` VALUES ('40', 'suxiao', '4f41ad7aea8e5568e52519fb0afba423', '1', '苏晓', '0', '经理', '943891200', '943891200', '8', '1425437429', '3232235783', '1');
+INSERT INTO `erp_user` VALUES ('40', 'suxiao', '4f41ad7aea8e5568e52519fb0afba423', '1', '苏晓', '1', '经理 ', '943891200', '943891200', '10', '1425541542', '2130706433', '1');
 INSERT INTO `erp_user` VALUES ('41', 'weidongdong', '0a2766c3215a4b75d0c40d3bcceb94ed', '12', '魏冬冬', '1', '经理', '1423411200', '', '4', '1425439439', '2130706433', '1');
 INSERT INTO `erp_user` VALUES ('42', 'haoxiangfei', '0c5d0865d0c7431431700f6b89f2562d', '7', '郝向飞', '0', '员工', '', '', '9', '1425533657', '2130706433', '1');
 INSERT INTO `erp_user` VALUES ('43', 'liuwenlong', '554128f4ed908ba989ddcc81e7c4eb1c', '7', '刘文龙', '1', '员工', '', '', '0', '0', '0', '1');
@@ -1026,7 +1040,7 @@ CREATE TABLE `erp_user_cust_apply` (
   `check` tinyint(1) NOT NULL DEFAULT '0' COMMENT '-1:拒绝 0:待审 >1:通过',
   `status` tinyint(1) NOT NULL DEFAULT '1' COMMENT '-1:删除 0:禁用 1:正常',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='员工-客户 权限申请记录';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='员工-客户 权限申请记录';
 
 -- ----------------------------
 -- Records of erp_user_cust_apply
@@ -1034,6 +1048,7 @@ CREATE TABLE `erp_user_cust_apply` (
 INSERT INTO `erp_user_cust_apply` VALUES ('1', '1', '28', 'new', '30', '0', '1425370236', '1427962236', '1425370236', '1425370241', '1', '1', '1');
 INSERT INTO `erp_user_cust_apply` VALUES ('2', '42', '29', 'new', '30', '0', '1425370625', '1427962625', '1425370625', '1425370637', '1', '1', '1');
 INSERT INTO `erp_user_cust_apply` VALUES ('3', '31', '28', 'new', '30', '0', '1425436993', '1428028993', '1425436993', '0', '0', '0', '1');
+INSERT INTO `erp_user_cust_apply` VALUES ('4', '42', '28', 'new', '30', '0', '1425536648', '1428128648', '1425536648', '0', '0', '0', '1');
 
 -- ----------------------------
 -- Table structure for `erp_user_cust_prod`
