@@ -85,14 +85,14 @@ class SeoordController extends HomeBaseController{
 		}
 		/*--------wcd权限判断---------*/
 		$oid=$_GET['id'];
-		if (!IS_ROOT){ //非超管
-			$id=$_GET['cust_id'];  //选中的公司id
-			$User = new UserModel();
-			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
-			if(!in_array($id,$cust_id)){
-				$this->error('您没有该公司的权限，不能进行相关操作！');
-			}
-		}
+// 		if (!IS_ROOT){ //非超管
+// 			$id=$_GET['cust_id'];  //选中的公司id
+// 			$User = new UserModel();
+// 			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
+// 			if(!in_array($id,$cust_id)){
+// 				$this->error('您没有该公司的权限，不能进行相关操作！');
+// 			}
+// 		}
 		/*查询所有优化人员*/
 		$depart = M('Depart');
 		$dep_id = $depart->where("name='产品客服部'")->getField('id'); //产品客服部所在id
@@ -123,43 +123,46 @@ class SeoordController extends HomeBaseController{
 		}
 		/*--------wcd权限判断---------*/
 		/** 查询订单信息  判断该订单是否通过审核 */
-		// 		$order=new OrderModel();
-		// 		$flag=$order->field('check')->where("id=$id")->find();
-		// 		if($flag['check']==0){ $this->error('订单未审核');}
-		if (!IS_ROOT){ //非超管
-			$ids=$_GET['cust_id'];  //选中的公司id
-			$User = new UserModel();
-			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
-			if(!in_array($ids,$cust_id)){
-				$this->error('您没有该公司的权限，不能进行相关操作！');
-			}
+			$order=new OrderModel();
+			$flag=$order->field('check')->where("id=$id")->find();
+			if($flag['check']==0){ $this->error('订单未审核');}
+// 		if (!IS_ROOT){ //非超管
+// 			$ids=$_GET['cust_id'];  //选中的公司id
+// 			$User = new UserModel();
+// 			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
+// 			if(!in_array($ids,$cust_id)){
+// 				$this->error('您没有该公司的权限，不能进行相关操作！');
+// 			}
+// 		}
+		//检测订单是否已经被推送
+		$seo_dev=new  Seo_orderModel();
+		$push_res=$seo_dev->field("push")->where("order_id=$id")->find();
+		if($push_res['push']==1){
+			$this->error('订单已经被推送！',U('seoord/seo_list'));
 		}
 		/** 查询所有部门 */
 		$depart=new DepartModel();
 		$this->id=$id;
-		$this->dp=$depart->alldepart(); 
+		$this->dp=$depart->alldep(); 
 		$this->assign("cust_id",$_GET['cust_id']);
 		$this->display();
 	}
 	/** 推送至下一个部门 */
 	public function push($id){ 
+		//所要推送到的部门
 		$dp_id=$_POST['dp'];
-		/**技术 */
-		if($dp_id==1){
-			/*网站开发模型*/
-			$dor=new Develop_orderModel();
-			$flag1=$dor->add_do($id);
-			if($flag1==1){ 	$this->success('推送成功');}
-			else{ $this->error('推送失败');}
-		}else if($dp_id==2){/** 优化 */
-			/*优化模型*/
-			$sor=new Seo_orderModel();
-			$flag2=$sor->add_so($id);
-			if($flag2==1){ $this->success('推送成功');}
-			else{ $this->error('推送失败');}
-		}else if($dp_id==11){/** 客服 */
-	
-		}else{ $this->error('禁止向该部门推送');}
+		//所要推送的订单id
+		$id=$_POST['id'];
+		
+		$seoer_dev=new Seo_orderModel();
+		//更改订单推送状态
+		$data["push"]=1;
+		$flag=$seoer_dev->where("order_id=".$id)->save($data);
+		if($flag==1){
+			$order_dp=new Order_departController();
+			$order_dp->ad_reco($id, $dp_id, 10);
+			$this->success("推送成功！",U('seoord/seo_list'));
+		}else { $this->error('推送失败！');}
 	}	
 	/*增加一条开发沟通记录*/
 	public function ad_record(){

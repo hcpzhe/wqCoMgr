@@ -8,6 +8,7 @@ use Home\Model\OrderModel;
 use Home\Model\Develop_order_commentModel;
 use Home\Model\DepartModel;
 use Home\Model\Order_departModel;
+use Home\Model\Seo_orderModel;
 class DepordController extends HomeBaseController{
 	/*网站开发订单列表*/
 	public function dep_list(){
@@ -181,6 +182,10 @@ class DepordController extends HomeBaseController{
 		$id=$_POST['id'];
 		$dp_id=$_POST['dp'];
 		$order_dev=new Develop_orderModel();
+		if ($dp_id==10){
+			$sor=new Seo_orderModel();
+			$flag2=$sor->add_so($id);
+		}
 		//更改订单推送状态
 		$data["Push"]=1;
 		$flag=$order_dev->where("order_id=".$id)->save($data);
