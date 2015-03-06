@@ -343,7 +343,7 @@ class OrderController extends HomeBaseController{
 	/** 推送至下一个部门 */
 	public function push($id){
 		//所推送部门
-		$dp_id=$_POST['dp'];
+		$dpid=$_POST['dp'];
 		//所推送客户
 		$cust_id=$_POST['cust_id'];
 		//所推送订单id
@@ -364,27 +364,32 @@ class OrderController extends HomeBaseController{
 		//更改订单推送状态
 		$data["push"]=1;
 		$order->where("id=".$or_id)->save($data);
-		/**技术 */
-		if($dp_id==1){
+		
+		if($dpid==1){
 			/*网站开发模型*/
 			$dor=new Develop_orderModel();
-			$flag1=$dor->add_do($id);
-			if($flag1==1){ 	
-			//订单所在部门表添加一条记录
+			$flag1=$dor->add_do($or_id);
+			if($flag1==0){
+				$this->error('推送失败');
+			}else{
 				$order_dp=new Order_departController();
-				$order_dp->ad_reco($or_id, $dp_id, 1);	
-				$this->success('推送成功',U('Order/order_list'));
+				$order_dp->ad_reco($or_id, 1, 12);
+				$this->success('推送成功',U('Order/order_list'));				
 			}
-			else{ $this->error('推送失败');}
-		}else if($dp_id==10){/** 优化 产品客服部*/
+		}else if($dpid==10){
 			/*优化模型*/
 			$sor=new Seo_orderModel();
-			$flag2=$sor->add_so($id);
-			if($flag2==1){ $this->success('推送成功',U('Order/order_list'));}
-			else{ $this->error('推送失败');}
-		}else if($dp_id==11){/** 客服 */
-			
-		}else{ $this->error('禁止向该部门推送');}
+			$flag2=$sor->add_so($or_id);
+			if($flag2==1){
+				$order_dp=new Order_departController();
+				$order_dp->ad_reco($or_id, 10, 12);
+				$this->success('推送成功',U('Order/order_list'));
+			}
+		}else {//网站客服
+			$order_dp=new Order_departController();
+			$order_dp->ad_reco($or_id, 2, 12);
+			$this->success("推送成功！",U('order/order_list'));
+		}
 	}
 	/** 停止订单 */
 	public function stop($id){

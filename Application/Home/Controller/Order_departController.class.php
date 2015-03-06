@@ -17,6 +17,7 @@ class Order_departController extends HomeBaseController {
 		$map['depart_id']=$dp_id;
 		$map['create_time']=time();
 		$map['is_use']=1;
+		$map['last_depart_id']=$la_dp;
 		$flag=$ord_pro->add($map);
 	}
 }

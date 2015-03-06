@@ -7,6 +7,7 @@ use Home\Model\Develop_userModel;
 use Home\Model\OrderModel;
 use Home\Model\Develop_order_commentModel;
 use Home\Model\DepartModel;
+use Home\Model\Order_departModel;
 class DepordController extends HomeBaseController{
 	/*网站开发订单列表*/
 	public function dep_list(){
@@ -177,30 +178,16 @@ class DepordController extends HomeBaseController{
 	}
 	/** 推送至下一个部门 */
 	public function push($id){
+		$id=$_POST['id'];
 		$dp_id=$_POST['dp'];
 		$order_dev=new Develop_orderModel();
 		//更改订单推送状态
-		$data["push"]=1;
-		$order_dev->where("id=".$id)->save($data);
-		/**技术 */
-		if($dp_id==1){
-			/*网站开发模型*/
-			$dor=new Develop_orderModel();
-			$flag1=$dor->add_do($id);
-			if($flag1==1){ 	
-				$order_dp=new Order_departController();
-				$order_dp->ad_reco($or_id, 1, 2);
-				$this->success('推送成功');
-			}
-			else{ $this->error('推送失败');}
-		}else if($dp_id==10){/** 优化 */
-			/*优化模型*/
-			$sor=new Seo_orderModel();
-			$flag2=$sor->add_so($id);
-			if($flag2==1){ $this->success('推送成功');}
-			else{ $this->error('推送失败');}
-		}else if($dp_id==11){/** 客服 */
-				
-		}else{ $this->error('禁止向该部门推送');}
+		$data["Push"]=1;
+		$flag=$order_dev->where("order_id=".$id)->save($data);
+		if($flag==1){
+			$order_dp=new Order_departController();
+			$order_dp->ad_reco($id, $dp_id, 1);
+			$this->success("推送成功！",U('Depord/dep_list'));
+		}else { $this->error('推送失败！');}
 	}	
 }
