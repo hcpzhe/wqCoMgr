@@ -382,3 +382,7 @@ body {
 
 #right{ float:left; width:340px;}
 .left{ float:left;}
+input[type=checkbox]{
+	width:20px;
+	height:20px;
+}

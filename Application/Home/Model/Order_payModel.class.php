@@ -39,7 +39,7 @@ class Order_payModel extends Model{
 	 * 以员工为分组求每个员工的业绩和
 	 */
 	public function group_sum($sta_time,$end_time){
-		$sql="SELECT SUM(money) as money ,ed.id,eu.id as uid,realname FROM wqerp.erp_order_pay as eop INNER JOIN wqerp.erp_user as eu ON eu.id=eop.user_id INNER JOIN erp_depart as ed ON ed.id=eu.depart_id where pay_time>='".$sta_time."' and pay_time<='".$end_time."'  GROUP BY user_id";
+		$sql="SELECT SUM(money) as money ,ed.id,eu.id as uid,realname FROM wqerp.erp_order_pay as eop INNER JOIN wqerp.erp_user as eu ON eu.id=eop.user_id INNER JOIN erp_depart as ed ON ed.id=eu.depart_id where eop.check=1 and pay_time>='".$sta_time."' and pay_time<='".$end_time."'  GROUP BY user_id";
 // 		echo $sql;
 		return $this->query($sql);
 	}
