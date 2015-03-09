@@ -39,7 +39,7 @@ class Order_renewalModel extends  Model{
 	 *获取订单续费表业绩
 	 */
 	public function group_sum($sta_time,$end_time){
-		$sql="SELECT ed.id,realname,SUM(money) as money FROM wqerp.erp_order_renewal as eor INNER JOIN wqerp.erp_user as eu ON eu.id=eor.user_id INNER JOIN erp_depart as ed ON ed.id=eu.depart_id  where pay_time>='".$sta_time."' and pay_time<='".$end_time."'  GROUP BY user_id";
+		$sql="SELECT ed.id,realname,SUM(money) as money FROM wqerp.erp_order_renewal as eor INNER JOIN wqerp.erp_user as eu ON eu.id=eor.user_id INNER JOIN erp_depart as ed ON ed.id=eu.depart_id  where eor.check=1 and pay_time>='".$sta_time."' and pay_time<='".$end_time."'  GROUP BY user_id";
 		return $this->query($sql);
 	}
 	/**
