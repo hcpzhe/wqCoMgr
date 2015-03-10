@@ -130,7 +130,8 @@ class UserModel extends Model {
  		//定义数组
  		$map = array('user_id'=>$uid);
  		$model = M('User_depart_mgr');
- 		$depidarr = $model->where($map)->getField('depart_id',true);   //取出当前用户所管理的部门
+ 		//取出当前用户所管理的部门
+ 		$depidarr = $model->where($map)->getField('depart_id',true);   
  		//如果是普通员工，没有部门管理权限
  		if(empty($depidarr)){
  			// 获取登陆用户的客户产品权限

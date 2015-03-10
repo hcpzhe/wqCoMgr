@@ -47,27 +47,26 @@ class PubliccustController extends HomeBaseController {
 		}
 		/*--------wcd权限判断---------*/
 		$cust_id = (int)I('cust_id');
-		$user_id = (int)I('user_id'); 
+		$user_id = $uid;
 		$cust=new CustomerModel();
 		$cname=$cust->where("id=$cust_id")->getField("name"); 		
 		$this->assign("cname",$cname);   //申请的公司名称
 		$user=new UserModel();
+		$realname=$user->where("id=$user_id")->getField("realname");
+		$this->assign("user_id",$user_id);
+		$this->assign("realname",$realname);   //权限人
 		if ($user_id){	//从权限分配里申请  延期		
-			$realname=$user->where("id=$user_id")->getField("realname");
-			$this->assign("user_id",$user_id);
-			$this->assign("realname",$realname);   //权限人
-			$class="delay";
+			$class="delay";echo "1111";
 			$this->assign("class",$class);
 			//print_r($realname);exit();
 		}else {
 			//从公海客户列表中申请  新申请
-			$class="new";
+			$class="new";echo "222";
 			$this->assign("class",$class);
 		}
-		$user_list=$user->select();
-		$this->assign("user_list",$user_list);
+		//所有签单人员
+		$this->assign("user_list",$user->all_saller());
 		$this->assign("cust_id",$cust_id);  //公司id
-		
 		$this->display();
 	}
 	public function apply_insert(){

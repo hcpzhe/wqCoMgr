@@ -125,15 +125,23 @@ class UsercustprodController extends HomeBaseController {
 				$this->error('您没有该公司的权限，不能进行相关操作！');
 			}
 		}
+		// 开始事务
+		mysql_query("start transaction");
+		//删除客户权限
 		$ucp = M("User_cust_prod"); 
-        $ucp->where('cust_id='.$id)->delete();  //删除客户权限
-
-        $pcu = M("Public_customer"); //把删除客户权限的客户放入公海
+        $res=$ucp->where('cust_id='.$id)->delete();  
+        //把删除客户权限的客户放入公海
+        $pcu = M("Public_customer"); 
         $data['cust_id'] = $id;
         $data['public_time']=time();
-        $pcu->add($data);
-        $this->success('删除成功',U('Customer/lists'));
-		
+        $res1=$pcu->add($data);
+        if ($res && $res1){
+        	mysql_query("COMMIT");
+        	$this->success('客户放入公海成功！',U('Customer/lists'));
+        }else{
+        	$this->error('客户放入公海失败！',U('Customer/lists'));
+        	mysql_query("ROLLBACK");
+        }
 	}
 			
 }

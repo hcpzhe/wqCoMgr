@@ -27,13 +27,10 @@
                     <td align="right">申 请 人：</td>
                     <td>
                        <select name="user_id" class="form-control">  
-                         <!-- <notempty name="user_id"> -->          
-                          <option value="{$user_id}">{$realname}</option>
-                         <!-- <else/> -->
-                          <!-- <foreach  name="user_list" item="u_list"> -->
-                          <option value="{$u_list.id}">{$u_list.realname}</option>
-                          <!-- </foreach> -->
-                         <!-- </notempty> -->
+        					  <option value="{$user_id}">{$realname}</option>
+	                          <!-- <foreach  name="user_list" item="u_list"> -->
+	                          <option value="{$u_list.id}">{$u_list.realname}</option>
+	                          <!-- </foreach> -->
                         </select>
                     </td>
                   </tr>

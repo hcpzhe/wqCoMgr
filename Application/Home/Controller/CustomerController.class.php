@@ -80,10 +80,11 @@ class CustomerController extends HomeBaseController {
 		/*--------wcd权限判断---------*/
 		if (!IS_ROOT){ //非超管		
 			$User = new UserModel();
-			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
+			//登录人拥有权限的客户id
+			$cust_id=$User->user_auto();  
 			$where['id']=array('in',$cust_id);
 			if (empty($cust_id)){
-				$this->error('没有相应的公司信息！',U('Index/welcome'));
+				$this->error('没有客户信息！',U('Index/welcome'));
 			}
 		}
 		$where['`status`'] = array('eq',1);		
