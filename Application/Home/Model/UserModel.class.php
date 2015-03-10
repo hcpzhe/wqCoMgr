@@ -166,7 +166,10 @@ class UserModel extends Model {
 //  		echo "<pre>";
 // 		print_r($cust_id);exit();	
 //  		echo "</pre>";
- 		return $cust_id;
-					
+ 		return $cust_id;			
+	}	
+	//查询所有销售客服
+	function all_saller(){
+		return $this->where("status=1 and depart_id in (2,7,8,10,13,15)")->select();
 	}	
 }

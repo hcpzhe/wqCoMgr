@@ -24,33 +24,44 @@ class CustomerController extends HomeBaseController {
 			$this->error('没有权限禁止操作！！！');
 		}
 		/*--------wcd权限判断---------*/
-		$User = M("User");
+		$User = new UserModel();
 		$id = UID;		
-		$user_list = $User->where('id='.$id)->select();
-		$this->assign('user_list',$user_list);  //录入人
+		$user_list = $User->where('id='.$id)->find();
+		//当前登录者
+		$this->assign('user_list',$user_list);
+		//所有人员
+		$this->assign('users',$User->all_saller());
 		$this->display();					
 	}
 	
-	/***新增的客户接口***/
+	/** 新增的客户接口
+	 * 1.客户表添加一条记录
+	 * 2.客户产品权限所有表添加一条记录，根据当前所添加的客户的id */
 	public function insert(){
 		$data['user_id']  = UID;		
 		$data['add_time'] = time();
 		$model = new CustomerModel();	
 		$data = $model->create();
+		// 开始事务
+		mysql_query("start transaction");
+		//客户表添加一条数据		
 		$res=$model->add($data);
-		if ($res){
-			$arr['user_id'] = UID;
-			$arr['cust_id'] = $res;
-			$arr['expired_time'] = strtotime(I('param.expired_time'));
-			if (empty($arr['expired_time'])){
-				$arr['expired_time'] = 0;
-			}
-			$ucp = M('User_cust_prod');
-			$ucp->add($arr);
-            $this->success('添加成功',U('Customer/lists'));
+		//员工产品权限表添加一条记录
+		$arr['user_id'] =$_POST['user_id'];
+		$arr['cust_id'] = $res;
+		//权限过期时间
+		$arr['expired_time'] = time()+30*24*60*60;
+// 		echo date("Y-m-d H:i:s", time());echo "<br/>";
+// 		echo date("Y-m-d H:i:s",$arr['expired_time']);exit();
+		$ucp = M('User_cust_prod');
+		$res1=$ucp->add($arr);
+		if ($res && $res1) {
+			mysql_query("COMMIT");
+			$this->success('添加成功',U('Customer/lists'));
 		}else {
 			$this->error('添加失败',U('Customer/add'));
-		}		
+			mysql_query("ROLLBACK");
+		}
 	}
 		
 	/**客户列表     公司名称搜索**/

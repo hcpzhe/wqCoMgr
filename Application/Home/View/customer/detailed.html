@@ -15,16 +15,17 @@
      <!-- <foreach name="list" item="list"> -->
      <div class="top_search">
          <font style="padding-left: 20px;"> 操作： </font>                                      
-        <a href="{:U('Customer/edit?id='.$list['id'])}" class="btn btn-primary">信息修改</a>
+        <a href="{:U('Customer/edit?id='.$list['id'])}" class="btn btn-primary">客户信息修改</a>
         <a href="{:U('Customervisit/addvisit?cust_id='.$list['id'])}" class="btn btn-primary">添加拜访</a>
         <a href="{:U('Order/add_order_form?id='.$list['id'])}" class="btn btn-primary" >添加订单</a> 
         <a href="{:U('Domain/add_domain?cust_id='.$list['id'])}" class="btn btn-primary">添加域名</a>   
      </div>
-      <div class="table-responsive">
+      <div class="table-responsive">     
         <table class="table table-bordered table-hover">
+<!-- 客户详细信息 -->         
          <tbody>
           <tr>
-             <th colspan="4" align="left" class="active">公司信息</th>                    
+             <th colspan="4" align="left" class="active">客户信息</th>                    
           </tr>
          </tbody>                  
           <tr>
@@ -56,8 +57,56 @@
             <td colspan="3">{$list['remark']}</td>
           </tr>   
           <!-- </foreach> -->  
-          
-          <!-- 订单信息 -->
+<!-- 客户详细信息 --> 
+<!-- 客服拜访记录 -->             
+           <!-- <if condition="$visits eq ' '"> -->
+			<tbody>
+              <tr>
+                 <th colspan="4" align="left" class="red">没有拜访记录！</th>                    
+              </tr>
+            </tbody>           
+           <!-- <else/> -->          
+           <tbody>
+           	  <tr>
+                 <th colspan="4" align="left" class="active">拜访记录</th>                    
+              </tr>
+              <tr>
+		         <td colspan="4" align="left" class="">     
+		         	<table class="table table-striped table-bordered table-hover table_center">
+				        <thead>    
+				          <tr>
+				            <th width="5%">编号</th>
+				            <th width="10%">拜访员工</th>
+				            <th width="25%">公司名称</th>
+				            <th width="10%">联系人</th>
+				            <th width="15%">联系电话</th>
+				            <th width="16%">拜访时间</th>
+				            <th width="19%">操作</th>
+				          </tr>
+				        </thead>
+				        <tbody>
+			          	<!-- <foreach name="visits" item="data"> -->       
+				           <tr>
+				             <td>{$data.v_id}</td>
+				             <td>{$data.uname}</td>
+				             <td class="text_left">{$data.cname}</td>
+				             <td>{$data.clink}</td>
+				             <td>{$data.cphone}</td>
+				             <td>{:date('Y/m/d H:i:s',$data['vtime'])}</td>
+				             <td>
+				               <a href="{:U('Customervisit/visit_detailed?id='.$data['v_id'].'&cust_id='.$data['cust_id'])}">查看详细</a> | 
+				               <a href="{:U('Customervisit/add_visit_prod?visit_id='.$data['v_id'].'&cust_id='.$data['cust_id'])}">添加沟通记录 </a>
+				             </td>
+				           </tr>                         
+			           <!-- </foreach> -->
+			           </tbody>		           
+				    </table> 
+				 </td>       	
+			  </tr>	        
+           </tbody>           
+           <!-- </if> -->
+<!-- 客服拜访记录 -->	           
+<!-- 订单信息 -->
              <!-- <if condition="$order_list eq '' "> -->
              <tbody>
               <tr>
@@ -97,110 +146,11 @@
               <tr>
                 <td align="center"> 备 &nbsp;&nbsp;&nbsp;&nbsp; 注</td>
                 <td colspan="3">{$order_list['remark']}</td>
-              </tr>                                          
+              </tr>               
+              <tr><td colspan="4"></td></tr>                           
              <!-- </foreach> -->
             <!-- </if> -->
-             
-            <!-- 域名信息 -->
-            <!-- <if condition="$domain_list eq '' "> -->
-            <tbody>
-              <tr>
-                 <th colspan="4" align="left" class="red">该公司还未有域名！</th>                    
-              </tr>
-            </tbody>
-            <!-- <else /> -->             
-            <tbody>
-              <tr>
-                 <th colspan="4" align="left" class="active">域名信息</th>                    
-              </tr>
-            </tbody> 
-            <!-- <foreach name="domain_list" item="domain_list"> -->               
-              <tr>
-                <td align="center"> 域  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 名 </td>
-                <td>{$domain_list['domain']}</td>
-                <td align="center">域名运营商</td>
-                <td>{$domain_list['service']}</td>
-              </tr>                 
-              <tr>
-                <td align="center">注 册 时 间</td>
-                <td>{:date('Y/m/d H:i:s',$domain_list['reg_time'])}</td>
-                <td align="center">过 期 时 间</td>
-                <td>{:date('Y/m/d H:i:s',$domain_list['expired_time'])}</td>
-              </tr>
-              <tr>
-                <td align="center">域 名 状 态</td>
-                <td class="text-info">
-                   <!-- <if condition="$domain_list['status'] eq -1 "> --><!--删除-->
-                   <!-- <elseif condition="$domain_list['status'] eq 0 " /> -->禁用  <font color="red"> 该域名已过期，请抓紧时间续费！</font>
-                   <!-- <else /> -->正常<!-- </if> -->
-                </td>
-                <td align="center">审 核 状 态</td>
-                <td>
-                   <!-- <if condition="$domain_list['check'] eq -1 "> -->拒绝
-                   <!-- <elseif condition="$domain_list['check'] eq 0 " /> --><a href="{:U('Domain/check?id='.$domain_list['id'])}">待审</a>
-                   <!-- <else /> -->通过<!-- </if> -->
-               </td>
-              </tr> 
-               <tr>
-                <td align="center">审 核 时 间</td>
-                <td>
-                  <!-- <if condition="$domain_list['check'] egt 1 "> -->{:date('Y/m/d H:i:s',$domain_list['check_time'])}
-                  <!-- <else /> --><font color="red">域名还未通过审核</font><!-- </if> -->
-                </td>  
-                <td align="center">域 名 归 属</td>
-                <td>
-                   <!-- <if condition="$domain_list['doamin_user'] eq 0 "> -->公司
-                   <!-- <else /> -->客户<!-- </if> -->
-                </td>                 
-              </tr>                                  
-            <!-- </foreach> -->  
-           <!-- </if> -->     
-           <!-- <if condition="$visits eq ' '"> -->
-			<tbody>
-              <tr>
-                 <th colspan="4" align="left" class="red">没有拜访记录！</th>                    
-              </tr>
-            </tbody>           
-           <!-- <else/> -->
-           <tbody>
-           	  <tr>
-                 <th colspan="4" align="left" class="active">拜访记录</th>                    
-              </tr>
-              <tr>
-		         <td colspan="4" align="left" class="active">     
-		         	<table class="table table-striped table-bordered table-hover table_center">
-				        <thead>    
-				          <tr>
-				            <th width="5%">编号</th>
-				            <th width="10%">拜访员工</th>
-				            <th width="25%">公司名称</th>
-				            <th width="10%">联系人</th>
-				            <th width="15%">联系电话</th>
-				            <th width="16%">拜访时间</th>
-				            <th width="19%">操作</th>
-				          </tr>
-				        </thead>
-				        <tbody>
-			          	<!-- <foreach name="visits" item="data"> -->       
-				           <tr>
-				             <td>{$data.v_id}</td>
-				             <td>{$data.uname}</td>
-				             <td class="text_left">{$data.cname}</td>
-				             <td>{$data.clink}</td>
-				             <td>{$data.cphone}</td>
-				             <td>{:date('Y/m/d H:i:s',$data['vtime'])}</td>
-				             <td>
-				               <a href="{:U('Customervisit/visit_detailed?id='.$data['v_id'].'&cust_id='.$data['cust_id'])}">查看详细</a> | 
-				               <a href="{:U('Customervisit/add_visit_prod?visit_id='.$data['v_id'].'&cust_id='.$data['cust_id'])}">添加沟通记录 </a>
-				             </td>
-				           </tr>                         
-			           <!-- </foreach> -->
-			           </tbody>
-				    </table> 
-				 </td>       	
-			  </tr>	        
-           </tbody>           
-           <!-- </if> -->
+<!-- 订单信息 -->          
         </table>
       </div>
   </div>

@@ -270,5 +270,6 @@ class  UserController extends HomeBaseController{
 				$this->success('修改成功！',U('User/search_list'));
 			}
 	}
+	
 		
 }
