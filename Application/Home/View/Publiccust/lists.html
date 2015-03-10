@@ -33,7 +33,7 @@
               <td>{$data1['contacts']}</td>
               <td>{$data1['phone']}</td>
               <td>{:date('Y/m/d H:i:s',$data1['public_time'])}</td>
-               <td><a href="{:U('Publiccust/apply?cust_id='.$data1['id'])}">权限申请</a></td>
+               <td><a href="{:U('Publiccust/apply?type=1&cust_id='.$data1['id'])}">权限申请</a></td>
              </tr>                             
          <!-- </foreach> -->
           </tbody>        

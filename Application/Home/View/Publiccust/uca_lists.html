@@ -37,9 +37,14 @@
                   <!-- </if> -->
               </td>
               <td>
-                   <!-- <if condition="$data1['check'] eq -1 "> -->拒绝
-                   <!-- <elseif condition="$data1['check'] eq 0 " /> --><a href="{:U('Publiccust/check?id='.$data1['id'].'&class='.$data1['class'].'&cust_id='.$data1['cust_id'].'&user_id='.$data1['user_id'])}">待审</a>
-                   <!-- <else /> -->通过<!-- </if> -->               
+                   <!-- <if condition="$data1['check'] eq 0 "> -->
+                   		<a href="{:U('Publiccust/agree?id='.$data1['id'].'&class='.$data1['class'].'&cust_id='.$data1['cust_id'].'&user_id='.$data1['user_id'])}">同意</a>
+                   		<a href="{:U('Publiccust/refuse?id='.$data1['id'].'&class='.$data1['class'].'&cust_id='.$data1['cust_id'].'&user_id='.$data1['user_id'])}">拒绝</a>                   		
+                   <!-- <elseif  condition="$data1['check'] eq 1"/> -->
+                   		通过
+                   <!-- <else> -->		
+                   		拒绝
+                   <!-- </if> -->               
                </td>
              </tr>                             
          <!-- </foreach> -->

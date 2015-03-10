@@ -27,7 +27,7 @@ class PubliccustController extends HomeBaseController {
 		/*--------wcd权限判断---------*/		
 		$pub_cust = M("Public_customer");
 		$list = $pub_cust->table('erp_customer as cr,erp_public_customer as epc')
-		->where('cr.id=epc.cust_id')
+		->where('cr.id=epc.cust_id and epc.status=1')
 		->getField("cr.id as id,cr.`name` as `name`,cr.contacts as contacts,cr.phone as phone,epc.public_time as public_time");
 		$this->assign("list",$list);
 		$this->display();		
@@ -46,27 +46,27 @@ class PubliccustController extends HomeBaseController {
 			$this->error('没有权限禁止操作！！！');
 		}
 		/*--------wcd权限判断---------*/
+		//客户id
 		$cust_id = (int)I('cust_id');
+		//系统用户
 		$user_id = $uid;
+		//根据客户id获取客户名称
 		$cust=new CustomerModel();
 		$cname=$cust->where("id=$cust_id")->getField("name"); 		
+		//客户名称赋值
 		$this->assign("cname",$cname);   //申请的公司名称
+		//获取当前操作用户名称
 		$user=new UserModel();
 		$realname=$user->where("id=$user_id")->getField("realname");
+		//当前操作用户id名称赋值
 		$this->assign("user_id",$user_id);
-		$this->assign("realname",$realname);   //权限人
-		if ($user_id){	//从权限分配里申请  延期		
-			$class="delay";echo "1111";
-			$this->assign("class",$class);
-			//print_r($realname);exit();
-		}else {
-			//从公海客户列表中申请  新申请
-			$class="new";echo "222";
-			$this->assign("class",$class);
-		}
+		$this->assign("realname",$realname);  
+		//获取申请类型
+		$this->class=$_GET['type'];
 		//所有签单人员
 		$this->assign("user_list",$user->all_saller());
-		$this->assign("cust_id",$cust_id);  //公司id
+		//公司id
+		$this->assign("cust_id",$cust_id);  
 		$this->display();
 	}
 	public function apply_insert(){
@@ -85,30 +85,45 @@ class PubliccustController extends HomeBaseController {
 		$data["cust_id"] = (int)I('cust_id');
 		$data["user_id"] = (int)I('user_id');
 		$class = I('param.class');
+		$data['class']=$class;
+		//根据申请类型获取原过期时间
 		if ($class == "new"){  //新申请
-			$data["class"] = $class;
 			$data["org_expired_time"] = time();
 		}else {  //延期客户
-			$data["class"] = $class;
 			$ucp=new User_cust_prodModel();
 			$data["org_expired_time"] = $ucp->where("cust_id=".$data["cust_id"])->getField("expired_time");   //原权限过期时间
 		}				
+		//获取新的过期时间
 		$data["apply_days"] = (int)I('param.apply_days');
-		$data["new_expired_time"] = $data["org_expired_time"] + $data["apply_days"] * 24 * 60 * 60;  //新过期时间
-		$data["apply_time"] = time(); //申请时间
-		$uca = M("User_cust_apply");
-		$flag=$uca->add($data);
-		if ($flag){
-			if ($class == "new"){
-				//新申请且申请成功，公海客户删除
-				$pub=M('Public_customer');					
-				$pub->where("cust_id=".$data["cust_id"])->delete();
+		$data["new_expired_time"] = $data["org_expired_time"] + $data["apply_days"] * 24 * 60 * 60;  
+		//申请时间
+		$data["apply_time"] = time(); 
+		if ($class == "new"){					
+			// 开始事务
+			mysql_query("start transaction");
+			//公海客户权限申请表添加数据
+			$uca = M("User_cust_apply");
+			$flag=$uca->add($data);
+			//更改公海客户状态为已申请
+			$pub=M('Public_customer');					
+			$flag1=$pub->where("cust_id=".$data["cust_id"])->setField("status",0);
+			if ($flag && $flag1) {
+				mysql_query("COMMIT");
+				$this->success('申请成功，等待审核',U('Publiccust/lists'));
+			}else{
+				$this->error('申请失败');
+				mysql_query("ROLLBACK");
 			}
-			$this->success('申请成功，等待审核',U('Publiccust/uca_lists'));
 		}else {
-			$this->error('申请失败');
+			//公海客户权限申请表添加数据
+			$uca = M("User_cust_apply");
+			$flag=$uca->add($data);
+			if ($flag) {
+				$this->success('申请成功，等待审核',U('Publiccust/lists'));
+			}else{
+				$this->error('申请失败');
+			}
 		}
-		
 	}
 	//员工客户权限申请列表   需审核
 	public function uca_lists() {
@@ -134,8 +149,8 @@ class PubliccustController extends HomeBaseController {
 		$this->assign("list",$list);
 		$this->display();
 	}
-	//权限审核
-	public function check(){
+	//同意审核
+	public function agree(){
 		/*--------wcd权限判断---------*/
 		//获取当前模块名称
 		$contro=CONTROLLER_NAME;
@@ -148,31 +163,114 @@ class PubliccustController extends HomeBaseController {
 			$this->error('没有权限禁止操作！！！');
 		}
 		/*--------wcd权限判断---------*/
+		//申请id
 		$id = (int)I('id');
+		//客户id
 		$cust_id = (int)I('cust_id');
+		//申请者id
 		$user_id = (int)I('user_id');
-		$class = I('class');          //权限申请类型
+		//申请了类型
+		$class = I('class');       
+		//获取新的权限过期时间
 		$uca = M("User_cust_apply");
 		$new_expired_time=$uca->where("id=$id")->getField("new_expired_time");  //新过期时间
-		$ucp = M("User_cust_prod");
-		if ($class == "delay"){
-			//申请延期						
-			$ucp-> where("cust_id=$cust_id")->setField('expired_time',$new_expired_time);
+		//根据不同的申请类型
+		if($class='new'){
+			// 开始事务
+			mysql_query("start transaction");
+			//更改公海客户申请列表该条记录的状态
+			//审核时间
+			$data['check_time']=time();
+			//审核人
+			$data['check_user']= UID;
+			//需要更改的审核状态
+			$data['check']=1;
+			$uca = M("User_cust_apply");
+			$res=$uca->where("id=$id")->save($data);
+			//删除公海里面这条客户信息
+			$public=M('Public_customer');
+			$res1=$public->where("cust_id=$cust_id")->delete();
+			//在用户产品权限表中添加一条记录
+			$map['user_id']=$user_id;
+			$map['cust_id']=$cust_id;
+			$map['expired_time']=$new_expired_time;
+			$ucp=M('User_cust_prod');
+			$res2=$ucp->add($map);
+			if ($res && $res1 && $res2) {
+				mysql_query("COMMIT");
+				$this->success('审核成功！',U('publiccust/lists'));
+			}else{
+				$this->error('审核失败！',U('publiccust/lists'));
+				mysql_query("ROLLBACK");
+			}	
 		}else {
-			//新申请
-            $arr['user_id'] = $user_id;
-            $arr['cust_id'] = $cust_id;
-            $arr['expired_time'] = $new_expired_time;
-//             print_r($arr);
-//             echo "终止";exit();
-			$ucp->add($arr);
+			// 开始事务
+			mysql_query("start transaction");
+			//更改公海客户申请列表该条记录的状态
+			//审核时间
+			$data['check_time']=time();
+			//审核人
+			$data['check_user']= UID;
+			//需要更改的审核状态
+			$data['check']=1;
+			$uca = M("User_cust_apply");
+			$res=$uca->where("id=$id")->save($data);
+			//删除公海里面这条客户信息
+			$public=M('Public_customer');
+			$res1=$public->where("cust_id=$cust_id")->delete();
+			//在用户产品权限表中添加一条记录
+			$map['expired_time']=$new_expired_time;
+			$ucp=M('User_cust_prod');
+			$res2=$ucp->where("user_id=$user_id and cust_id=$cust_id")->save($map);
+			if ($res && $res1 && $res2) {
+				mysql_query("COMMIT");
+				$this->success('审核成功！',U('publiccust/lists'));
+			}else{
+				$this->error('审核失败！',U('publiccust/lists'));
+				mysql_query("ROLLBACK");
+			}
 		}
-		$data['check_time']=time();  //审核时间
-		$data['check_user']= UID;
-		$data['check']=1;
-		$uca->where("id=$id")->save($data);
-		if (false === $uca->create($data)) $this->error($uca->getError());
-		if (false === $uca->where('id='.$id)->save()) $this->error('审核失败');
-		$this->success('审核成功',U('Publiccust/uca_lists'));		
 	}		
+	//拒绝申请
+	function refuse(){
+		/*--------wcd权限判断---------*/
+		//获取当前模块名称
+		$contro=CONTROLLER_NAME;
+		//获取当前操作名称
+		$actio=ACTION_NAME;
+		//获取当前访问规则
+		$cd_rule="Home/".$contro."/".$actio;
+		$uid = UID;
+		if($this::cd_rule_check($uid,$cd_rule)!=1){
+			$this->error('没有权限禁止操作！！！');
+		}
+		/*--------wcd权限判断---------*/
+		//申请id
+		$id = (int)I('id');
+		//客户id
+		$cust_id = (int)I('cust_id');
+		//申请者id
+		$user_id = (int)I('user_id');
+		// 开始事务
+		mysql_query("start transaction");
+		//更改公海客户申请列表该条记录的状态
+		//审核时间
+		$data['check_time']=time(); 
+		//审核人
+		$data['check_user']= UID;
+		//需要更改的审核状态
+		$data['check']=-1;
+		$uca = M("User_cust_apply");
+		$res=$uca->where("id=$id")->save($data);
+		//更改公海里面该条客户信息为显示
+		$public=M('Public_customer');
+		$res1=$public->where("cust_id=$cust_id")->setField('status',1);
+		if ($res && $res1) {
+			mysql_query("COMMIT");
+			$this->success('审核成功！',U('publiccust/lists'));
+		}else{
+			$this->error('审核失败！',U('publiccust/lists'));
+			mysql_query("ROLLBACK");
+		}
+	}
 }
