@@ -4,20 +4,23 @@ use Think\Model;
 class Order_payModel extends Model{
 	/*订单付款记录*/
 	public function op_record($where){
-		$where="op.order_id=oe.id AND oe.cust_id=cr.id AND oe.user_id=ur.id AND op.status=1 ".$where;
-		/*查询数据总条数*/
-		$count =$this->table('erp_order_pay as op,erp_order as oe,erp_customer as cr,erp_user as ur')
-		->where($where)
-		->count();
+		$where['erp_order_pay.status']=1;
+		//获取登录者所有拥有权限的客户
+		$User = new UserModel();
+		$cust_id=$User->user_auto();
+		$where['cr.id']=array('in',$cust_id);
+		$count=$this->join("erp_order as oe on erp_order_pay.order_id=oe.id")->join("erp_customer as cr on oe.cust_id=cr.id")->join("erp_user as ur on oe.user_id=ur.id")->where($where)->count();
 		/*载入分页类，初始化数据*/
 		$page=new \Think\Page($count,10);
 		/*调用分页链接函数*/
 		$data['show']=$page->show();
 		/*控制数据查询条数*/
-		$data['op_list'] =$this->table('erp_order_pay as op,erp_order as oe,erp_customer as cr,erp_user as ur')
-		->where($where)
-		->field("op.id as id,cr.id as cust_id,cr.name as cname,op.money as money,op.class as class,op.`check` as `check`,op.pay_time as pay_time,op.check_time as check_time,ur.realname as uname")
-		->limit($page->firstRow.','.$page->listRows)->order('op.id desc')->select();
+		$data['op_list']=$this->join("erp_order as oe on erp_order_pay.order_id=oe.id")->join("erp_customer as cr on oe.cust_id=cr.id")->join("erp_user as ur on oe.user_id=ur.id")->where($where)->field("erp_order_pay.id as id,cr.id as cust_id,cr.name as cname,erp_order_pay.money as money,erp_order_pay.class as class,erp_order_pay.`check` as `check`,erp_order_pay.pay_time as pay_time,erp_order_pay.check_time as check_time,ur.realname as uname")
+ 		->limit($page->firstRow.','.$page->listRows)->order('erp_order_pay.id desc')->select();
+// 		$data['op_list'] =$this->table('erp_order_pay as op,erp_order as oe,erp_customer as cr,erp_user as ur')
+// 		->where($where)
+// 		->field("op.id as id,cr.id as cust_id,cr.name as cname,op.money as money,op.class as class,op.`check` as `check`,op.pay_time as pay_time,op.check_time as check_time,ur.realname as uname")
+// 		->limit($page->firstRow.','.$page->listRows)->order('op.id desc')->select();
 		return $data;
 	}
 	/*订单付款详情*/

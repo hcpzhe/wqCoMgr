@@ -26,22 +26,23 @@ class OrderpayController extends HomeBaseController{
 		$key = I('param.key');
 		/** 拼接where条件 */
 		if(!empty($class)){
-			$where=$where." AND op.class=".$class;
+			$where['erp_order_pay.class']=$class;
+// 			$where=$where." AND op.class=".$class;
 		}
 		/*通过，待审核*/
 		if(!empty($check) && $check==1){
-			$where=$where." AND op.check=1";
+			$where['erp_order_pay.check']=1;
+// 			$where=$where." AND op.check=1";
 		}else if(!empty($check) && $check==2){
-			$where=$where." AND op.check=0";
+			$where['erp_order_pay.check']=0;
+// 			$where=$where." AND op.check=0";
 		}		
 		if(!empty($key)){
-			$where=$where." AND ( cr.name like '%".$key."%' or ur.realname like '%".$key."%')";
+			$where['cr.name']=array('like',"'%".$key."%'");
+// 			$where=$where." AND ( cr.name like '%".$key."%' or ur.realname like '%".$key."%')";
 		}
 		$orderpay=new Order_payModel();
-		$this->data=$orderpay->op_record($where);
-// 		echo "<pre>";
-// 		print_r($data);
-// 		echo "</pre>";exit();		
+		$this->data=$orderpay->op_record($where);	
 		$this->display();
 	}
 	/*订单付款详情*/
