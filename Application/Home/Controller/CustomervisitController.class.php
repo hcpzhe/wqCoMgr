@@ -113,8 +113,10 @@ class CustomervisitController extends HomeBaseController {
 		$model = new Customer_visitModel();			
 		$result = $model->data($data)->add();	
 		if ($result){ 
-			$visit_id = $result; //获取新添数据id
-			$this->redirect('Customervisit/add_visit_prod',array('cust_id'=>$cust_id,'visit_id'=>$visit_id),1,'<div style="margin: 40px 0 20px;">拜访记录添加成功，请添加沟通记录</div>'); //拜访记录添加成功后跳转到添加沟通记录页面
+			$this->success('拜访记录添加成功！',U('Customervisit/visitlists'));
+//			跳转到添加产品沟通记录页面
+// 			$visit_id = $result; //获取新添数据id
+// 			$this->redirect('Customervisit/add_visit_prod',array('cust_id'=>$cust_id,'visit_id'=>$visit_id),1,'<div style="margin: 40px 0 20px;">拜访记录添加成功，请添加沟通记录</div>'); //拜访记录添加成功后跳转到添加沟通记录页面
 		}else{ 
 			$this->error('拜访记录添加失败！');
 		}	       

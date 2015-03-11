@@ -60,8 +60,8 @@
              <td>{$data.phone}</td>
              <td>{:date('Y/m/d H:i:s',$data['visit_time'])}</td>
              <td>
-               <a href="{:U('Customervisit/visit_detailed?id='.$data['id'].'&cust_id='.$data['cust_id'])}">查看详细</a> | 
-               <a href="{:U('Customervisit/add_visit_prod?visit_id='.$data['id'].'&cust_id='.$data['cust_id'])}">添加沟通记录 </a>
+               <a href="{:U('Customervisit/visit_detailed?id='.$data['id'].'&cust_id='.$data['cust_id'])}">查看详细</a>
+<!--           <a href="{:U('Customervisit/add_visit_prod?visit_id='.$data['id'].'&cust_id='.$data['cust_id'])}">添加沟通记录 </a> -->
              </td>
            </tr>                         
            <!-- </foreach> -->
