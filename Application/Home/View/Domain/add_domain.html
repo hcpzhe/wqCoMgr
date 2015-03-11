@@ -42,6 +42,7 @@ function checkdomain(){
                     <td width="70%">                                      
 		                <input type="text" name="domain" id="domain" class="form-control" />
 		                <input type="hidden" name="cust_id" value="{$cust_id}">
+		                <input type="hidden" name="order_id" value="{$order_id}">
 		                <font class="red" id="namets"> * </font>
 		                <a href="javascript:void(0)" id="btnsearch" onclick="checkdomain();">模糊查询</a>	            
                     </td>
@@ -67,10 +68,10 @@ function checkdomain(){
                        </select>                    
                     <font class="red" id="namets"> * </font></td>
                   </tr> 
-                  <tr>
+ <!--             <tr>
                     <td align="right">域名运营商：</td>
                     <td><input type="text" name="service" class="form-control"></td>
-                  </tr>                                  
+                  </tr>      -->                            
                   <tr>
                     <td>&nbsp;</td>
                     <td align="left"><input type="submit" name="Submit" value=" 添加 " class="btn btn-primary"></td>
@@ -87,12 +88,6 @@ function checkdomainfrm(afrm) {
 		afrm.domain.focus();
 		return false;
 	}
- if( (afrm.service.value == "") )
-	{
-		alert("运营商不能为空！");
-		afrm.service.focus();
-		return false;
-	} 
 	$(afrm).RSsubmit({success_alert:true});
 	return false;
 }

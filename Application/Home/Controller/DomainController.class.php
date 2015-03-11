@@ -57,33 +57,15 @@ class DomainController extends HomeBaseController{
 	}
 	/*添加域名*/
 	public function add_domain(){
-// 		/*--------wcd权限判断---------*/
-// 		//获取当前模块名称
-// 		$contro=CONTROLLER_NAME;
-// 		//获取当前操作名称
-// 		$actio=ACTION_NAME;
-// 		//获取当前访问规则
-// 		$cd_rule="Home/".$contro."/".$actio;
-// 		$uid = UID;
-// 		if($this::cd_rule_check($uid,$cd_rule)!=1){
-// 			$this->error('没有权限禁止操作！！！');
-// 		}
-// 		/*--------wcd权限判断---------*/
 		$id = (int)I('param.cust_id');  //被选中要进行操作的id
 		$order_id = I('param.order_id');
 		$domain = M('Customer');		
-// 		if (!IS_ROOT){ //非超管
-// 			$User = new UserModel();
-// 			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
-// 			if(!in_array($id,$cust_id)){
-// 				$this->error('您没有该公司的权限，不能进行相关操作！');
-// 			}
-// 		}
-			//查询客户信息的审核状态
-			$check = $domain->where('id='.$id)->getField('check');	
-			$this->assign('cust_id',$id);
-			$this->assign('order_id',$order_id);
-			$this->display();			
+		//查询客户信息的审核状态
+		//客户id
+		$this->assign('cust_id',$id);
+		//订单id
+		$this->assign('order_id',$order_id);
+		$this->display();			
 	}	
 	/***添加域名时 域名的模糊检索***/
 	public function search($domain=null){
@@ -107,24 +89,47 @@ class DomainController extends HomeBaseController{
 	
 	/**域名添加   提交接口**/
 	public function insert(){	
+		//客户id
 		$data['cust_id'] = (int)I('cust_id');
+		//域名名称
 		$data['domain'] =  I('param.domain');
+		//服务商
 		$data['service'] =  I('param.service');
+		//域名拥有者
 		$data['doamin_user'] =  I('param.doamin_user');
+		//注册时间
 		$data['reg_time'] = time();
-		$data['year_num'] = I('param.year');   //新注域名使用年限
-		$data['expired_time'] = $data['reg_time'] + $data['year_num']*60*60*24*365;  //域名到期时间计算
+		//使用年限
+		$data['year_num'] = I('param.year');   
+		//域名到期时间计算
+		$data['expired_time'] = $data['reg_time'] + $data['year_num']*60*60*24*365; 
+		//订单id
+		$or_id=I('param.order_id');
 		$model = new DomainModel();
-		$data = $model->data($data)->add();		
-		if($data==0){ $this->error('添加失败');}
-		else { 
-			/**订单域名关系表添加一条数据*/
-			$map['order_id']=I('order_id');
-			$map['domain_id']=$data;
+		//根据添加域名的类型操作1.根据客户直接添加，2，根据订单添加
+		if($or_id){
+			// 开始事务
+			mysql_query("start transaction");
+// 			域名库添加一条记录，标注属于那个客户
+			$flag = $model->data($data)->add();
+// 			订单域名关系表添加一条数据
+			$map['order_id']=$or_id;
+			$map['domain_id']= $flag;
 			$Order_domain=new Order_domainModel();
-			$Order_domain->add($map);
-		}		
-		$this->success('添加成功',U('Domain/domain_list'));
+			$flag1=$Order_domain->add($map);
+			if($flag && $flag1) {
+				mysql_query("COMMIT");
+				$this->success('添加成功！',U('Domain/domain_list'));
+			}else{
+				$this->error('添加失败');
+				mysql_query("ROLLBACK");
+			}
+		}else {		
+// 			域名库添加一条记录，标注属于那个客户
+			$flag = $model->data($data)->add();
+			if($flag==0){ $this->error('添加失败');}
+			else { $this->success('添加成功！',U('Domain/domain_list'));}
+		}
 	}
 	/**域名详细信息**/
 	public function domain_detailed(){
