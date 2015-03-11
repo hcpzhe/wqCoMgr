@@ -29,27 +29,26 @@ class OrderController extends HomeBaseController{
 			$this->error('没有权限禁止操作！！！');
 		}
 		/*--------wcd权限判断---------*/
-// 		$time=1419868800;
-// / 		echo date('Y-m-d H:i:s',"1451448732");exit();
-		//$time=time();
-// 		$time=strtotime("2014-11-4 12:12:12");
-// 		echo $time;exit();
 		/*获取搜索条件*/
 		$pro = I('param.product');  
 		$check = I('param.check');  //按照审核状态搜索
 		$key = I('param.key');  //按照审核状态搜索
 		/** 拼接where条件 */
 		if(!empty($pro)){
-			$where=$where." AND pt.id=".$pro;
+			$where['pt.id']=$pro;
+// 			$where=$where." AND pt.id=".$pro;
 		}
 		/*通过，待审核*/
 		if(!empty($check) && $check==1){
-			$where=$where." AND oe.check=1";
+			$where['erp_order.check']=1;
+// 			$where=$where." AND oe.check=1";
 		}else if(!empty($check) && $check==2){
-			$where=$where." AND oe.check=0";
+			$where['erp_order.check']=0;
+// 			$where=$where." AND oe.check=0";
 		}		
 		if(!empty($key)){
-			$where=$where." AND ( cr.name like '%".$key."%' or ur.realname like '%".$key."%')";
+			$where['cr.name']=array('in',"like '%".$key."%'");
+// 			$where=$where." AND ( cr.name like '%".$key."%' or ur.realname like '%".$key."%')";
 		}
 		$order=new OrderModel();
 		$this->data=$order->orderlist($where);

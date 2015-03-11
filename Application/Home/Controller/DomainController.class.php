@@ -48,7 +48,7 @@ class DomainController extends HomeBaseController{
 		$count=$model->where($map)->count();       // 查询满足要求的总记录数
 		$Page       = new \Think\Page($count,10);// 实例化分页类 传入总记录数和每页显示的记录数(10)
 		$show       = $Page->show();// 分页显示输出
-		$domain_list = $model->where($map)->limit($Page->firstRow.','.$Page->listRows)->order('expired_time')->select();
+		$domain_list = $model->where($map)->limit($Page->firstRow.','.$Page->listRows)->order('id desc')->select();
 		$this->assign('domain_list',$domain_list);
 		$this->assign('page',$show);   //分页显示
 		$this->assign('domain', $domain);           //用于搜索条件的显示

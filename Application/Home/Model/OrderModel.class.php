@@ -5,20 +5,20 @@ use Think\Page;
 class OrderModel extends Model{
 	/*显示订单列表*/
 	Public function orderlist($where){
-		$where="oe.user_id=ur.id AND oe.cust_id=cr.id AND oe.prod_id=pt.id AND oe.status=1 ".$where;
-		/*查询数据总条数*/
-		$count=$this->table('erp_order as oe,erp_user as ur,erp_customer as cr,erp_product as pt')
-					->where($where)
-					->count();
+ 		$where['erp_order.status']=1;
+ 		//获取登录者所有拥有权限的客户
+ 		$User = new UserModel();
+ 		$cust_id=$User->user_auto(); 
+ 		$where['cr.id']=array('in',$cust_id);
+//  	$where['ur.id']=UID;
+ 		$count=$this->join("erp_user as ur on erp_order.user_id=ur.id")->join("erp_customer as cr on erp_order.cust_id=cr.id")->join("erp_product as pt on erp_order.prod_id=pt.id")->where($where)->count();
+// 		echo "<pre>";echo $count;echo "</pre>";exit();
 		/*载入分页类，初始化数据*/
 		$page=new \Think\Page($count,10);
 		/*调用分页链接函数*/
 		$data['show']=$page->show();
 		/*控制数据查询条数*/
-		$data['order_list']=$this->table('erp_order as oe,erp_user as ur,erp_customer as cr,erp_product as pt')
-					->where($where)
-					->field("oe.id as id,ur.realname as uname,cr.id as cust_id,cr.`name` as cname,pt.`name` as pname,pt.`id` as pid,oe.total_fees,oe.signed_time as signed_time,oe.`check`,oe.push as push")
-					->limit($page->firstRow.','.$page->listRows)->order('oe.id desc')->select();//	echo $this->_sql();exit();
+		$data['order_list']=$this->join("erp_user as ur on erp_order.user_id=ur.id")->join("erp_customer as cr on erp_order.cust_id=cr.id")->join("erp_product as pt on erp_order.prod_id=pt.id")->where($where)->field("erp_order.id as id,ur.realname as uname,cr.id as cust_id,cr.`name` as cname,pt.`name` as pname,pt.`id` as pid,erp_order.total_fees,erp_order.signed_time as signed_time,erp_order.`check`,erp_order.push as push")->limit($page->firstRow.','.$page->listRows)->order('erp_order.id desc')->select();
 		return $data;
 	}
 	/*c查询指定订单的详细内容*/	
