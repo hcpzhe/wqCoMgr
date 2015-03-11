@@ -79,31 +79,26 @@ class CustomervisitController extends HomeBaseController {
 			$this->error('没有权限禁止操作！！！');
 		}
 		/*--------wcd权限判断---------*/
-		$id = (int)I('cust_id');   //被选中要进行操作的id
+		//被选中要进行操作的id
+		$id = (int)I('cust_id');
 		$cust = M('customer');
-		if(empty($id)){   //未被选中指定公司  添加拜访记录
-			$newdata['status'] = 1; //公司信息审核通过后 才能添加拜访记录
-			$cust_list=$cust->where($newdata)->select();
-			$this->assign('cust_list',$cust_list);
-		}else{
+		//对当前被操作的客户是否拥有权限，进行判断
+		if(!empty($id)){
 			if (!IS_ROOT){ //非超管
 				$User = new UserModel();
 				$cust_id=$User->user_auto();  //登录人拥有的客户权限id
 				if(!in_array($id,$cust_id)){
 					$this->error('您没有该公司的权限，不能进行相关操作！');
 				}
-			}
+			}				
 		}
+		//获取当前时间
 		$visit_time = time();
 		$this->assign('visit_time',$visit_time);
-	    $check = $cust->where('id='.$id)->getField('check');
 		$cust_name = $cust->where('id='.$id)->getField('name');
+		//当前添加拜访记录的客户信息赋值
 		$this->assign('cust_id',$id);
 		$this->assign('cust_name',$cust_name);							
-		
-		$User = M("User");
-		$user_list = $User->where('status=1')->select();
-		$this->assign('user_list',$user_list);  //拜访员工
 		$this->display();
 			
 	}
@@ -212,16 +207,21 @@ class CustomervisitController extends HomeBaseController {
 	}
 	/***拜访记录添加 客户名称模糊检索***/
 	public function search(){
-		$name = I('param.name');    //输入的搜索信息
-		//print_r($name);exit();
+		//获取搜索的值
+		$name = I('param.name');    
 		$where['status'] = 1;
+		//将搜索的值赋值到条件语句
 		if(!empty($name)){
 			//公司名称模糊检索
 			$where['name'] = array('like',"%$name%");
 		}
+		//获取登录者拥有的客户
+		$User = new UserModel();
+		$cus=$User->user_auto();
+		$where['id']=array('in',$cus);
+		//根据条件查询出登录者可以添加拜访记录的客户
 		$customer=new CustomerModel();
-		$cus_list = $customer->where($where)
-		->order('id desc')->select();
+		$cus_list = $customer->where($where)->order('id desc')->select();
 		$this->assign('cus_list',$cus_list);
 		$this->display();
 	}
