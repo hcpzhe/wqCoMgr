@@ -52,6 +52,7 @@ class CustomervisitController extends HomeBaseController {
 		}else {
 		$where=$where." AND ( cr.phone like '%".$name."%')";  //按照联系电话查询
 		}
+		$where=$where."AND ur.id=$uid";
 		$count=$visit->table('erp_customer_visit as cu,erp_user as ur,erp_customer as cr')
 		->where($where)
 		->count();       // 查询满足要求的总记录数
