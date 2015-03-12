@@ -220,19 +220,19 @@ class OrderController extends HomeBaseController{
 			}
 			$customer=new CustomerModel();
 			$this->cus=$customer->one($id);
-		}else{
-			/*查询所有客户*/
-			$customer=new CustomerModel();
-			$this->cus_list=$customer->cus_list();
 		}
-			/*查询产品分类*/
-			$product=new ProductModel();
-			$this->p_list=$product->p_list();
-			/** 查询系统 用户 */
-			$user=new UserModel();
-			$this->user_list=$user->alluser();
-			
-			$this->display();
+		/*查询产品分类*/
+		$product=new ProductModel();
+		$this->p_list=$product->p_list();
+		/*查询系统 用户 */
+		$user=new UserModel();
+		$this->user_list=$user->alluser();
+		//查询当前登录用户
+		$dq_er = new UserModel();
+		$id = UID;
+		$dq_user = $dq_er->where('id='.$id)->find();
+		$this->assign('dq_user',$dq_user);
+		$this->display();
 	}	
 /** 添加订单   订单表添加一条记录，订单付款表添加一条预付款记录*/
 	public function add_order(){
@@ -453,9 +453,13 @@ class OrderController extends HomeBaseController{
 			//公司名称模糊检索
 			$where['name'] = array('like',"%$name%");
 		}
+		//获取登录者拥有的客户
+		$User = new UserModel();
+		$cus=$User->user_auto();
+		$where['id']=array('in',$cus);
+		
 		$customer=new CustomerModel();
-		$cus_list = $customer->where($where)				
-				->order('id desc')->select();
+		$cus_list = $customer->where($where)->order('id desc')->select();
 		$this->assign('cus_list',$cus_list);
 		$this->display();
 	}

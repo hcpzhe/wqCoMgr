@@ -70,6 +70,7 @@ function checkname(){
                 <td align="right">签单员工：</td>
                 <td>
                 <select name="userid" class="form-control">
+                	<option value="{$dq_user.id}">{$dq_user.realname}</option>
                 <!-- <foreach name="user_list" item="ulist"> -->
                     <option value="{$ulist.id}">{$ulist.realname}</option>
                 <!-- </foreach> -->
