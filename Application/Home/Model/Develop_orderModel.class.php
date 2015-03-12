@@ -38,8 +38,13 @@ class Develop_orderModel extends Model{
 	}
 	/*修改网站开发订单的状态*/
 	public function up_check($oid){
-		$map['check']=1;
-		$this->where("order_id=$oid")->save($map);
+		$flag=$this->where("order_id=$oid")->setField('check');
+		if($flag==1){ return 1;}
+		else {
+			$map['check']=1;
+			$flag1=$this->where("order_id=$oid")->save($map);
+			return $flag1;
+		}
 	}
 	/*查询指定订单的详细信息*/
 	public function depinfo($oid){
