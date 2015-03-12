@@ -365,34 +365,70 @@ class OrderController extends HomeBaseController{
 		if ($userid != $uid){
 			$this->error("没有推送权限");
 		}
-		//更改订单推送状态
-		$data["push"]=1;
-		$order->where("id=".$or_id)->save($data);
+		/**
+		 * 1.更改订单推送状态
+		 * 2.根据推送的部门进行不同的操作
+		 * 	 a.技术部：添加一条网站开发订单 ，更改订单所在部门
+		 * 	 b.产品客服部：添加一条优化订单，更改订单所在部门
+		 * 	 c.客服部：更改订单所在部门
+		 */
 		
-		if($dpid==1){
-			/*网站开发模型*/
+		
+		
+		if($dpid==1){/*网站开发模型*/
+			// 开始事务
+			mysql_query("start transaction");
+			//更改订单推送状态
+			$data["push"]=1;
+			$flag=$order->where("id=".$or_id)->save($data);
+			//网站开发添加一条记录
 			$dor=new Develop_orderModel();
 			$flag1=$dor->add_do($or_id);
-			if($flag1==0){
-				$this->error('推送失败');
+			//更改订单所在部门
+			$order_dp=new Order_departController();
+			$flag2=$order_dp->ad_reco($or_id, 1, 12);
+			if ($flag && $flag1 && $flag2) {
+				mysql_query("COMMIT");
+				$this->success('推送成功',U('Order/order_list'));	
 			}else{
-				$order_dp=new Order_departController();
-				$order_dp->ad_reco($or_id, 1, 12);
-				$this->success('推送成功',U('Order/order_list'));				
+				$this->error('推送失败');
+				mysql_query("ROLLBACK");
 			}
-		}else if($dpid==10){
-			/*优化模型*/
+		}else if($dpid==10){/*优化模型*/
+			// 开始事务
+			mysql_query("start transaction");
+			//更改订单推送状态
+			$data["push"]=1;
+			$flag=$order->where("id=".$or_id)->save($data);
+			//添加一条优化订单
 			$sor=new Seo_orderModel();
-			$flag2=$sor->add_so($or_id);
-			if($flag2==1){
-				$order_dp=new Order_departController();
-				$order_dp->ad_reco($or_id, 10, 12);
+			$flag1=$sor->add_so($or_id);
+			//更改订单所在部门
+			$order_dp=new Order_departController();
+			$flag2=$order_dp->ad_reco($or_id, 1, 12);
+			if ($flag && $flag1 && $flag2) {
+				mysql_query("COMMIT");
 				$this->success('推送成功',U('Order/order_list'));
+			}else{
+				$this->error('推送失败');
+				mysql_query("ROLLBACK");
 			}
 		}else {//网站客服
+			// 开始事务
+			mysql_query("start transaction");
+			//更改订单推送状态
+			$data["push"]=1;
+			$flag=$order->where("id=".$or_id)->save($data);
+			//更改订单所在部门
 			$order_dp=new Order_departController();
-			$order_dp->ad_reco($or_id, 2, 12);
-			$this->success("推送成功！",U('order/order_list'));
+			$flag1=$order_dp->ad_reco($or_id, 2, 12);
+			if ($flag && $flag1) {
+				mysql_query("COMMIT");
+				$this->success('推送成功',U('Order/order_list'));
+			}else{
+				$this->error('推送失败');
+				mysql_query("ROLLBACK");
+			}
 		}
 	}
 	/** 停止订单 */

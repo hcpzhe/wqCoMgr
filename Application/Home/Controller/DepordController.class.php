@@ -24,8 +24,6 @@ class DepordController extends HomeBaseController{
 			$this->error('没有权限禁止操作！！！');
 		}
 		/*--------wcd权限判断---------*/
-		
-		
 		/*获取搜索条件*/
 		$check = (int)I('param.check'); 
 		$key = I('param.key');
@@ -114,14 +112,6 @@ class DepordController extends HomeBaseController{
 		}
 		/*--------wcd权限判断---------*/
 		$oid=$_GET['id'];
-// 		if (!IS_ROOT){ //非超管
-// 			$id=$_GET['cust_id'];  //选中的客户id
-// 			$User = new UserModel();
-// 		    $cust_id=$User->user_auto();  //登录人拥有的客户权限id
-// 			if(!in_array($id,$cust_id)){
-// 				$this->error('您没有该公司的权限，不能进行相关操作！');
-// 			}
-// 		}
 		/*查询技术部所有人员*/
 		$depart = M('Depart');
 		$dep_id = $depart->where("name='技术部'")->getField('id'); //技术部所在id	
