@@ -245,23 +245,28 @@ class OrderController extends HomeBaseController{
 		$map['signed_time']=time();//获取当前日期
 		$map['expired_time']=60*60*24*$day+$map['signed_time'];//获取订单到期日期
 		$map['remark']=$_POST['remark'];
+		// 开始事务
+		mysql_query("start transaction");
+		//订单表添加一条记录
 		$order=new OrderModel();
 		$flag=$order->add($map);
-		if($flag==0){	$this->error('添加失败！');
-		}else{	
-			//订单所在部门表中添加一条记录
-			$order_depart=new Order_departController();
-			$order_depart->ad_reco($flag,12);
-			//添加订单付款记录
-			$map1['money']=$_POST['yfk'];
-			$map1['order_id']=$flag;
-			$map1['pay_time']=time();
-			$map1['class']=1;
-			$map1['user_id']= UID;
-			$order_pay=new Order_payModel();
-			$flag1=$order_pay->add($map1);
-			if($flag1==0){ $this->error('添加失败');}
-			else{ $this->redirect('Domain/add_domain',array('cust_id'=>$map['cust_id'],'order_id'=>$flag),1,'<div style="margin: 40px 0 20px;">订单添加成功，请添加域名！</div>');}
+		//订单所在部门表中添加一条记录
+		$order_depart=new Order_departController();
+		$flag1=$order_depart->ad_reco($flag,12);
+		//添加订单付款记录
+		$map1['money']=$_POST['yfk'];
+		$map1['order_id']=$flag;
+		$map1['pay_time']=time();
+		$map1['class']=1;
+		$map1['user_id']= UID;
+		$order_pay=new Order_payModel();
+		$flag2=$order_pay->add($map1);
+		if ($flag && $flag1 && $flag2){
+			mysql_query("COMMIT");
+			$this->redirect('Domain/add_domain',array('cust_id'=>$map['cust_id'],'order_id'=>$flag),1,'<div style="margin: 40px 0 20px;">订单添加成功，请添加域名！</div>');
+		}else{
+			$this->error('添加失败');
+			mysql_query("ROLLBACK");
 		}
 	}	
 /*
@@ -322,21 +327,21 @@ class OrderController extends HomeBaseController{
 				$this->error('您没有该公司的权限，不能进行相关操作！');
 			}
 	     }	
-	     	//检测订单是否已经被推送
-	     	$order=new OrderModel();
-			$push_res=$order->field("push")->where("id=$id")->find();
-			if($push_res['push']==1){
-				$this->error('订单已经被推送！',U('Order/order_list'));
-			}
-			/** 查询订单信息  判断该订单是否通过审核 */
-			$flag=$order->field('check')->where("id=$id")->find();
-			if($flag['check']==0){ $this->error('订单未审核');}
-			/** 查询所有部门 */
-			$depart=new DepartModel();
-			$this->id=$id;
-			$this->dp=$depart->alldep();
-			$this->assign("cust_id",$_GET['cust_id']);
-			$this->display();
+     	//检测订单是否已经被推送
+     	$order=new OrderModel();
+		$push_res=$order->field("push")->where("id=$id")->find();
+		if($push_res['push']==1){
+			$this->error('订单已经被推送！',U('Order/order_list'));
+		}
+		/** 查询订单信息  判断该订单是否通过审核 */
+		$flag=$order->field('check')->where("id=$id")->find();
+		if($flag['check']==0){ $this->error('订单未审核');}
+		/** 查询所有 可推送的部门*/
+		$depart=new DepartModel();
+		$this->id=$id;
+		$this->dp=$depart->alldep();
+		$this->assign("cust_id",$_GET['cust_id']);
+		$this->display();
 		
 	}
 	/** 推送至下一个部门 */

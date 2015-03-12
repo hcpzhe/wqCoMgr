@@ -19,5 +19,6 @@ class Order_departController extends HomeBaseController {
 		$map['is_use']=1;
 		$map['last_depart_id']=$la_dp;
 		$flag=$ord_pro->add($map);
+		return $flag;
 	}
 }
