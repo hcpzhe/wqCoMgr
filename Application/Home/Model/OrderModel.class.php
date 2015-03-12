@@ -9,7 +9,9 @@ class OrderModel extends Model{
  		//获取登录者所有拥有权限的客户
  		$User = new UserModel();
  		$cust_id=$User->user_auto(); 
- 		$where['cr.id']=array('in',$cust_id);
+ 		if (!empty($cust_id)){
+ 			$where['cr.id']=array('in',$cust_id);
+ 		}else{ return false;}
 //  	$where['ur.id']=UID;
  		$count=$this->join("erp_user as ur on erp_order.user_id=ur.id")->join("erp_customer as cr on erp_order.cust_id=cr.id")->join("erp_product as pt on erp_order.prod_id=pt.id")->where($where)->count();
 // 		echo "<pre>";echo $count;echo "</pre>";exit();

@@ -18,7 +18,7 @@
 			   <form method="post" action="{:U('Order/dist')}">
                     <select name="user" class="form-control">
                     <!-- <foreach name="severs" item="list"> -->
-                        <option value="{$list.realname}">{$list.realname}</option>
+                        <option value="{$list.id}">{$list.realname}</option>
                     <!-- </foreach> -->	
                     </select>                   
                     <input type="hidden" value="{$order_id}" name="oid" > 

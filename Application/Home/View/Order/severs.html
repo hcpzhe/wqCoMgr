@@ -77,14 +77,14 @@
           <table class="table table-striped table-bordered table-hover table_center">
             <thead>
               <tr>
-                <th width="21%">客户名称</th>
+                <th width="20%">客户名称</th>
                 <th width="9%">签单人员</th>
-                <th width="18%">签单时间</th>
+                <th width="17%">签单时间</th>
                 <th width="14%">到期时间</th>
                 <th width="14%">金额</th>
                 <th width="9%">产品</th>
                 <th width="7%">分配客服</th>
-                <th width="9">操作</th>
+                <th width="11">操作</th>
               </tr>
             </thead>
             <tbody>     
@@ -108,9 +108,9 @@
                  		停止
                  	<!-- <else/> -->
                  		开始
-                 		<a href="{:U('Order/stop?id='.$data['o_id'])}">停止</a></td>
-                 	<!-- </if> -->
-                 	     
+                 		<a href="{:U('Order/stop?id='.$data['o_id'])}">停止</a>
+                 	<!-- </if> -->    
+                 	<a href="Order/consultation">添加回访</a> </td>
               </tr>                         
              <!-- </foreach> -->
            </tbody>

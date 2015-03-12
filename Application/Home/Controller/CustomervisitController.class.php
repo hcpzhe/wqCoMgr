@@ -35,7 +35,7 @@ class CustomervisitController extends HomeBaseController {
 		$key = (int)I('param.key'); //公司信息
 		$name = I('param.name');    //输入的搜索信息
 		$visit=new Customer_visitModel();
-		$where = "cu.user_id=ur.id AND cu.cust_id=cr.id";  //多表查询条件
+		$where = "cu.user_id=ur.id AND cu.cust_id=cr.id AND cu.type=1";  //多表查询条件
 		if (!empty($user_id)){
 			$where=$where." AND ( ur.id = $user_id)";
 		}
@@ -222,10 +222,12 @@ class CustomervisitController extends HomeBaseController {
 		$User = new UserModel();
 		$cus=$User->user_auto();
 		$where['id']=array('in',$cus);
-		//根据条件查询出登录者可以添加拜访记录的客户
-		$customer=new CustomerModel();
-		$cus_list = $customer->where($where)->order('id desc')->select();
-		$this->assign('cus_list',$cus_list);
+		if(!empty($cus)){
+			//根据条件查询出登录者可以添加拜访记录的客户e
+			$customer=new CustomerModel();
+			$cus_list = $customer->where($where)->order('id desc')->select();
+			$this->assign('cus_list',$cus_list);
+		}
 		$this->display();
 	}
 }

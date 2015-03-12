@@ -501,25 +501,21 @@ class OrderController extends HomeBaseController{
 		$this->assign('cus_list',$cus_list);
 		$this->display();
 	}
-	//推送至客服部订单
+	//推送至客服部de订单
 	function severs(){
  		$text = I('param.text');
  		$order=new OrderModel();
- 		if(empty($text)){
- 			$sql="SELECT eo.status as status,eo.sever_id  as sever_id,eo.id as o_id,eu.realname as realname,ec.`name` as name,eo.signed_time as stime,eo.expired_time as etime,eo.total_fees as money,ep.`name` as pro_name
-FROM erp_order as eo,erp_user as eu,erp_customer as ec,erp_order_depart as eod,erp_product as ep
-WHERE eo.user_id=eu.id and eo.cust_id=ec.id AND eod.order_id=eo.id AND ep.id=eo.prod_id
-AND eo.status>=0 AND eod.is_use=1 AND eod.depart_id=2";
- 		}else {
- 			$sql="SELECT eo.status as status,eo.sever_id  as sever_id,eo.id as o_id,eu.realname as realname,ec.`name` as name,eo.signed_time as stime,eo.expired_time as etime,eo.total_fees as money,ep.`name` as pro_name
-FROM erp_order as eo,erp_user as eu,erp_customer as ec,erp_order_depart as eod,erp_product as ep
-WHERE eo.user_id=eu.id and eo.cust_id=ec.id AND eod.order_id=eo.id AND ep.id=eo.prod_id
-AND eo.status>=0 AND eod.is_use=1 AND eod.depart_id=2 AND ec.`name` LIKE '%".$text."%'";
- 		}
- 		$order_severs=$order->query($sql);
+ 		$where['erp_order.status']=array('egt','0');
+ 		$where['eod.is_use']=1;
+ 		$where['eod.depart_id']=2;
+ 		if(UID!=35){$where['erp_order.sever_id']=UID; }
+ 		if(!empty($text)){ $where['ec.`name`']=array('like',"'%".$text."%'");}
+ 		$order_severs=$order->join("erp_user as eu on erp_order.user_id=eu.id")->join("erp_customer as ec on erp_order.cust_id=ec.id")->join("erp_order_depart as eod on erp_order.id=eod.order_id")->join("erp_product as ep on ep.id=erp_order.prod_id")
+ 		->where($where)->field("erp_order.status as status,erp_order.sever_id  as sever_id,erp_order.id as o_id,eu.realname as realname,ec.`name` as name,erp_order.signed_time as stime,erp_order.expired_time as etime,erp_order.total_fees as money,ep.`name` as pro_name")->select();
  		$this->severs=$order_severs;
  		$this->display();
 	}
+	//分配客服  表单
 	function distform(){
 		//获取要分配订单id
 		$this->order_id=$_GET['id'];
@@ -529,6 +525,7 @@ AND eo.status>=0 AND eod.is_use=1 AND eod.depart_id=2 AND ec.`name` LIKE '%".$te
 		$this->severs=$sever;
 		$this->display();
 	}
+	//分配客服
 	function dist(){
 		//获取订单id
 		$oid=$_POST['oid'];
