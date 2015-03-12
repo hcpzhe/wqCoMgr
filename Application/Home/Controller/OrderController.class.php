@@ -372,9 +372,6 @@ class OrderController extends HomeBaseController{
 		 * 	 b.产品客服部：添加一条优化订单，更改订单所在部门
 		 * 	 c.客服部：更改订单所在部门
 		 */
-		
-		
-		
 		if($dpid==1){/*网站开发模型*/
 			// 开始事务
 			mysql_query("start transaction");

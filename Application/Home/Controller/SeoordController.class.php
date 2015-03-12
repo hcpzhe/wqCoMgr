@@ -51,14 +51,6 @@ class SeoordController extends HomeBaseController{
 		}
 		/*--------wcd权限判断---------*/
 		$oid=$_GET['id'];
-// 		if (!IS_ROOT){ //非超管
-// 			$id=$_GET['cust_id'];  //选中的公司id
-// 			$User = new UserModel();
-// 			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
-// 			if(!in_array($id,$cust_id)){
-// 				$this->error('您没有该公司的权限，不能进行相关操作！');
-// 			}
-// 		}
 		/** 详细信息 */
 		$seo=new Seo_orderModel();
 		$this->data=$seo->seoinfo($oid);
@@ -85,14 +77,6 @@ class SeoordController extends HomeBaseController{
 		}
 		/*--------wcd权限判断---------*/
 		$oid=$_GET['id'];
-// 		if (!IS_ROOT){ //非超管
-// 			$id=$_GET['cust_id'];  //选中的公司id
-// 			$User = new UserModel();
-// 			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
-// 			if(!in_array($id,$cust_id)){
-// 				$this->error('您没有该公司的权限，不能进行相关操作！');
-// 			}
-// 		}
 		/*查询所有优化人员*/
 		$depart = M('Depart');
 		$dep_id = $depart->where("name='产品客服部'")->getField('id'); //产品客服部所在id
@@ -126,14 +110,6 @@ class SeoordController extends HomeBaseController{
 			$order=new OrderModel();
 			$flag=$order->field('check')->where("id=$id")->find();
 			if($flag['check']==0){ $this->error('订单未审核');}
-// 		if (!IS_ROOT){ //非超管
-// 			$ids=$_GET['cust_id'];  //选中的公司id
-// 			$User = new UserModel();
-// 			$cust_id=$User->user_auto();  //登录人拥有的客户权限id
-// 			if(!in_array($ids,$cust_id)){
-// 				$this->error('您没有该公司的权限，不能进行相关操作！');
-// 			}
-// 		}
 		//检测订单是否已经被推送
 		$seo_dev=new  Seo_orderModel();
 		$push_res=$seo_dev->field("push")->where("order_id=$id")->find();
@@ -153,16 +129,26 @@ class SeoordController extends HomeBaseController{
 		$dp_id=$_POST['dp'];
 		//所要推送的订单id
 		$id=$_POST['id'];
-		
-		$seoer_dev=new Seo_orderModel();
+		/**
+		 * 更改订单推送状态
+		 * 更改订单所在部门
+		 */
+		// 开始事务
+		mysql_query("start transaction");
 		//更改订单推送状态
+		$seoer_dev=new Seo_orderModel();
 		$data["push"]=1;
 		$flag=$seoer_dev->where("order_id=".$id)->save($data);
-		if($flag==1){
-			$order_dp=new Order_departController();
-			$order_dp->ad_reco($id, $dp_id, 10);
+		//更改订单所在部门
+		$order_dp=new Order_departController();
+		$flag1=$order_dp->ad_reco($id, $dp_id, 10);
+		if ($flag && $flag1) {
+			mysql_query("COMMIT");
 			$this->success("推送成功！",U('seoord/seo_list'));
-		}else { $this->error('推送失败！');}
+		}else{
+			$this->error('推送失败！');
+			mysql_query("ROLLBACK");
+		}
 	}	
 	/*增加一条开发沟通记录*/
 	public function ad_record(){
