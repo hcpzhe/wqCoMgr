@@ -145,15 +145,6 @@ class DepordController extends HomeBaseController{
 		$order=new OrderModel();
 		$flag=$order->field('check')->where("id=$id")->find();
 		if($flag['check']==0){ $this->error('订单未审核');}
-	
-// 		if (!IS_ROOT){ //非超管
-// 			$id=$_GET['cust_id'];  //选中的客户id
-// 			$User = new UserModel();
-// 		    $cust_id=$User->user_auto();  //登录人拥有的客户权限id
-// 			if(!in_array($id,$cust_id)){
-// 				$this->error('您没有该公司的权限，不能进行相关操作！');
-// 			}
-// 		}
 		//检测订单是否已经被推送
 		$order_dev=new Develop_orderModel();
 		$push_res=$order_dev->field("push")->where("order_id=$id")->find();
@@ -171,18 +162,48 @@ class DepordController extends HomeBaseController{
 	public function push($id){
 		$id=$_POST['id'];
 		$dp_id=$_POST['dp'];
-		$order_dev=new Develop_orderModel();
-		if ($dp_id==10){
+		/**
+		 * 判断所要推送的部门
+		 * 1.优化：更改订单推送状态，更改订单所在部门,优化订单添加一条记录
+		 * 2.网站客服：更改订单推送状态，更改订单所在部门
+		 */
+		if ($dp_id==10){//优化
+			// 开始事务
+			mysql_query("start transaction");
+			//更改订单推送状态
+			$order_dev=new Develop_orderModel();
+			$data["Push"]=1;
+			$flag=$order_dev->where("order_id=".$id)->save($data);
+			//优化订单添加一条记录
 			$sor=new Seo_orderModel();
-			$flag2=$sor->add_so($id);
-		}
-		//更改订单推送状态
-		$data["Push"]=1;
-		$flag=$order_dev->where("order_id=".$id)->save($data);
-		if($flag==1){
+			$flag1=$sor->add_so($id);
+			//更改订单所在部门
 			$order_dp=new Order_departController();
-			$order_dp->ad_reco($id, $dp_id, 1);
-			$this->success("推送成功！",U('Depord/dep_list'));
-		}else { $this->error('推送失败！');}
+			$flag2=$order_dp->ad_reco($id, $dp_id, 1);
+			if ($flag && $flag1 && $flag2) {
+				mysql_query("COMMIT");
+				$this->success("推送成功！",U('Depord/dep_list'));
+			}else{
+				$this->error('推送失败！');
+				mysql_query("ROLLBACK");
+			}
+		}elseif ($dp_id==2){//客服
+			// 开始事务
+			mysql_query("start transaction");
+			//更改订单推送状态
+			$order_dev=new Develop_orderModel();
+			$data["Push"]=1;
+			$flag=$order_dev->where("order_id=".$id)->save($data);
+			//更改订单所在部门
+			$order_dp=new Order_departController();
+			$flag1=$order_dp->ad_reco($id, $dp_id, 1);
+			if ($flag && $flag1) {
+				mysql_query("COMMIT");
+				$this->success("推送成功！",U('Depord/dep_list'));
+			}else{
+				$this->error('推送失败！');
+				mysql_query("ROLLBACK");
+			}
+		}
 	}	
 }
